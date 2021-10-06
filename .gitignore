@@ -2,7 +2,7 @@ war/WEB-INF/classes/*
 war/WEB-INF/lib/*
 war/WEB-INF/deploy/*
 war/accounter.client/
-war/com.vimukti.accounter.admin.Admin/
+war/com.nitya.accounter.admin.Admin/
 war/accounter.setup/
 war/react/node_modules/*
 war/*.log

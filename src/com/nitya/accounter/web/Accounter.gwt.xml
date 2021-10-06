@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.1.0//EN" "http://google-web-toolkit.googlecode.com/svn/tags/2.1/distro-source/core/src/gwt-module.dtd">
+<module rename-to='accounter.client'>
+	<!-- Inherit the core Web Toolkit stuff. -->
+	<inherits name='com.google.gwt.user.User' />
+
+	<!-- Inherit the default GWT style sheet. You can change -->
+	<!-- the theme of your GWT application by uncommenting -->
+	<!-- any one of the following lines. -->
+	<!--<inherits name='com.google.gwt.user.theme.standard.Standard' /> -->
+	<!--<inherits name='com.smartclient.theme.treefrog.TreeFrog' /> -->
+	<!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome' /> -->
+	<!-- <inherits name='com.google.gwt.user.theme.dark.Dark' /> -->
+
+	<!-- Other module inherits -->
+	<!-- <inherits name='com.smartgwt.SmartGwt' /> -->
+	<inherits name="com.google.gwt.json.JSON" />
+	<inherits name="com.google.gwt.activity.Activity" />
+	<inherits name="com.google.gwt.i18n.I18N" />
+	<inherits name="net.zschech.gwt.comet.Comet" />
+	<inherits name="com.google.gwt.visualization.Visualization" />
+	<inherits name="com.allen_sauer.gwt.dnd.gwt-dnd" />
+<!-- 	<inherits name="com.nitya.accounter.admin.Admin" /> -->
+<!-- 	<inherits name="com.nitya.accounter.setup.Setup" /> -->
+
+	<!-- <inherits name="com.google.gwt.logging.Logging"/> -->
+
+	<!-- <inherits name='pl.balon.gwt.diagrams.Diagrams' /> -->
+
+	<!-- Specify the app entry point class. -->
+	<entry-point class='com.nitya.accounter.web.client.ui.Accounter' />
+	<!--<set-property name="user.agent" value="gecko1_8,safari,ie9" /> -->
+	<set-configuration-property name="UiBinder.useSafeHtmlTemplates"
+		value="true" />
+	<set-property name="ClientBundle.enableInlining" value="false" /> 
+	<define-property name="tablet.user.agent" values="not_tablet" />
+	<property-provider name="tablet.user.agent"><![CDATA[
+  {
+    /** var ua = window.navigator.userAgent.toLowerCase();
+    if (ua.indexOf('android') != -1) { return 'android'; }
+    if (ua.indexOf('ipad') != -1) { return 'ipad'; }
+    if (ua.indexOf('msie 10.0') != -1) { return 'ie10'; } **/
+    return 'not_tablet';
+  }
+]]></property-provider>
+
+	<!-- Constrain the value for non-webkit browsers -->
+	<set-property name="tablet.user.agent" value="not_tablet">
+		<none> <!-- Actually means NOR, in this case "not safari" -->
+			<any>
+				<when-property-is name="user.agent" value="safari" />
+				<when-property-is name="user.agent" value="ie9" />
+			</any>
+		</none>
+	</set-property>
+	<!-- <set-property name="tablet.user.agent" value="ie10" />  -->
+	<generate-with
+		class="com.nitya.accounter.web.server.i18n.MessagesGenerator">
+		<when-type-assignable class="com.nitya.accounter.web.client.i18n.Messages" />
+	</generate-with>
+	<generate-with class="com.nitya.accounter.web.server.i18n.LocaleGenerator">
+		<when-type-is class="com.google.gwt.i18n.client.impl.LocaleInfoImpl" />
+	</generate-with>
+	<generate-with
+		class="com.nitya.accounter.web.server.i18n.CldrImplGenerator">
+		<when-type-is class="com.google.gwt.i18n.client.impl.CldrImpl" />
+	</generate-with>
+
+	<!-- Fall through to this rule is the browser isn't IE 10 <replace-with 
+		class="com.nitya.accounter.web.client.ui.GwtTabPanel"> <when-type-is class="com.nitya.accounter.web.client.ui.ITabPanel"/> 
+		</replace-with> -->
+
+	<replace-with class="com.nitya.accounter.web.client.ui.StyleTabPanelImpl">
+		<when-type-is class="com.nitya.accounter.web.client.ui.GwtTabPanel" />
+		<when-property-is name="tablet.user.agent" value="ie10" />
+	</replace-with>
+
+	<replace-with
+		class="com.nitya.accounter.web.client.ui.StyledDiscosurePanel">
+		<when-type-is class="com.nitya.accounter.web.client.ui.GwtDisclosurePanel" />
+		<when-property-is name="tablet.user.agent" value="ie10" />
+	</replace-with>
+
+	<replace-with
+		class="com.nitya.accounter.web.client.ui.WebsocketAccounterInitialiser">
+		<when-type-is
+			class="com.nitya.accounter.web.client.ui.AccounterInitialiser" />
+		<when-property-is name="tablet.user.agent" value="ie10" />
+	</replace-with>
+
+	<replace-with
+		class="com.nitya.accounter.web.client.ui.WebsocketAccounterRPCInitialiser">
+		<when-type-is
+			class="com.nitya.accounter.web.client.ui.AccounterRPCInitialiser" />
+		<when-property-is name="tablet.user.agent" value="ie10" />
+	</replace-with>
+
+
+	<replace-with
+		class="com.nitya.accounter.web.client.core.WebsocketCometInitializer">
+		<when-type-is
+			class="com.nitya.accounter.web.client.core.AccounterCometInitializer" />
+		<when-property-is name="tablet.user.agent" value="ie10" />
+	</replace-with>
+
+	<!-- <replace-with
+		class="com.nitya.accounter.web.client.ui.grids.StyledFlexTable">
+		<when-type-is class="com.nitya.accounter.web.client.ui.grids.GwtFlexTable" />
+		<when-property-is name="tablet.user.agent" value="ie10" />
+	</replace-with>-->
+	<replace-with class="com.nitya.accounter.web.client.ui.Windows8Menu">
+		<when-type-is class="com.nitya.accounter.web.client.ui.WebMenu" />
+		<when-property-is name="tablet.user.agent" value="ie10" />
+	</replace-with>
+
+	<replace-with
+		class="com.nitya.accounter.web.client.ui.core.IpadViewManager">
+		<when-type-is class="com.nitya.accounter.web.client.ui.core.ViewManager" />
+		<when-property-is name="tablet.user.agent" value="ipad" />
+	</replace-with>
+
+	<replace-with class="com.nitya.accounter.web.client.ui.IPadMenu">
+		<when-type-is class="com.nitya.accounter.web.client.ui.WebMenu" />
+		<when-property-is name="tablet.user.agent" value="ipad" />
+	</replace-with>
+
+	<replace-with
+		class="com.nitya.accounter.web.client.ui.combo.IPadDropDownView">
+		<when-type-is class="com.nitya.accounter.web.client.ui.combo.DropDownView" />
+		<when-property-is name="tablet.user.agent" value="ipad" />
+	</replace-with>
+
+	<replace-with
+		class="com.nitya.accounter.web.client.ui.edittable.IpadEditTableView">
+		<when-type-is
+			class="com.nitya.accounter.web.client.ui.edittable.EditTableView" />
+		<when-property-is name="tablet.user.agent" value="ipad" />
+	</replace-with>
+
+	<replace-with
+		class="com.nitya.accounter.web.client.portlet.IpadPortletPage">
+		<when-type-is class="com.nitya.accounter.web.client.portlet.PortletPage" />
+		<when-property-is name="tablet.user.agent" value="ipad" />
+	</replace-with>
+
+
+	<replace-with class="com.nitya.accounter.web.client.ui.forms.IpadCheckBox">
+		<when-type-is class="com.nitya.accounter.web.client.ui.forms.CheckBoxImpl" />
+		<when-property-is name="tablet.user.agent" value="ipad" />
+	</replace-with>
+
+	<replace-with
+		class="com.nitya.accounter.web.client.ui.IpadAccounterInitialiser">
+		<when-type-is
+			class="com.nitya.accounter.web.client.ui.AccounterInitialiser" />
+		<when-property-is name="tablet.user.agent" value="ipad" />
+	</replace-with>
+
+<!-- 	<replace-with
+		class="com.nitya.accounter.web.client.ui.edittable.IPadEditTableImpl">
+		<when-type-is
+			class="com.nitya.accounter.web.client.ui.edittable.EditTableImpl" />
+		<when-property-is name="tablet.user.agent" value="ipad" />
+	</replace-with> -->
+	<replace-with
+		class="com.nitya.accounter.web.client.ui.edittable.Win8EditTableImpl">
+		<when-type-is
+			class="com.nitya.accounter.web.client.ui.edittable.EditTableImpl" />
+		<when-property-is name="tablet.user.agent" value="ie10" />
+	</replace-with>
+	<replace-with class="com.nitya.accounter.web.client.ui.customers.Win8InvoiceView">
+		<when-type-is class="com.nitya.accounter.web.client.ui.customers.InvoiceView" />
+		<when-property-is name="tablet.user.agent" value="ie10" />
+	</replace-with>
+	<replace-with class="com.nitya.accounter.web.client.ui.company.Win8JournalEntryView">
+		<when-type-is class="com.nitya.accounter.web.client.ui.company.JournalEntryView" />
+		<when-property-is name="tablet.user.agent" value="ie10" />
+	</replace-with>
+	<replace-with class="com.nitya.accounter.web.client.ui.customers.Win8CashSalesView">
+		<when-type-is class="com.nitya.accounter.web.client.ui.customers.CashSalesView" />
+		<when-property-is name="tablet.user.agent" value="ie10" />
+	</replace-with>
+	<replace-with class="com.nitya.accounter.web.client.ui.customers.Win8CustomerCreditMemoView">
+		<when-type-is class="com.nitya.accounter.web.client.ui.customers.CustomerCreditMemoView" />
+		<when-property-is name="tablet.user.agent" value="ie10" />
+	</replace-with>
+	<replace-with class="com.nitya.accounter.web.client.ui.customers.Win8CustomerView">
+		<when-type-is class="com.nitya.accounter.web.client.ui.customers.CustomerView" />
+		<when-property-is name="tablet.user.agent" value="ie10" />
+	</replace-with>
+	<replace-with class="com.nitya.accounter.web.client.ui.customers.Win8JobView">
+		<when-type-is class="com.nitya.accounter.web.client.ui.customers.JobView" />
+		<when-property-is name="tablet.user.agent" value="ie10" />
+	</replace-with>
+	<replace-with class="com.nitya.accounter.web.client.ui.customers.Win8QuoteView">
+		<when-type-is class="com.nitya.accounter.web.client.ui.customers.QuoteView" />
+		<when-property-is name="tablet.user.agent" value="ie10" />
+	</replace-with>
+	<replace-with class="com.nitya.accounter.web.client.ui.customers.Win8ReceivePaymentView">
+		<when-type-is class="com.nitya.accounter.web.client.ui.customers.ReceivePaymentView" />
+		<when-property-is name="tablet.user.agent" value="ie10" />
+	</replace-with>
+	<replace-with class="com.nitya.accounter.web.client.ui.settings.Win8WareHouseView">
+		<when-type-is class="com.nitya.accounter.web.client.ui.settings.WareHouseView" />
+		<when-property-is name="tablet.user.agent" value="ie10" />
+	</replace-with>
+	<replace-with class="com.nitya.accounter.web.client.ui.vat.Win8PayTAXView">
+		<when-type-is class="com.nitya.accounter.web.client.ui.vat.PayTAXView" />
+		<when-property-is name="tablet.user.agent" value="ie10" />
+	</replace-with>
+	<replace-with class="com.nitya.accounter.web.client.ui.vat.Win8ReceiveVATView">
+		<when-type-is class="com.nitya.accounter.web.client.ui.vat.ReceiveVATView" />
+		<when-property-is name="tablet.user.agent" value="ie10" />
+	</replace-with>
+	<replace-with class="com.nitya.accounter.web.client.ui.vat.Win8TAXAgencyView">
+		<when-type-is class="com.nitya.accounter.web.client.ui.vat.TAXAgencyView" />
+		<when-property-is name="tablet.user.agent" value="ie10" />
+	</replace-with>
+	<replace-with class="com.nitya.accounter.web.client.ui.vendors.Win8CashExpenseView">
+		<when-type-is class="com.nitya.accounter.web.client.ui.vendors.CashExpenseView" />
+		<when-property-is name="tablet.user.agent" value="ie10" />
+	</replace-with>
+	<replace-with class="com.nitya.accounter.web.client.ui.vendors.Win8CashPurchaseView">
+		<when-type-is class="com.nitya.accounter.web.client.ui.vendors.CashPurchaseView" />
+		<when-property-is name="tablet.user.agent" value="ie10" />
+	</replace-with>
+	<replace-with class="com.nitya.accounter.web.client.ui.vendors.Win8ItemReceiptView">
+		<when-type-is class="com.nitya.accounter.web.client.ui.vendors.ItemReceiptView" />
+		<when-property-is name="tablet.user.agent" value="ie10" />
+	</replace-with>
+	<replace-with class="com.nitya.accounter.web.client.ui.vendors.Win8PurchaseOrderView">
+		<when-type-is class="com.nitya.accounter.web.client.ui.vendors.PurchaseOrderView" />
+		<when-property-is name="tablet.user.agent" value="ie10" />
+	</replace-with>
+	<replace-with class="com.nitya.accounter.web.client.ui.vendors.Win8VendorBillView">
+		<when-type-is class="com.nitya.accounter.web.client.ui.vendors.VendorBillView" />
+		<when-property-is name="tablet.user.agent" value="ie10" />
+	</replace-with>
+	<replace-with class="com.nitya.accounter.web.client.ui.vendors.Win8VendorCreditMemoView">
+		<when-type-is class="com.nitya.accounter.web.client.ui.vendors.VendorCreditMemoView" />
+		<when-property-is name="tablet.user.agent" value="ie10" />
+	</replace-with>
+	<replace-with class="com.nitya.accounter.web.client.ui.vendors.Win8VendorView">
+		<when-type-is class="com.nitya.accounter.web.client.ui.vendors.VendorView" />
+		<when-property-is name="tablet.user.agent" value="ie10" />
+	</replace-with>
+	<replace-with class="com.nitya.accounter.web.client.ui.vat.Win8TDSDeductorDetailsView">
+		<when-type-is class="com.nitya.accounter.web.client.ui.vat.TDSDeductorDetailsView" />
+		<when-property-is name="tablet.user.agent" value="ie10" />
+	</replace-with>
+	<replace-with class="com.nitya.accounter.web.client.ui.vat.Win8TDSChalanDetailsView">
+		<when-type-is class="com.nitya.accounter.web.client.ui.vat.TDSChalanDetailsView" />
+		<when-property-is name="tablet.user.agent" value="ie10" />
+	</replace-with>
+	<replace-with class="com.nitya.accounter.web.client.ui.vendors.Win8VendorPaymentView">
+		<when-type-is class="com.nitya.accounter.web.client.ui.vendors.NewVendorPaymentView" />
+		<when-property-is name="tablet.user.agent" value="ie10" />
+	</replace-with>
+	<replace-with class="com.nitya.accounter.web.client.ui.customers.Win8CustomerRefundView">
+		<when-type-is class="com.nitya.accounter.web.client.ui.customers.CustomerRefundView" />
+		<when-property-is name="tablet.user.agent" value="ie10" />
+	</replace-with>
+	<replace-with class="com.nitya.accounter.web.client.ui.customers.Win8CustomerPrePaymentView">
+		<when-type-is class="com.nitya.accounter.web.client.ui.customers.CustomerPrePaymentView" />
+		<when-property-is name="tablet.user.agent" value="ie10" />
+	</replace-with>
+	<replace-with class="com.nitya.accounter.web.client.ui.Win8AccountView">
+		<when-type-is class="com.nitya.accounter.web.client.ui.NewAccountView" />
+		<when-property-is name="tablet.user.agent" value="ie10" />
+	</replace-with>
+	<replace-with class="com.nitya.accounter.web.client.ui.Win8ItemView">
+		<when-type-is class="com.nitya.accounter.web.client.ui.ItemView" />
+		<when-property-is name="tablet.user.agent" value="ie10" />
+	</replace-with>
+	<replace-with class="com.nitya.accounter.web.client.ui.Win8InventoryAssemblyView">
+		<when-type-is class="com.nitya.accounter.web.client.ui.InventoryAssemblyView" />
+		<when-property-is name="tablet.user.agent" value="ie10" />
+	</replace-with>
+	<replace-with class="com.nitya.accounter.web.client.ui.vat.Win8TDSResponsiblePersonDetailsView">
+		<when-type-is class="com.nitya.accounter.web.client.ui.vat.TDSResponsiblePersonDetailsView" />
+		<when-property-is name="tablet.user.agent" value="ie10" />
+	</replace-with>
+	
+	<replace-with class="com.nitya.accounter.web.client.ui.core.ButtonBar">
+		<when-type-is class="com.nitya.accounter.web.client.ui.core.IButtonBar" />
+	</replace-with>
+	
+	<replace-with class="com.nitya.accounter.web.client.ui.core.ApplicationBar">
+		<when-type-is class="com.nitya.accounter.web.client.ui.core.IButtonBar" />
+		<when-property-is name="tablet.user.agent" value="ie10" />
+	</replace-with>
+	
+	<replace-with class="com.nitya.accounter.web.client.ui.win8.Win8URLLauncher">
+		<when-type-is class="com.nitya.accounter.web.client.ui.core.URLLauncher" />
+		<when-property-is name="tablet.user.agent" value="ie10" />
+	</replace-with>
+	
+		<replace-with class="com.nitya.accounter.web.client.ui.win8.Win8HistoryTokenUtils">
+		<when-type-is class="com.nitya.accounter.web.client.ui.HistoryTokenUtils" />
+		<when-property-is name="tablet.user.agent" value="ie10" />
+	</replace-with>
+	
+		<replace-with class="com.nitya.accounter.web.client.ui.customers.Win8EmployeeTimeSheetView">
+		<when-type-is class="com.nitya.accounter.web.client.ui.customers.EmployeeTimeSheetView" />
+		<when-property-is name="tablet.user.agent" value="ie10" />
+		</replace-with>
+</module>

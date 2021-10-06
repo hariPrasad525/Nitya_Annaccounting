@@ -29,9 +29,10 @@
 			<command title="customer" />
 			<command title="Vendor" />
 			<command title="banking" />
-			<command title="reports" />
 			<command if="inventoryEnabled" title="inventory" />
+			<command if="payrollEnabled" title="payroll" />
 			<command title="settings" />
+			<command title="reports" />
 			<command title="logout" />
 		</outputs>
 	</pattern>
@@ -48,10 +49,10 @@
 			<command title="merge" />
 			<command title="lists" />
 			<command title="depreciation" />
-			
+
 		</outputs>
 	</pattern>
-	
+
 	<pattern login="true">
 		<input>transactionscenter</input>
 		<outputs>
@@ -60,7 +61,7 @@
 			<command title="otherTransactions" />
 		</outputs>
 	</pattern>
-	
+
 	<pattern login="true">
 		<input>customerTransactions</input>
 		<outputs>
@@ -73,7 +74,7 @@
 			<command title="customerRefunds" />
 		</outputs>
 	</pattern>
-	
+
 	<pattern login="true">
 		<input>vendorTransactions</input>
 		<outputs>
@@ -82,7 +83,7 @@
 			<command if="purchaseorderEnabled" title="purchaseOrderList" />
 		</outputs>
 	</pattern>
-	
+
 	<pattern login="true">
 		<input>otherTransactions</input>
 		<outputs>
@@ -210,7 +211,7 @@
 		<input>more</input>
 		<outputs>
 			<command title="newCustomer" />
-			<command title="newItem" />
+			<command title="addNewItem" />
 			<command if="trackingQuotes" title="newQuote" />
 			<command if="delayedCharges" title="newCredit" />
 			<command if="delayedCharges" title="newCharge" />
@@ -265,7 +266,7 @@
 		<input>others</input>
 		<outputs>
 			<command title="newVendor" />
-			<command title="newItem" />
+			<command title="addNewPurchaseItem" />
 			<command title="newCashPurchase" />
 			<command title="vendorCredit" />
 			<command title="newCheck" />
@@ -416,8 +417,24 @@
 	</pattern>
 
 	<pattern login="true">
+		<input>addNewPurchaseItem</input>
+		<outputs>
+			<command if="serviceItem" value="createNewServiceItem vendor"
+				title="createNewServiceItem" />
+			<command if="productItem" value="newProductItem vendor"
+				title="newProductItem" />
+			<command if="nonInventoryItem" value="createNewNonInventoryItem vendor"
+				title="createNewNonInventoryItem" />
+			<command if="inventoryItem" value="createNewInventoryItem vendor"
+				title="createNewInventoryItem" />
+			<command if="assemblyItem" value="createNewInventoryAssemblyItem vendor"
+	title="createNewInventoryAssemblyItem" />
+			<command title="listofAllItem" />
+		</outputs>
+	</pattern>
+
+	<pattern login="true">
 		<input>addItem</input>
-		<input>newItem</input>
 		<input>createItem</input>
 		<input>addNewItem</input>
 		<outputs>
@@ -637,5 +654,32 @@
 		</outputs>
 	</pattern>
 
+	<pattern login="true" if="payrollEnabled">
+		<input>payroll</input>
+		<outputs>
+			<command title="newEmployee"></command>
+			<command title="newEmployeeGroup"></command>
+			<command title="newPayHead" />
+			<command title="newPayrollUnit"></command>
+			<command title="newPayStructure"></command>
+			<command title="newPayrun"></command>
+			<command title="newPayEmployee"></command>
+			<command title="newAttOrProductionType"></command>
+			<command title="payrollLists" />
+		</outputs>
+	</pattern>
+
+
+	<pattern login="true" if="payrollEnabled">
+		<input>payrollLists</input>
+		<outputs>
+			<command title="employeeList" />
+			<command title="employeeGroupList" />
+			<command title="payheadList" />
+			<command title="payrollUnitList" />
+			<command title="payStructureList" />
+			<command title="attendanceOrProductionTypeList" />
+		</outputs>
+	</pattern>
 </patterns>
 

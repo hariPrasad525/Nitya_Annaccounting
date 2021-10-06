@@ -9,8 +9,8 @@ import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.PutMethod;
 import org.apache.tools.ant.filters.StringInputStream;
 
+import com.nitya.accounter.web.client.core.ClientCustomer;
 import com.vimukti.accounter.developer.api.core.AbstractTest;
-import com.vimukti.accounter.web.client.core.ClientCustomer;
 
 public class CrudTest extends AbstractTest {
 	private String path;

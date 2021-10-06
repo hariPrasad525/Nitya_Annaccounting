@@ -1,0 +1,57 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<g:FlowPanel ui:field="mainViewPanel" styleName="setup_common_head">
+		<g:Label ui:field="headerLabel" styleName="setup_header_label" />
+		<g:FlowPanel ui:field="viewPanel">
+			<g:FlowPanel ui:field="sell" styleName="sell_panel">
+				<g:RadioButton name="sell_type" ui:field="servicesOnly" />
+				<g:Label ui:field="servicesOnlyText" styleName="organisation_comment" />
+				<g:RadioButton name="sell_type" ui:field="productsOnly" />
+				<g:Label ui:field="productsOnlyText" styleName="organisation_comment" />
+				<g:RadioButton name="sell_type" ui:field="both" />
+				<g:Label ui:field="bothText" styleName="organisation_comment" />
+			</g:FlowPanel>
+		</g:FlowPanel>
+
+		<g:FlowPanel ui:field="totalPanel" styleName="subPanel">
+			<g:FlowPanel>
+				<g:CheckBox styleName="setup_check_box" ui:field="inventoryCheckBox" />
+				<g:Label ui:field="inventoryCommentLabel" styleName="organisation_comment" />
+			</g:FlowPanel>
+			<g:FlowPanel ui:field="hiddenPanel" styleName="subPanel">
+				<g:CheckBox styleName="setup_check_box" ui:field="warehousesCheckBox" />
+				<g:Label ui:field="wareHouseCommentLabel" styleName="organisation_comment" />
+				<g:CheckBox styleName="setup_check_box" ui:field="unitsCheckBox" />
+				<g:FlowPanel styleName='inventoryschemlistbox'>
+					<g:Label styleName="setup_label" ui:field="inventoryScheme" />
+					<g:ListBox styleName="setup_listbox" ui:field="inventorySchemeListBox"></g:ListBox>
+				</g:FlowPanel>
+			</g:FlowPanel>
+		</g:FlowPanel>
+		<!-- <g:FlowPanel ui:field="vat" styleName="sales_tax"> <g:HTML wordWrap="true" 
+			ui:field="vatHeader" styleName="setup_header_label" /> <g:RadioButton name="vat" 
+			ui:field="vatYes" styleName="employee_yesno" /> <g:RadioButton name="vat" 
+			ui:field="vatNo" styleName="employee_yesno" /> </g:FlowPanel> <g:FlowPanel 
+			ui:field="salesTax" styleName="sales_tax"> <g:HTML wordWrap="true" ui:field="salesTaxHead" 
+			styleName="setup_header_label" /> <g:RadioButton name="sales_tax" ui:field="salesTaxYes" 
+			styleName="employee_yesno" /> <g:RadioButton name="sales_tax" ui:field="salesTaxNo" 
+			styleName="employee_yesno" /> </g:FlowPanel> -->
+		<g:FlowPanel styleName="companyInfoPanel">
+			<g:FlowPanel>
+				<g:CheckBox ui:field="trackCheckbox" styleName="header" />
+			</g:FlowPanel>
+			<g:Label ui:field="trackLabel" styleName="organisation_comment" />
+			<g:FlowPanel ui:field="hidePanel" styleName='subtrackortax'>
+				<g:Label styleName="setup_label" ui:field="taxItemTransactionLabel" />
+				<g:RadioButton name="new name" ui:field="onepeTransactionRadioButton" />
+				<g:Label ui:field="oneperTransactionLabel" styleName="organisation_comment" />
+				<g:RadioButton name="new name" ui:field="oneperdetaillineRadioButton" />
+				<g:Label ui:field="oneperdetaillineLabel" styleName="organisation_comment" />
+				<g:CheckBox styleName="setup_check_box" ui:field="enableTaxCheckbox" />
+				<g:Label ui:field="enableTaxLabel" styleName="organisation_comment" />
+			</g:FlowPanel>
+		</g:FlowPanel>
+
+	</g:FlowPanel>
+</ui:UiBinder> 

@@ -2,12 +2,12 @@
 <!DOCTYPE hibernate-mapping PUBLIC
                 "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
                 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<hibernate-mapping package="com.vimukti.accounter.core"
+<hibernate-mapping package="com.nitya.accounter.core"
 	default-access="field" auto-import="false">
 
 	<query name="get.All.InventoryItem">
 		<query-param name="companyId" type="long"/>
-		from com.vimukti.accounter.core.Item it where it.company.id=:companyId and it.type in (2,4) 
+		from com.nitya.accounter.core.Item it where it.company.id=:companyId and it.type in (2,4) 
 	</query>
 
 	<sql-query name="getNextAccountNumber">
@@ -27,24 +27,24 @@
 	
 	<query name="get.AssetsAccountOfCompany">
 		<query-param name="companyId" type="long"/>
-		from com.vimukti.accounter.core.Account a where a.company.id=:companyId and a.type=5
+		from com.nitya.accounter.core.Account a where a.company.id=:companyId and a.type=5
 	</query>
 	
 	<query name="get.Account.by.Name">
 		<query-param name="companyId" type="long"/>
 		<query-param name="accountName" type="String"/>
-		from com.vimukti.accounter.core.Account a where a.name=:accountName and a.company.id=:companyId
+		from com.nitya.accounter.core.Account a where a.name=:accountName and a.company.id=:companyId
 	</query>
 	
 	<query name="getAccountTransactions">
 		<query-param name="companyId" type="long"/>
 		<query-param name="accountId" type="long"/>
-		from com.vimukti.accounter.core.AccountTransaction at where at.account.id=:accountId and at.company.id=:companyId
+		from com.nitya.accounter.core.AccountTransaction at where at.account.id=:accountId and at.company.id=:companyId
 	</query>
 	
 	<query name="get.AccountTransaction.Of.Item">
 		<query-param name="itemId" type="long"/>
-		select at from com.vimukti.accounter.core.AccountTransaction  at left join at.transaction.transactionItems as ti
+		select at from com.nitya.accounter.core.AccountTransaction  at left join at.transaction.transactionItems as ti
 		where ti.type=1 and ti.item.id=:itemId and 
 		(at.account.id=ti.item.expenseAccount.id or at.account.id=ti.item.assestsAccount.id) and 
 		(at.transaction.type in (1,14,8,37) or (at.transaction.type=36 and ti.quantity.value &lt; 0))
@@ -66,42 +66,42 @@
 	
 	<query name="get.AccountTransactions.Of.AccountReceivables">
 		<query-param name="companyId" type="long" />
-		from com.vimukti.accounter.core.AccountTransaction at 
+		from com.nitya.accounter.core.AccountTransaction at 
 		where at.account.id=at.company.accountsReceivableAccount.id and at.company.id=:companyId
 	</query>
 	
 	<query name="get.AccountTransactions.Of.AccountPayables">
 		<query-param name="companyId" type="long" />
-		from com.vimukti.accounter.core.AccountTransaction at 
+		from com.nitya.accounter.core.AccountTransaction at 
 		where at.account.id=at.company.accountsPayableAccount.id and at.company.id=:companyId
 	</query>
 	
 	<query name="getAllTransactionOfCompany">
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.Transaction t  where t.company=:company and t.saveStatus not in (201,202,204) order by t.type, t.id
+		from com.nitya.accounter.core.Transaction t  where t.company=:company and t.saveStatus not in (201,202,204) order by t.type, t.id
 	</query>
 	
 	
 	<query name="getNextCompany">
 		<query-param name="companyId" type="long" />
-		from com.vimukti.accounter.core.Company c where c.version!=7 and 
+		from com.nitya.accounter.core.Company c where c.version!=7 and 
 		c.isConfigured=true and isLocked=false and c.id &gt; :companyId  order by id
 	</query>
 	
 	<query name="getAccountTransactionsOfVoidTransaction">
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.AccountTransaction at where at.transaction.saveStatus in (201,202,204) and at.company=:company
+		from com.nitya.accounter.core.AccountTransaction at where at.transaction.saveStatus in (201,202,204) and at.company=:company
 	</query>
 	
 	<query name="get.All.TdsChallans">
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.TDSChalanDetail tc where
+		from com.nitya.accounter.core.TDSChalanDetail tc where
 		tc.company=:company
 	</query>
 
 	<query name="get.all.Items">
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.Item it where it.type in(2,4) and it.company=:company order by it.id
+		from com.nitya.accounter.core.Item it where it.type in(2,4) and it.company=:company order by it.id
 	</query>
 
 	<sql-query name="get.all.inventory.items.transactions">
@@ -125,12 +125,12 @@
 
 	<query name="getItemsOfAverageCostZero">
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.Item i where i.type in (2,4) and i.averageCost=0 and i.company=:company
+		from com.nitya.accounter.core.Item i where i.type in (2,4) and i.averageCost=0 and i.company=:company
 	</query>
 	
 	<query name="getInventoryOfAverageCostNegative">
 		<query-param name="company" type="company"/>
-		from com.vimukti.accounter.core.Item i where i.type in (2,4) and i.averageCost &lt; 0 and i.company=:company
+		from com.nitya.accounter.core.Item i where i.type in (2,4) and i.averageCost &lt; 0 and i.company=:company
 	</query>
 	
 	<sql-query name="make.all.accounttransaction.can.updateaccount">
@@ -257,26 +257,26 @@
 	
 	<query name="get.buildassemblies">
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.BuildAssembly ba where ba.company=:company order by ba.id
+		from com.nitya.accounter.core.BuildAssembly ba where ba.company=:company order by ba.id
 	</query>
 	
 	<query name="get.buildassembly.items">
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.Item it where it.company=:company and it.type=4 and 
-		it.id in (select inventoryAssembly.id from com.vimukti.accounter.core.BuildAssembly ba where ba.company=:company) 
+		from com.nitya.accounter.core.Item it where it.company=:company and it.type=4 and 
+		it.id in (select inventoryAssembly.id from com.nitya.accounter.core.BuildAssembly ba where ba.company=:company) 
 		order by it.id
 	</query>
 	
 	<query name="get.Incorrect.AccountTransactions">
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.AccountTransaction at where at.company= :company 
+		from com.nitya.accounter.core.AccountTransaction at where at.company= :company 
 		and at.company!=at.account.company 
 	</query>
 	
 	<query name="get.Account.By.Name">
 		<query-param name="company" type="Company" />
 		<query-param name="name" type="String" />
-		from com.vimukti.accounter.core.Account a where a.company=:company and a.name=:name
+		from com.nitya.accounter.core.Account a where a.company=:company and a.name=:name
 	</query>
 	
 	<sql-query name="get.Incorrect.Accounts">
@@ -302,7 +302,7 @@
 	
 	<query name="getDefaultAccounts">
 		<query-param name="company" type="Company"/>
-		from com.vimukti.accounter.core.Account a where a.isDefault=true and a.company= :company
+		from com.nitya.accounter.core.Account a where a.isDefault=true and a.company= :company
 	</query>
 	
 	<sql-query name="insert.Payee.update">
@@ -347,7 +347,7 @@
 	
 	<query name="get.All.Transactions">
 		<query-param name="companyID" type="long"/>
-		from com.vimukti.accounter.core.Transaction t where t.company.id=:companyID order by t.transactionDate ASC, t.number ASC
+		from com.nitya.accounter.core.Transaction t where t.company.id=:companyID order by t.transactionDate ASC, t.number ASC
 	</query>
 	
 	<sql-query name="getStockTransfers">

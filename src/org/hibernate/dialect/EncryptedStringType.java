@@ -4,7 +4,7 @@ import org.hibernate.type.AbstractSingleColumnStandardBasicType;
 import org.hibernate.type.DiscriminatorType;
 import org.hibernate.type.descriptor.sql.BinaryTypeDescriptor;
 
-import com.vimukti.accounter.utils.AccounterEncryptor;
+import com.nitya.accounter.utils.AccounterEncryptor;
 
 public class EncryptedStringType extends
 		AbstractSingleColumnStandardBasicType<String> implements

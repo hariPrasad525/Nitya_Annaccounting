@@ -1,0 +1,18 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<g:FlowPanel styleName="companyInfoPanel trackdiscount">
+		<g:FlowPanel>
+			<g:FlowPanel>
+				<g:CheckBox ui:field="trackroundingAmountCheckBox"
+					styleName="header" />
+			</g:FlowPanel>
+			<g:FlowPanel ui:field="hidePanel">
+				<g:ListBox ui:field="accountsCombo" />
+				<g:ListBox ui:field="roundingMethodCombo" />
+				<g:TextBox ui:field="roundingLimitItem" />
+				<g:CheckBox ui:field="removeifZeroCheckBox" styleName="removeifzero" />
+			</g:FlowPanel>
+		</g:FlowPanel>
+	</g:FlowPanel>
+</ui:UiBinder> 

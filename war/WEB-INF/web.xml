@@ -31,11 +31,11 @@
 		com.isomorphic.servlet.FileDownload</servlet-class> <init-param> <param-name>expires</param-name> 
 		<param-value> text/javascript:2592000,image/gif:2592000,image/png:2592000,application/x-javascript:2592000 
 		</param-value> </init-param> </servlet> <servlet-mapping> <servlet-name>FileDownload</servlet-name> 
-		<url-pattern> /com.vimukti.collaber.web.CollaberApplication/* </url-pattern> 
+		<url-pattern> /com.nitya.collaber.web.CollaberApplication/* </url-pattern> 
 		</servlet-mapping> -->
 	<servlet>
 		<servlet-name>accounter</servlet-name>
-		<servlet-class>com.vimukti.accounter.servlets.OpenCompanyServlet
+		<servlet-class>com.nitya.accounter.servlets.OpenCompanyServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -49,7 +49,7 @@
 
 	<servlet>
 		<servlet-name>webLogin</servlet-name>
-		<servlet-class>com.vimukti.accounter.servlets.NewLoginServlet
+		<servlet-class>com.nitya.accounter.servlets.NewLoginServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -60,7 +60,7 @@
 
 	<servlet>
 		<servlet-name>menuxml</servlet-name>
-		<servlet-class>com.vimukti.accounter.servlets.MacMenuServlet
+		<servlet-class>com.nitya.accounter.servlets.MacMenuServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -70,7 +70,7 @@
 
 	<servlet>
 		<servlet-name>newmenuxml</servlet-name>
-		<servlet-class>com.vimukti.accounter.servlets.NewMenuServlet
+		<servlet-class>com.nitya.accounter.servlets.NewMenuServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -80,7 +80,7 @@
 
 	<servlet>
 		<servlet-name>mailHookeServlet</servlet-name>
-		<servlet-class>com.vimukti.accounter.text.MailHookServlet
+		<servlet-class>com.nitya.accounter.text.MailHookServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -89,14 +89,14 @@
 	</servlet-mapping>
 
 	<!-- <servlet-mapping> <servlet-name>new signup</servlet-name> <url-pattern>/signup</url-pattern> 
-		</servlet-mapping> <servlet> <servlet-name>new signup</servlet-name> <servlet-class>com.vimukti.accounter.servlets.SignupServlet 
+		</servlet-mapping> <servlet> <servlet-name>new signup</servlet-name> <servlet-class>com.nitya.accounter.servlets.SignupServlet 
 		</servlet-class> </servlet> -->
 
 	<!-- API SERVLET MAPPING START -->
 
 	<filter>
 		<filter-name>Api Filter</filter-name>
-		<filter-class>com.vimukti.accounter.developer.api.ApiFilter
+		<filter-class>com.nitya.accounter.developer.api.ApiFilter
 		</filter-class>
 	</filter>
 	<filter-mapping>
@@ -106,7 +106,7 @@
 
 	<servlet>
 		<servlet-name>Api Login</servlet-name>
-		<servlet-class>com.vimukti.accounter.developer.api.ApiLoginServlet
+		<servlet-class>com.nitya.accounter.developer.api.ApiLoginServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -117,7 +117,7 @@
 
 	<servlet>
 		<servlet-name>Api Operations</servlet-name>
-		<servlet-class>com.vimukti.accounter.developer.api.ApiOperationsServlet
+		<servlet-class>com.nitya.accounter.developer.api.ApiOperationsServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -128,7 +128,7 @@
 
 	<servlet>
 		<servlet-name>Reports Api</servlet-name>
-		<servlet-class>com.vimukti.accounter.developer.api.ReportsApiServlet
+		<servlet-class>com.nitya.accounter.developer.api.ReportsApiServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -139,7 +139,7 @@
 
 	<servlet>
 		<servlet-name>Api Registration</servlet-name>
-		<servlet-class>com.vimukti.accounter.developer.api.RegistrationServlet
+		<servlet-class>com.nitya.accounter.developer.api.RegistrationServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -149,7 +149,7 @@
 
 	<servlet>
 		<servlet-name>Create Objects</servlet-name>
-		<servlet-class>com.vimukti.accounter.developer.api.RestApiServlet
+		<servlet-class>com.nitya.accounter.developer.api.RestApiServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -160,7 +160,7 @@
 
 	<servlet>
 		<servlet-name>Api Lists</servlet-name>
-		<servlet-class>com.vimukti.accounter.developer.api.ListsApiServlet
+		<servlet-class>com.nitya.accounter.developer.api.ListsApiServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -174,7 +174,7 @@
 	<servlet>
 		<servlet-name>PaypalTransactionPermissionServlet</servlet-name>
 		<servlet-class>
-			com.vimukti.accounter.servlets.PaypalTransactionPermissionServlet
+			com.nitya.accounter.servlets.PaypalTransactionPermissionServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -187,7 +187,7 @@
 	<servlet>
 		<servlet-name>PaypalTransactionCallbackServlet</servlet-name>
 		<servlet-class>
-			com.vimukti.accounter.servlets.PaypalTransactionCallbackServlet
+			com.nitya.accounter.servlets.PaypalTransactionCallbackServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -199,7 +199,7 @@
 
 	<servlet>
 		<servlet-name>Companies</servlet-name>
-		<servlet-class>com.vimukti.accounter.servlets.CompaniesServlet
+		<servlet-class>com.nitya.accounter.servlets.CompaniesServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -209,7 +209,7 @@
 
 	<servlet>
 		<servlet-name>Company Password</servlet-name>
-		<servlet-class>com.vimukti.accounter.servlets.CompanyPasswordServlet
+		<servlet-class>com.nitya.accounter.servlets.CompanyPasswordServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -219,7 +219,7 @@
 
 	<servlet>
 		<servlet-name>Activation</servlet-name>
-		<servlet-class>com.vimukti.accounter.servlets.ActivationServlet
+		<servlet-class>com.nitya.accounter.servlets.ActivationServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -229,7 +229,7 @@
 
 	<servlet>
 		<servlet-name>Company Password Recovery</servlet-name>
-		<servlet-class>com.vimukti.accounter.servlets.CompanyPasswordRecoveryServlet
+		<servlet-class>com.nitya.accounter.servlets.CompanyPasswordRecoveryServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -239,7 +239,7 @@
 
 	<servlet>
 		<servlet-name>EmailForActivation</servlet-name>
-		<servlet-class>com.vimukti.accounter.servlets.EmailForActivationServlet
+		<servlet-class>com.nitya.accounter.servlets.EmailForActivationServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -249,7 +249,7 @@
 
 	<servlet>
 		<servlet-name>signup</servlet-name>
-		<servlet-class>com.vimukti.accounter.servlets.SignupServlet
+		<servlet-class>com.nitya.accounter.servlets.SignupServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -258,7 +258,7 @@
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>selectcompany</servlet-name>
-		<servlet-class>com.vimukti.accounter.servlets.MigrateCompanyServlet
+		<servlet-class>com.nitya.accounter.servlets.MigrateCompanyServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -267,7 +267,7 @@
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>migrationstatus</servlet-name>
-		<servlet-class>com.vimukti.accounter.servlets.MigrationStatusServlet
+		<servlet-class>com.nitya.accounter.servlets.MigrationStatusServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -276,7 +276,7 @@
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>support</servlet-name>
-		<servlet-class>com.vimukti.accounter.servlets.SupportServlet
+		<servlet-class>com.nitya.accounter.servlets.SupportServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -287,7 +287,7 @@
 
 	<servlet>
 		<servlet-name>generatePDFServlet</servlet-name>
-		<servlet-class>com.vimukti.accounter.servlets.GeneratePDFservlet
+		<servlet-class>com.nitya.accounter.servlets.GeneratePDFservlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -297,7 +297,7 @@
 
 	<servlet>
 		<servlet-name>form16AServlet</servlet-name>
-		<servlet-class>com.vimukti.accounter.servlets.Form16ApdfGenerationServlet
+		<servlet-class>com.nitya.accounter.servlets.Form16ApdfGenerationServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -307,7 +307,7 @@
 
 	<servlet>
 		<servlet-name>generateETDSServlet</servlet-name>
-		<servlet-class>com.vimukti.accounter.servlets.GenerateETDSServlet
+		<servlet-class>com.nitya.accounter.servlets.GenerateETDSServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -317,7 +317,7 @@
 
 	<servlet>
 		<servlet-name>miscInfoServlet</servlet-name>
-		<servlet-class>com.vimukti.accounter.servlets.MISCInfoServlet
+		<servlet-class>com.nitya.accounter.servlets.MISCInfoServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -327,7 +327,7 @@
 
 	<servlet>
 		<servlet-name>ExportReportServlet</servlet-name>
-		<servlet-class>com.vimukti.accounter.servlets.ExportReportServlet
+		<servlet-class>com.nitya.accounter.servlets.ExportReportServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -337,7 +337,7 @@
 
 	<servlet>
 		<servlet-name>Suffixservlet</servlet-name>
-		<servlet-class>com.vimukti.accounter.servlets.Suffixservlet
+		<servlet-class>com.nitya.accounter.servlets.Suffixservlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -348,7 +348,7 @@
 
 	<servlet>
 		<servlet-name>forgetpassword</servlet-name>
-		<servlet-class>com.vimukti.accounter.servlets.ForgetPasswordServlet
+		<servlet-class>com.nitya.accounter.servlets.ForgetPasswordServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -358,7 +358,7 @@
 
 	<servlet>
 		<servlet-name>resetPassword</servlet-name>
-		<servlet-class>com.vimukti.accounter.servlets.ResetPasswordServlet
+		<servlet-class>com.nitya.accounter.servlets.ResetPasswordServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -368,7 +368,7 @@
 
 	<servlet>
 		<servlet-name>Logout</servlet-name>
-		<servlet-class>com.vimukti.accounter.servlets.LogoutServlet
+		<servlet-class>com.nitya.accounter.servlets.LogoutServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -379,7 +379,7 @@
 
 	<servlet>
 		<servlet-name>deleteAccount</servlet-name>
-		<servlet-class>com.vimukti.accounter.servlets.DeleteAccountServlet
+		<servlet-class>com.nitya.accounter.servlets.DeleteAccountServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -390,7 +390,7 @@
 
 	<servlet>
 		<servlet-name>cancelform</servlet-name>
-		<servlet-class>com.vimukti.accounter.servlets.CancelAccountServlet
+		<servlet-class>com.nitya.accounter.servlets.CancelAccountServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -413,7 +413,7 @@
 	<servlet>
 		<servlet-name>iAccounterCIImpl</servlet-name>
 		<servlet-class>
-			com.vimukti.accounter.web.server.AccounterCompanyInitializationServiceImpl
+			com.nitya.accounter.web.server.AccounterCompanyInitializationServiceImpl
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -424,7 +424,7 @@
 	<servlet>
 		<servlet-name>iAccounterImpl</servlet-name>
 		<servlet-class>
-			com.vimukti.accounter.web.server.AccounterCRUDServiceImpl
+			com.nitya.accounter.web.server.AccounterCRUDServiceImpl
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -435,7 +435,7 @@
 	<servlet>
 		<servlet-name>iAccounterGetImpl</servlet-name>
 		<servlet-class>
-			com.vimukti.accounter.web.server.AccounterGETServiceImpl
+			com.nitya.accounter.web.server.AccounterGETServiceImpl
 		</servlet-class>
 	</servlet>
 
@@ -448,7 +448,7 @@
 		<servlet-name>iAccounterHomeViewImpl
 		</servlet-name>
 		<servlet-class>
-			com.vimukti.accounter.web.server.AccounterHomeViewImpl
+			com.nitya.accounter.web.server.AccounterHomeViewImpl
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -459,7 +459,7 @@
 	<servlet>
 		<servlet-name>iAccounterReportImpl</servlet-name>
 		<servlet-class>
-			com.vimukti.accounter.web.server.AccounterReportServiceImpl
+			com.nitya.accounter.web.server.AccounterReportServiceImpl
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -469,7 +469,7 @@
 
 	<servlet>
 		<servlet-name>createcompany</servlet-name>
-		<servlet-class>com.vimukti.accounter.servlets.CreateCompanyServlet
+		<servlet-class>com.nitya.accounter.servlets.CreateCompanyServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -479,7 +479,7 @@
 
 	<servlet>
 		<servlet-name>Company Status</servlet-name>
-		<servlet-class>com.vimukti.accounter.servlets.CompanyStatusServlet
+		<servlet-class>com.nitya.accounter.servlets.CompanyStatusServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -489,7 +489,7 @@
 
 	<servlet>
 		<servlet-name>companyAuthentication</servlet-name>
-		<servlet-class>com.vimukti.accounter.servlets.AuthenticationServlet
+		<servlet-class>com.nitya.accounter.servlets.AuthenticationServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -499,7 +499,7 @@
 
 	<servlet>
 		<servlet-name>deletecompany</servlet-name>
-		<servlet-class>com.vimukti.accounter.servlets.DeleteCompanyServlet
+		<servlet-class>com.nitya.accounter.servlets.DeleteCompanyServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -509,7 +509,7 @@
 
 	<servlet>
 		<servlet-name>uploadImportDataFile</servlet-name>
-		<servlet-class>com.vimukti.accounter.servlets.UploadImportDataFileServlet
+		<servlet-class>com.nitya.accounter.servlets.UploadImportDataFileServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -519,7 +519,7 @@
 
 	<servlet>
 		<servlet-name>uploadFile</servlet-name>
-		<servlet-class>com.vimukti.accounter.servlets.UploadFileServlet
+		<servlet-class>com.nitya.accounter.servlets.UploadFileServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -529,7 +529,7 @@
 
 	<servlet>
 		<servlet-name>Upload Attachment</servlet-name>
-		<servlet-class>com.vimukti.accounter.servlets.UploadAttachmentServlet
+		<servlet-class>com.nitya.accounter.servlets.UploadAttachmentServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -539,7 +539,7 @@
 
 	<servlet>
 		<servlet-name>Download Attachment</servlet-name>
-		<servlet-class>com.vimukti.accounter.servlets.DownloadAttachmentServlet
+		<servlet-class>com.nitya.accounter.servlets.DownloadAttachmentServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -548,7 +548,7 @@
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>Download Temp File</servlet-name>
-		<servlet-class>com.vimukti.accounter.servlets.DownloadTempFileServlet
+		<servlet-class>com.nitya.accounter.servlets.DownloadTempFileServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -558,7 +558,7 @@
 
 	<servlet>
 		<servlet-name>uploadtemplatefile</servlet-name>
-		<servlet-class>com.vimukti.accounter.servlets.UploadTemplateFileServlet
+		<servlet-class>com.nitya.accounter.servlets.UploadTemplateFileServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -568,7 +568,7 @@
 
 	<servlet>
 		<servlet-name>uploadstatementfile</servlet-name>
-		<servlet-class>com.vimukti.accounter.servlets.UploadStatementFileServlet
+		<servlet-class>com.nitya.accounter.servlets.UploadStatementFileServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -580,7 +580,7 @@
 
 	<servlet>
 		<servlet-name>downloadFileFromFile</servlet-name>
-		<servlet-class>com.vimukti.accounter.servlets.DownloadFileServlet
+		<servlet-class>com.nitya.accounter.servlets.DownloadFileServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -637,7 +637,7 @@
 	</servlet-mapping>
 	<filter>
 		<filter-name>GzipFilter</filter-name>
-		<filter-class>com.vimukti.accounter.utils.GzipFilter</filter-class>
+		<filter-class>com.nitya.accounter.utils.GzipFilter</filter-class>
 		<init-param>
 			<param-name>mimeTypes</param-name>
 			<param-value>text/plain,text/html,text/xml,application/xhtml+xml,text/css,application/javascript,image/svg+xml
@@ -659,7 +659,7 @@
 
 	<filter>
 		<filter-name>gwtCacheControlFilter</filter-name>
-		<filter-class>com.vimukti.accounter.servlets.GWTCacheControlFilter
+		<filter-class>com.nitya.accounter.servlets.GWTCacheControlFilter
 		</filter-class>
 	</filter>
 
@@ -670,7 +670,7 @@
 
 	<filter>
 		<filter-name>AccounterDebugFilter</filter-name>
-		<filter-class>com.vimukti.accounter.servlets.AccounterDebugFilter
+		<filter-class>com.nitya.accounter.servlets.AccounterDebugFilter
 		</filter-class>
 	</filter>
 
@@ -681,7 +681,7 @@
 
 	<filter>
 		<filter-name>ServletLocaleFilter</filter-name>
-		<filter-class>com.vimukti.accounter.servlets.ServletLocaleFilter
+		<filter-class>com.nitya.accounter.servlets.ServletLocaleFilter
 		</filter-class>
 	</filter>
 
@@ -692,13 +692,13 @@
 
 	<filter>
 		<filter-name>MainServerFilter</filter-name>
-		<filter-class>com.vimukti.accounter.servlets.MainServerFilter
+		<filter-class>com.nitya.accounter.servlets.MainServerFilter
 		</filter-class>
 	</filter>
 
 	<filter>
 		<filter-name>ServerMaintananceFilter</filter-name>
-		<filter-class>com.vimukti.accounter.servlets.ServerMaintainanceFilter
+		<filter-class>com.nitya.accounter.servlets.ServerMaintainanceFilter
 		</filter-class>
 	</filter>
 
@@ -715,7 +715,7 @@
 
 	<filter>
 		<filter-name>ThreadLocalFilter</filter-name>
-		<filter-class>com.vimukti.accounter.servlets.ThreadLocalFilter
+		<filter-class>com.nitya.accounter.servlets.ThreadLocalFilter
 		</filter-class>
 	</filter>
 
@@ -727,7 +727,7 @@
 
 	<filter>
 		<filter-name>StartupFilter</filter-name>
-		<filter-class>com.vimukti.accounter.servlets.StartupFilter
+		<filter-class>com.nitya.accounter.servlets.StartupFilter
 		</filter-class>
 	</filter>
 
@@ -744,17 +744,26 @@
 
 	<servlet>
 		<servlet-name>maintanance</servlet-name>
-		<servlet-class>com.vimukti.accounter.servlets.MaintananceServlet
+		<servlet-class>com.nitya.accounter.servlets.MaintananceServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>maintanance</servlet-name>
 		<url-pattern>/main/maintanance</url-pattern>
 	</servlet-mapping>
-
+	
+	<servlet>
+		<servlet-name>authorize_payment</servlet-name>
+		<servlet-class>com.nitya.accounter.servlets.AuthorizePaymentServlet	
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>authorize_payment</servlet-name>
+		<url-pattern>/authorize_payment</url-pattern>
+	</servlet-mapping>
 	<servlet>
 		<servlet-name>adminlogin</servlet-name>
-		<servlet-class>com.vimukti.accounter.admin.server.AdminLoginServlet
+		<servlet-class>com.nitya.accounter.admin.server.AdminLoginServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -766,7 +775,7 @@
 
 	<servlet>
 		<servlet-name>adminhome</servlet-name>
-		<servlet-class>com.vimukti.accounter.admin.server.AdminHomeServlet
+		<servlet-class>com.nitya.accounter.admin.server.AdminHomeServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -777,7 +786,7 @@
 	<servlet>
 		<servlet-name>adminserviceimpl</servlet-name>
 		<servlet-class>
-			com.vimukti.accounter.admin.server.AdminCRUDServiceImpl
+			com.nitya.accounter.admin.server.AdminCRUDServiceImpl
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -787,7 +796,7 @@
 
 	<servlet>
 		<servlet-name>adminlogout</servlet-name>
-		<servlet-class>com.vimukti.accounter.admin.server.AdminLogoutServlet
+		<servlet-class>com.nitya.accounter.admin.server.AdminLogoutServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -799,7 +808,7 @@
 		<servlet-name>AdminHomeViewImpl
 		</servlet-name>
 		<servlet-class>
-			com.vimukti.accounter.admin.server.AdminHomeViewImpl
+			com.nitya.accounter.admin.server.AdminHomeViewImpl
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -811,7 +820,7 @@
 		<servlet-name>OpenIdServlet
 		</servlet-name>
 		<servlet-class>
-			com.vimukti.accounter.servlets.OpenIdServlet
+			com.nitya.accounter.servlets.OpenIdServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -823,7 +832,7 @@
 		<servlet-name>openIdSignupServlet
 		</servlet-name>
 		<servlet-class>
-			com.vimukti.accounter.servlets.SignupOpenIdServlet
+			com.nitya.accounter.servlets.SignupOpenIdServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -836,7 +845,7 @@
 		<servlet-name>FacebookLoginServlet
 		</servlet-name>
 		<servlet-class>
-			com.vimukti.accounter.servlets.FacebookLoginServlet
+			com.nitya.accounter.servlets.FacebookLoginServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -848,7 +857,7 @@
 		<servlet-name>MaintanaceInfoMailServelet
 		</servlet-name>
 		<servlet-class>
-			com.vimukti.accounter.servlets.MaintanaceInfoMailServelet
+			com.nitya.accounter.servlets.MaintanaceInfoMailServelet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -859,7 +868,7 @@
 	<servlet>
 		<servlet-name>iTranslateImpl</servlet-name>
 		<servlet-class>
-			com.vimukti.accounter.web.server.translate.TranslateServiceImpl
+			com.nitya.accounter.web.server.translate.TranslateServiceImpl
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -871,7 +880,7 @@
 		<servlet-name>TranslationUploadServlet
 		</servlet-name>
 		<servlet-class>
-			com.vimukti.accounter.servlets.TranslationUploadServlet
+			com.nitya.accounter.servlets.TranslationUploadServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -883,7 +892,7 @@
 		<servlet-name>EmailActivationServlet
 		</servlet-name>
 		<servlet-class>
-			com.vimukti.accounter.servlets.EmailActivateServlet
+			com.nitya.accounter.servlets.EmailActivateServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -894,7 +903,7 @@
 		<servlet-name>GoPremiumServlet
 		</servlet-name>
 		<servlet-class>
-			com.vimukti.accounter.servlets.GoPremiumServlet
+			com.nitya.accounter.servlets.GoPremiumServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -907,7 +916,7 @@
 		<servlet-name>SubscribtionComplitionServlet
 		</servlet-name>
 		<servlet-class>
-			com.vimukti.accounter.servlets.SubscribtionComplitionServlet
+			com.nitya.accounter.servlets.SubscribtionComplitionServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -918,7 +927,7 @@
 		<servlet-name>SubscriptionIPNServlet
 		</servlet-name>
 		<servlet-class>
-			com.vimukti.accounter.servlets.SubscriptionIPNServlet
+			com.nitya.accounter.servlets.SubscriptionIPNServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -929,7 +938,7 @@
 	<servlet>
 		<servlet-name>InAppReceiptVerificationServlet</servlet-name>
 		<servlet-class>
-			com.vimukti.accounter.servlets.InAppReceiptVerificationServlet
+			com.nitya.accounter.servlets.InAppReceiptVerificationServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -941,7 +950,7 @@
 		<servlet-name>SubscriptionManagementServlet
 		</servlet-name>
 		<servlet-class>
-			com.vimukti.accounter.servlets.SubscriptionManagementServlet
+			com.nitya.accounter.servlets.SubscriptionManagementServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -953,7 +962,7 @@
 		<servlet-name>SubDeleteUserConformServlet
 		</servlet-name>
 		<servlet-class>
-			com.vimukti.accounter.servlets.SubDeleteUserConformServlet
+			com.nitya.accounter.servlets.SubDeleteUserConformServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -965,7 +974,7 @@
 		<servlet-name>iAccounterExportCSVImpl
 		</servlet-name>
 		<servlet-class>
-			com.vimukti.accounter.web.server.AccounterExportCSVImpl
+			com.nitya.accounter.web.server.AccounterExportCSVImpl
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -976,7 +985,7 @@
 		<servlet-name>OpenIDPasswordServlet
 		</servlet-name>
 		<servlet-class>
-			com.vimukti.accounter.servlets.OpenIDPasswordServlet
+			com.nitya.accounter.servlets.OpenIDPasswordServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -988,7 +997,7 @@
 		<servlet-name>EncryptCompaniesServlet
 		</servlet-name>
 		<servlet-class>
-			com.vimukti.accounter.servlets.EncryptCompaniesServlet
+			com.nitya.accounter.servlets.EncryptCompaniesServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -1000,7 +1009,7 @@
 		<servlet-name>DecryptCompaniesServlet
 		</servlet-name>
 		<servlet-class>
-			com.vimukti.accounter.servlets.DecryptCompanyServlet
+			com.nitya.accounter.servlets.DecryptCompanyServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -1012,7 +1021,7 @@
 		<servlet-name>DecryptPasswordServlet
 		</servlet-name>
 		<servlet-class>
-			com.vimukti.accounter.servlets.DecryptPasswordServlet
+			com.nitya.accounter.servlets.DecryptPasswordServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -1023,7 +1032,7 @@
 	<servlet>
 		<servlet-name>Company locked</servlet-name>
 		<servlet-class>
-			com.vimukti.accounter.servlets.CompanyLockedServlet
+			com.nitya.accounter.servlets.CompanyLockedServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -1034,7 +1043,7 @@
 	<servlet>
 		<servlet-name>PremiumServlet</servlet-name>
 		<servlet-class>
-			com.vimukti.accounter.servlets.PremiumServlet
+			com.nitya.accounter.servlets.PremiumServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -1047,7 +1056,7 @@
 
 	<servlet>
 		<servlet-name>ws</servlet-name>
-		<servlet-class>com.vimukti.accounter.ws.WebSocketHandler
+		<servlet-class>com.nitya.accounter.ws.WebSocketHandler
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -1059,7 +1068,7 @@
 	<servlet>
 		<servlet-name>windowsServiceImpl</servlet-name>
 		<servlet-class>
-			com.vimukti.accounter.web.server.AccounterWindowsHomeServiceImpl
+			com.nitya.accounter.web.server.AccounterWindowsHomeServiceImpl
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -1071,7 +1080,7 @@
 	<servlet>
 		<servlet-name>CacheFilenameCreatorServlet</servlet-name>
 		<servlet-class>
-			com.vimukti.accounter.servlets.CacheFilenameCreatorServlet
+			com.nitya.accounter.servlets.CacheFilenameCreatorServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -1083,7 +1092,7 @@
 		<servlet-name>iAccounterPayrollImpl
 		</servlet-name>
 		<servlet-class>
-			com.vimukti.accounter.web.server.AccounterPayrollImpl
+			com.nitya.accounter.web.server.AccounterPayrollImpl
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -1095,7 +1104,7 @@
 		<servlet-name>freeTrailServlet
 		</servlet-name>
 		<servlet-class>
-			com.vimukti.accounter.servlets.FreeTrailServlet
+			com.nitya.accounter.servlets.FreeTrailServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -1106,7 +1115,7 @@
 		<servlet-name>licenseInfoServlet
 		</servlet-name>
 		<servlet-class>
-			com.vimukti.accounter.servlets.LicenseInfoServlet
+			com.nitya.accounter.servlets.LicenseInfoServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -1114,12 +1123,12 @@
 		<url-pattern>/main/licenseInfo</url-pattern>
 	</servlet-mapping>
 	<listener>
-		<listener-class>com.vimukti.accounter.listeners.ServicesStartUpListener
+		<listener-class>com.nitya.accounter.listeners.ServicesStartUpListener
 		</listener-class>
 	</listener>
 
 	<listener>
-		<listener-class>com.vimukti.accounter.listeners.StartUpListener
+		<listener-class>com.nitya.accounter.listeners.StartUpListener
 		</listener-class>
 	</listener>
 
@@ -1127,7 +1136,7 @@
 	<servlet>
 		<servlet-name>setupserviceimpl</servlet-name>
 		<servlet-class>
-			com.vimukti.accounter.setup.server.SetupServiceImpl
+			com.nitya.accounter.setup.server.SetupServiceImpl
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -1138,7 +1147,7 @@
 	<servlet>
 		<servlet-name>setupservlet</servlet-name>
 		<servlet-class>
-			com.vimukti.accounter.setup.server.AccounterSetupServlet
+			com.nitya.accounter.setup.server.AccounterSetupServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -1152,7 +1161,7 @@
 		<servlet-name>desktopStartup
 		</servlet-name>
 		<servlet-class>
-			com.vimukti.accounter.servlets.DesktopStartupServlet
+			com.nitya.accounter.servlets.DesktopStartupServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -1164,7 +1173,7 @@
 		<servlet-name>desktopStartupComplete
 		</servlet-name>
 		<servlet-class>
-			com.vimukti.accounter.servlets.StartupCompletedServlet
+			com.nitya.accounter.servlets.StartupCompletedServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -1176,7 +1185,7 @@
 		<servlet-name>manageLicense
 		</servlet-name>
 		<servlet-class>
-			com.vimukti.accounter.servlets.ManageLicenseServlet
+			com.nitya.accounter.servlets.ManageLicenseServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -1188,7 +1197,7 @@
 		<servlet-name>purchaseLicense
 		</servlet-name>
 		<servlet-class>
-			com.vimukti.accounter.servlets.PurchaseLicenseServlet
+			com.nitya.accounter.servlets.PurchaseLicenseServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -1200,7 +1209,7 @@
 		<servlet-name>PurchaseLicenseIPNServlet
 		</servlet-name>
 		<servlet-class>
-			com.vimukti.accounter.servlets.PurchaseLicenseIPNServlet
+			com.nitya.accounter.servlets.PurchaseLicenseIPNServlet
 		</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -1208,7 +1217,7 @@
 		<url-pattern>/main/license/ipn</url-pattern>
 	</servlet-mapping>
 
-	<!-- <filter> <filter-name>CharsetFilter</filter-name> <filter-class>com.vimukti.accounter.servlets.CharsetFilter</filter-class> 
+	<!-- <filter> <filter-name>CharsetFilter</filter-name> <filter-class>com.nitya.accounter.servlets.CharsetFilter</filter-class> 
 		<init-param> <param-name>requestEncoding</param-name> <param-value>UTF-8</param-value> 
 		</init-param> </filter> <filter-mapping> <filter-name>CharsetFilter</filter-name> 
 		<url-pattern>/*</url-pattern> </filter-mapping> -->

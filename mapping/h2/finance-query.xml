@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<hibernate-mapping package="com.vimukti.accounter.core">
+<hibernate-mapping package="com.nitya.accounter.core">
 
 
 	<!-- QUERIES FOR DAOs -->
@@ -6624,7 +6624,7 @@
 	<query name="getPortletPageConfiguration">
 		<query-param name="pageName" type="string" />
 		<query-param name="userId" type="long" />
-		from com.vimukti.accounter.core.PortletPageConfiguration p where
+		from com.nitya.accounter.core.PortletPageConfiguration p where
 		p.pageName=:pageName AND p.user.id=:userId
 	</query>
 
@@ -6656,14 +6656,14 @@
 
 	<query name="getCustomersOrderByName">
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.Customer c where c.company=:company
+		from com.nitya.accounter.core.Customer c where c.company=:company
 		and c.isActive=true
 		order by c.name
 	</query>
 
 	<query name="getVendorsOrderByName">
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.Vendor c where c.isActive=true and
+		from com.nitya.accounter.core.Vendor c where c.isActive=true and
 		c.company=:company
 		order by c.name
 	</query>
@@ -6727,7 +6727,7 @@
 
 	<query name="getTaxreturnByTransactionid">
 		<query-param name="transaction" type="Transaction" />
-		from com.vimukti.accounter.core.TAXReturnEntry tr where
+		from com.nitya.accounter.core.TAXReturnEntry tr where
 		tr.transaction=:transaction
 	</query>
 

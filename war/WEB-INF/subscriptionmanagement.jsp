@@ -1,5 +1,5 @@
 <%@ page import="java.util.*" %>
-<%@ page import="com.vimukti.accounter.core.*" %>
+<%@ page import="com.nitya.accounter.core.*" %>
 <%@page pageEncoding="UTF-8" %>
 <%@ taglib prefix="i18n" uri="/WEB-INF/i18n.tld"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 

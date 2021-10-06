@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC
                 "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
                 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<hibernate-mapping package="com.vimukti.accounter.core"
+<hibernate-mapping package="com.nitya.accounter.core"
 	default-access="field" auto-import="false">
 	<class name="Transaction" table="TRANSACTION">
 		<id name="id" column="ID">
@@ -17,7 +17,7 @@
 		<!-- <property name="netAmount" column="NET_AMOUNT"></property> -->
 		<!-- <property name="totalVAT" column="TOTAL_VAT"></property> -->
 		<property name="transactionDate" column="T_DATE"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<property name="type" column="T_TYPE"></property>
 		<property name="number" type="encryptedstring" column="NUMBER"></property>
 		<property name="saveStatus" column="SAVE_STATUS"></property>
@@ -37,7 +37,7 @@
 			<one-to-many class="TransactionItem" />
 		</list>
 		<one-to-one name="recurringTransaction"
-			class="com.vimukti.accounter.core.RecurringTransaction" property-ref="transaction" />
+			class="com.nitya.accounter.core.RecurringTransaction" property-ref="transaction" />
 		<property name="status" column="STATUS"></property>
 		<property name="canVoidOrEdit" column="CAN_VOID_OR_EDIT"></property>
 		<property name="isDeposited" column="IS_DEPOSITED"></property>
@@ -51,7 +51,7 @@
 		<property name="lastModifiedDate" column="LAST_MODIFIED_DATE"
 			not-null="true" />
 		<set name="attachments" table="ATTACHMENT" cascade="save-update,delete-orphan">
-			<key column="TRANSACTION_ID" not-null="true" />
+			<key column="TRANSACTION_ID" not-null ="false"/>
 			<one-to-many class="Attachment" />
 		</set>
 		<property name="currency" column="CURRENCY"></property>
@@ -60,6 +60,10 @@
 			cascade="all-delete-orphan">
 			<key column="TRANSACTION_ID"></key>
 			<one-to-many class="AccountTransaction" />
+		</set>
+		<set name="empTimeSheet" cascade="save-update,delete-orphan" >
+		<key column="TRANSACTION_ID"></key>
+		<one-to-many class="EmployeeTimeSheet" />
 		</set>
 		<!-- <set name="payVATEntriesList" inverse="true" cascade="save-update"> 
 			<key column="TRANSACTION_ID"></key> <one-to-many class="PayTAXEntries" /> 
@@ -80,7 +84,7 @@
 		</many-to-one>
 		<set name="reconciliationItems" inverse="true">
 			<key column="TRANSACTION_ID" />
-			<one-to-many class="com.vimukti.accounter.core.ReconciliationItem" />
+			<one-to-many class="com.nitya.accounter.core.ReconciliationItem" />
 		</set>
 
 		<list name="history" cascade="save-update,delete">
@@ -116,7 +120,7 @@
 		<many-to-one name="lastActivity" class="Activity" column="LAST_ACTIVITY"></many-to-one>
 
 		<!-- <joined-subclass name="PayTAX" table="PAY_TAX"> <key column="ID" /> 
-			<property name="billsDueOnOrBefore" column="BILLS_DUE_ON_OR_BEFORE" type="com.vimukti.accounter.core.LongUseType"></property> 
+			<property name="billsDueOnOrBefore" column="BILLS_DUE_ON_OR_BEFORE" type="com.nitya.accounter.core.LongUseType"></property> 
 			<many-to-one name="payFrom" class="Account" cascade="save-update" column="PAYFROM_ACCOUNT_ID"> 
 			</many-to-one> <many-to-one name="taxAgency" class="TAXAgency" cascade="save-update" 
 			column="TAX_AGENCY_ID"> </many-to-one> <property name="endingBalance" column="ENDING_BALANCE"></property> 
@@ -126,7 +130,7 @@
 		<joined-subclass name="PayTAX" table="PAY_TAX">
 			<key column="ID" />
 			<property name="returnsDueOnOrBefore" column="RETURNS_DUE_ON_OR_BEFORE"
-				type="com.vimukti.accounter.core.LongUseType"></property>
+				type="com.nitya.accounter.core.LongUseType"></property>
 			<many-to-one name="payFrom" class="Account" cascade="save-update"
 				column="PAYFROM_ACCOUNT_ID">
 			</many-to-one>
@@ -165,9 +169,9 @@
 			<property name="assesmentYearEnd"></property>
 			<property name="isFiled"></property>
 			<property name="etdsfillingAcknowledgementNo" type="encryptedstring"></property>
-			<property name="acknowledgementDate" type="com.vimukti.accounter.core.LongUseType"></property>
-			<property name="fromDate" type="com.vimukti.accounter.core.LongUseType"></property>
-			<property name="toDate" type="com.vimukti.accounter.core.LongUseType"></property>
+			<property name="acknowledgementDate" type="com.nitya.accounter.core.LongUseType"></property>
+			<property name="fromDate" type="com.nitya.accounter.core.LongUseType"></property>
+			<property name="toDate" type="com.nitya.accounter.core.LongUseType"></property>
 			<list name="tdsTransactionItems" cascade="save-update,delete-orphan">
 				<key column="TDS_CHALLANDETAIL_ID"></key>
 				<list-index column="IDX" />
@@ -184,7 +188,7 @@
 		<joined-subclass name="ReceiveVAT" table="RECEIVE_VAT">
 			<key column="ID" />
 			<property name="returnsDueOnOrBefore" column="RETURNS_DUE_ON_OR_BEFORE"
-				type="com.vimukti.accounter.core.LongUseType"></property>
+				type="com.nitya.accounter.core.LongUseType"></property>
 			<many-to-one name="depositIn" class="Account" cascade="save-update"
 				column="DEPOSIT_IN_ACCOUNT_ID">
 			</many-to-one>
@@ -249,7 +253,7 @@
 			<!-- <property name="employeeName" column="EMPLOYEE_NAME" type="string"></property> -->
 			<property name="checkNumber" column="CHECK_NUMBER" type="encryptedstring"></property>
 			<property name="deliveryDate" column="DELIVERY_DATE"
-				type="com.vimukti.accounter.core.LongUseType"></property>
+				type="com.nitya.accounter.core.LongUseType"></property>
 			<property name="expenseStatus" column="EXPENSE_STATUS"></property>
 		</joined-subclass>
 		<joined-subclass name="CashSales" table="CASH_SALES">
@@ -313,7 +317,7 @@
 				<many-to-many column="ESTIMATE_ID" class="Estimate" />
 			</list>
 			<property name="deliverydate" column="DELIVERY_DATE"
-				type="com.vimukti.accounter.core.LongUseType"></property>
+				type="com.nitya.accounter.core.LongUseType"></property>
 			<many-to-one name="priceLevel" class="PriceLevel" column="PRICE_LEVEL_ID">
 			</many-to-one>
 			<property name="taxTotal" column="SALES_TAX"></property>
@@ -351,7 +355,7 @@
 			</many-to-one>
 			<property name="checkNumber" type="encryptedstring" column="CHECK_NUMBER"></property>
 			<property name="deliveryDate" column="DELIVERY_DATE"
-				type="com.vimukti.accounter.core.LongUseType"></property>
+				type="com.nitya.accounter.core.LongUseType"></property>
 		</joined-subclass>
 		<joined-subclass name="CustomerCreditMemo" table="CUSTOMER_CREDIT_MEMO">
 			<key column="ID" />
@@ -478,14 +482,14 @@
 				column="PAYMENT_TERM_ID">
 			</many-to-one>
 			<property name="dueDate" column="DUE_DATE"
-				type="com.vimukti.accounter.core.LongUseType"></property>
+				type="com.nitya.accounter.core.LongUseType"></property>
 			<property name="deliveryDate" column="DELIVERY_DATE"
-				type="com.vimukti.accounter.core.LongUseType"></property>
+				type="com.nitya.accounter.core.LongUseType"></property>
 			<property name="isPaid" column="IS_PAID"></property>
 			<property name="payments" column="PAYMENTS"></property>
 			<property name="balanceDue" column="BALANCE_DUE"></property>
 			<property name="discountDate" column="DISCOUNT_DATE"
-				type="com.vimukti.accounter.core.LongUseType"></property>
+				type="com.nitya.accounter.core.LongUseType"></property>
 			<set name="transactionPayBills" inverse="true">
 				<key column="ENTER_BILL_ID"></key>
 				<one-to-many class="TransactionPayBill" />
@@ -560,11 +564,11 @@
 				column="SHIPPING_METHOD_ID">
 			</many-to-one>
 			<property name="expirationDate" column="EXPIRATION_DATE"
-				type="com.vimukti.accounter.core.LongUseType"></property>
+				type="com.nitya.accounter.core.LongUseType"></property>
 			<property name="customerOrderNumber" column="CUSTOMER_ORDER_NUMBER"
 				type="encryptedstring"></property>
 			<property name="deliveryDate" column="DELIVERY_DATE"
-				type="com.vimukti.accounter.core.LongUseType"></property>
+				type="com.nitya.accounter.core.LongUseType"></property>
 			<many-to-one name="priceLevel" class="PriceLevel" column="PRICE_LEVEL_ID">
 			</many-to-one>
 			<property name="taxTotal" column="SALES_TAX"></property>
@@ -630,9 +634,9 @@
 				column="SHIPPING_METHOD_ID">
 			</many-to-one>
 			<property name="dueDate" column="DUE_DATE"
-				type="com.vimukti.accounter.core.LongUseType"></property>
+				type="com.nitya.accounter.core.LongUseType"></property>
 			<property name="deliverydate" column="DELIVERY_DATE"
-				type="com.vimukti.accounter.core.LongUseType"></property>
+				type="com.nitya.accounter.core.LongUseType"></property>
 			<property name="orderNum" column="SALES_ORDER_NO" type="encryptedstring"></property>
 			<property name="discountTotal" column="DISCOUNT_TOTAL"></property>
 			<many-to-one name="priceLevel" class="PriceLevel" column="PRICE_LEVEL_ID">
@@ -648,7 +652,7 @@
 				<many-to-many column="ESTIMATE_ID" class="Estimate" />
 			</list>
 			<property name="discountDate" column="DISCOUNT_DATE"
-				type="com.vimukti.accounter.core.LongUseType"></property>
+				type="com.nitya.accounter.core.LongUseType"></property>
 			<set name="transactionReceivePayments" inverse="true">
 				<key column="INVOICE_ID"></key>
 				<one-to-many class="TransactionReceivePayment" />
@@ -675,7 +679,7 @@
 				column="PAYFROM_ID">
 			</many-to-one>
 			<property name="billDueOnOrBefore" column="BILL_DUE_ONORBEFORE"
-				type="com.vimukti.accounter.core.LongUseType"></property>
+				type="com.nitya.accounter.core.LongUseType"></property>
 			<many-to-one name="vendor" class="Vendor" cascade="save-update"
 				column="VENDOR_ID">
 			</many-to-one>
@@ -754,7 +758,7 @@
 			<many-to-one name="shipTo" class="Account" column="SHIP_TO_ID">
 			</many-to-one>
 			<property name="purchaseOrderDate" column="PURCHASE_ORDER_DATE"
-				type="com.vimukti.accounter.core.LongUseType"></property>
+				type="com.nitya.accounter.core.LongUseType"></property>
 			<property name="toBePrinted" column="TO_BE_PRINTED"></property>
 			<property name="toBeEmailed" column="TO_BE_EMAILED"></property>
 			<component name="contact" class="Contact">
@@ -784,9 +788,9 @@
 				column="PAYMENT_TERM_ID">
 			</many-to-one>
 			<property name="deliveryDate" column="DELIVERY_DATE"
-				type="com.vimukti.accounter.core.LongUseType"></property>
+				type="com.nitya.accounter.core.LongUseType"></property>
 			<property name="dispatchDate" column="DISPATCH_DATE"
-				type="com.vimukti.accounter.core.LongUseType"></property>
+				type="com.nitya.accounter.core.LongUseType"></property>
 			<component name="shippingAddress" class="Address">
 				<property name="type" column="SHIPPING_ADDRESS_TYPE"></property>
 				<property name="address1" type="encryptedstring" column="SHIPPING_ADDRESS_ADDRESS1"
@@ -827,7 +831,7 @@
 			<many-to-one name="shipTo" class="Account" column="SHIP_TO_ID">
 			</many-to-one>
 			<property name="purchaseOrderDate" column="PURCHASE_ORDER_DATE"
-				type="com.vimukti.accounter.core.LongUseType"></property>
+				type="com.nitya.accounter.core.LongUseType"></property>
 			<property name="toBePrinted" column="TO_BE_PRINTED"></property>
 			<property name="toBeEmailed" column="TO_BE_EMAILED"></property>
 			<component name="contact" class="Contact">
@@ -857,9 +861,9 @@
 				column="PAYMENT_TERM_ID">
 			</many-to-one>
 			<property name="dueDate" column="DUE_DATE"
-				type="com.vimukti.accounter.core.LongUseType"></property>
+				type="com.nitya.accounter.core.LongUseType"></property>
 			<property name="deliveryDate" column="DELIVERY_DATE"
-				type="com.vimukti.accounter.core.LongUseType"></property>
+				type="com.nitya.accounter.core.LongUseType"></property>
 			<component name="shippingAddress" class="Address">
 				<property name="type" column="SHIPPING_ADDRESS_TYPE"></property>
 				<property name="address1" type="encryptedstring" column="SHIPPING_ADDRESS_ADDRESS1"
@@ -948,7 +952,7 @@
 			</many-to-one> <many-to-one name="shippingTerm" class="ShippingTerms" column="SHIPPING_TERMS_ID"> 
 			</many-to-one> <many-to-one name="shippingMethod" class="ShippingMethod" 
 			column="SHIPPING_METHOD_ID"> </many-to-one> <property name="dueDate" column="DUE_DATE" 
-			type="com.vimukti.accounter.core.LongUseType"></property> <property name="discountTotal" 
+			type="com.nitya.accounter.core.LongUseType"></property> <property name="discountTotal" 
 			column="DISCOUNT_TOTAL"></property> <many-to-one name="priceLevel" class="PriceLevel" 
 			column="PRICE_LEVEL_ID"> </many-to-one> <property name="taxTotal" column="SALES_TAX_AMOUNT"></property> 
 			<many-to-one name="salesTaxItem" class="Item" column="ITEM_ID"> </many-to-one> 
@@ -960,14 +964,14 @@
 			<key column="ID" />
 			<property name="billFrom" column="BILL_FROM" type="encryptedstring"></property>
 			<property name="billDate" column="BILL_DATE"
-				type="com.vimukti.accounter.core.LongUseType"></property>
+				type="com.nitya.accounter.core.LongUseType"></property>
 			<property name="status" column="STATUS"></property>
 			<property name="submittedDate" column="SUBMITTED_DATE"
-				type="com.vimukti.accounter.core.LongUseType"></property>
+				type="com.nitya.accounter.core.LongUseType"></property>
 			<property name="paymentDueDate" column="PAYMENT_DUE_DATE"
-				type="com.vimukti.accounter.core.LongUseType"></property>
+				type="com.nitya.accounter.core.LongUseType"></property>
 			<property name="reportingDate" column="REPORTING_DATE"
-				type="com.vimukti.accounter.core.LongUseType"></property>
+				type="com.nitya.accounter.core.LongUseType"></property>
 			<property name="amountDue" column="AMOUNT_DUE"></property>
 			<property name="paidAmount" column="PAID_AMOUNT"></property>
 			<property name="category" column="CATEGORY"></property>
@@ -1078,9 +1082,9 @@
 		<joined-subclass name="TAXReturn" table="TAX_RETURN">
 			<key column="ID" />
 			<property name="periodStartDate" column="START_DATE"
-				type="com.vimukti.accounter.core.LongUseType"></property>
+				type="com.nitya.accounter.core.LongUseType"></property>
 			<property name="periodEndDate" column="END_DATE"
-				type="com.vimukti.accounter.core.LongUseType"></property>
+				type="com.nitya.accounter.core.LongUseType"></property>
 
 			<many-to-one name="taxAgency" class="TAXAgency" cascade="save-update"
 				column="TAX_AGENCY">
@@ -1168,9 +1172,9 @@
 			<many-to-one name="employeeGroup" column="EMPLOYEE_GROUP" class="EmployeeGroup">
 			</many-to-one>
 			<property name="payPeriodStartDate" column="PAY_PERIOD_STARTDATE"
-				type="com.vimukti.accounter.core.LongUseType" />
+				type="com.nitya.accounter.core.LongUseType" />
 			<property name="payPeriodEndDate" column="PAY_PERIOD_ENDDATE"
-				type="com.vimukti.accounter.core.LongUseType" />
+				type="com.nitya.accounter.core.LongUseType" />
 			<set name="payEmployee" inverse="true" cascade="save-update,delete-orphan">
 				<key column="PAY_RUN_ID" />
 				<one-to-many class="EmployeePaymentDetails" />
@@ -1252,7 +1256,7 @@
 		<property name="totalTax" column="TOTAL_TAX"></property>
 		<property name="taxRate" column="TAX_RATE"></property>
 		<property name="transactionDate" column="TRANSACTION_DATE"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<many-to-one name="transaction" column="TRANSACTION_ID"
 			class="Transaction" lazy="false">
 		</many-to-one>
@@ -1370,7 +1374,7 @@
 			<generator class="identity" />
 		</id>
 		<property name="date" column="DATE"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<property name="memo" type="encryptedstring" column="MEMO"></property>
 		<property name="amountToUse" column="AMOUNT_TO_USE"></property>
 		<many-to-one name="transactionReceivePayment" class="TransactionReceivePayment"
@@ -1395,13 +1399,13 @@
 		</many-to-one>
 		<property name="version" column="VERSION"></property>
 		<property name="dueDate" column="DUE_DATE"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<many-to-one name="enterBill" class="EnterBill" column="ENTER_BILL_ID">
 		</many-to-one>
 		<property name="originalAmount" column="ORIGINAL_AMOUNT"></property>
 		<property name="amountDue" column="AMOUNT_DUE"></property>
 		<property name="discountDate" column="DISCOUNT_DATE"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<many-to-one name="discountAccount" class="Account"
 			column="DISCOUNT_ID">
 		</many-to-one>
@@ -1446,13 +1450,13 @@
 		</id>
 		<property name="version" column="VERSION"></property>
 		<property name="dueDate" column="DUE_DATE"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<many-to-one name="invoice" class="Invoice" cascade="save-update"
 			column="INVOICE_ID">
 		</many-to-one>
 		<property name="invoiceAmount" column="INVOICE_AMOUNT"></property>
 		<property name="discountDate" column="DISCOUNT_DATE"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<many-to-one name="discountAccount" class="Account"
 			cascade="save-update" column="DISCOUNT_ID">
 		</many-to-one>
@@ -1482,7 +1486,7 @@
 	</class>
 	<!--<class name="TransactionIssuePayment" table="TRANSACTION_ISSUE_PAYMENT"> 
 		<id name="id" column="ID"> <generator class="identity" /> </id> <property 
-		name="date" column="DATE" type="com.vimukti.accounter.core.LongUseType"></property> 
+		name="date" column="DATE" type="com.nitya.accounter.core.LongUseType"></property> 
 		<many-to-one name="writeCheck" class="WriteCheck" column="WRITE_CHECK_ID"> 
 		</many-to-one> <many-to-one name="customerRefund" class="CustomerRefund" 
 		column="CUSTOMER_REFUND_ID"> </many-to-one> <many-to-one name="payBill" class="PayBill" 
@@ -1507,7 +1511,7 @@
 		<many-to-one name="taxReturn" class="TAXReturn" column="VAT_RETURN_ID">
 		</many-to-one>
 		<property name="filedDate" column="FILED_DATE"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<many-to-one name="payTAX" class="PayTAX" column="PAY_TAX_ID">
 		</many-to-one>
 		<property name="version" column="VERSION"></property>
@@ -1546,7 +1550,7 @@
 		<property name="version" column="VERSION"></property>
 		<property name="isTAXGroupEntry" column="IS_TAX_GROUP_ENTRY"></property>
 		<property name="transactionDate" column="TRANSACTION_DATE"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<property name="transactionType" column="TRANSACTION_TYPE"></property>
 		<property name="transactionCategory" column="TRANSACTION_CATEGORY"></property>
 	</class>
@@ -1618,14 +1622,14 @@
 		<property name="stopped" column="STOPPED"></property>
 
 		<property name="startDate" column="START_DATE"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<property name="endDate" column="END_DATE"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<property name="nextScheduleOn" column="NEXT_SCHEDULE_ON"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 
 		<property name="prevScheduleOn" column="PREV_SCHEDULE_ON"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 
 		<many-to-one name="transaction" column="TRANSACTION_ID"
 			unique="true" not-null="true" cascade="save-update,delete-orphan" />

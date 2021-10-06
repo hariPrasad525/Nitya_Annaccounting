@@ -15,6 +15,7 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <link rel="shortcut icon" href="/images/favicon.ico" />
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 <meta content="IE=100" http-equiv="X-UA-Compatible" />
 <%@ include file="./init.jsp"%>
 <script type="text/javascript" charset="utf-8">

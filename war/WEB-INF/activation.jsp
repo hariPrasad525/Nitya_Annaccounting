@@ -77,7 +77,7 @@
 <!--      <div id="appVersions"> -->
 <!-- 	    <div> -->
 <!-- 	       <span>Access Anna Accounting from </span> -->
-<!-- 	       <a target="_blank" href="https://play.google.com/store/apps/details?id=com.vimukti.accounter.android"> Android </a> | -->
+<!-- 	       <a target="_blank" href="https://play.google.com/store/apps/details?id=com.nitya.accounter.android"> Android </a> | -->
 <!-- 	       <a target="_blank" href="http://www.windowsphone.com/en-US/apps/6a8b2e3f-9c72-4929-9053-1262c6204d80"> Windows Phone </a> | -->
 <!-- 		   <a target="_blank" href="http://itunes.apple.com/us/app/accounter/id466388076?ls=1&mt=8"> iPhone </a> | -->
 <!-- 		   <a target="_blank" href="https://appworld.blackberry.com/webstore/content/67065/?lang=en"> Black Berry </a> | -->

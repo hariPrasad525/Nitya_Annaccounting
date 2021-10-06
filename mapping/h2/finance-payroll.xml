@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC
                 "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
                 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<hibernate-mapping package="com.vimukti.accounter.core"
+<hibernate-mapping package="com.nitya.accounter.core"
 	default-access="field" auto-import="false">
 	<class name="EmployeeGroup" table="EMPLOYEE_GROUP">
 		<id name="id" column="ID">
@@ -75,7 +75,7 @@
 		<many-to-one name="payHead" column="PAY_HEAD" class="PayHead" />
 		<property name="rate" column="RATE" />
 		<property name="effectiveFrom" column="EFFECTIVE_FROM"
-			type="com.vimukti.accounter.core.LongUseType" />
+			type="com.nitya.accounter.core.LongUseType" />
 	</class>
 
 	<class name="PayHead" table="PAY_HEAD">
@@ -122,7 +122,7 @@
 				<list-index column="SLAB_INDEX" />
 				<composite-element class="ComputationSlab">
 					<property name="effectiveFrom" column="EFFECTIVE_FROM"
-						type="com.vimukti.accounter.core.LongUseType" />
+						type="com.nitya.accounter.core.LongUseType" />
 					<property name="fromAmount" column="FROM_AMOUNT" />
 					<property name="toAmount" column="TO_AMOUNT" />
 					<property name="slabType" column="SLAB_TYPE" />
@@ -270,63 +270,63 @@
 	<query name="list.All.Employees">
 		<query-param name="company" type="Company" />
 		<query-param name="isActive" type="boolean" />
-		from com.vimukti.accounter.core.Employee e where
+		from com.nitya.accounter.core.Employee e where
 		e.company=:company and e.isActive =:isActive
 		order by e.id
 	</query>
 
 	<query name="list.All.Payheads">
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.PayHead ph where
+		from com.nitya.accounter.core.PayHead ph where
 		ph.company=:company
 		order by ph.id
 	</query>
 
 	<query name="list.All.PayrollUnits">
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.PayrollUnit pr where
+		from com.nitya.accounter.core.PayrollUnit pr where
 		pr.company=:company
 		order by pr.id
 	</query>
 
 	<query name="list.Payhead">
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.PayHead ph where
+		from com.nitya.accounter.core.PayHead ph where
 		ph.company=:company
 		order by ph.id
 	</query>
 
 	<query name="list.PayrollUnit">
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.PayrollUnit p where p.company=:company
+		from com.nitya.accounter.core.PayrollUnit p where p.company=:company
 	</query>
 
 	<query name="list.PayStructure">
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.PayStructure p where
+		from com.nitya.accounter.core.PayStructure p where
 		p.company=:company
 	</query>
 
 	<query name="list.AttendanceProductionType">
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.AttendanceOrProductionType p where
+		from com.nitya.accounter.core.AttendanceOrProductionType p where
 		p.company=:company
 	</query>
 
 	<query name="list.EmployeeGroups">
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.EmployeeGroup eg where
+		from com.nitya.accounter.core.EmployeeGroup eg where
 		eg.company=:company
 	</query>
 
 	<!-- <query name="list.EmployeeCategories"> <query-param name="company" 
-		type="Company" /> from com.vimukti.accounter.core.EmployeeCategory ec where 
+		type="Company" /> from com.nitya.accounter.core.EmployeeCategory ec where 
 		ec.company=:company </query> -->
 	<query name="getEmployee.by.Name">
 		<query-param name="company" type="Company" />
 		<query-param name="name" type="encryptedstring" />
 		<query-param name="id" type="long" />
-		from com.vimukti.accounter.core.Employee E where
+		from com.nitya.accounter.core.Employee E where
 		E.company=:company and
 		E.name=:name and E.id != :id
 	</query>
@@ -335,7 +335,7 @@
 		<query-param name="company" type="Company" />
 		<query-param name="name" type="encryptedstring" />
 		<query-param name="id" type="long" />
-		from com.vimukti.accounter.core.EmployeeGroup E where
+		from com.nitya.accounter.core.EmployeeGroup E where
 		E.company=:company and
 		E.name=:name and E.id != :id
 	</query>
@@ -344,7 +344,7 @@
 		<query-param name="company" type="Company" />
 		<query-param name="name" type="encryptedstring" />
 		<query-param name="id" type="long" />
-		from com.vimukti.accounter.core.PayHead PH where
+		from com.nitya.accounter.core.PayHead PH where
 		PH.company=:company
 		and
 		PH.name=:name and PH.id !=:id
@@ -354,7 +354,7 @@
 		<query-param name="company" type="Company" />
 		<query-param name="name" type="encryptedstring" />
 		<query-param name="id" type="long" />
-		from com.vimukti.accounter.core.AttendanceOrProductionType A where
+		from com.nitya.accounter.core.AttendanceOrProductionType A where
 		A.company=:company and
 		A.name=:name and A.id != :id
 	</query>
@@ -363,9 +363,9 @@
 		<query-param name="company" type="Company" />
 		<query-param name="employee" type="Employee" />
 		<query-param name="group" type="EmployeeGroup" />
-		<query-param name="start" type="com.vimukti.accounter.core.LongUseType" />
-		<query-param name="end" type="com.vimukti.accounter.core.LongUseType" />
-		from com.vimukti.accounter.core.PayStructureItem PI
+		<query-param name="start" type="com.nitya.accounter.core.LongUseType" />
+		<query-param name="end" type="com.nitya.accounter.core.LongUseType" />
+		from com.nitya.accounter.core.PayStructureItem PI
 		where
 		(PI.payStructure.employee = :employee or
 		PI.payStructure.employeeGroup
@@ -378,7 +378,7 @@
 
 	<query name="getEmployeesByGroup">
 		<query-param name="groupId" type="long"></query-param>
-		from com.vimukti.accounter.core.Employee e where
+		from com.nitya.accounter.core.Employee e where
 		e.group.id=:groupId
 	</query>
 	
@@ -386,7 +386,7 @@
 		<query-param name="employeeId" type="long"></query-param>
 		<query-param name="groupId" type="long"></query-param>
 		<query-param name="companyId" type="long"></query-param>
-		from com.vimukti.accounter.core.PayStructure p where
+		from com.nitya.accounter.core.PayStructure p where
 			p.employee.id = :employeeId or 
 			p.employeeGroup.id = :groupId and
 			p.company.id = :companyId

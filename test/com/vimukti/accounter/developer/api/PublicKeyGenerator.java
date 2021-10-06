@@ -24,7 +24,7 @@ import java.security.spec.X509EncodedKeySpec;
 
 import org.apache.commons.codec.binary.Base64;
 
-import com.vimukti.accounter.main.ServerConfiguration;
+import com.nitya.accounter.main.ServerConfiguration;
 
 public class PublicKeyGenerator {
 

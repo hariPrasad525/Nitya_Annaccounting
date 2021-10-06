@@ -3,7 +3,7 @@
                 "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
                 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping
-	package="com.vimukti.accounter.core" default-access="field"
+	package="com.nitya.accounter.core" default-access="field"
 	auto-import="false">
 	<class name="Account" table="ACCOUNT">
 		<id name="id" column="ID">
@@ -27,7 +27,7 @@
 		<property name="cashFlowCategory" column="CASHFLOW_CATEGORY"></property>
 		<property name="openingBalance" column="OPENING_BALANCE"></property>
 		<property name="asOf" column="AS_OF"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<property name="isConsiderAsCashAccount"
 			column="IS_CASH_ACCOUNT"></property>
 		<property name="comment" type="encryptedstring"
@@ -43,7 +43,7 @@
 		<property name="statementBalance" column="STATEMENT_BALANCE"></property>
 		<property name="statementLastDate"
 			column="STATEMENT_IMPORTED_DATE"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<property name="isOpeningBalanceEditable"
 			column="IS_OPENING_BALANCE_EDITABLE"></property>
 		<property name="hierarchy" column="HIERARCHY"></property>
@@ -73,7 +73,7 @@
 		<property name="paypalToken" column="PAYPALTOKEN"></property>
 		<property name="paypalSecretkey" column="PAYPALSECRETKEY"></property>
 		<property name="endDate" column="ENDDATE"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<!-- <array name="monthViceAmounts" table="ACCOUNT_AMOUNTS" cascade="all"> 
 			<key column="ACCOUNT_ID"></key> <list-index column="IDX" /> <element column="MONTH_VICE_AMOUNT" 
 			type="double"></element> </array> -->
@@ -92,7 +92,7 @@
 				column="BANK_ACCOUNT_NUMBER" type="encryptedstring"></property>
 			<property name="lastReconcilationDate"
 				column="LAST_RECONCILATION_DATE"
-				type="com.vimukti.accounter.core.LongUseType"></property>
+				type="com.nitya.accounter.core.LongUseType"></property>
 		</joined-subclass>
 	</class>
 	<class name="Location" table="LOCATION">
@@ -196,9 +196,9 @@
 			class="Company" not-null="true">
 		</many-to-one>
 		<property name="startDate" column="START_DATE"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<property name="endDate" column="END_DATE"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<property name="status" column="STATUS"></property>
 		<property name="isCurrentFiscalYear"
 			column="IS_CURRENT_FISCAL_YEAR"></property>
@@ -269,7 +269,7 @@
 			column="FIRSTMONTH_OF_INCOMETAXYEAR"></property>
 		<property name="taxForm" column="TAX_FORM"></property>
 		<property name="booksClosingDate" column="BOOKS_COLSING_DATE"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<property name="closingDateWarningType"
 			column="CLOSING_DATE_WARNINGTYPE"></property>
 		<property name="enableAccountNumbers"
@@ -350,19 +350,19 @@
 				not-null="true"></property>
 			<property name="startOfFiscalYear"
 				column="CP_START_OF_FISCAL_YEAR"
-				type="com.vimukti.accounter.core.LongUseType" not-null="true"></property>
+				type="com.nitya.accounter.core.LongUseType" not-null="true"></property>
 			<property name="endOfFiscalYear"
 				column="CP_END_OF_FISCAL_YEAR"
-				type="com.vimukti.accounter.core.LongUseType" not-null="true"></property>
+				type="com.nitya.accounter.core.LongUseType" not-null="true"></property>
 			<property name="startDate"
 				column="CP_FISCAL_YEAR_START_DATE" not-null="true"
-				type="com.vimukti.accounter.core.LongUseType"></property>
+				type="com.nitya.accounter.core.LongUseType"></property>
 			<property name="depreciationStartDate"
 				column="CP_DEPRECIATION_START_DATE" not-null="true"
-				type="com.vimukti.accounter.core.LongUseType"></property>
+				type="com.nitya.accounter.core.LongUseType"></property>
 			<property name="preventPostingBeforeDate"
 				column="CP_PREVENT_POSTING_DATE"
-				type="com.vimukti.accounter.core.LongUseType"></property>
+				type="com.nitya.accounter.core.LongUseType"></property>
 			<property name="dateFormat" column="DATE_FORMAT"
 				not-null="true"></property>
 			<!-- <property name="legalName" column="CP_LEGAL_NAME" not-null="true"></property> -->
@@ -404,7 +404,7 @@
 				column="LOCATION_TRACKING_ID"></property>
 
 			<many-to-one name="defaultTaxCode"
-				class="com.vimukti.accounter.core.TAXCode" cascade="save-update"
+				class="com.nitya.accounter.core.TAXCode" cascade="save-update"
 				column="DEFAULT_TAX_CODE">
 			</many-to-one>
 
@@ -870,6 +870,10 @@
 		<many-to-one name="company" column="COMPANY_ID"
 			class="Company" not-null="true">
 		</many-to-one>
+		<property name="customerName"
+				column="CUSTOMER_NAME" type="encryptedstring"></property>
+		<property name="customerId"
+				column="CUSTOMER_ID" ></property>
 		<!-- <many-to-one name="VATCode" class="TaxCode" column="VAT_CODE_ID"> -->
 		<!-- </many-to-one> -->
 		<property name="type" column="TYPE"></property>
@@ -940,7 +944,7 @@
 			not-null="true" />
 		<property name="isDefault" column="IS_DEFAULT"></property>
 		<property name="asOfDate" column="AS_OF_DATE"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<many-to-one name="assestsAccount" class="Account"
 			column="ASSETS_ACCOUNT_ID">
 		</many-to-one>
@@ -979,7 +983,65 @@
 		</joined-subclass>
 
 	</class>
+	
+	<class name="EmployeeTimeSheet" table="EMPLOYEE_TIME_SHEET">
+			<id name="id" column="ID">
+				<generator class="identity" />
+			</id>
+	<property name="consultantName"
+		column="CONSULTANT_NAME" type="encryptedstring"></property>
+	<property name="companyId" column="COMPANY_ID"
+		not-null="true">
+		</property>
+	<property name="itemId" column="ITEM_ID"
+		not-null="true">
+			</property>
+	<property name="fromDate" column="FROM_DATE"
+		not-null="true">
+			</property>
+	<property name="toDate" column="TO_DATE"
+		not-null="true">
+			</property>
+	<property name="hours" column="HOURS"
+		not-null="true">
+			</property>
+	<property name="isBilled" column="IS_BILLED"
+		not-null="true">
+			</property>
+	<set name="attachments" table="ATTACHMENT"  cascade="save-update,delete-orphan">
+			<key column="EMPLOYEETIMESHEET_ID"  />
+			<one-to-many class="Attachment" />
+		</set>
 
+	</class>
+    
+    
+    	<class name="RewaHrTimeSheet" table="REWA_HR_TIME_SHEET">
+			<id name="id" column="ID">
+				<generator class="identity" />
+			</id>
+	<property name="timeSheetId"
+		column="TIME_SHEET_ID" ></property>
+	<property name="projectName" column="PROJECT_NAME" type="encryptedstring"
+		not-null="true">
+		</property>
+	<property name="projectActivityName" column="ACTIVITY_NAME" type="encryptedstring"
+		not-null="true">
+			</property>
+	<property name="description" column="PROJECT_DESCRIPTION"
+		>
+			</property>
+	<property name="reportedDate" column="REPORTED_DATE"
+		not-null="true">
+			</property>
+	<property name="duration" column="DURATION"
+		not-null="true">
+			</property>
+	<property name="extraDuration" column="EXTRA_DURATION"
+		not-null="true">
+			</property>
+	</class>
+	
 	<!-- Implemented by Kishore for Attendance Table -->
 
 	<class name="EmployeeAttendance" table="EMPLOYEE_ATTENDANCE">
@@ -1141,13 +1203,13 @@
 		<property name="gender" type="encryptedstring"
 			column="GENDER"></property>
 		<property name="dateOfBirth" column="DATE_OF_BIRTH"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<property name="dateOfHire" column="DATE_OF_HIRE"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<property name="dateOfLastReview" column="DATE_OF_LASTREVIEW"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<property name="dateOfRelease" column="DATE_OF_RELEASE"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<property name="isActive" column="IS_ACTIVE"></property>
 		<property name="memo" type="encryptedstring" column="MEMO"></property>
 		<property name="fileAs" type="encryptedstring"
@@ -1208,7 +1270,7 @@
 		<property name="name" type="encryptedstring" not-null="true"
 			column="NAME"></property>
 		<property name="payeeSince" column="PAYEE_SINCE"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<property name="fileAs" type="encryptedstring"
 			column="FILE_AS"></property>
 		<property name="version" column="VERSION"></property>
@@ -1326,7 +1388,7 @@
 				<one-to-many class="Job" />
 			</set>
 			<property name="balanceAsOf" column="BALANCE_AS_OF"
-				type="com.vimukti.accounter.core.LongUseType"></property>
+				type="com.nitya.accounter.core.LongUseType"></property>
 			<property name="number" type="encryptedstring"
 				column="NUMBER"></property>
 			<many-to-one name="salesPerson" class="SalesPerson"
@@ -1380,7 +1442,7 @@
 			<property name="vendorNumber" type="encryptedstring"
 				column="ACCOUNT_NUMBER"></property>
 			<property name="balanceAsOf" column="BALANCE_AS_OF"
-				type="com.vimukti.accounter.core.LongUseType"></property>
+				type="com.nitya.accounter.core.LongUseType"></property>
 			<property name="taxId" type="encryptedstring"
 				column="TAX_ID"></property>
 			<property name="isTrackPaymentsFor1099"
@@ -1451,7 +1513,7 @@
 				column="TAX_FILING_FREQUENCY"></property>
 			<property name="lastTAXReturnDate"
 				column="LAST_TAX_RETURN_DATE"
-				type="com.vimukti.accounter.core.LongUseType"></property>
+				type="com.nitya.accounter.core.LongUseType"></property>
 		</joined-subclass>
 		<joined-subclass name="Employee" table="EMPLOYEE">
 			<key column="ID" />
@@ -1463,19 +1525,19 @@
 			<property name="designation" column="DESIGNATION" />
 			<property name="location" column="LOCATION" />
 			<property name="dateOfBirth" column="DATE_OF_BIRTH"
-				type="com.vimukti.accounter.core.LongUseType" />
+				type="com.nitya.accounter.core.LongUseType" />
 			<property name="gender" column="GENDER" />
 			<property name="passportNumber" column="PASSPORT_NUMBER" />
 			<property name="countryOfIssue" column="COUNTRY_OF_ISSUE" />
 			<property name="passportExpiryDate"
 				column="PASSPORT_EXPIRY_DATE"
-				type="com.vimukti.accounter.core.LongUseType" />
+				type="com.nitya.accounter.core.LongUseType" />
 			<property name="lastDate" column="LAST_DATE"
-				type="com.vimukti.accounter.core.LongUseType" />
+				type="com.nitya.accounter.core.LongUseType" />
 			<property name="reasonType" type="int" column="REASON_TYPE" />
 			<property name="visaNumber" column="VISA_NUMBER" />
 			<property name="visaExpiryDate" column="VISA_EXPIRY_DATE"
-				type="com.vimukti.accounter.core.LongUseType" />
+				type="com.nitya.accounter.core.LongUseType" />
 			<property name="salary" column="SALARY"></property>
 			<property name="payType" column="PAY_TYPE"></property>
 			<property name="payFrequency" column="PAY_FREQUENCY"></property>
@@ -1697,7 +1759,7 @@
 		</id>
 		<property name="rate" column="RATE"></property>
 		<property name="asOf" column="AS_OF"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<property name="version" column="VERSION"></property>
 	</class>
 	<!-- <class name="TaxRateCalculation" table="TAX_RATE_CALCULATION"> <id 
@@ -1723,7 +1785,7 @@
 			column="TAX_ITEM_ID">
 		</many-to-one>
 		<property name="transactionDate" column="TRANSACTION_DATE"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<many-to-one name="taxAgency" class="TAXAgency"
 			column="TAX_AGENCY_ID">
 		</many-to-one>
@@ -1857,7 +1919,7 @@
 			column="ASSET_ACCOUNT_ID">
 		</many-to-one>
 		<property name="purchaseDate" column="PURCHASE_DATE"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<property name="purchasePrice" column="PURCHASE_PRICE"></property>
 		<property name="description" type="encryptedstring"
 			column="DESCRIPTION"></property>
@@ -1885,7 +1947,7 @@
 			column="SELLING_OR_DISPOSING_FIXED_ASSET_ID" cascade="save-update"> </many-to-one> -->
 		<property name="soldOrDisposedDate"
 			column="SOLD_OR_DISPOSED_DATE"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<many-to-one name="accountForSale" class="Account"
 			column="SALE_ACCOUNT_ID">
 		</many-to-one>
@@ -1893,7 +1955,7 @@
 		<property name="noDepreciation" column="NO_DEPRECIATION"></property>
 		<property name="depreciationTillDate"
 			column="DEPRECIATION_TILL_DATE"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<property name="notes" type="encryptedstring" column="NOTES"></property>
 		<many-to-one name="lossOrGainOnDisposalAccount"
 			class="Account" column="LOSS_OR_GAIN_DISPOSAL_ACCOUNT_ID">
@@ -1948,9 +2010,9 @@
 		</many-to-one>
 		<property name="status" column="STATUS"></property>
 		<property name="depreciateFrom" column="DEPRECIATE_FROM"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<property name="depreciateTo" column="DEPRECIATE_TO"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<list name="fixedAssets" cascade="save-update,delete">
 			<key column="FIXED_ASSET_ID"></key>
 			<list-index column="IDX" />
@@ -1971,7 +2033,7 @@
 			class="Company" not-null="true">
 		</many-to-one>
 		<property name="actionDate" column="ACTION_DATE"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<property name="actionType" type="encryptedstring"
 			column="ACTION_TYPE"></property>
 		<property name="user" type="encryptedstring"
@@ -2288,7 +2350,7 @@
 			column="RECURRING_TRANSACTION">
 		</many-to-one>
 		<property name="transactionDate"
-			type="com.vimukti.accounter.core.LongUseType"
+			type="com.nitya.accounter.core.LongUseType"
 			column="TRANSACTION_DATE"></property>
 		<property name="isValid" column="IS_VALID"></property>
 		<property name="version" column="VERSION"></property>
@@ -2317,7 +2379,7 @@
 		<property name="actionToken" type="encryptedstring"
 			column="ACTION_TOKEN"></property>
 		<property name="date"
-			type="com.vimukti.accounter.core.LongUseType" column="DATE"></property>
+			type="com.nitya.accounter.core.LongUseType" column="DATE"></property>
 		<property name="version" column="VERSION"></property>
 		<many-to-one name="createdBy" class="User"
 			column="CREATED_BY" not-null="true" />
@@ -2390,7 +2452,7 @@
 		<property name="objType" column="OBJECT_TYPE"></property>
 		<property name="name" type="encryptedstring" column="NAME"></property>
 		<property name="transactionDate"
-			type="com.vimukti.accounter.core.LongUseType"
+			type="com.nitya.accounter.core.LongUseType"
 			column="TRANSACTION_DATE"></property>
 		<property name="objStatus" column="OBJECT_STATUS"></property>
 		<property name="amount" column="AMOUNT"></property>
@@ -2411,25 +2473,25 @@
 			class="Company" not-null="true">
 		</many-to-one>
 		<many-to-one name="account"
-			class="com.vimukti.accounter.core.Account" cascade="save-update"
+			class="com.nitya.accounter.core.Account" cascade="save-update"
 			column="ACCOUNT">
 		</many-to-one>
 		<property name="startDate" column="START_DATE"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<property name="endDate" column="END_DATE"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<property name="openingBalance" column="OPENING_BALANCE"></property>
 		<property name="closingBalance" column="CLOSING_BALANCE"></property>
 		<property name="reconcilationDate"
 			column="RECONCILIATION_DATE"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 
 		<property name="statement" column="STATEMENT"></property>
 		<set name="items" cascade="save-update,delete"
 			table="RECONCILIATION">
 			<key column="RECONCILIATION_ID"></key>
 			<one-to-many
-				class="com.vimukti.accounter.core.ReconciliationItem" />
+				class="com.nitya.accounter.core.ReconciliationItem" />
 		</set>
 	</class>
 
@@ -2442,7 +2504,7 @@
 			column="TRANSACTION_NUMBER"></property>
 		<property name="transationType" column="TRANSACTION_TYPE"></property>
 		<property name="transactionDate" column="TRANSACTION_DATE"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<many-to-one name="reconciliation"
 			column="RECONCILIATION_ID" class="Reconciliation" />
 		<many-to-one name="transaction" column="TRANSACTION_ID"
@@ -2484,7 +2546,7 @@
 			<generator class="identity" />
 		</id>
 		<property name="deletedDate" column="DELETED_DATE"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<property name="emailID" column="EMAIL_ID"></property>
 		<property name="reason" column="REASON" type="text"></property>
 
@@ -2655,7 +2717,7 @@
 			class="Company">
 		</many-to-one>
 		<property name="statementDate" column="STATEMENT_DATE"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<property name="description" type="encryptedstring"
 			column="DESCRIPTION"></property>
 		<property name="referenceNumber" type="encryptedstring"
@@ -2668,7 +2730,7 @@
 			<key column="STATEMENT_RECORD_ID" />
 			<list-index column="TRANSACTION_IDX" />
 			<one-to-many
-				class="com.vimukti.accounter.core.Transaction" />
+				class="com.nitya.accounter.core.Transaction" />
 		</list>
 
 		<many-to-one name="statement" column="STATEMENT_ID"
@@ -2686,11 +2748,11 @@
 			class="Company" not-null="true">
 		</many-to-one>
 		<property name="importtedDate" column="IMPORTTED_DATE"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<property name="startDate" column="START_DATE"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<property name="endDate" column="END_DATE"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<property name="startBalance" column="STARTING_BALANCE"></property>
 		<property name="closingBalance" column="CLOSING_BALANCE"></property>
 		<property name="isReconciled" column="IS_RECONCILED"></property>
@@ -2702,7 +2764,7 @@
 			<key column="STATEMENT_ID" />
 			<list-index column="IDX" />
 			<one-to-many
-				class="com.vimukti.accounter.core.StatementRecord" />
+				class="com.nitya.accounter.core.StatementRecord" />
 		</list>
 	</class>
 
@@ -2726,11 +2788,11 @@
 		<property name="jobType" column="JOB_TYPE"></property>
 		<property name="isActive" column="JOB_ACTIVE"></property>
 		<property name="startDate" column="START_DATE"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<property name="projectEndDate" column="PROJECT_ENDDATE"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<property name="endDate" column="END_DATE"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 	</class>
 
 

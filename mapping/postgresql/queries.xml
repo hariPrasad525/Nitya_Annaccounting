@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping default-access="field"
-	package="com.vimukti.accounter.core">
+	package="com.nitya.accounter.core">
 
 	<query name="get.canVoidOrEditTransaction.from.transactionID">
 		<query-param name="company" type="Company" />
 		<query-param name="id" type="long" />
 		select t.canVoidOrEdit from
-		com.vimukti.accounter.core.Transaction t
+		com.nitya.accounter.core.Transaction t
 		where t.id=:id and t.company=:company
 	</query>
 
@@ -15,15 +15,15 @@
 		<query-param name="company" type="Company" />
 		<query-param name="status" type="int" />
 		select distinct(t.transactionDate) from
-		com.vimukti.accounter.core.Transaction t where t.company=:company and
+		com.nitya.accounter.core.Transaction t where t.company=:company and
 		t.transactionDate &gt;=
 		(select
 		c.preferences.depreciationStartDate
 		from
-		com.vimukti.accounter.core.Company c where c.id is not
+		com.nitya.accounter.core.Company c where c.id is not
 		null) and
 		t.transactionDate &lt;= (select max(d.depreciateTo) from
-		com.vimukti.accounter.core.Depreciation d where d.company=:company and
+		com.nitya.accounter.core.Depreciation d where d.company=:company and
 		d.status=:status)
 		order by
 		t.transactionDate
@@ -33,7 +33,7 @@
 		<query-param name="company" type="Company" />
 		<query-param name="id" type="long" />
 		select f from
-		com.vimukti.accounter.core.FixedAsset f
+		com.nitya.accounter.core.FixedAsset f
 		where f.id=:id and
 		f.company=:company
 	</query>
@@ -42,7 +42,7 @@
 		<query-param name="company" type="Company" />
 		<query-param name="status" type="int" />
 		select f from
-		com.vimukti.accounter.core.FixedAsset f
+		com.nitya.accounter.core.FixedAsset f
 		where
 		(f.status=:status) and
 		f.company=:company
@@ -53,7 +53,7 @@
 		<query-param name="company" type="Company" />
 		<query-param name="status" type="int" />
 		select f from
-		com.vimukti.accounter.core.FixedAsset f
+		com.nitya.accounter.core.FixedAsset f
 		where
 		(f.status=:status or f.status=3) and
 		f.company=:company
@@ -63,7 +63,7 @@
 	<query name="getEntry.from.journalEntryType">
 		<query-param name="company" type="Company" />
 		from
-		com.vimukti.accounter.core.JournalEntry je where
+		com.nitya.accounter.core.JournalEntry je where
 		je.company=:company and
 		je.journalEntryType=3
 		order by je.id
@@ -72,7 +72,7 @@
 	<query name="getFiscalYear.by.check.isCurrentFiscalYearistrue">
 		<query-param name="company" type="Company" />
 		select f.startDate from
-		com.vimukti.accounter.core.FiscalYear f where
+		com.nitya.accounter.core.FiscalYear f where
 		f.company=:company and
 		f.isCurrentFiscalYear=true
 	</query>
@@ -80,7 +80,7 @@
 	<query name="getEntry.by.debitand.balanceDue.orderbyid">
 		<query-param name="company" type="Company" />
 		from
-		com.vimukti.accounter.core.JournalEntry je where
+		com.nitya.accounter.core.JournalEntry je where
 		je.company=:company and
 		je.balanceDue>0.0
 		order by je.id
@@ -89,7 +89,7 @@
 	<query name="getEntry.by.vendorId.creditand.balanceDue.orderbyid">
 		<query-param name="company" type="Company" />
 		<query-param name="id" type="long" />
-		from com.vimukti.accounter.core.JournalEntry je where
+		from com.nitya.accounter.core.JournalEntry je where
 		je.company=:company and
 		je.involvedPayee.id=:id and
 		je.balanceDue>0.0
@@ -101,7 +101,7 @@
 		<query-param name="company" type="Company" />
 		<query-param name="id" type="long" />
 		from
-		com.vimukti.accounter.core.JournalEntry je where
+		com.nitya.accounter.core.JournalEntry je where
 		je.company=:company and
 		je.involvedPayee.id=:id and
 		je.balanceDue>0.0
@@ -115,7 +115,7 @@
 		<query-param name="id" type="long" />
 		select min(v.periodStartDate),
 		max(v.periodEndDate) from
-		com.vimukti.accounter.core.TAXReturn v
+		com.nitya.accounter.core.TAXReturn v
 		where v.company=:company and
 		v.taxAgency.id
 		=:id group by v.taxAgency.id
@@ -125,7 +125,7 @@
 		<query-param name="id" type="long" />
 		<query-param name="company" type="Company" />
 		select a.name from
-		com.vimukti.accounter.core.Account
+		com.nitya.accounter.core.Account
 		a where a.id=:id
 		and a.company=:company
 	</query>
@@ -135,7 +135,7 @@
 		<query-param name="date" type="long" />
 		<query-param name="status" type="int" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.Depreciation
+		from com.nitya.accounter.core.Depreciation
 		d inner join d.fixedAsset
 		where d.company=:company and d.depreciateFrom >=:date and
 		d.status=:status
@@ -146,7 +146,7 @@
 		<query-param name="id" type="long" />
 		<query-param name="balance" type="double" />
 		<query-param name="company" type="Company" />
-		update com.vimukti.accounter.core.Payee set balance=:balance where
+		update com.nitya.accounter.core.Payee set balance=:balance where
 		id=:id and company=:company
 	</query>
 
@@ -154,20 +154,20 @@
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
 		<query-param name="company" type="Company" />
-		update com.vimukti.accounter.core.Invoice set customer.id=:toID where
+		update com.nitya.accounter.core.Invoice set customer.id=:toID where
 		customer.id=:fromID and company=:company
 	</query>
 	<query name="update.merge.CreditsAndPayments">
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
-		update com.vimukti.accounter.core.CreditsAndPayments set
+		update com.nitya.accounter.core.CreditsAndPayments set
 		payee.id=:toID where
 		payee.id=:fromID
 	</query>
 	<query name="update.merge.CustomFieldValue">
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
-		update com.vimukti.accounter.core.CustomFieldValue set
+		update com.nitya.accounter.core.CustomFieldValue set
 		payee.id=:toID
 		where
 		payee.id=:fromID
@@ -177,7 +177,7 @@
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
 		<query-param name="company" type="Company" />
-		update com.vimukti.accounter.core.CashSales set customer.id=:toID
+		update com.nitya.accounter.core.CashSales set customer.id=:toID
 		where customer.id=:fromID and company=:company
 	</query>
 
@@ -185,7 +185,7 @@
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
 		<query-param name="company" type="Company" />
-		update com.vimukti.accounter.core.Estimate set customer.id=:toID
+		update com.nitya.accounter.core.Estimate set customer.id=:toID
 		where
 		customer.id=:fromID and company=:company
 	</query>
@@ -194,7 +194,7 @@
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
 		<query-param name="company" type="Company" />
-		update com.vimukti.accounter.core.CustomerCreditMemo set
+		update com.nitya.accounter.core.CustomerCreditMemo set
 		customer.id=:toID where customer.id=:fromID and company=:company
 	</query>
 
@@ -202,7 +202,7 @@
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
 		<query-param name="company" type="Company" />
-		update com.vimukti.accounter.core.CustomerPrePayment set
+		update com.nitya.accounter.core.CustomerPrePayment set
 		customer.id=:toID where customer.id=:fromID and company=:company
 	</query>
 
@@ -210,14 +210,14 @@
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
 		<query-param name="company" type="Company" />
-		update com.vimukti.accounter.core.CustomerRefund set payTo.id=:toID
+		update com.nitya.accounter.core.CustomerRefund set payTo.id=:toID
 		where payTo.id=:fromID and company=:company
 	</query>
 	<query name="update.merge.Estimate.old.tonew">
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
 		<query-param name="company" type="Company" />
-		update com.vimukti.accounter.core.Estimate set customer.id=:toID
+		update com.nitya.accounter.core.Estimate set customer.id=:toID
 		where
 		customer.id=:fromID and company=:company
 	</query>
@@ -225,7 +225,7 @@
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
 		<query-param name="company" type="Company" />
-		update com.vimukti.accounter.core.ReceivePayment set customer.id=:toID
+		update com.nitya.accounter.core.ReceivePayment set customer.id=:toID
 		where
 		customer.id=:fromID and company=:company
 	</query>
@@ -234,7 +234,7 @@
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
 		<query-param name="company" type="Company" />
-		update com.vimukti.accounter.core.JournalEntry set
+		update com.nitya.accounter.core.JournalEntry set
 		involvedPayee.id=:toID
 		where involvedPayee.id=:fromID and
 		company=:company
@@ -242,13 +242,13 @@
 	</query>
 	<query name="delete.customFiledValuesByCustomField">
 		<query-param name="Id" type="long" />
-		delete from com.vimukti.accounter.core.CustomFieldValue cv
+		delete from com.nitya.accounter.core.CustomFieldValue cv
 		where
 		cv.customField.id=:Id
 	</query>
 	<query name="get.customFiledValuesByCustomField">
 		<query-param name="Id" type="long" />
-		from com.vimukti.accounter.core.CustomFieldValue cv
+		from com.nitya.accounter.core.CustomFieldValue cv
 		where
 		cv.customField.id=:Id
 	</query>
@@ -256,7 +256,7 @@
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
 		<query-param name="company" type="Company" />
-		update com.vimukti.accounter.core.WriteCheck set
+		update com.nitya.accounter.core.WriteCheck set
 		customer.id=:toID
 		where customer.id=:fromID and company=:company
 	</query>
@@ -266,7 +266,7 @@
 		<query-param name="status" type="boolean" />
 		<query-param name="balance" type="double" />
 		<query-param name="company" type="Company" />
-		update com.vimukti.accounter.core.Payee set
+		update com.nitya.accounter.core.Payee set
 		balance=:balance,isActive=:status where
 		id=:id and company=:company
 	</query>
@@ -275,7 +275,7 @@
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
 		<query-param name="company" type="Company" />
-		update com.vimukti.accounter.core.PurchaseOrder set vendor.id=:toID
+		update com.nitya.accounter.core.PurchaseOrder set vendor.id=:toID
 		where
 		vendor.id=:fromID and company=:company
 	</query>
@@ -285,7 +285,7 @@
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
 		<query-param name="company" type="Company" />
-		update com.vimukti.accounter.core.CashPurchase set vendor.id=:toID
+		update com.nitya.accounter.core.CashPurchase set vendor.id=:toID
 		where
 		vendor.id=:fromID and company=:company
 	</query>
@@ -294,7 +294,7 @@
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
 		<query-param name="company" type="Company" />
-		update com.vimukti.accounter.core.CreditCardCharge set vendor.id=:toID
+		update com.nitya.accounter.core.CreditCardCharge set vendor.id=:toID
 		where
 		vendor.id=:fromID and company=:company
 	</query>
@@ -303,7 +303,7 @@
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
 		<query-param name="company" type="Company" />
-		update com.vimukti.accounter.core.EnterBill set vendor.id=:toID
+		update com.nitya.accounter.core.EnterBill set vendor.id=:toID
 		where
 		vendor.id=:fromID and company=:company
 	</query>
@@ -312,7 +312,7 @@
 		<query-param name="fromID" type="long" />
 		<query-param name="company" type="Company" />
 		<query-param name="toID" type="long" />
-		update com.vimukti.accounter.core.ItemReceipt set vendor.id=:toID
+		update com.nitya.accounter.core.ItemReceipt set vendor.id=:toID
 		where
 		vendor.id=:fromID and company=:company
 	</query>
@@ -320,7 +320,7 @@
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
 		<query-param name="company" type="Company" />
-		update com.vimukti.accounter.core.PayBill set vendor.id=:toID
+		update com.nitya.accounter.core.PayBill set vendor.id=:toID
 		where
 		vendor.id=:fromID and company=:company
 	</query>
@@ -328,7 +328,7 @@
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
 		<query-param name="company" type="Company" />
-		update com.vimukti.accounter.core.VendorCreditMemo set
+		update com.nitya.accounter.core.VendorCreditMemo set
 		vendor.id=:toID
 		where
 		vendor.id=:fromID and company=:company
@@ -337,7 +337,7 @@
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
 		<query-param name="company" type="Company" />
-		update com.vimukti.accounter.core.WriteCheck set
+		update com.nitya.accounter.core.WriteCheck set
 		vendor.id=:toID where
 		vendor.id=:fromID and company=:company
 	</query>
@@ -345,7 +345,7 @@
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
 		<query-param name="company" type="Company" />
-		update com.vimukti.accounter.core.Item set
+		update com.nitya.accounter.core.Item set
 		preferredVendor.id=:toID
 		where
 		preferredVendor.id=:fromID and company=:company
@@ -358,7 +358,7 @@
 		<query-param name="p_Price" type="double" />
 
 		<query-param name="company" type="Company" />
-		update com.vimukti.accounter.core.Item set
+		update com.nitya.accounter.core.Item set
 		salesPrice=:price,purchasePrice=:p_Price,isActive=:status
 		where
 		id=:from and company=:company
@@ -369,7 +369,7 @@
 		<query-param name="from" type="long" />
 		<query-param name="balance" type="double" />
 		<query-param name="company" type="Company" />
-		update com.vimukti.accounter.core.Account set
+		update com.nitya.accounter.core.Account set
 		totalBalanceInAccountCurrency=:balance
 		where
 		id=:from and
@@ -379,25 +379,25 @@
 	<query name="delete.account.old">
 		<query-param name="from" type="long" />
 		<query-param name="company" type="Company" />
-		delete from com.vimukti.accounter.core.AccountTransaction where
+		delete from com.nitya.accounter.core.AccountTransaction where
 		account.id=:from and company=:company
 	</query>
 
 	<query name="get.TransactionDate.from.TransactionbyDate">
-		<query-param name="date" type="com.vimukti.accounter.core.LongUseType" />
+		<query-param name="date" type="com.nitya.accounter.core.LongUseType" />
 		<query-param name="company" type="Company" />
-		select t.transactionDate from com.vimukti.accounter.core.Transaction t
+		select t.transactionDate from com.nitya.accounter.core.Transaction t
 		where t.transactionDate
 		&lt;:date and t.company=:company
 	</query>
 
 
 	<query name="getFisaclId.andSum.fromAccountTransaction">
-		<query-param name="startDate" type="com.vimukti.accounter.core.LongUseType" />
-		<query-param name="endDate" type="com.vimukti.accounter.core.LongUseType" />
+		<query-param name="startDate" type="com.nitya.accounter.core.LongUseType" />
+		<query-param name="endDate" type="com.nitya.accounter.core.LongUseType" />
 		<query-param name="company" type="Company" />
 		select at.account.id as accountId, sum(at.amount) as amount from
-		com.vimukti.accounter.core.AccountTransaction at where
+		com.nitya.accounter.core.AccountTransaction at where
 		at.company=:company and at.account.type
 		in (14,15,16,17,18) and
 		at.transaction.transactionDate between
@@ -408,10 +408,10 @@
 
 	<query name="getDepreciation.byFixedAsset.andWithDetails">
 		<query-param name="company" type="Company" />
-		<query-param name="date" type="com.vimukti.accounter.core.LongUseType" />
+		<query-param name="date" type="com.nitya.accounter.core.LongUseType" />
 		<query-param name="status" type="int" />
 		<query-param name="id" type="long" />
-		select d from com.vimukti.accounter.core.Depreciation
+		select d from com.nitya.accounter.core.Depreciation
 		d inner join
 		d.fixedAsset where d.company=:company and d.depreciateFrom
 		>= :date and
@@ -421,50 +421,50 @@
 	<query name="getCustomerNumber.orderBy.customerNumber">
 		<query-param name="company" type="Company" />
 		select c.number from
-		com.vimukti.accounter.core.Customer c where
+		com.nitya.accounter.core.Customer c where
 		c.company=:company and c.number is not null
 	</query>
 	<query name="getVendorNumber.byId.andOrder">
 		<query-param name="company" type="Company" />
 		select v.vendorNumber from
-		com.vimukti.accounter.core.Vendor v where
+		com.nitya.accounter.core.Vendor v where
 		v.company=:company and v.vendorNumber is not null
 	</query>
 
 	<query name="getassestNumber.from.FixedAsset">
 		<query-param name="company" type="Company" />
 		select f.assetNumber from
-		com.vimukti.accounter.core.FixedAsset f where
+		com.nitya.accounter.core.FixedAsset f where
 		f.company=:company order by f.id
 	</query>
 
 	<query name="getTransactionNumber.by.type">
 		<query-param name="transactionType" type="int" />
 		<query-param name="company" type="Company" />
-		select t.number from com.vimukti.accounter.core.Transaction t where
+		select t.number from com.nitya.accounter.core.Transaction t where
 		t.type =:transactionType and t.company=:company
 	</query>
 	
 	<query name="getFlow.by.Id.from.Account">
 		<query-param name="company" type="Company" />
-		select a.flow from com.vimukti.accounter.core.Account
+		select a.flow from com.nitya.accounter.core.Account
 		a where a.id=
 		(select max(a1.id) from
-		com.vimukti.accounter.core.Account a1 where
+		com.nitya.accounter.core.Account a1 where
 		a1.company=:company and a1.parent is null and a1.flow is not null)
 	</query>
 
 	<query name="getCount.from.Account.and.parent">
 		<query-param name="parentId" type="long" />
 		<query-param name="company" type="Company" />
-		select count(*) from com.vimukti.accounter.core.Account a where
+		select count(*) from com.nitya.accounter.core.Account a where
 		a.parent.id=:parentId and a.company=:company
 	</query>
 
 
 	<query name="getAllUsers">
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.User user where user.company=:company
+		from com.nitya.accounter.core.User user where user.company=:company
 	</query>
 
 	<query name="getPayBill.form.accountId.and.status">
@@ -472,7 +472,7 @@
 		<query-param name="status" type="int" />
 		<query-param name="tobePrinted" type="encryptedstring" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.PayBill pst where pst.company=:company
+		from com.nitya.accounter.core.PayBill pst where pst.company=:company
 		and pst.payFrom.id =:accountId and pst.checkNumber=:tobePrinted and
 		pst.saveStatus not in (204,201) and pst.status
 		=:status
@@ -483,7 +483,7 @@
 		<query-param name="status" type="int" />
 		<query-param name="tobePrinted" type="encryptedstring" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.VendorPrePayment pst where
+		from com.nitya.accounter.core.VendorPrePayment pst where
 		pst.company=:company
 		and pst.payFrom.id =:accountId and
 		pst.saveStatus not in (204,201) and pst.status
@@ -495,7 +495,7 @@
 		<query-param name="accountId" type="long" />
 		<query-param name="status" type="int" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.ReceiveVAT rv where
+		from com.nitya.accounter.core.ReceiveVAT rv where
 		rv.company=:company and rv.checkNumber!=:tobePrinted and
 		rv.depositIn.id
 		=:accountId and
@@ -508,7 +508,7 @@
 		<query-param name="status" type="int" />
 		<query-param name="tobePrinted" type="encryptedstring" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.CreditCardCharge pst where
+		from com.nitya.accounter.core.CreditCardCharge pst where
 		pst.company=:company and
 		pst.payFrom.id =:accountId and
 		pst.checkNumber=:tobePrinted and
@@ -522,7 +522,7 @@
 		<query-param name="status" type="int" />
 		<query-param name="tobePrinted" type="encryptedstring" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.CashPurchase pst where
+		from com.nitya.accounter.core.CashPurchase pst where
 		pst.company=:company and pst.payFrom.id
 		=:accountId and
 		pst.checkNumber=:tobePrinted and
@@ -534,7 +534,7 @@
 		<query-param name="accountId" type="long" />
 		<query-param name="status" type="int" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.CustomerPrePayment cpp where
+		from com.nitya.accounter.core.CustomerPrePayment cpp where
 		cpp.company=:company and
 		cpp.depositIn.id =:accountId and
 		cpp.saveStatus!=204
@@ -545,7 +545,7 @@
 	<query name="getCashPurchase.form.status">
 		<query-param name="status" type="int" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.CashPurchase cc where
+		from com.nitya.accounter.core.CashPurchase cc where
 		cc.company=:company and cc.status
 		=:status
 	</query>
@@ -553,14 +553,14 @@
 	<query name="getCreditCardCharge.form.status">
 		<query-param name="status" type="int" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.CreditCardCharge cc where
+		from com.nitya.accounter.core.CreditCardCharge cc where
 		cc.status=:status
 	</query>
 
 	<query name="getPayBill.form.status">
 		<query-param name="status" type="int" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.PayBill pb where pb.company=:company
+		from com.nitya.accounter.core.PayBill pb where pb.company=:company
 		and
 		pb.status =:status
 	</query>
@@ -568,7 +568,7 @@
 	<query name="getVendorPayment.form.status">
 		<query-param name="status" type="int" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.VendorPrePayment pb where
+		from com.nitya.accounter.core.VendorPrePayment pb where
 		pb.company=:company
 		and
 		pb.status =:status
@@ -578,21 +578,21 @@
 		<query-param name="parentId" type="long" />
 		<query-param name="flow" type="string" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.Account a where a.company=:company and
+		from com.nitya.accounter.core.Account a where a.company=:company and
 		a.parent.id=:parentId and a.flow !=:flow order by a.id
 	</query>
 
 	<query name="getListofNames.from.customerGroup">
 		<query-param name="company" type="Company" />
 		<query-param name="name" type="String" />
-		from com.vimukti.accounter.core.CustomerGroup C where
+		from com.nitya.accounter.core.CustomerGroup C where
 		C.company=:company and C.name=:name
 	</query>
 
 	<query name="getNameofBank.from.Bank">
 		<query-param name="company" type="Company" />
 		<query-param name="name" type="String" />
-		from com.vimukti.accounter.core.Bank B where
+		from com.nitya.accounter.core.Bank B where
 		B.name=:name and
 		B.company=:company
 	</query>
@@ -601,11 +601,11 @@
 		<query-param name="company" type="Company" />
 		<query-param name="depreciationFor" type="int" />
 		<query-param name="status" type="int" />
-		from com.vimukti.accounter.core.Depreciation d where
+		from com.nitya.accounter.core.Depreciation d where
 		d.company=:company and
 		d.id=((select
 		max(d1.id) from
-		com.vimukti.accounter.core.Depreciation
+		com.nitya.accounter.core.Depreciation
 		d1 where d1.company=:company
 		and
 		d1.depreciationFor =
@@ -616,30 +616,30 @@
 		<query-param name="company" type="Company" />
 		<query-param name="depreciationFrom" type="int" />
 		<query-param name="status" type="int" />
-		from com.vimukti.accounter.core.Depreciation d where
+		from com.nitya.accounter.core.Depreciation d where
 		d.depreciateFrom
 		>=:depreciationFrom and d.status=:status
 	</query>
 
 	<query name="getTransaction.by.Transactiondates">
-		<query-param name="startDate" type="com.vimukti.accounter.core.LongUseType" />
-		<query-param name="endDate" type="com.vimukti.accounter.core.LongUseType" />
+		<query-param name="startDate" type="com.nitya.accounter.core.LongUseType" />
+		<query-param name="endDate" type="com.nitya.accounter.core.LongUseType" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.Transaction t where t.company=:company
+		from com.nitya.accounter.core.Transaction t where t.company=:company
 		and t.transactionDate between :startDate and :endDate
 	</query>
 
 	<query name="getFisacalyear.by.Startdate">
 		<query-param name="status" type="int" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.FiscalYear f where f.company=:company
+		from com.nitya.accounter.core.FiscalYear f where f.company=:company
 		order by f.startDate
 	</query>
 
 	<query name="getItem.by.Name">
 		<query-param name="company" type="Company" />
 		<query-param name="name" type="String" />
-		from com.vimukti.accounter.core.Item I where
+		from com.nitya.accounter.core.Item I where
 		I.company=:company and
 		I.name=:name
 	</query>
@@ -648,7 +648,7 @@
 		<query-param name="company" type="Company" />
 		<query-param name="name" type="String" />
 		<query-param name="id" type="long" />
-		from com.vimukti.accounter.core.RecurringTransaction r where
+		from com.nitya.accounter.core.RecurringTransaction r where
 		r.company=:company and
 		r.name=:name and r.id !=:id
 	</query>
@@ -656,21 +656,21 @@
 	<query name="getNameofAccount.by.Name">
 		<query-param name="company" type="Company" />
 		<query-param name="name" type="String" />
-		from com.vimukti.accounter.core.Account a where a.company=:company and
+		from com.nitya.accounter.core.Account a where a.company=:company and
 		a.name =:name
 	</query>
 
 	<query name="getPaymentTerms.by.Name">
 		<query-param name="company" type="Company" />
 		<query-param name="name" type="String" />
-		from com.vimukti.accounter.core.PaymentTerms P where
+		from com.nitya.accounter.core.PaymentTerms P where
 		P.company=:company and P.name=:name
 	</query>
 
 	<query name="getShippingmethod.by.Name">
 		<query-param name="company" type="Company" />
 		<query-param name="name" type="String" />
-		from com.vimukti.accounter.core.ShippingMethod S
+		from com.nitya.accounter.core.ShippingMethod S
 		where
 		S.company=:company and S.name=:name
 	</query>
@@ -678,21 +678,21 @@
 	<query name="getShippingTerms.by.Name">
 		<query-param name="company" type="Company" />
 		<query-param name="name" type="String" />
-		from com.vimukti.accounter.core.ShippingTerms S where
+		from com.nitya.accounter.core.ShippingTerms S where
 		S.company=:company and S.name=:name
 	</query>
 
 	<query name="getTaxAgency.by.Name">
 		<query-param name="company" type="Company" />
 		<query-param name="name" type="String" />
-		from com.vimukti.accounter.core.TAXAgency V where V.company=:company
+		from com.nitya.accounter.core.TAXAgency V where V.company=:company
 		and V.name=:name
 	</query>
 
 	<query name="getTaxCode.by.id">
 		<query-param name="company" type="Company" />
 		<query-param name="id" type="long" />
-		from com.vimukti.accounter.core.TAXCode t where
+		from com.nitya.accounter.core.TAXCode t where
 		t.company=:company and
 		t.id =:id
 	</query>
@@ -700,7 +700,7 @@
 	<query name="getTaxACode.inTaxitem.by.id">
 		<query-param name="id" type="long" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.TAXCode t where
+		from com.nitya.accounter.core.TAXCode t where
 		t.company=:company and
 		t.id =:id
 	</query>
@@ -708,7 +708,7 @@
 	<query name="getTaxrate.by.TransactioId.and.Vatreturn">
 		<query-param name="company" type="Company" />
 		<query-param name="id" type="long" />
-		from com.vimukti.accounter.core.TAXRateCalculation vr
+		from com.nitya.accounter.core.TAXRateCalculation vr
 		where
 		vr.taxItem.company=:company and vr.transaction.id=:id
 		and
@@ -718,19 +718,19 @@
 
 	<query name="getTaxAdjustment.by.dates">
 		<query-param name="company" type="Company" />
-		<query-param name="fromDate" type="com.vimukti.accounter.core.LongUseType" />
-		<query-param name="toDate" type="com.vimukti.accounter.core.LongUseType" />
-		from com.vimukti.accounter.core.TAXAdjustment v where
+		<query-param name="fromDate" type="com.nitya.accounter.core.LongUseType" />
+		<query-param name="toDate" type="com.nitya.accounter.core.LongUseType" />
+		from com.nitya.accounter.core.TAXAdjustment v where
 		v.taxItem.company=:company and
 		v.transactionDate between :fromDate and
 		:toDate
 	</query>
 
 	<query name="getTaxrateCalc.by.taxitem.and.details">
-		<query-param name="toDate" type="com.vimukti.accounter.core.LongUseType" />
+		<query-param name="toDate" type="com.nitya.accounter.core.LongUseType" />
 		<query-param name="vatAgency" type="long" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.TAXRateCalculation vr where
+		from com.nitya.accounter.core.TAXRateCalculation vr where
 		vr.taxItem.company=:company and vr.taxItem
 		is not null and
 		vr.taxAgency.id=:vatAgency and vr.transactionDate
@@ -739,10 +739,10 @@
 	</query>
 
 	<query name="getTaxrateCalc.by.vatitem.and.details">
-		<query-param name="toDate" type="com.vimukti.accounter.core.LongUseType" />
+		<query-param name="toDate" type="com.nitya.accounter.core.LongUseType" />
 		<query-param name="vatAgency" type="long" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.TAXRateCalculation vr where
+		from com.nitya.accounter.core.TAXRateCalculation vr where
 		vr.taxItem.company=:company and vr.taxItem
 		is not null and
 		vr.taxItem.taxAgency.id=:vatAgency and
@@ -753,7 +753,7 @@
 	<query name="getVendor.by.name">
 		<query-param name="company" type="Company" />
 		<query-param name="name" type="String" />
-		from com.vimukti.accounter.core.Vendor V where
+		from com.nitya.accounter.core.Vendor V where
 		V.company=:company and
 		V.name=:name
 	</query>
@@ -761,14 +761,14 @@
 	<query name="getVendorGroup.by.name">
 		<query-param name="company" type="Company" />
 		<query-param name="name" type="String" />
-		from com.vimukti.accounter.core.VendorGroup V where V.company=:company
+		from com.nitya.accounter.core.VendorGroup V where V.company=:company
 		and V.name=:name
 	</query>
 
 	<query name="getFixedAsset.by.statusAnd.purchaseDate">
 		<query-param name="company" type="Company" />
 		<query-param name="date" type="long" />
-		from com.vimukti.accounter.core.FixedAsset f where f.company=:company
+		from com.nitya.accounter.core.FixedAsset f where f.company=:company
 		and
 		f.status = 2 and
 		f.purchaseDate &lt;=:date
@@ -776,7 +776,7 @@
 
 	<query name="getAccount.by.idInAccountList">
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.Account a where a.company=:company and
+		from com.nitya.accounter.core.Account a where a.company=:company and
 		a.id in (:accountsList)
 	</query>
 
@@ -784,7 +784,7 @@
 		<query-param name="company" type="Company" />
 		<query-param name="deprediationTo" type="long" />
 		<query-param name="status" type="int" />
-		from com.vimukti.accounter.core.Depreciation d where
+		from com.nitya.accounter.core.Depreciation d where
 		d.company=:company and
 		d.depreciateTo >= :deprediationTo and
 		d.status=:status
@@ -793,17 +793,17 @@
 	<query name="getAccount.by.id">
 		<query-param name="company" type="Company" />
 		<query-param name="id" type="long" />
-		from com.vimukti.accounter.core.Account a where a.id
+		from com.nitya.accounter.core.Account a where a.id
 		=:id and
 		a.company=:company
 	</query>
 
 	<query name="getTaxCalc.by.TaxAgencyId.and.withOtherDetails">
-		<query-param name="fromDate" type="com.vimukti.accounter.core.LongUseType" />
-		<query-param name="toDate" type="com.vimukti.accounter.core.LongUseType" />
+		<query-param name="fromDate" type="com.nitya.accounter.core.LongUseType" />
+		<query-param name="toDate" type="com.nitya.accounter.core.LongUseType" />
 		<query-param name="taxAgency" type="long" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.TAXRateCalculation vr where
+		from com.nitya.accounter.core.TAXRateCalculation vr where
 		vr.taxItem.company=:company and
 		vr.taxItem.taxAgency.id=:taxAgency and
 		vr.taxItem is not null and
@@ -814,10 +814,10 @@
 	</query>
 
 	<query name="getTaxrateCalc.by.TaxAgencyandItem.and.Dates">
-		<query-param name="fromDate" type="com.vimukti.accounter.core.LongUseType" />
-		<query-param name="toDate" type="com.vimukti.accounter.core.LongUseType" />
+		<query-param name="fromDate" type="com.nitya.accounter.core.LongUseType" />
+		<query-param name="toDate" type="com.nitya.accounter.core.LongUseType" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.TAXRateCalculation vr where
+		from com.nitya.accounter.core.TAXRateCalculation vr where
 		vr.taxItem
 		is not null and vr.taxItem.company=:company and vr.transactionDate
 		between :fromDate and :toDate group by
@@ -826,11 +826,11 @@
 	</query>
 
 	<query name="getTaxadjustment.by.allDetails.withOrder">
-		<query-param name="fromDate" type="com.vimukti.accounter.core.LongUseType" />
-		<query-param name="toDate" type="com.vimukti.accounter.core.LongUseType" />
+		<query-param name="fromDate" type="com.nitya.accounter.core.LongUseType" />
+		<query-param name="toDate" type="com.nitya.accounter.core.LongUseType" />
 		<query-param name="taxAgency" type="long" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.TAXAdjustment v where
+		from com.nitya.accounter.core.TAXAdjustment v where
 		v.taxItem.company=:company and
 		v.taxItem.taxAgency.id=:taxAgency and
 		v.transactionDate between
@@ -838,10 +838,10 @@
 	</query>
 
 	<query name="getTaxadjustment.by.betweenDates">
-		<query-param name="fromDate" type="com.vimukti.accounter.core.LongUseType" />
-		<query-param name="toDate" type="com.vimukti.accounter.core.LongUseType" />
+		<query-param name="fromDate" type="com.nitya.accounter.core.LongUseType" />
+		<query-param name="toDate" type="com.nitya.accounter.core.LongUseType" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.TAXAdjustment v where
+		from com.nitya.accounter.core.TAXAdjustment v where
 		v.taxItem.company=:company and
 		v.transactionDate between :fromDate and
 		:toDate
@@ -849,11 +849,11 @@
 	</query>
 
 	<query name="getVat.by.taxAgency.and.VatPeriod">
-		<query-param name="fromDate" type="com.vimukti.accounter.core.LongUseType" />
-		<query-param name="toDate" type="com.vimukti.accounter.core.LongUseType" />
+		<query-param name="fromDate" type="com.nitya.accounter.core.LongUseType" />
+		<query-param name="toDate" type="com.nitya.accounter.core.LongUseType" />
 		<query-param name="taxAgency" type="long" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.TAXReturn v where v.company=:company
+		from com.nitya.accounter.core.TAXReturn v where v.company=:company
 		and
 		v.taxAgency.id=:taxAgency and v.periodEndDate between :fromDate
 		and
@@ -861,10 +861,10 @@
 	</query>
 
 	<query name="getVat.by.BetweenendDates">
-		<query-param name="fromDate" type="com.vimukti.accounter.core.LongUseType" />
-		<query-param name="toDate" type="com.vimukti.accounter.core.LongUseType" />
+		<query-param name="fromDate" type="com.nitya.accounter.core.LongUseType" />
+		<query-param name="toDate" type="com.nitya.accounter.core.LongUseType" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.TAXReturn v where v.company=:company
+		from com.nitya.accounter.core.TAXReturn v where v.company=:company
 		and v.periodEndDate between :fromDate and :toDate
 	</query>
 
@@ -872,7 +872,7 @@
 		<query-param name="company" type="Company" />
 		<query-param name="name" type="String" />
 		<query-param name="type" type="int" />
-		from com.vimukti.accounter.core.Account a where a.company=:company and
+		from com.nitya.accounter.core.Account a where a.company=:company and
 		a.name =:name and a.type =:type
 	</query>
 
@@ -880,14 +880,14 @@
 		<query-param name="company" type="Company" />
 		<query-param name="type" type="int" />
 		<query-param name="id" type="long" />
-		from com.vimukti.accounter.core.Account a where a.company=:company and
+		from com.nitya.accounter.core.Account a where a.company=:company and
 		a.id =:id and a.type =:type
 	</query>
 
 	<query name="getcreditandPayments.by.Payieeid.and.balance">
 		<query-param name="company" type="Company" />
 		<query-param name="id" type="long" />
-		from com.vimukti.accounter.core.CreditsAndPayments cp
+		from com.nitya.accounter.core.CreditsAndPayments cp
 		where
 		cp.payee.company=:company and cp.payee.id
 		=:id and cp.balance > 0.0
@@ -895,7 +895,7 @@
 
 	<query name="getFisacalyear">
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.FiscalYear fs where
+		from com.nitya.accounter.core.FiscalYear fs where
 		fs.company=:company
 	</query>
 
@@ -904,7 +904,7 @@
 		<query-param name="fromDate" type="LongUseType" />
 		<query-param name="toDate" type="LongUseType" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.TAXAdjustment v where
+		from com.nitya.accounter.core.TAXAdjustment v where
 		v.taxItem.company=:company and
 		v.taxItem.taxAgency.id=:vatAgency and
 		v.transactionDate between
@@ -912,11 +912,11 @@
 	</query>
 
 	<query name="getTAXRateCalculations.by.taxAgencyIdand.Date">
-		<query-param name="fromDate" type="com.vimukti.accounter.core.LongUseType" />
-		<query-param name="toDate" type="com.vimukti.accounter.core.LongUseType" />
+		<query-param name="fromDate" type="com.nitya.accounter.core.LongUseType" />
+		<query-param name="toDate" type="com.nitya.accounter.core.LongUseType" />
 		<query-param name="vatAgency" type="int" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.TAXRateCalculation vr where vr.taxItem
+		from com.nitya.accounter.core.TAXRateCalculation vr where vr.taxItem
 		is not null and vr.taxItem.company=:company and
 		vr.taxItem.taxAgency.id=:vatAgency and
 		vr.transactionDate between
@@ -927,29 +927,29 @@
 
 	<query name="getDepreciation">
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.Depreciation d where
+		from com.nitya.accounter.core.Depreciation d where
 		d.company=:company and
 		d.id =(select
 		min(d1.id) from
-		com.vimukti.accounter.core.Depreciation
+		com.nitya.accounter.core.Depreciation
 		d1 where d1.company=:company)
 	</query>
 
 
 	<query name="getTransactionDate.by.dates">
-		<query-param name="startDate" type="com.vimukti.accounter.core.LongUseType" />
-		<query-param name="endDate" type="com.vimukti.accounter.core.LongUseType" />
+		<query-param name="startDate" type="com.nitya.accounter.core.LongUseType" />
+		<query-param name="endDate" type="com.nitya.accounter.core.LongUseType" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.Transaction t where t.type in
+		from com.nitya.accounter.core.Transaction t where t.type in
 		(4,5,8,10) and t.transactionDate between :startDate and :endDate and
 		t.company=:company
 	</query>
 
 	<query name="getDepreciation.by.depreciateFrom">
-		<query-param name="depreciateFrom" type="com.vimukti.accounter.core.LongUseType" />
+		<query-param name="depreciateFrom" type="com.nitya.accounter.core.LongUseType" />
 		<query-param name="status" type="int" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.Depreciation d where
+		from com.nitya.accounter.core.Depreciation d where
 		d.depreciateFrom
 		>= depreciateFrom and d.status=status and d.company =:company
 	</query>
@@ -958,7 +958,7 @@
 		<query-param name="status" type="int" />
 		<query-param name="company" type="Company" />
 
-		from com.vimukti.accounter.core.WriteCheck wc where
+		from com.nitya.accounter.core.WriteCheck wc where
 		wc.status =:status
 		and wc.company=:company
 	</query>
@@ -968,7 +968,7 @@
 		<query-param name="status" type="int" />
 		<query-param name="tobePrinted" type="encryptedstring" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.WriteCheck wc where
+		from com.nitya.accounter.core.WriteCheck wc where
 		wc.bankAccount.id=:id and wc.saveStatus not in (204,201) and wc.status=:status and
 		wc.checkNumber=:tobePrinted and
 		wc.company=:company
@@ -977,7 +977,7 @@
 	<query name="getCustomerRefund.by.isvoidandstatus">
 		<query-param name="status" type="int" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.CustomerRefund cr
+		from com.nitya.accounter.core.CustomerRefund cr
 		where
 		cr.saveStatus!=204
 		and cr.status=status and cr.company=:company
@@ -986,7 +986,7 @@
 	<query name="getPaySalesTax.by.status">
 		<query-param name="status" type="int" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.PayTAX pst where
+		from com.nitya.accounter.core.PayTAX pst where
 		pst.status =
 		status and
 		pst.company=:company
@@ -997,7 +997,7 @@
 		<query-param name="status" type="int" />
 		<query-param name="tobePrinted" type="encryptedstring" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.CustomerRefund cr
+		from com.nitya.accounter.core.CustomerRefund cr
 		where cr.payFrom.id
 		=:id and cr.saveStatus not in (204,201) and cr.status=:status and
 		cr.checkNumber=:tobePrinted and
@@ -1009,7 +1009,7 @@
 		<query-param name="status" type="int" />
 		<query-param name="tobePrinted" type="encryptedstring" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.PayTAX pst where
+		from com.nitya.accounter.core.PayTAX pst where
 		pst.payFrom.id =
 		:id
 		and pst.saveStatus not in (204,201) and pst.status =:status and
@@ -1021,7 +1021,7 @@
 		<query-param name="id" type="long" />
 		<query-param name="transactionId" type="long" />
 		<query-param name="company" type="Company" />
-		select cp from com.vimukti.accounter.core.CreditsAndPayments cp
+		select cp from com.nitya.accounter.core.CreditsAndPayments cp
 		left
 		join cp.transactionCreditsAndPayments as tcap
 		left join
@@ -1039,10 +1039,10 @@
 
 	<query name="getCustomerRefund">
 		<query-param name="company" type="Company" />
-		<query-param name="fromDate" type="com.vimukti.accounter.core.LongUseType" />
-		<query-param name="toDate" type="com.vimukti.accounter.core.LongUseType" />
+		<query-param name="fromDate" type="com.nitya.accounter.core.LongUseType" />
+		<query-param name="toDate" type="com.nitya.accounter.core.LongUseType" />
 		<query-param name="viewId" type="int" />
-		from com.vimukti.accounter.core.CustomerRefund cr where
+		from com.nitya.accounter.core.CustomerRefund cr where
 		((cr.status=:viewId and cr.saveStatus not in (204,201))
 		or (:viewId =3 and cr.saveStatus=204) or
 		(:viewId =4 and cr.saveStatus=201) or :viewId = 1000) and
@@ -1058,7 +1058,7 @@
 	<query name="getWriteCheck.by.payToType">
 		<query-param name="company" type="Company" />
 		<query-param name="type" type="int" />
-		from com.vimukti.accounter.core.WriteCheck wc where
+		from com.nitya.accounter.core.WriteCheck wc where
 		wc.company=:company and wc.payToType=:type order by wc.transactionDate
 		desc
 	</query>
@@ -1066,7 +1066,7 @@
 	<query name="getFixedAsset.by.checkStatusand.purchaseDate">
 		<query-param name="company" type="Company" />
 		<query-param name="date" type="long" />
-		from com.vimukti.accounter.core.FixedAsset f where f.company=:company
+		from com.nitya.accounter.core.FixedAsset f where f.company=:company
 		and f.status = 2 and f.purchaseDate &lt;=:date
 		order by
 		f.lastModifiedDate desc
@@ -1076,11 +1076,11 @@
 		<query-param name="company" type="Company" />
 		<query-param name="depreciationFor" type="int" />
 		<query-param name="status" type="int" />
-		from com.vimukti.accounter.core.Depreciation d where
+		from com.nitya.accounter.core.Depreciation d where
 		d.company=:company and
 		d.id=((select
 		max(d1.id) from
-		com.vimukti.accounter.core.Depreciation
+		com.nitya.accounter.core.Depreciation
 		d1 where d1.company=:company
 		and
 		d1.depreciationFor
@@ -1089,10 +1089,10 @@
 
 	<query
 		name="getTAXRateCalculation.by.check.taxItemandDates.orderBy.transactionItem">
-		<query-param name="startDate" type="com.vimukti.accounter.core.LongUseType" />
-		<query-param name="endDate" type="com.vimukti.accounter.core.LongUseType" />
+		<query-param name="startDate" type="com.nitya.accounter.core.LongUseType" />
+		<query-param name="endDate" type="com.nitya.accounter.core.LongUseType" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.TAXRateCalculation v
+		from com.nitya.accounter.core.TAXRateCalculation v
 		where v.taxItem is
 		not null and v.taxItem.company=:company and v.transactionDate between
 		:startDate
@@ -1101,10 +1101,10 @@
 	</query>
 
 	<query name="getTAXRateCalculation.by.check.taxItemandDates">
-		<query-param name="startDate" type="com.vimukti.accounter.core.LongUseType" />
-		<query-param name="endDate" type="com.vimukti.accounter.core.LongUseType" />
+		<query-param name="startDate" type="com.nitya.accounter.core.LongUseType" />
+		<query-param name="endDate" type="com.nitya.accounter.core.LongUseType" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.TAXRateCalculation v where v.taxItem
+		from com.nitya.accounter.core.TAXRateCalculation v where v.taxItem
 		is not null and v.taxItem.company=:company and v.transactionDate
 		between :startDate and :endDate group by v.id
 	</query>
@@ -1114,7 +1114,7 @@
 		<query-param name="type" type="int" />
 		<query-param name="expenseStatus" type="int" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.CashPurchase cp where
+		from com.nitya.accounter.core.CashPurchase cp where
 		cp.company=:company and
 		cp.expenseStatus=:expenseStatus
 		and
@@ -1125,7 +1125,7 @@
 		<query-param name="type" type="int" />
 		<query-param name="expenseStatus" type="int" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.CashPurchase cp where
+		from com.nitya.accounter.core.CashPurchase cp where
 		cp.company=:company and
 		cp.expenseStatus=:expenseStatus and
 		cp.type=:type and cp.saveStatus!=204
@@ -1134,10 +1134,10 @@
 	<query name="getEstimate">
 		<query-param name="company" type="Company" />
 		<query-param name="estimateType" type="int" />
-		<query-param name="fromDate" type="com.vimukti.accounter.core.LongUseType" />
-		<query-param name="toDate" type="com.vimukti.accounter.core.LongUseType" />
+		<query-param name="fromDate" type="com.nitya.accounter.core.LongUseType" />
+		<query-param name="toDate" type="com.nitya.accounter.core.LongUseType" />
 		<query-param name="status" type="int" />
-		from com.vimukti.accounter.core.Estimate e
+		from com.nitya.accounter.core.Estimate e
 		where e.company=:company
 		and
 		e.estimateType=:estimateType and e.saveStatus
@@ -1157,10 +1157,10 @@
 	<query name="getExpiredEstimate">
 		<query-param name="company" type="Company" />
 		<query-param name="estimateType" type="int" />
-		<query-param name="fromDate" type="com.vimukti.accounter.core.LongUseType" />
-		<query-param name="toDate" type="com.vimukti.accounter.core.LongUseType" />
-		<query-param name="today" type="com.vimukti.accounter.core.LongUseType" />
-		from com.vimukti.accounter.core.Estimate e where e.company=:company
+		<query-param name="fromDate" type="com.nitya.accounter.core.LongUseType" />
+		<query-param name="toDate" type="com.nitya.accounter.core.LongUseType" />
+		<query-param name="today" type="com.nitya.accounter.core.LongUseType" />
+		from com.nitya.accounter.core.Estimate e where e.company=:company
 		and e.estimateType=:estimateType and e.saveStatus != 202
 		and
 		e.transactionDate between :fromDate and :toDate and e.deliveryDate
@@ -1171,14 +1171,14 @@
 	<query name="getEstimate.by.check.id.status">
 		<query-param name="company" type="Company" />
 		<query-param name="id" type="long" />
-		from com.vimukti.accounter.core.Estimate e
+		from com.nitya.accounter.core.Estimate e
 		where e.company=:company and
 		e.customer.id =:id and e.status = 0 and e.saveStatus != 202
 	</query>
 
 	<query name="getFiscalYear.by.check.status.startDate">
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.FiscalYear fy where
+		from com.nitya.accounter.core.FiscalYear fy where
 		fy.company=:company and
 		fy.status = 1 order by fy.startDate
 	</query>
@@ -1186,7 +1186,7 @@
 	<query name="getJobsList">
 		<query-param name="company" type="Company" />
 		from
-		com.vimukti.accounter.core.Job j where j.company=:company
+		com.nitya.accounter.core.Job j where j.company=:company
 		order by
 		j.id
 	</query>
@@ -1196,7 +1196,7 @@
 		<query-param name="type" type="int" />
 		<query-param name="number" type="String" />
 		<query-param name="id" type="long" />
-		from com.vimukti.accounter.core.Transaction t
+		from com.nitya.accounter.core.Transaction t
 		where t.company =:company
 		and
 		t.type =:type and
@@ -1204,16 +1204,16 @@
 	</query>
 	<query name="get.PayBills.by.tds">
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.PayBill b
+		from com.nitya.accounter.core.PayBill b
 		where b.company=:company and
 		b.tdsTaxItem !=null
 	</query>
 
 	<query name="getJournalEntry">
 		<query-param name="company" type="Company" />
-		<query-param name="fromDate" type="com.vimukti.accounter.core.LongUseType" />
-		<query-param name="toDate" type="com.vimukti.accounter.core.LongUseType" />
-		from com.vimukti.accounter.core.JournalEntry j where
+		<query-param name="fromDate" type="com.nitya.accounter.core.LongUseType" />
+		<query-param name="toDate" type="com.nitya.accounter.core.LongUseType" />
+		from com.nitya.accounter.core.JournalEntry j where
 		j.company=:company and j.saveStatus != 202
 		and j.transactionDate
 		between :fromDate and :toDate
@@ -1223,7 +1223,7 @@
 	<query name="getJournalEntry.by.id">
 		<query-param name="id" type="long" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.JournalEntry j where
+		from com.nitya.accounter.core.JournalEntry j where
 		j.id =:id and
 		j.company=:company
 	</query>
@@ -1231,7 +1231,7 @@
 	<query name="getTAXRateCalculation.by.check.idandvatReturn">
 		<query-param name="id" type="long" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.TAXRateCalculation vr
+		from com.nitya.accounter.core.TAXRateCalculation vr
 		where
 		vr.transaction.id=:id and vr.taxReturn is not null and
 		vr.transaction.company=:company
@@ -1239,7 +1239,7 @@
 
 	<query name="getVATReturn.by.check.BalanceGraterThanzero">
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.TAXReturn v where
+		from com.nitya.accounter.core.TAXReturn v where
 		v.balance
 		&gt;0 and
 		v.company=:company
@@ -1247,7 +1247,7 @@
 
 	<query name="getVATReturn.by.check.BalancelessThanzero">
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.TAXReturn v where
+		from com.nitya.accounter.core.TAXReturn v where
 		v.balance
 		&lt;0 and
 		v.company=:company
@@ -1255,32 +1255,32 @@
 
 	<query name="getVATReturn.by.taxagencyandenddate">
 		<query-param name="taxAgency" type="int" />
-		<query-param name="endDate" type="com.vimukti.accounter.core.LongUseType" />
+		<query-param name="endDate" type="com.nitya.accounter.core.LongUseType" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.TAXReturn vt where
+		from com.nitya.accounter.core.TAXReturn vt where
 		vt.taxAgency.id=:taxAgency and vt.periodEndDate=:endDate and
 		vt.company=:company
 	</query>
 
 	<query name="getVATReturn.by.enddate">
 		<query-param name="company" type="Company" />
-		<query-param name="endDate" type="com.vimukti.accounter.core.LongUseType" />
-		from com.vimukti.accounter.core.TAXReturn v where v.periodEndDate =
+		<query-param name="endDate" type="com.nitya.accounter.core.LongUseType" />
+		from com.nitya.accounter.core.TAXReturn v where v.periodEndDate =
 		:endDate and v.company=:company
 	</query>
 
 	<query name="getItem.by.check.isIBuyThisItemisTrue">
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.Item item where
+		from com.nitya.accounter.core.Item item where
 		item.isIBuyThisItem =
 		true and item.company=:company
 	</query>
 
 	<query name="getTAXRateCalculation.by.datesand.orderby.transactionItem">
-		<query-param name="startDate" type="com.vimukti.accounter.core.LongUseType" />
-		<query-param name="endDate" type="com.vimukti.accounter.core.LongUseType" />
+		<query-param name="startDate" type="com.nitya.accounter.core.LongUseType" />
+		<query-param name="endDate" type="com.nitya.accounter.core.LongUseType" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.TAXRateCalculation v
+		from com.nitya.accounter.core.TAXRateCalculation v
 		where v.taxItem is
 		not null and v.transactionDate between :startDate
 		and :endDate and
@@ -1289,14 +1289,14 @@
 
 	<query name="getItem.by.checkisISellThisItemisTrue">
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.Item item where
+		from com.nitya.accounter.core.Item item where
 		item.isISellThisItem =
 		true and item.company=:company
 	</query>
 
 	<query name="getFixedAsset.by.checkingstatus">
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.FixedAsset f where
+		from com.nitya.accounter.core.FixedAsset f where
 		f.status = 3 and
 		f.company=:company
 	</query>
@@ -1306,7 +1306,7 @@
 		<query-param name="type2" type="int" />
 		<query-param name="type3" type="int" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.Account a where
+		from com.nitya.accounter.core.Account a where
 		a.type not in
 		(type1,type2,type3) and a.company=:company
 	</query>
@@ -1315,30 +1315,30 @@
 	<query name="getTransactionMakeDeposit.by.checking.isDepositedandisVoid">
 		<query-param name="company" type="Company" />
 		from
-		com.vimukti.accounter.core.TransactionMakeDepositEntries at where
+		com.nitya.accounter.core.TransactionMakeDepositEntries at where
 		at.transaction.isDeposited = false and at.transaction.saveStatus!=204
 		and at.transaction.company=:company
 	</query>
 
 	<query name="getTAXAdjustment.checkingby.transactionDate">
-		<query-param name="endDate" type="com.vimukti.accounter.core.LongUseType" />
+		<query-param name="endDate" type="com.nitya.accounter.core.LongUseType" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.TAXAdjustment v where
+		from com.nitya.accounter.core.TAXAdjustment v where
 		v.transactionDate &lt;=:endDate and v.company=:company
 	</query>
 
 	<query name="getTAXAdjustment.checkingby.VATperiodEndDate">
-		<query-param name="endDate" type="com.vimukti.accounter.core.LongUseType" />
+		<query-param name="endDate" type="com.nitya.accounter.core.LongUseType" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.TAXReturn v where v.periodEndDate
+		from com.nitya.accounter.core.TAXReturn v where v.periodEndDate
 		&lt;=:endDate and v.company=:company
 	</query>
 
 	<query name="getTAXRateCalculation.by.datesand.vatReturn">
-		<query-param name="startDate" type="com.vimukti.accounter.core.LongUseType" />
-		<query-param name="endDate" type="com.vimukti.accounter.core.LongUseType" />
+		<query-param name="startDate" type="com.nitya.accounter.core.LongUseType" />
+		<query-param name="endDate" type="com.nitya.accounter.core.LongUseType" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.TAXRateCalculation v where v.taxItem
+		from com.nitya.accounter.core.TAXRateCalculation v where v.taxItem
 		is not null and v.transactionDate between :startDate and :endDate and
 		v.taxReturn is null and v.taxItem.company=:company order by v.taxItem
 	</query>
@@ -1346,22 +1346,22 @@
 
 
 	<query name="getTAXRateCalculation.by.dates">
-		<query-param name="startDate" type="com.vimukti.accounter.core.LongUseType" />
-		<query-param name="endDate" type="com.vimukti.accounter.core.LongUseType" />
+		<query-param name="startDate" type="com.nitya.accounter.core.LongUseType" />
+		<query-param name="endDate" type="com.nitya.accounter.core.LongUseType" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.TAXRateCalculation v where v.taxItem
+		from com.nitya.accounter.core.TAXRateCalculation v where v.taxItem
 		is not null and v.transactionDate between :startDate and :endDate and
 		v.taxItem.company=:company order by v.taxItem
 	</query>
 
 	<query name="getTAXRateCalculation.by.dates.and.taxAgency">
-		<query-param name="startDate" type="com.vimukti.accounter.core.LongUseType" />
-		<query-param name="endDate" type="com.vimukti.accounter.core.LongUseType" />
+		<query-param name="startDate" type="com.nitya.accounter.core.LongUseType" />
+		<query-param name="endDate" type="com.nitya.accounter.core.LongUseType" />
 		<query-param name="company" type="Company" />
 		<query-param name="taxAgency" type="long" />
 		select sum(v.taxAmount), sum(v.lineTotal), max(v.transaction),
 		v.taxItem, v.isVATGroupEntry from
-		com.vimukti.accounter.core.TAXRateCalculation v
+		com.nitya.accounter.core.TAXRateCalculation v
 		where v.taxItem is not
 		null and v.transactionDate between :startDate
 		and :endDate and
@@ -1377,11 +1377,11 @@
 		<query-param name="taxAgency" type="long" />
 		select sum(v.taxAmount), sum(v.lineTotal), max(v.transaction),
 		v.taxItem, v.isVATGroupEntry from
-		com.vimukti.accounter.core.TAXRateCalculation v
+		com.nitya.accounter.core.TAXRateCalculation v
 		where v.taxItem is not
 		null and v.transactionDate &lt; (select
 		max(transactionDate) from
-		com.vimukti.accounter.core.TAXReturn
+		com.nitya.accounter.core.TAXReturn
 		a where a.taxAgency.id=:taxAgency
 		and a.company=:company) and
 		v.taxItem.company=:company and
@@ -1395,10 +1395,10 @@
 
 	<query name="getTAXAdjustment.by.taxAgencyidanddates">
 		<query-param name="taxAgency" type="long" />
-		<query-param name="fromDate" type="com.vimukti.accounter.core.LongUseType" />
-		<query-param name="toDate" type="com.vimukti.accounter.core.LongUseType" />
+		<query-param name="fromDate" type="com.nitya.accounter.core.LongUseType" />
+		<query-param name="toDate" type="com.nitya.accounter.core.LongUseType" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.TAXAdjustment v where
+		from com.nitya.accounter.core.TAXAdjustment v where
 		v.taxItem.taxAgency.id=:taxAgency and v.transactionDate between
 		:fromDate and :toDate and v.isFiled = false and v.company=:company
 		order by v.taxItem
@@ -1406,10 +1406,10 @@
 
 	<query
 		name="getTAXAdjustment.by.dates.orderby.taxItemNameand.TransactionDate">
-		<query-param name="startDate" type="com.vimukti.accounter.core.LongUseType" />
-		<query-param name="endDate" type="com.vimukti.accounter.core.LongUseType" />
+		<query-param name="startDate" type="com.nitya.accounter.core.LongUseType" />
+		<query-param name="endDate" type="com.nitya.accounter.core.LongUseType" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.TAXAdjustment v where
+		from com.nitya.accounter.core.TAXAdjustment v where
 		v.transactionDate between :startDate and :endDate and
 		v.company=:company order by
 		v.taxItem.name,
@@ -1417,20 +1417,20 @@
 	</query>
 
 	<query name="getTAXRateCalculation.by.dates.groupedByIdtransactionItem">
-		<query-param name="startDate" type="com.vimukti.accounter.core.LongUseType" />
-		<query-param name="endDate" type="com.vimukti.accounter.core.LongUseType" />
+		<query-param name="startDate" type="com.nitya.accounter.core.LongUseType" />
+		<query-param name="endDate" type="com.nitya.accounter.core.LongUseType" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.TAXRateCalculation v where
+		from com.nitya.accounter.core.TAXRateCalculation v where
 		v.taxItem.name=:taxItemName and v.transactionDate between :startDate
 		and :endDate and v.taxItem.company =:company
 	</query>
 
 
 	<query name="getTAXRateCalculation.by.dates.orderbytaxItem.name">
-		<query-param name="startDate" type="com.vimukti.accounter.core.LongUseType" />
-		<query-param name="endDate" type="com.vimukti.accounter.core.LongUseType" />
+		<query-param name="startDate" type="com.nitya.accounter.core.LongUseType" />
+		<query-param name="endDate" type="com.nitya.accounter.core.LongUseType" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.TAXRateCalculation v where
+		from com.nitya.accounter.core.TAXRateCalculation v where
 		v.taxItem.company=:company and v.taxItem
 		is not null and
 		v.transactionDate
@@ -1441,59 +1441,59 @@
 	</query>
 
 	<query name="getFixedAsset.by.purchaseDate">
-		<query-param name="purchaseDate" type="com.vimukti.accounter.core.LongUseType" />
+		<query-param name="purchaseDate" type="com.nitya.accounter.core.LongUseType" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.FixedAsset fa where
+		from com.nitya.accounter.core.FixedAsset fa where
 		fa.purchaseDate
 		&lt;=purchaseDate and fa.company=:company
 	</query>
 
 	<query name="getFiscalYearf">
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.FiscalYear f where f.company=:company
+		from com.nitya.accounter.core.FiscalYear f where f.company=:company
 	</query>
 
 	<query name="deleteTAXCode">
 		<query-param name="id" type="long" />
 		<query-param name="company" type="Company" />
-		delete from com.vimukti.accounter.core.TAXCode t
+		delete from com.nitya.accounter.core.TAXCode t
 		where t.id=id and
 		t.company=:company
 	</query>
 
 	<query name="get.developer.by.client">
-		<query-param name="client" type="com.vimukti.accounter.core.Client" />
-		from com.vimukti.accounter.core.Developer d where d.client =:client
+		<query-param name="client" type="com.nitya.accounter.core.Client" />
+		from com.nitya.accounter.core.Developer d where d.client =:client
 	</query>
 
 	<query name="get.developer.by.id">
 		<query-param name="id" type="long" />
-		from com.vimukti.accounter.core.Developer d where d.id=:id
+		from com.nitya.accounter.core.Developer d where d.id=:id
 	</query>
 
 	<query name="get.developer.by.apiKey">
 		<query-param name="apiKey" type="String" />
-		from com.vimukti.accounter.core.Developer d where d.apiKey=:apiKey
+		from com.nitya.accounter.core.Developer d where d.apiKey=:apiKey
 	</query>
 
 	<query name="get.ServerCompany.by.companyId.and.client">
 		<query-param name="id" type="Long" />
-		<query-param name="client" type="com.vimukti.accounter.core.Client" />
+		<query-param name="client" type="com.nitya.accounter.core.Client" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.Company sc left join sc.users
+		from com.nitya.accounter.core.Company sc left join sc.users
 		u left
 		join u.client c where sc.id=:id and c=:client
 	</query>
 
 	<query name="get.All.Units">
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.Unit where company=:company
+		from com.nitya.accounter.core.Unit where company=:company
 	</query>
 
 	<query name="adminUserForEmailId">
 		<query-param name="company" type="Company" />
 		<query-param name="emailid" type="string" />
-		from com.vimukti.accounter.core.User user left join user.client c
+		from com.nitya.accounter.core.User user left join user.client c
 		where c.emailId=:emailid
 		and user.company=:company
 		and user.isAdmin
@@ -1502,27 +1502,27 @@
 
 	<query name="get.Admin.Users">
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.User user where user.company=:company
+		from com.nitya.accounter.core.User user where user.company=:company
 		and user.isAdmin =true and user.isDeleted = false
 	</query>
 
 	<query name="getTAXAdjustment.by.dates.and.taxItemName">
-		<query-param name="startDate" type="com.vimukti.accounter.core.LongUseType" />
-		<query-param name="endDate" type="com.vimukti.accounter.core.LongUseType" />
+		<query-param name="startDate" type="com.nitya.accounter.core.LongUseType" />
+		<query-param name="endDate" type="com.nitya.accounter.core.LongUseType" />
 		<query-param name="taxItemName" type="String" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.TAXAdjustment v where
+		from com.nitya.accounter.core.TAXAdjustment v where
 		v.taxItem.name=:taxItemName and v.transactionDate between :startDate
 		and :endDate and v.company=:company order by v.taxItem.name,
 		v.transactionDate
 	</query>
 
 	<query name="getTAXAdjustment.by.dates.and.taxAgency">
-		<query-param name="startDate" type="com.vimukti.accounter.core.LongUseType" />
-		<query-param name="endDate" type="com.vimukti.accounter.core.LongUseType" />
+		<query-param name="startDate" type="com.nitya.accounter.core.LongUseType" />
+		<query-param name="endDate" type="com.nitya.accounter.core.LongUseType" />
 		<query-param name="taxAgency" type="Long" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.TAXAdjustment v where
+		from com.nitya.accounter.core.TAXAdjustment v where
 		v.taxItem.taxAgency.id=:taxAgency and v.transactionDate between
 		:startDate
 		and :endDate and v.company=:company and v.saveStatus != 204
@@ -1535,13 +1535,13 @@
 	<query name="getTAXCode.for.TAXItemGroup">
 		<query-param name="id" type="long" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.TAXCode t where
+		from com.nitya.accounter.core.TAXCode t where
 		t.TAXItemGrpForSales.id=:id and t.company=:company
 	</query>
 
 	<query name="get.selected.vendors.enterbills.list">
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.EnterBill e where
+		from com.nitya.accounter.core.EnterBill e where
 		e.vendor.isTrackPaymentsFor1099=true and e.company=:company
 		and
 		e.saveStatus!=204
@@ -1549,21 +1549,21 @@
 
 	<query name="get.notselected.vendors.enterbills.list">
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.EnterBill e where
+		from com.nitya.accounter.core.EnterBill e where
 		e.vendor.isTrackPaymentsFor1099=false and e.company=:company and
 		e.saveStatus!=204
 	</query>
 
 	<query name="get.1099.vendors">
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.Vendor v where
+		from com.nitya.accounter.core.Vendor v where
 		v.isTrackPaymentsFor1099=true and v.company=:company
 	</query>
 
 	<query name="get.selected.vendors.enterbills.list.by.id">
 		<query-param name="vendorId" type="long" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.EnterBill e where
+		from com.nitya.accounter.core.EnterBill e where
 		e.vendor.id=:vendorId and e.company=:company and e.saveStatus!=204
 	</query>
 
@@ -1571,7 +1571,7 @@
 		<query-param name="fromDate" type="timestamp" />
 		<query-param name="endDate" type="timestamp" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.Activity at where
+		from com.nitya.accounter.core.Activity at where
 		at.time between
 		:fromDate and :endDate and at.company=:company order by at.time desc
 	</query>
@@ -1579,7 +1579,7 @@
 	<query name="get.reconciliations.by.accountId">
 		<query-param name="accountID" type="long" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.Reconciliation re where
+		from com.nitya.accounter.core.Reconciliation re where
 		re.account.id=:accountID and re.company=:company
 	</query>
 
@@ -1588,26 +1588,26 @@
 	<query name="get.OpeningBalance.Of.Account.from.Reconciliations">
 		<query-param name="accountID" type="long" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.Reconciliation re where
+		from com.nitya.accounter.core.Reconciliation re where
 		re.account.id=:accountID and re.company=:company order by re.id desc
 	</query>
 
 	<query name="get.all.activities.of.transaction">
 		<query-param name="transactionId" type="long" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.Activity act where
+		from com.nitya.accounter.core.Activity act where
 		act.objectID=:transactionId and act.company=:company
 	</query>
 
 	<query name="getJournalEntryForCustomer">
 		<query-param name="id" type="long" />
-		from com.vimukti.accounter.core.JournalEntry je where
+		from com.nitya.accounter.core.JournalEntry je where
 		je.involvedPayee.id=:id
 	</query>
 
 	<query name="getJournalEntryForAccount">
 		<query-param name="id" type="long" />
-		from com.vimukti.accounter.core.JournalEntry je where
+		from com.nitya.accounter.core.JournalEntry je where
 		je.involvedAccount.id=:id
 	</query>
 
@@ -1616,7 +1616,7 @@
 		<query-param name="taxAgency" type="long" />
 		select max(t.periodEndDate)
 		from
-		com.vimukti.accounter.core.TAXReturn t
+		com.nitya.accounter.core.TAXReturn t
 		where
 		t.company=:company and t.taxAgency.id=:taxAgency
 	</query>
@@ -1624,10 +1624,10 @@
 	<query name="getLastTAXReturn.Entries.by.taxAgency">
 		<query-param name="company" type="Company" />
 		<query-param name="taxAgency" type="long" />
-		from com.vimukti.accounter.core.TAXReturnEntry tre where
+		from com.nitya.accounter.core.TAXReturnEntry tre where
 		tre.taxReturn.id = (select
 		max(t.id) from
-		com.vimukti.accounter.core.TAXReturn
+		com.nitya.accounter.core.TAXReturn
 		t where t.company=:company and
 		t.taxAgency.id=:taxAgency)
 	</query>
@@ -1737,7 +1737,7 @@
 	</sql-query>
 
 	<query name="getNews">
-		from com.vimukti.accounter.core.News
+		from com.nitya.accounter.core.News
 	</query>
 
 	<sql-query name="getItemStatuses">
@@ -1766,7 +1766,7 @@
 	<query name="list.TAXReturns">
 		<query-param name="company" type="Company" />
 		<query-param name="viewType" type="int" />
-		from com.vimukti.accounter.core.TAXReturn tr where
+		from com.nitya.accounter.core.TAXReturn tr where
 		tr.company=:company
 		AND
 
@@ -1779,7 +1779,7 @@
 
 	<query name="getStockTransfersList">
 		<query-param name="companyId" type="long" />
-		from com.vimukti.accounter.core.StockTransfer st where
+		from com.nitya.accounter.core.StockTransfer st where
 		st.company.id=:companyId order by st.lastModifiedDate desc
 	</query>
 
@@ -1787,7 +1787,7 @@
 		<query-param name="companyId" type="long" />
 		<query-param name="startDate" type="long" />
 		<query-param name="endDate" type="long" />
-		from com.vimukti.accounter.core.StockAdjustment st where st.transactionDate between
+		from com.nitya.accounter.core.StockAdjustment st where st.transactionDate between
 		:startDate and :endDate and st.company.id=:companyId
 		order by st.lastModifiedDate desc
 	</query>
@@ -1795,7 +1795,7 @@
 	<query name="getAccountsOfType">
 		<query-param name="companyId" type="long" />
 		<query-param name="type" type="int" />
-		from com.vimukti.accounter.core.Account a where a.type=:type and
+		from com.nitya.accounter.core.Account a where a.type=:type and
 		a.company.id =:companyId
 		order by a.number asc
 	</query>
@@ -1809,32 +1809,32 @@
 
 	<query name="getFiscalYears.of.company">
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.FiscalYear f where f.company=:company
+		from com.nitya.accounter.core.FiscalYear f where f.company=:company
 	</query>
 
 	<!-- queries for item merging -->
 
 	<!--<query name="update.merge.itembackup.old.tonew"> <query-param name="fromID" 
 		type="long" /> <query-param name="toID" type="long" /> <query-param name="company" 
-		type="Company" /> update com.vimukti.accounter.core.ItemBackUp set item.id=:toID 
+		type="Company" /> update com.nitya.accounter.core.ItemBackUp set item.id=:toID 
 		where item.id=:fromID and company=:company </query> -->
 
 	<query name="update.merge.itemUpdates.old.tonew">
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
-		update com.vimukti.accounter.core.ItemUpdate set item.id=:toID where
+		update com.nitya.accounter.core.ItemUpdate set item.id=:toID where
 		item.id=:fromID
 	</query>
 
 	<!-- <query name="update.merge.itemsalesorder.old.tonew"> <query-param name="fromID" 
 		type="long" /> <query-param name="toID" type="long" /> <query-param name="company" 
-		type="Company" /> update com.vimukti.accounter.core.SalesOrder set salesTaxItem.id=:toID 
+		type="Company" /> update com.nitya.accounter.core.SalesOrder set salesTaxItem.id=:toID 
 		where salesTaxItem.id=:fromID and company=:company </query> -->
 
 	<query name="update.merge.trasactionexpense.old.tonew">
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
-		update com.vimukti.accounter.core.TransactionExpense set item.id=:toID
+		update com.nitya.accounter.core.TransactionExpense set item.id=:toID
 		where
 		item.id=:fromID
 	</query>
@@ -1842,7 +1842,7 @@
 	<query name="update.merge.trasactionitem.old.tonew">
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
-		update com.vimukti.accounter.core.TransactionItem set item.id=:toID
+		update com.nitya.accounter.core.TransactionItem set item.id=:toID
 		where
 		item.id=:fromID
 	</query>
@@ -1850,7 +1850,7 @@
 	<query name="update.merge.itemUpdate.old.tonew">
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
-		update com.vimukti.accounter.core.ItemUpdate set item.id=:toID
+		update com.nitya.accounter.core.ItemUpdate set item.id=:toID
 		where
 		item.id=:fromID
 	</query>
@@ -1858,7 +1858,7 @@
 	<query name="update.merge.inventoryHistory.old.tonew">
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
-		update com.vimukti.accounter.core.InventoryHistory set item.id=:toID
+		update com.nitya.accounter.core.InventoryHistory set item.id=:toID
 		where
 		item.id=:fromID
 	</query>
@@ -1866,7 +1866,7 @@
 	<query name="update.merge.inventoryAssembly.old.tonew">
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
-		update com.vimukti.accounter.core.InventoryAssemblyItem set inventoryItem.id=:toID
+		update com.nitya.accounter.core.InventoryAssemblyItem set inventoryItem.id=:toID
 		where
 		inventoryItem.id=:fromID
 	</query>
@@ -1877,7 +1877,7 @@
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
 		<query-param name="company" type="Company" />
-		update com.vimukti.accounter.core.AccountTransaction set
+		update com.nitya.accounter.core.AccountTransaction set
 		account.id=:toID where
 		account.id=:fromID and company=:company
 	</query>
@@ -1886,21 +1886,21 @@
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
 		<query-param name="company" type="Company" />
-		update com.vimukti.accounter.core.CustomerCreditMemo set
+		update com.nitya.accounter.core.CustomerCreditMemo set
 		account.id=:toID where
 		account.id=:fromID and company=:company
 	</query>
 
 	<!-- <query name="update.merge.issuepayment.old.tonew"> <query-param name="fromID" 
 		type="long" /> <query-param name="toID" type="long" /> <query-param name="company" 
-		type="Company" /> update com.vimukti.accounter.core.IssuePayment set account.id=:toID 
+		type="Company" /> update com.nitya.accounter.core.IssuePayment set account.id=:toID 
 		where account.id=:fromID and company=:company </query> -->
 
 	<query name="update.merge.accounttrasactionexpense.old.tonew">
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
 
-		update com.vimukti.accounter.core.TransactionExpense set
+		update com.nitya.accounter.core.TransactionExpense set
 		account.id=:toID where
 		account.id=:fromID
 	</query>
@@ -1909,7 +1909,7 @@
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
 		<query-param name="company" type="Company" />
-		update com.vimukti.accounter.core.PayExpense set paidFrom.id=:toID
+		update com.nitya.accounter.core.PayExpense set paidFrom.id=:toID
 		where
 		paidFrom.id=:fromID and company=:company
 	</query>
@@ -1918,7 +1918,7 @@
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
 		<query-param name="company" type="Company" />
-		update com.vimukti.accounter.core.ReceivePayment set
+		update com.nitya.accounter.core.ReceivePayment set
 		depositIn.id=:toID where
 		depositIn.id=:fromID and company=:company
 	</query>
@@ -1927,21 +1927,21 @@
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
 		<query-param name="company" type="Company" />
-		update com.vimukti.accounter.core.TransactionExpense set
+		update com.nitya.accounter.core.TransactionExpense set
 		account.id=:toID where
 		account.id=:fromID and company=:company
 	</query>
 	<query name="update.merge.transactionitem.old.tonew">
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
-		update com.vimukti.accounter.core.TransactionItem set account.id=:toID
+		update com.nitya.accounter.core.TransactionItem set account.id=:toID
 		where
 		account.id=:fromID
 	</query>
 	<query name="update.merge.transactionitemeffectingAccount.old.tonew">
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
-		update com.vimukti.accounter.core.TransactionItem set
+		update com.nitya.accounter.core.TransactionItem set
 		effectingAccount.id=:toID
 		where
 		effectingAccount.id=:fromID
@@ -1949,7 +1949,7 @@
 	<query name="update.merge.journalEntry.old.tonew">
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
-		update com.vimukti.accounter.core.JournalEntry set
+		update com.nitya.accounter.core.JournalEntry set
 		involvedAccount.id=:toID
 		where
 		involvedAccount.id=:fromID
@@ -1958,7 +1958,7 @@
 	<query name="update.merge.transactionmakedepositentries.old.tonew">
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
-		update com.vimukti.accounter.core.TransactionMakeDepositEntries set
+		update com.nitya.accounter.core.TransactionMakeDepositEntries set
 		account.id=:toID where
 		account.id=:fromID
 	</query>
@@ -1967,7 +1967,7 @@
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
 		<query-param name="company" type="Company" />
-		update com.vimukti.accounter.core.WriteCheck set bankAccount.id=:toID
+		update com.nitya.accounter.core.WriteCheck set bankAccount.id=:toID
 		where
 		bankAccount.id=:fromID and company=:company
 	</query>
@@ -1976,7 +1976,7 @@
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
 		<query-param name="company" type="Company" />
-		update com.vimukti.accounter.core.ReceiveVAT set depositIn.id=:toID
+		update com.nitya.accounter.core.ReceiveVAT set depositIn.id=:toID
 		where
 		depositIn.id=:fromID and company=:company
 	</query>
@@ -1985,7 +1985,7 @@
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
 		<query-param name="company" type="Company" />
-		update com.vimukti.accounter.core.PayTAX set payFrom.id=:toID
+		update com.nitya.accounter.core.PayTAX set payFrom.id=:toID
 		where
 		payFrom.id=:fromID and company=:company
 	</query>
@@ -1994,7 +1994,7 @@
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
 		<query-param name="company" type="Company" />
-		update com.vimukti.accounter.core.CustomerRefund set payFrom.id=:toID
+		update com.nitya.accounter.core.CustomerRefund set payFrom.id=:toID
 		where
 		payFrom.id=:fromID and company=:company
 	</query>
@@ -2003,7 +2003,7 @@
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
 		<query-param name="company" type="Company" />
-		update com.vimukti.accounter.core.CustomerPrePayment set
+		update com.nitya.accounter.core.CustomerPrePayment set
 		depositIn.id=:toID
 		where
 		depositIn.id=:fromID and company=:company
@@ -2013,7 +2013,7 @@
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
 		<query-param name="company" type="Company" />
-		update com.vimukti.accounter.core.PayBill set payFrom.id=:toID
+		update com.nitya.accounter.core.PayBill set payFrom.id=:toID
 		where
 		payFrom.id=:fromID and company=:company
 	</query>
@@ -2022,7 +2022,7 @@
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
 		<query-param name="company" type="Company" />
-		update com.vimukti.accounter.core.CashPurchase set payFrom.id=:toID
+		update com.nitya.accounter.core.CashPurchase set payFrom.id=:toID
 		where
 		payFrom.id=:fromID and company=:company
 	</query>
@@ -2031,7 +2031,7 @@
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
 		<query-param name="company" type="Company" />
-		update com.vimukti.accounter.core.CashSales set depositIn.id=:toID
+		update com.nitya.accounter.core.CashSales set depositIn.id=:toID
 		where
 		depositIn.id=:fromID and company=:company
 	</query>
@@ -2040,7 +2040,7 @@
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
 		<query-param name="company" type="Company" />
-		update com.vimukti.accounter.core.TransferFund set depositIn.id=:toID
+		update com.nitya.accounter.core.TransferFund set depositIn.id=:toID
 		where
 		depositIn.id=:fromID and company=:company
 	</query>
@@ -2049,7 +2049,7 @@
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
 		<query-param name="company" type="Company" />
-		update com.vimukti.accounter.core.TransferFund set
+		update com.nitya.accounter.core.TransferFund set
 		depositFrom.id=:toID
 		where
 		depositFrom.id=:fromID and company=:company
@@ -2057,18 +2057,18 @@
 
 
 	<query name="getCompany.has.recurrings">
-		from com.vimukti.accounter.core.Company c
+		from com.nitya.accounter.core.Company c
 		where
 		(select count(r.id) from
-		com.vimukti.accounter.core.RecurringTransaction r
+		com.nitya.accounter.core.RecurringTransaction r
 		where r.company.id =
 		c.id and r.type !=2) > 0
 	</query>
 
 	<query name="getRecurrringsBeforeDate">
-		<query-param name="date" type="com.vimukti.accounter.core.LongUseType" />
+		<query-param name="date" type="com.nitya.accounter.core.LongUseType" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.RecurringTransaction r
+		from com.nitya.accounter.core.RecurringTransaction r
 		where
 		r.company=:company and r.nextScheduleOn &lt;=:date and r.stopped =
 		false
@@ -2077,7 +2077,7 @@
 
 	<query name="getRecurrrings.remind.days.before">
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.RecurringTransaction r
+		from com.nitya.accounter.core.RecurringTransaction r
 		where
 		r.company=:company and r.stopped = false
 		and r.type =1 and
@@ -2087,75 +2087,75 @@
 	<query name="getRemindersByViewType">
 		<query-param name="companyId" type="long" />
 		<query-param name="viewType" type="int" />
-		from com.vimukti.accounter.core.Reminder r
+		from com.nitya.accounter.core.Reminder r
 		where
 		r.company.id=:companyId and r.recurringTransaction.transaction.type=:viewType order by r.transactionDate desc
 	</query>
 	
 	<query name="getAllReminders">
 		<query-param name="companyId" type="long" />
-		from com.vimukti.accounter.core.Reminder r
+		from com.nitya.accounter.core.Reminder r
 		where
 		r.company.id=:companyId order by r.transactionDate desc
 	</query>
 
 	<query name="getEnterBillByEstimate">
 		<query-param name="estimate" type="Estimate" />
-		from com.vimukti.accounter.core.EnterBill eb left join eb.estimates es
+		from com.nitya.accounter.core.EnterBill eb left join eb.estimates es
 		where es=:estimate
 	</query>
 	<query name="getWriteCheckByEstimate">
 		<query-param name="estimate" type="Estimate" />
-		from com.vimukti.accounter.core.WriteCheck wc left join wc.estimates
+		from com.nitya.accounter.core.WriteCheck wc left join wc.estimates
 		es
 		where es=:estimate
 	</query>
 
 	<query name="getCashPurchaseByEstimate">
 		<query-param name="estimate" type="Estimate" />
-		from com.vimukti.accounter.core.CashPurchase cp left join cp.estimates
+		from com.nitya.accounter.core.CashPurchase cp left join cp.estimates
 		es
 		where es=:estimate
 	</query>
 
 	<query name="getDepositByEstimate">
 		<query-param name="estimate" type="Estimate" />
-		from com.vimukti.accounter.core.MakeDeposit d left join d.estimates es
+		from com.nitya.accounter.core.MakeDeposit d left join d.estimates es
 		where es=:estimate
 
 	</query>
 
 	<query name="getRecurring.for.template">
 		<query-param name="templateId" type="long" />
-		from com.vimukti.accounter.core.RecurringTransaction r
+		from com.nitya.accounter.core.RecurringTransaction r
 		where
 		r.transaction.id =:templateId
 	</query>
 
 	<query name="getRecurringReminderTask">
 		<query-param name="companyId" type="long" />
-		from com.vimukti.accounter.core.MessageOrTask m
+		from com.nitya.accounter.core.MessageOrTask m
 		where m.contentType=1
 		and m.company.id =:companyId
 	</query>
 
 	<query name="getAutomaticTransactionsMessage">
 		<query-param name="companyId" type="long" />
-		from com.vimukti.accounter.core.MessageOrTask m
+		from com.nitya.accounter.core.MessageOrTask m
 		where m.contentType=2
 		and m.company.id =:companyId
 	</query>
 
 	<query name="getMessagesAndTasks">
 		<query-param name="companyId" type="long" />
-		from com.vimukti.accounter.core.MessageOrTask m
+		from com.nitya.accounter.core.MessageOrTask m
 		where m.company.id
 		=:companyId
 	</query>
 
 	<query name="getTDSAgencyOfCompany">
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.TAXAgency ta where ta.taxType=4 and
+		from com.nitya.accounter.core.TAXAgency ta where ta.taxType=4 and
 		ta.company=:company
 		order by ta.id
 	</query>
@@ -2164,7 +2164,7 @@
 	<query name="getCheckNumber">
 		<query-param name="accountId" type="long" />
 		<query-param name="companyId" type="long" />
-		select a.lastCheckNum from com.vimukti.accounter.core.Account a
+		select a.lastCheckNum from com.nitya.accounter.core.Account a
 		where
 		a.id=:accountId and a.company.id=:companyId
 	</query>
@@ -2172,20 +2172,20 @@
 	<query name="getTransaction.by.id">
 		<query-param name="transactionId" type="long" />
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.Transaction t
+		from com.nitya.accounter.core.Transaction t
 		where t.id=:transactionId
 		and t.company=:company
 	</query>
 
 	<query name="getTdsResposiblePersonDetails">
 		<query-param name="companyId" type="long" />
-		from com.vimukti.accounter.core.TDSResponsiblePerson tc where
+		from com.nitya.accounter.core.TDSResponsiblePerson tc where
 		tc.company.id=:companyId
 	</query>
 
 	<query name="getTdsDeductor">
 		<query-param name="companyId" type="long" />
-		from com.vimukti.accounter.core.TDSDeductorMasters tc where
+		from com.nitya.accounter.core.TDSDeductorMasters tc where
 		tc.company.id=:companyId
 	</query>
 
@@ -2193,11 +2193,11 @@
 		<query-param name="company" type="Company" />
 		<query-param name="formNum" type="int" />
 		<query-param name="quarter" type="int" />
-		<query-param name="fromDate" type="com.vimukti.accounter.core.LongUseType" />
-		<query-param name="toDate" type="com.vimukti.accounter.core.LongUseType" />
+		<query-param name="fromDate" type="com.nitya.accounter.core.LongUseType" />
+		<query-param name="toDate" type="com.nitya.accounter.core.LongUseType" />
 		<query-param name="startYear" type="int" />
 		<query-param name="endYear" type="int" />
-		from com.vimukti.accounter.core.TDSChalanDetail tc where
+		from com.nitya.accounter.core.TDSChalanDetail tc where
 		tc.company=:company and tc.formType=:formNum and
 		tc.chalanPeriod=:quarter 
 		and tc.fromDate=:fromDate and tc.toDate=:toDate
@@ -2208,7 +2208,7 @@
 	<query name="getTDSChallansForAckNo">
 		<query-param name="ackNo" type="String" />
 		<query-param name="companyId" type="long" />
-		from com.vimukti.accounter.core.TDSChalanDetail tc where
+		from com.nitya.accounter.core.TDSChalanDetail tc where
 		tc.company.id=:companyId and tc.etdsfillingAcknowledgementNo=:ackNo
 	</query>
 
@@ -2217,7 +2217,7 @@
 		<query-param name="startDate" type="long" />
 		<query-param name="endDate" type="long" />
 		<query-param name="acknowledgementNo" type="String" />
-		from com.vimukti.accounter.core.TDSChalanDetail tc where
+		from com.nitya.accounter.core.TDSChalanDetail tc where
 		tc.company=:company and tc.dateTaxPaid >=:startDate
 		and tc.dateTaxPaid
 		&lt;=:endDate
@@ -2230,7 +2230,7 @@
 		<query-param name="startYear" type="int" />
 		<query-param name="endYear" type="int" />
 		<query-param name="acknowledgementNo" type="String" />
-		from com.vimukti.accounter.core.TDSChalanDetail tc where
+		from com.nitya.accounter.core.TDSChalanDetail tc where
 		tc.company=:company and tc.assesmentYearStart = :startYear and
 		tc.assesmentYearEnd=:endYear
 		and
@@ -2241,21 +2241,21 @@
 	<query name="getCustomer.by.name">
 		<query-param name="company" type="Company" />
 		<query-param name="name" type="String" />
-		from com.vimukti.accounter.core.Customer V where
+		from com.nitya.accounter.core.Customer V where
 		V.company=:company and
 		V.name=:name
 	</query>
 
 	<query name="list.TAXReturn.orderByEndDate">
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.TAXReturn tr
+		from com.nitya.accounter.core.TAXReturn tr
 		where tr.company=:company
 		order by tr.periodEndDate
 	</query>
 
 	<query name="getTaxrateCalc.of.TAXReturn">
 		<query-param name="taxReturnId" type="long" />
-		from com.vimukti.accounter.core.TAXRateCalculation trc where
+		from com.nitya.accounter.core.TAXRateCalculation trc where
 		trc.taxReturn.id=:taxReturnId
 	</query>
 
@@ -2265,36 +2265,36 @@
 
 	<query name="list.bankStatement">
 		<query-param name="companyId" type="long" />
-		from com.vimukti.accounter.core.Statement s where
+		from com.nitya.accounter.core.Statement s where
 		s.company.id=:companyId
 		order by s.id
 	</query>
 
 	<query name="getAllItems">
 		<query-param name="companyId" type="long" />
-		from com.vimukti.accounter.core.Item i where
+		from com.nitya.accounter.core.Item i where
 		i.company.id=:companyId
 		order by i.id
 	</query>
 	<query name="getSalesPersons">
 		<query-param name="companyId" type="long" />
-		from com.vimukti.accounter.core.SalesPerson s where
+		from com.nitya.accounter.core.SalesPerson s where
 		s.company.id=:companyId order by s.id
 	</query>
 	<query name="getTaxcodes">
 		<query-param name="companyId" type="long" />
-		from com.vimukti.accounter.core.TAXCode t where
+		from com.nitya.accounter.core.TAXCode t where
 		t.company.id=:companyId order by t.id
 	</query>
 
 	<query name="getTaxItems">
 		<query-param name="companyId" type="long" />
-		from com.vimukti.accounter.core.TAXItem t where
+		from com.nitya.accounter.core.TAXItem t where
 		t.company.id=:companyId order by t.id
 	</query>
 	<query name="getTaxReturnById">
 		<query-param name="id" type="long" />
-		from com.vimukti.accounter.core.TAXReturn tr where
+		from com.nitya.accounter.core.TAXReturn tr where
 		tr.id=:id order by
 		tr.id
 	</query>
@@ -2302,7 +2302,7 @@
 	<query name="list.InventorySales">
 		<query-param name="itemId" type="long" />
 		<!-- <query-param name="inventoryScheme" type="int"/> -->
-		from com.vimukti.accounter.core.TransactionItem sale
+		from com.nitya.accounter.core.TransactionItem sale
 		where
 		sale.item.id=:itemId and sale.transaction.saveStatus not in (201,202,204)
 		and (sale.transaction.type in (1,4,8,37) or (sale.transaction.type=36
@@ -2313,69 +2313,69 @@
 	<query name="getJobsByCustomer">
 		<query-param name="customerId" type="long" />
 		<query-param name="companyId" type="long" />
-		from com.vimukti.accounter.core.Job j where j.customer.id=:customerId
+		from com.nitya.accounter.core.Job j where j.customer.id=:customerId
 		and
 		j.company.id=:companyId order by j.id
 	</query>
 	<query name="getAccountByNumber">
 		<query-param name="company" type="Company" />
 		<query-param name="accountNumber" type="String" />
-		select ac.id from com.vimukti.accounter.core.Account ac where
+		select ac.id from com.nitya.accounter.core.Account ac where
 		ac.number=:accountNumber and ac.company=:company
 	</query>
 	<query name="getAccountByName">
 		<query-param name="company" type="Company" />
 		<query-param name="accountName" type="String" />
-		select ac.id from com.vimukti.accounter.core.Account ac where
+		select ac.id from com.nitya.accounter.core.Account ac where
 		ac.name=:accountName and ac.company=:company
 	</query>
 	<query name="getItemGrupByName">
 		<query-param name="company" type="Company" />
 		<query-param name="itemGrupName" type="String" />
-		select ig.id from com.vimukti.accounter.core.ItemGroup ig where
+		select ig.id from com.nitya.accounter.core.ItemGroup ig where
 		ig.name=:itemGrupName and ig.company=:company
 	</query>
 	<query name="getMeasurementByName">
 		<query-param name="company" type="Company" />
 		<query-param name="measurement" type="String" />
-		select m.id from com.vimukti.accounter.core.Measurement m where
+		select m.id from com.nitya.accounter.core.Measurement m where
 		m.name=:measurement and m.company=:company
 	</query>
 	<query name="getWarehouseByName">
 		<query-param name="company" type="Company" />
 		<query-param name="warehouse" type="String" />
-		select wh.id from com.vimukti.accounter.core.Warehouse wh where
+		select wh.id from com.nitya.accounter.core.Warehouse wh where
 		wh.name=:warehouse and wh.company=:company
 	</query>
 	<query name="getPayeeIdByName">
 		<query-param name="company" type="Company" />
 		<query-param name="payee" type="String" />
-		select p.id from com.vimukti.accounter.core.Payee p where
+		select p.id from com.nitya.accounter.core.Payee p where
 		p.name=:payee and p.company=:company
 	</query>
 	<query name="getCurrencyIdByCode">
 		<query-param name="company" type="Company" />
 		<query-param name="currency" type="String" />
-		select c.id from com.vimukti.accounter.core.Currency c where
+		select c.id from com.nitya.accounter.core.Currency c where
 		c.formalName=:currency and c.company=:company
 	</query>
 	<query name="deleteClientmobilecookies">
 		<query-param name="client" type="Client" />
-		delete from com.vimukti.accounter.core.MobileCookie mc
+		delete from com.nitya.accounter.core.MobileCookie mc
 		where
 		mc.client=:client
 	</query>
 	<query name="update.merge.transactionitem.class.old.tonew">
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
-		update com.vimukti.accounter.core.TransactionItem set
+		update com.nitya.accounter.core.TransactionItem set
 		accounterClass=:toID where
 		accounterClass=:fromID
 	</query>
 	<query name="update.merge.transaction.class.old.tonew">
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
-		update com.vimukti.accounter.core.Transaction set
+		update com.nitya.accounter.core.Transaction set
 		accounterClass=:toID
 		where
 		accounterClass=:fromID
@@ -2383,32 +2383,32 @@
 	<query name="update.merge.transaction.deposit.item.class.old.tonew">
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
-		update com.vimukti.accounter.core.TransactionDepositItem set
+		update com.nitya.accounter.core.TransactionDepositItem set
 		accounterClass=:toID where
 		accounterClass=:fromID
 	</query>
 	<query name="update.merge.transaction.location.old.tonew">
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
-		update com.vimukti.accounter.core.Transaction set
+		update com.nitya.accounter.core.Transaction set
 		location=:toID where
 		location=:fromID
 	</query>
 	<query name="deleteBankChequeLayouts">
 		<query-param name="account" type="Account" />
-		delete from com.vimukti.accounter.core.ChequeLayout cl
+		delete from com.nitya.accounter.core.ChequeLayout cl
 		where
 		cl.account=:account
 	</query>
 	<query name="getEmployeeAttendanceManagementItems">
 		<query-param name="employee" type="long" />
-			from com.vimukti.accounter.core.AttendanceManagementItem item 
+			from com.nitya.accounter.core.AttendanceManagementItem item 
 			where item.employee.id =:employee
 	</query>
 	<query name="update.merge.Job.old.tonew">
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
-		update com.vimukti.accounter.core.Job set
+		update com.nitya.accounter.core.Job set
 		customer.id=:toID
 		where
 		customer.id=:fromID
@@ -2416,7 +2416,7 @@
 	<query name="update.merge.TransactionItem.old.tonew">
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
-		update com.vimukti.accounter.core.TransactionItem set
+		update com.nitya.accounter.core.TransactionItem set
 		customer.id=:toID
 		where
 		customer.id=:fromID
@@ -2424,7 +2424,7 @@
 	<query name="update.merge.payee.update.old.tonew">
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
-		update com.vimukti.accounter.core.PayeeUpdate set
+		update com.nitya.accounter.core.PayeeUpdate set
 		payee.id=:toID
 		where
 		payee.id=:fromID
@@ -2432,33 +2432,33 @@
 	<!-- <query name="update.merge.loan.old.tonew">
 		<query-param name="fromID" type="long"></query-param>
 		<query-param name="toID" type="long"></query-param>
-			update com.vimukti.accounter.core.Loan set
+			update com.nitya.accounter.core.Loan set
 			payee.id=:toID
 			where payee.id=:fromID
 	</query> -->
 	<query name="update.merge.TransactionDepositItem.update.old.tonew">
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
-		update com.vimukti.accounter.core.TransactionDepositItem
+		update com.nitya.accounter.core.TransactionDepositItem
 			set receivedFrom.id=:toID
 			where receivedFrom.id=:fromID
 	</query>
 	<query name="update.merge.TransactionDepositItem.customer.update.old.tonew">
 		<query-param name="fromID" type="long" />
 		<query-param name="toID" type="long" />
-		update com.vimukti.accounter.core.TransactionDepositItem
+		update com.nitya.accounter.core.TransactionDepositItem
 			set customer.id=:toID
 			where customer.id=:fromID
 	</query>	
 	
 	<query name="getItemUpdates.of.Item.oderby.transactionDate" >
 	    <query-param name="item" type="Item"/>
-		from com.vimukti.accounter.core.ItemUpdate iu where iu.item= :item 
+		from com.nitya.accounter.core.ItemUpdate iu where iu.item= :item 
 		order by iu.transaction.transactionDate 
 	</query>
 	<query name="getInventoryItem">
 	    <query-param name="companyId" type="long"/>
-	    from com.vimukti.accounter.core.Item item where item.type in (2,4) and item.company.id= :companyId
+	    from com.nitya.accounter.core.Item item where item.type in (2,4) and item.company.id= :companyId
 	</query>
 	
 	<sql-query name="getInventoryRemapTasks">
@@ -2494,7 +2494,7 @@
 	</sql-query>
 	<query name="getAllInvoiceFrequencyByCompany">
 		<query-param name="company" type="Company" />
-		select ig.id from com.vimukti.accounter.core.InvoiceFrequencyGroup ig where
+		select ig.id from com.nitya.accounter.core.InvoiceFrequencyGroup ig where
 		 ig.company=:company
 	</query>
 	

@@ -1561,8 +1561,54 @@
 		</accounts>
 		<!-- End of Type-31 Industry Account lists -->
 	</industry>
-	
-<industry type="33" name="Consulting">
+	<industry type="32" name="General Service Based Business">
+		<accounts>
+			<account type="Income" name="Sales Income" default="true" systemOnly="false" countries="" cashFlow="Operating"></account>
+			<account type="Income" name="Sales Discounts" default="false" systemOnly="false" countries="" cashFlow="Operating"></account>
+			<account type="Cost of Goods Sold" name="Merchant Account fees" default="false" systemOnly="false" countries="" cashFlow="Operating"></account>
+			<account type="Cost of Goods Sold" name="Subcontracted Services" default="false" systemOnly="false" countries="" cashFlow="Operating"></account>
+			<account type="Expense" name="Advertising &amp; Promotion" default="true" systemOnly="false" countries="" cashFlow="Operating"></account>
+			<account type="Expense" name="Automobile Expense" default="true" systemOnly="false" countries="" cashFlow="Operating"></account>
+			<account type="Expense" name="Bank Service Charges" default="true" systemOnly="false" countries="" cashFlow="Operating"></account>
+			<account type="Expense" name="Business Licenses &amp; Permits" default="false" systemOnly="false" countries="" cashFlow="Operating"></account>
+			<account type="Expense" name="Charitable Conrtibutions" default="false" systemOnly="false" countries="" cashFlow="Operating"></account>
+			<account type="Expense" name="Computer &amp; Internet Expenses" default="true" systemOnly="false" countries="" cashFlow="Operating"></account>
+			<account type="Expense" name="Continuing Education" default="false" systemOnly="false" countries="" cashFlow="Operating"></account>
+			<account type="Expense" name="Depreciation Expenses" default="true" systemOnly="false" countries="" cashFlow="Operating"></account>
+			<account type="Expense" name="Dues &amp; Subscriptions" default="false" systemOnly="false" countries="" cashFlow="Operating"></account>
+			<account type="Expense" name="Equipment Rental" default="false" systemOnly="false" countries="" cashFlow="Operating"></account>
+			<account type="Expense" name="Insurance expense" default="true" systemOnly="false" countries="" cashFlow="Operating"></account>
+			<account type="Expense" name="General Liability Expenses" default="false" systemOnly="false" countries="" cashFlow="Operating"></account>
+			<account type="Expense" name="Health Insurance" default="false" systemOnly="false" countries="" cashFlow="Operating"></account>
+			<account type="Expense" name="Life &amp; Disability Insurance" default="false" systemOnly="false" countries="" cashFlow="Operating"></account>
+			<account type="Expense" name="Professional Liability" default="false" systemOnly="false" countries="" cashFlow="Operating"></account>
+			<account type="Expense" name="Workers Compenstation" default="false" systemOnly="false" countries="" cashFlow="Operating"></account>
+			<account type="Expense" name="Interest Expense" default="true" systemOnly="false" countries="" cashFlow="Operating"></account>
+			<account type="Expense" name="Janitorial Expenses" default="false" systemOnly="false" countries="" cashFlow="Operating"></account>
+			<account type="Expense" name="Meals &amp; Entertainment" default="true" systemOnly="false" countries="" cashFlow="Operating"></account>
+			<account type="Expense" name="Miscellaneous Expenses" default="false" systemOnly="false" countries="" cashFlow="Operating"></account>
+			<account type="Expense" name="Office Supplies" default="true" systemOnly="false" countries="" cashFlow="Operating"></account>
+			<account type="Expense" name="Postage &amp; delivery" default="false" systemOnly="false" countries="" cashFlow="Operating"></account>
+			<account type="Expense" name="Printing &amp; reproduction" default="false" systemOnly="false" countries="" cashFlow="Operating"></account>
+			<account type="Expense" name="Professoinal Fees" default="true" systemOnly="false" countries="" cashFlow="Operating"></account>
+			<account type="Expense" name="Rent Expenses" default="true" systemOnly="false" countries="" cashFlow="Operating"></account>
+			<account type="Expense" name="Repairs &amp; Maintenance" default="true" systemOnly="false" countries="" cashFlow="Operating"></account>
+			<account type="Expense" name="Salaries and Wages" default="true" systemOnly="false" countries="" cashFlow="Operating"></account>
+			<account type="Expense" name="Taxes &amp; Property" default="false" systemOnly="false" countries="" cashFlow="Operating"></account>
+			<account type="Expense" name="Telephone Expenses" default="true" systemOnly="false" countries="" cashFlow="Operating"></account>
+			<account type="Expense" name="Travel Expenses" default="true" systemOnly="false" countries="" cashFlow="Operating"></account>
+			<account type="Expense" name="Utilities Expenses" default="true" systemOnly="true" countries="" cashFlow="Operating"></account>
+			<account type="Other Income" name="Finance charge income" default="false" systemOnly="false" countries="" cashFlow="Operating"></account>
+			<account type="Other Income" name="Insurance proceeds recieved" default="false" systemOnly="false" countries="" cashFlow="Operating"></account>
+			<account type="Other Income" name="Interest Income" default="false" systemOnly="false" countries="" cashFlow="Operating"></account>
+			<account type="Other Income" name="Proceeds from sales of Assests" default="false" systemOnly="false" countries="" cashFlow="Operating"></account>
+			<account type="Other Expense" name="Political Contributions" default="false" systemOnly="false" countries="" cashFlow="Operating"></account>
+			<account type="Other Expense" name="Ask my Accountant" default="true" systemOnly="false" countries="" cashFlow="Operating"></account>
+		</accounts>
+		<!-- End of Type-32 Industry Account lists -->
+		
+	</industry>
+	<industry type="33" name="ITConsulting">
 		<accounts>
 			<account type="Income" name="Sales Income" default="true" systemOnly="false" countries="" cashFlow="Operating"></account>
 			<account type="Income" name="Sales Discounts" default="false" systemOnly="false" countries="" cashFlow="Operating"></account>
@@ -1607,5 +1653,4 @@
 			<account type="Other Expense" name="Ask my Accountant" default="true" systemOnly="false" countries="" cashFlow="Operating"></account>
 		</accounts>
 		</industry>
-	
 </industries>

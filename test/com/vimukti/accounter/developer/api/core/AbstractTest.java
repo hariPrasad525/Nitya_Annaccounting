@@ -22,7 +22,8 @@ import org.apache.commons.httpclient.methods.PutMethod;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.mortbay.util.UrlEncoded;
 
-import com.vimukti.accounter.developer.api.ApiSerializationFactory;
+import com.nitya.accounter.developer.api.ApiSerializationFactory;
+import com.nitya.accounter.developer.api.core.ApiResult;
 
 public abstract class AbstractTest implements ITest {
 	private static final String SIGNATURE = "Signature";

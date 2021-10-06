@@ -1,58 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <commands>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.MyCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.MyCommand"
 		name="my com">
 	</command>
-	<command clazz="com.vimukti.accounter.mobile.commands.LogoutCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.LogoutCommand"
 		name="logout">
 		<alias>signout</alias>
 	</command>
-	<command clazz="com.vimukti.accounter.mobile.commands.AuthenticationCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.AuthenticationCommand"
 		name="authenticate">
 		<alias>login</alias>
 		<alias>signin</alias>
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.CancelCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.CancelCommand"
 		name="cancel">
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.CreateFullCompanyCommand"
+		clazz="com.nitya.accounter.mobile.commands.CreateFullCompanyCommand"
 		name="fullCompanySetup">
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.CreatePartialCompanyCommand"
+		clazz="com.nitya.accounter.mobile.commands.CreatePartialCompanyCommand"
 		name="partialCompanySetup">
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.CompanyTypeCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.CompanyTypeCommand"
 		name="companyTypeSelection">
 		<alias>createCompany</alias>
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.SelectCompanyCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.SelectCompanyCommand"
 		name="selectCompany">
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.PendingItemsListCommand"
+		clazz="com.nitya.accounter.mobile.commands.PendingItemsListCommand"
 		name="fixedAssetsPendingItemsList">
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.RegisteredItemsListCommand"
+		clazz="com.nitya.accounter.mobile.commands.RegisteredItemsListCommand"
 		name="registeredItemsList">
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.SoldAndDisposedItemsListCommand"
+		clazz="com.nitya.accounter.mobile.commands.SoldAndDisposedItemsListCommand"
 		name="soldAndDisposedItems">
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.CreateInvoiceCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.CreateInvoiceCommand"
 		name="newInvoice">
 		<alias>createInvoice</alias>
 		<alias>addInvoice</alias>
@@ -63,7 +63,7 @@
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.CreateVendorGroupCommand"
+		clazz="com.nitya.accounter.mobile.commands.CreateVendorGroupCommand"
 		name="newVendorGroup">
 		<alias>createVendorGroup</alias>
 		<alias>updateVendorGroup</alias>
@@ -71,33 +71,33 @@
 		<alias>editVendorGroup</alias>
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.AddNewCurrencyCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.AddNewCurrencyCommand"
 		name="addCurrency">
 		<alias>updateCurrency</alias>
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.CurrencyListCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.CurrencyListCommand"
 		name="currencyList"></command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.MergeCustomersCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.MergeCustomersCommand"
 		name="mergeCustomers"></command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.MergeVendorsCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.MergeVendorsCommand"
 		name="mergeVendors"></command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.MergeAccountsCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.MergeAccountsCommand"
 		name="mergeAccounts"></command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.CreateFixedAssetCommand"
+		clazz="com.nitya.accounter.mobile.commands.CreateFixedAssetCommand"
 		name="newFixedAsset">
 		<alias>updateFixedAsset</alias>
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.MergeItemsCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.MergeItemsCommand"
 		name="mergeItems"></command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.CreateAccountCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.CreateAccountCommand"
 		name="newAccount">
 		<alias>createAccount</alias>
 		<alias>addAccount</alias>
@@ -115,7 +115,7 @@
 		<alias>createBankAccount</alias>
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.AccountsListCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.AccountsListCommand"
 		name="accounterCategoryList">
 		<alias>Accounts</alias>
 		<alias>accounterCategoryList</alias>
@@ -124,92 +124,92 @@
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.reports.APAgingDetailReportCommand"
+		clazz="com.nitya.accounter.mobile.commands.reports.APAgingDetailReportCommand"
 		name="apAgeingDetail">
 		<alias>APAgingDetailReport</alias>
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.reports.APAgingSummaryReportCommand"
+		clazz="com.nitya.accounter.mobile.commands.reports.APAgingSummaryReportCommand"
 		name="apAgeingSummary">
 		<alias>aPAgingSummaryReport</alias>
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.reports.ARAgingDetailReportCommand"
+		clazz="com.nitya.accounter.mobile.commands.reports.ARAgingDetailReportCommand"
 		name="arAgeingDetail">
 		<alias>aRAgingDetailReport</alias>
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.reports.ARAgingSummaryReportCommand"
+		clazz="com.nitya.accounter.mobile.commands.reports.ARAgingSummaryReportCommand"
 		name="arAgeingSummary">
 		<alias>aRAgingSummaryReport</alias>
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.reports.BalanceSheetReportCommand"
+		clazz="com.nitya.accounter.mobile.commands.reports.BalanceSheetReportCommand"
 		name="balanceSheet">
 		<alias>balanceSheetReport</alias>
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.reports.CashFlowReportCommand"
+		clazz="com.nitya.accounter.mobile.commands.reports.CashFlowReportCommand"
 		name="cashFlowReport">
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.reports.CustomerStatementReportCommand"
+		clazz="com.nitya.accounter.mobile.commands.reports.CustomerStatementReportCommand"
 		name="customerstatement">
 		<alias>customerStatement</alias>
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.reports.CustomerTransactionHistoryReportCommand"
+		clazz="com.nitya.accounter.mobile.commands.reports.CustomerTransactionHistoryReportCommand"
 		name="customerTransactionHistory">
 		<alias>customerTransactionHistoryReport</alias>
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.reports.ECSalesListReportCommand"
+		clazz="com.nitya.accounter.mobile.commands.reports.ECSalesListReportCommand"
 		name="ecSalesList">
 		<alias>eCSalesListReport</alias>
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.delete.CustomerDeleteCommand"
+		clazz="com.nitya.accounter.mobile.commands.delete.CustomerDeleteCommand"
 		name="deleteCustomer"></command>
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.delete.CustomerGroupDeleteCommand"
+		clazz="com.nitya.accounter.mobile.commands.delete.CustomerGroupDeleteCommand"
 		name="deletecustomergroup"></command>
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.delete.VendorDeleteCommand"
+		clazz="com.nitya.accounter.mobile.commands.delete.VendorDeleteCommand"
 		name="deleteVendor"></command>
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.delete.AccountDeleteCommand"
+		clazz="com.nitya.accounter.mobile.commands.delete.AccountDeleteCommand"
 		name="deleteAccount">
 		<alias>deleteBankAccout</alias>
 	</command>
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.delete.VendorGroupDeleteCommand"
+		clazz="com.nitya.accounter.mobile.commands.delete.VendorGroupDeleteCommand"
 		name="deleteVendorGroup"></command>
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.delete.ShippingMethodDeleteCommand"
+		clazz="com.nitya.accounter.mobile.commands.delete.ShippingMethodDeleteCommand"
 		name="deleteShippingMethod"></command>
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.delete.CreditRatingDeleteCommand"
+		clazz="com.nitya.accounter.mobile.commands.delete.CreditRatingDeleteCommand"
 		name="deleteCreditRating"></command>
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.delete.PaymentTermDeleteCommand"
+		clazz="com.nitya.accounter.mobile.commands.delete.PaymentTermDeleteCommand"
 		name="deletePaymentTerm"></command>
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.delete.ShippingTermDeleteCommand"
+		clazz="com.nitya.accounter.mobile.commands.delete.ShippingTermDeleteCommand"
 		name="deleteShippingTerm"></command>
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.delete.ItemGroupDeleteCommand"
+		clazz="com.nitya.accounter.mobile.commands.delete.ItemGroupDeleteCommand"
 		name="deleteItemGroup"></command>
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.delete.ItemDeleteCommand"
+		clazz="com.nitya.accounter.mobile.commands.delete.ItemDeleteCommand"
 		name="deleteItem">
 		<alias>deleteInventoryItem</alias>
 		<alias>deleteNonInventoryItem</alias>
@@ -217,58 +217,58 @@
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.delete.TransactionDeleteCommand"
+		clazz="com.nitya.accounter.mobile.commands.delete.TransactionDeleteCommand"
 		name="deleteTransaction">
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.delete.SalesPersonDeleteCommand"
+		clazz="com.nitya.accounter.mobile.commands.delete.SalesPersonDeleteCommand"
 		name="deleteSalesPerson"></command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.delete.VatCodeDeleteCommand"
+		clazz="com.nitya.accounter.mobile.commands.delete.VatCodeDeleteCommand"
 		name="deleteVatCode"></command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.delete.VatItemDeleteCommand"
+		clazz="com.nitya.accounter.mobile.commands.delete.VatItemDeleteCommand"
 		name="deleteVatItem"></command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.delete.TaxAgencyDeleteCommand"
+		clazz="com.nitya.accounter.mobile.commands.delete.TaxAgencyDeleteCommand"
 		name="deleteTaxagency"></command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.reports.ExpenseReportCommand"
+		clazz="com.nitya.accounter.mobile.commands.reports.ExpenseReportCommand"
 		name="expenseReport">
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.reports.PriorVATReturnReportCommand"
+		clazz="com.nitya.accounter.mobile.commands.reports.PriorVATReturnReportCommand"
 		name="priorVATReturn">
 		<alias>priorVATReturnReport</alias>
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.reports.ProfitLossReportCommand"
+		clazz="com.nitya.accounter.mobile.commands.reports.ProfitLossReportCommand"
 		name="profitAndLoss">
 		<alias>profitLossReport</alias>
 		<alias>profitandlossReport</alias>
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.reports.PurchaseByItemDetailReportCommand"
+		clazz="com.nitya.accounter.mobile.commands.reports.PurchaseByItemDetailReportCommand"
 		name="purchaseByItemDetail">
 		<alias>purchaseByItemDetailReport</alias>
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.reports.PurchaseByItemSummaryReportCommand"
+		clazz="com.nitya.accounter.mobile.commands.reports.PurchaseByItemSummaryReportCommand"
 		name="purchaseByItemSummary">
 		<alias>purchasebyItemSummaryReport</alias>
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.reports.PurchaseBySupplierDetailReportCommand"
+		clazz="com.nitya.accounter.mobile.commands.reports.PurchaseBySupplierDetailReportCommand"
 		name="purchaseBySupplierDetail">
 		<alias>purchaseByVednorDetailReport</alias>
 		<alias>purchaseByVendorDetail</alias>
@@ -277,95 +277,95 @@
 	
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.reports.PurchaseBySupplierSummaryReportCommand"
+		clazz="com.nitya.accounter.mobile.commands.reports.PurchaseBySupplierSummaryReportCommand"
 		name="purchaseByVendorSummary">
 		<alias>purchaseByVendorSummaryReport</alias>
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.reports.PurchaseOpenOrderReportCommand"
+		clazz="com.nitya.accounter.mobile.commands.reports.PurchaseOpenOrderReportCommand"
 		name="purchaseOrderReport">
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.reports.SalesByCustomerDetailReportCommand"
+		clazz="com.nitya.accounter.mobile.commands.reports.SalesByCustomerDetailReportCommand"
 		name="salesByCustomerDetail">
 		<alias>salesByCustomerDetailReport</alias>
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.reports.SalesByCustomerSummaryReportCommand"
+		clazz="com.nitya.accounter.mobile.commands.reports.SalesByCustomerSummaryReportCommand"
 		name="salesByCustomerSummary">
 		<alias>salesByCustomerSummaryReport</alias>
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.reports.SalesByItemDetailReportCommand"
+		clazz="com.nitya.accounter.mobile.commands.reports.SalesByItemDetailReportCommand"
 		name="salesByItemDetail">
 		<alias>salesbyItemDetailReport</alias>
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.reports.SalesByItemSummaryReportCommand"
+		clazz="com.nitya.accounter.mobile.commands.reports.SalesByItemSummaryReportCommand"
 		name="salesByItemSummary">
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.reports.SalesOpenOrderReportCommand"
+		clazz="com.nitya.accounter.mobile.commands.reports.SalesOpenOrderReportCommand"
 		name="salesOrderReport">
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.reports.SupplierTransactionHistoryReportCommand"
+		clazz="com.nitya.accounter.mobile.commands.reports.SupplierTransactionHistoryReportCommand"
 		name="vendorTransactionHistory">
 		<alias>vendorTransactionHistoryReport</alias>
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.reports.TransactionDetailByAccountReportCommand"
+		clazz="com.nitya.accounter.mobile.commands.reports.TransactionDetailByAccountReportCommand"
 		name="transactionDetailByAccount">
 		<alias>transactionDetailByAccountReport</alias>
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.reports.TrialBalanceReportCommand"
+		clazz="com.nitya.accounter.mobile.commands.reports.TrialBalanceReportCommand"
 		name="trialBalance">
 		<alias>trialBalanceReport</alias>
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.reports.UncategorisedVATAmountsReportCommand"
+		clazz="com.nitya.accounter.mobile.commands.reports.UncategorisedVATAmountsReportCommand"
 		name="uncategorisedVATAmounts">
 		<alias>uncategorizedVATAmountsReport</alias>
 		<alias>uncategorisedVATAmounts</alias>
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.reports.VAT100ReportCommand"
+		clazz="com.nitya.accounter.mobile.commands.reports.VAT100ReportCommand"
 		name="vat100">
 		<alias>vAT100Report</alias>
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.reports.VATDetailReportCommand"
+		clazz="com.nitya.accounter.mobile.commands.reports.VATDetailReportCommand"
 		name="vatDetail">
 		<alias>vATDetailReport</alias>
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.reports.VATItemSummaryReportCommand"
+		clazz="com.nitya.accounter.mobile.commands.reports.VATItemSummaryReportCommand"
 		name="vatItemSummary">
 		<alias>vATItemSummaryReport</alias>
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.reports.ECSalesListDetailReportCommand"
+		clazz="com.nitya.accounter.mobile.commands.reports.ECSalesListDetailReportCommand"
 		name="ecSalesListDetails">
 		<alias>ecSalesListDetailReport</alias>
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.reports.TransactionDetailbyTaxItemReportCommand"
+		clazz="com.nitya.accounter.mobile.commands.reports.TransactionDetailbyTaxItemReportCommand"
 		name="transactionDetailByTaxItem">
 		<alias>transactionDetailbyTaxItemReport</alias>
 		<alias>transactionDetailByTaxItem</alias>
@@ -373,20 +373,20 @@
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.reports.VATItemDetailReportCommand"
+		clazz="com.nitya.accounter.mobile.commands.reports.VATItemDetailReportCommand"
 		name="vatItemDetail">
 		<alias>vATItemDetailReport</alias>
 		<alias>taxItemDetailReport</alias>
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.reports.TaxItemExceptionReportCommand"
+		clazz="com.nitya.accounter.mobile.commands.reports.TaxItemExceptionReportCommand"
 		name="taxItemExceptionDetailReport">
 		<alias>taxItemExceptionDetailReport</alias>
 		<alias>vatExceptionDetail</alias>
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.CreateVATItemCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.CreateVATItemCommand"
 		name="newVATItem">
 		<alias>createVatitem</alias>
 		<alias>addVatitem</alias>
@@ -401,7 +401,7 @@
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.CreateServiceItemCommand"
+		clazz="com.nitya.accounter.mobile.commands.CreateServiceItemCommand"
 		name="newServiceItem">
 		<alias>addServiceItem</alias>
 		<alias>createServiceItem</alias>
@@ -412,7 +412,7 @@
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.CreateNonInventoryItemCommand"
+		clazz="com.nitya.accounter.mobile.commands.CreateNonInventoryItemCommand"
 		name="newNonInventoryItem">
 		<alias>nonInventoryItem</alias>
 		<alias>newProductItem</alias>
@@ -424,7 +424,7 @@
 		<alias>updateProductItem</alias>
 	</command>
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.CreateInventoryAssemblyItemCommand"
+		clazz="com.nitya.accounter.mobile.commands.CreateInventoryAssemblyItemCommand"
 		name="createNewInventoryAssemblyItem">
 		<alias>inventoryAssemblyItem</alias>
 		<alias>createInventoryAssemblyItem</alias>
@@ -434,7 +434,7 @@
 		<alias>createNewInventoryAssemblyItem</alias>
 	</command>
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.CreateInventoryItemCommand"
+		clazz="com.nitya.accounter.mobile.commands.CreateInventoryItemCommand"
 		name="newInventoryItem">
 		<alias>inventoryItem</alias>
 		<alias>createInventoryItem</alias>
@@ -444,7 +444,7 @@
 		<alias>createNewInventoryItem</alias>
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.ItemsCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.ItemsCommand"
 		name="itemList">
 		<alias>allItems</alias>
 		<alias>items</alias>
@@ -453,7 +453,7 @@
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.CreateFiscalYearCommand"
+		clazz="com.nitya.accounter.mobile.commands.CreateFiscalYearCommand"
 		name="newFiscalYear">
 		<alias>createFascalYear</alias>
 		<alias>editFiscalYear</alias>
@@ -462,7 +462,7 @@
 		<alias>addFiscalYear</alias>
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.UserActivityLogCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.UserActivityLogCommand"
 		name="userActivityLog">
 		<alias>activity</alias>
 		<alias>log</alias>
@@ -470,13 +470,13 @@
 		<alias>userLog</alias>
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.ExpensesListCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.ExpensesListCommand"
 		name="expensesList">
 		<alias>expensesClaims</alias>
 		<alias>expenses</alias>
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.CreateEnterBillCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.CreateEnterBillCommand"
 		name="enterBill">
 		<alias>billEnter</alias>
 		<alias>bill</alias>
@@ -485,12 +485,12 @@
 		<alias>updateVendorBill</alias>
 	</command>
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.UpdateTransactionCommand"
+		clazz="com.nitya.accounter.mobile.commands.UpdateTransactionCommand"
 		name="editTransaction">
 		<alias>updatePayment</alias>
 		<alias>updateTransaction</alias>
 	</command>
-	<command clazz="com.vimukti.accounter.mobile.commands.CreatePayBillCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.CreatePayBillCommand"
 		name="payBill">
 		<alias>billPay</alias>
 		<alias>createPayBill</alias>
@@ -498,7 +498,7 @@
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.BillsAndExpensesListCommand"
+		clazz="com.nitya.accounter.mobile.commands.BillsAndExpensesListCommand"
 		name="billsAndExpenses">
 		<alias>bills</alias>
 		<alias>billsList</alias>
@@ -508,7 +508,7 @@
 		<alias>vendorBillList</alias>
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.CreateVATCodeCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.CreateVATCodeCommand"
 		name="newVATCode">
 		<alias>createVATCode</alias>
 		<alias>addVATCode</alias>
@@ -521,7 +521,7 @@
 		<alias>updateVatCode</alias>
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.CreateVATAgencyCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.CreateVATAgencyCommand"
 		name="newVATAgency">
 		<alias>createVATAgency</alias>
 		<alias>addVATAgency</alias>
@@ -533,7 +533,7 @@
 		<alias>newTAXAgency</alias>
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.VATAdjustmentCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.VATAdjustmentCommand"
 		name="newVATAdjustment">
 		<alias>createTaxAdjustment</alias>
 		<alias>updateTaxAdjustment</alias>
@@ -543,39 +543,39 @@
 		<alias>taxAdjustment</alias>
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.PayVATCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.PayVATCommand"
 		name="payVAT">
 		<alias>payTax</alias>
 		<alias>updatePayTax</alias>
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.ReceiveVATCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.ReceiveVATCommand"
 		name="receiveVAT">
 		<alias>newReceiveVat</alias>
 		<alias>taxRefund</alias>
 		<alias>updateTaxRefund</alias>
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.CreateTaxGroupCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.CreateTaxGroupCommand"
 		name="newTaxGroup">
 		<alias>createTaxGroup</alias>
 		<alias>addTaxGroup</alias>
 		<alias>updateTaxGroup</alias>
 	</command>
 
-	<!-- <command clazz="com.vimukti.accounter.mobile.commands.PaySalesTaxCommand" -->
+	<!-- <command clazz="com.nitya.accounter.mobile.commands.PaySalesTaxCommand" -->
 	<!-- name="Pay VAT"> -->
 	<!-- <alias>Pay SalesTax</alias> -->
 	<!-- <alias>Pay Sales Tax</alias> -->
 	<!-- </command> -->
 
-	<command clazz="com.vimukti.accounter.mobile.commands.FileVATCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.FileVATCommand"
 		name="fileVAT">
 		<alias>fileTax</alias>
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.CreateCashPurchaseCommand"
+		clazz="com.nitya.accounter.mobile.commands.CreateCashPurchaseCommand"
 		name="newCashPurchase">
 		<alias>vendorcashPurchase</alias>
 		<alias>createCashPurchase</alias>
@@ -588,7 +588,7 @@
 		<alias>modifyvendorcashPurchase</alias>
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.CreateCashSaleCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.CreateCashSaleCommand"
 		name="newCashSale">
 		<alias>addCashSale</alias>
 		<alias>newCashSale</alias>
@@ -598,14 +598,14 @@
 		<alias>createCashSale</alias>
 	</command>
 
-	<!-- <command clazz="com.vimukti.accounter.mobile.commands.NewCreditCardChargeCommand" 
+	<!-- <command clazz="com.nitya.accounter.mobile.commands.NewCreditCardChargeCommand" 
 		name="newCreditcardCharge"> <alias>creditCardCharge</alias> <alias>createCreditCardCharge</alias> 
 		<alias>addCreditCardCharge</alias> <alias>createCreditCardCharge</alias> 
 		<alias>editCreditCardCharge</alias> <alias>updateCreditCardCharge</alias> 
 		</command> -->
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.CreateCreditCardExpenseCommand"
+		clazz="com.nitya.accounter.mobile.commands.CreateCreditCardExpenseCommand"
 		name="newCreditCardExpense">
 		<alias>creditCardExpense</alias>
 		<alias>addCreditCardExpense</alias>
@@ -616,7 +616,7 @@
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.CreateCustomerCreditMemoCommand"
+		clazz="com.nitya.accounter.mobile.commands.CreateCustomerCreditMemoCommand"
 		name="newCustomerCreditMemo">
 		<alias>createCustomerCreditMemo</alias>
 		<alias>addCustomerCreditMemo</alias>
@@ -628,7 +628,7 @@
 		<alias>updateCustomerCredit</alias>
 	</command>
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.CreateCashExpenseCommand"
+		clazz="com.nitya.accounter.mobile.commands.CreateCashExpenseCommand"
 		name="newCashExpense">
 		<alias>addCashExpense</alias>
 		<alias>newCashExpense</alias>
@@ -642,7 +642,7 @@
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.CreateMakeDepositCommand"
+		clazz="com.nitya.accounter.mobile.commands.CreateMakeDepositCommand"
 		name="newMakeDeposit">
 		<alias>makeADeposit</alias>
 		<alias>updateMakeDeposit</alias>
@@ -655,7 +655,7 @@
 		<alias>updateTransferFund</alias>
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.CreateLocationCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.CreateLocationCommand"
 		name="newLocation">
 		<alias>location</alias>
 		<alias>createLocation</alias>
@@ -665,7 +665,7 @@
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.CreateIssuePaymentCommand"
+		clazz="com.nitya.accounter.mobile.commands.CreateIssuePaymentCommand"
 		name="newIssuePayment">
 		<alias>issuePayment</alias>
 		<alias>createIssuePayment</alias>
@@ -673,7 +673,7 @@
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.CreateVendorCreditMemoCommand"
+		clazz="com.nitya.accounter.mobile.commands.CreateVendorCreditMemoCommand"
 		name="newVendorCreditMemo">
 		<alias>addVendorCreditMemo</alias>
 		<alias>createVendorCreditMemo</alias>
@@ -683,7 +683,7 @@
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.CreateShippingMethodCommand"
+		clazz="com.nitya.accounter.mobile.commands.CreateShippingMethodCommand"
 		name="newShippingMethod">
 		<alias>shippingMethod</alias>
 		<alias>createShippingMethod</alias>
@@ -693,7 +693,7 @@
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.CreateShippingTermCommand"
+		clazz="com.nitya.accounter.mobile.commands.CreateShippingTermCommand"
 		name="newShippingTerm">
 		<alias>updateShippingTerm</alias>
 		<alias>modifyShippingTerm</alias>
@@ -702,7 +702,7 @@
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.CreateSalesPersonCommand"
+		clazz="com.nitya.accounter.mobile.commands.CreateSalesPersonCommand"
 		name="newSalesPerson">
 		<alias>createSalesPerson</alias>
 		<alias>addSalesPerson</alias>
@@ -712,7 +712,7 @@
 		<alias>salesPerson</alias>
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.CreateContactCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.CreateContactCommand"
 		name="newContact">
 		<alias>createContact</alias>
 		<alias>addContact</alias>
@@ -721,7 +721,7 @@
 		<alias>editContact</alias>
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.CreateCustomerCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.CreateCustomerCommand"
 		name="newCustomer">
 		<alias>createCustomer</alias>
 		<alias>addCustomer</alias>
@@ -731,7 +731,7 @@
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.CreateCreditRatingCommand"
+		clazz="com.nitya.accounter.mobile.commands.CreateCreditRatingCommand"
 		name="newCreditRating">
 		<alias>createCreditRating</alias>
 		<alias>addCreditRating</alias>
@@ -742,7 +742,7 @@
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.CreateCustomerPrepaymentCommand"
+		clazz="com.nitya.accounter.mobile.commands.CreateCustomerPrepaymentCommand"
 		name="newCustomerPrepayment">
 		<alias>createCustomerPrepayment</alias>
 		<alias>createCustomerPayment</alias>
@@ -753,12 +753,12 @@
 		<alias>modifyCustomerPrepayment</alias>
 		<alias>customerPrepayment</alias>
 	</command>
-	<command clazz="com.vimukti.accounter.mobile.commands.UpdateItemCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.UpdateItemCommand"
 		name="updateItem">
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.CreateReceivePaymentCommand"
+		clazz="com.nitya.accounter.mobile.commands.CreateReceivePaymentCommand"
 		name="newReceivePayment">
 		<alias>paymentReceive</alias>
 		<alias>createReceivePayment</alias>
@@ -772,7 +772,7 @@
 		<alias>updateCustomerPayment</alias>
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.CreateQuoteCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.CreateQuoteCommand"
 		name="newQuote">
 		<alias>estimate</alias>
 		<alias>createQuote</alias>
@@ -803,7 +803,7 @@
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.CreateCustomerRefundCommand"
+		clazz="com.nitya.accounter.mobile.commands.CreateCustomerRefundCommand"
 		name="newCustomerRefund">
 		<alias>createCustomerRefund</alias>
 		<alias>addCustomerrefund</alias>
@@ -813,17 +813,17 @@
 		<alias>customerRefund</alias>
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.AccountRegisterCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.AccountRegisterCommand"
 		name="accountRegister">
 		<alias>bankRegisters</alias>
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.CustomerListCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.CustomerListCommand"
 		name="Customers">
 		<alias>customerLists</alias>
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.CreateClassCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.CreateClassCommand"
 		name="newClass">
 		<alias>createClass</alias>
 		<alias>editClass</alias>
@@ -832,11 +832,11 @@
 		<alias>addClass</alias>
 	</command>
 
-	<!-- <command clazz="com.vimukti.accounter.mobile.commands.BankAccountReconcilationHistoryCommand" 
+	<!-- <command clazz="com.nitya.accounter.mobile.commands.BankAccountReconcilationHistoryCommand" 
 		name="ReconcilationHistory"> <alias>Reconcilation History</alias> </command> -->
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.CreateVendorPrepaymentCommand"
+		clazz="com.nitya.accounter.mobile.commands.CreateVendorPrepaymentCommand"
 		name="newVendorPrepayment">
 		<alias>vendorPrepayment</alias>
 		<alias>addANewVendorPayment</alias>
@@ -850,12 +850,12 @@
 		<alias>newVendorPayment</alias>
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.VendorsListCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.VendorsListCommand"
 		name="vendorsList">
 		<alias>Vendors</alias>
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.InvoiceListCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.InvoiceListCommand"
 		name="invoicesList">
 		<alias>invoices</alias>
 		<alias>invoiceLists</alias>
@@ -865,11 +865,11 @@
 
 	</command>
 
-	<!-- <command clazz="com.vimukti.accounter.mobile.commands.SalesOrderListCommand" 
+	<!-- <command clazz="com.nitya.accounter.mobile.commands.SalesOrderListCommand" 
 		name="Sales Order List"> <alias>Sales Orders</alias> </command> -->
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.ReceivedPaymentsListCommand"
+		clazz="com.nitya.accounter.mobile.commands.ReceivedPaymentsListCommand"
 		name="receivedPaymentsList">
 		<alias>receivedPayments</alias>
 		<alias>paymentsReceived</alias>
@@ -877,31 +877,31 @@
 		<alias>customerPrePaymentList</alias>
 	</command>
 
-	<!-- <command clazz="com.vimukti.accounter.mobile.commands.PurchaseOrderListCommand" 
+	<!-- <command clazz="com.nitya.accounter.mobile.commands.PurchaseOrderListCommand" 
 		name="Purchase Order List"> <alias>Purchase Orders</alias> <alias>Purchase 
 		Order List</alias> </command> -->
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.CreateInviteAUserCommand"
+		clazz="com.nitya.accounter.mobile.commands.CreateInviteAUserCommand"
 		name="Inviteuser">
 		<alias>newUser</alias>
 		<alias>updateUser</alias>
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.CreateBrandingThemeCommand"
+		clazz="com.nitya.accounter.mobile.commands.CreateBrandingThemeCommand"
 		name="newBrandTheme">
 		<alias>createBrandingTheme</alias>
 		<alias>addBrandingTheme</alias>
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.CreditRatingListCommand"
+		clazz="com.nitya.accounter.mobile.commands.CreditRatingListCommand"
 		name="creditRatingList">
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.CreatePaymentTermCommand"
+		clazz="com.nitya.accounter.mobile.commands.CreatePaymentTermCommand"
 		name="addPaymentTerm">
 		<alias>newPaymentTerm</alias>
 		<alias>createPaymentTerm</alias>
@@ -910,12 +910,12 @@
 		<alias>EditPaymentTerm</alias>
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.UsersCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.UsersCommand"
 		name="users">
 		<alias>usersList</alias>
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.CreateVendorCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.CreateVendorCommand"
 		name="createVendor">
 		<alias>newVendor</alias>
 		<alias>addVendor</alias>
@@ -924,7 +924,7 @@
 		<alias>editVendor</alias>
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.VendorPaymentsCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.VendorPaymentsCommand"
 		name="vendorPayments">
 		<alias>vendorPaymentsList</alias>
 		<alias>payments</alias>
@@ -933,20 +933,20 @@
 		<alias>creditCardChargeList</alias>
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.LocationListCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.LocationListCommand"
 		name="locationlist">
 		<alias>locationsList</alias>
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.JournalEntryListCommand"
+		clazz="com.nitya.accounter.mobile.commands.JournalEntryListCommand"
 		name="journalEntries">
 		<alias>journalEntriesList</alias>
 	</command>
 
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.CreateJournalEntryCommand"
+		clazz="com.nitya.accounter.mobile.commands.CreateJournalEntryCommand"
 		name="newJournalEntry">
 		<alias>createJournalEntry</alias>
 		<alias>addJournalEntry</alias>
@@ -954,29 +954,29 @@
 	</command>
 
 
-	<!-- <command clazz="com.vimukti.accounter.mobile.commands.NewSalesOrderCommand" 
+	<!-- <command clazz="com.nitya.accounter.mobile.commands.NewSalesOrderCommand" 
 		name="New Sales Order"> <alias>New SalesOrder</alias> <alias>Add Sales Order</alias> 
 		<alias>Sales Order</alias> <alias>Create SalesOrder</alias> <alias>Create 
 		Sales Order</alias> </command> -->
 
-	<!-- <command clazz="com.vimukti.accounter.mobile.commands.NewPurchaseOrderCommand" 
+	<!-- <command clazz="com.nitya.accounter.mobile.commands.NewPurchaseOrderCommand" 
 		name="New Purchase Order"> <alias>New PurchaseOrder</alias> <alias>Purchase 
 		Order</alias> <alias>Create PurchaseOrder</alias> <alias>Add PurchaseOrder</alias> 
 		<alias>Create Purchase Order</alias> <alias>Edit Purchase Order</alias> <alias>Update 
 		Purchase Order</alias> <alias>Modify Purchase Order</alias> <alias>Create 
 		New PurchaseOrder</alias> </command> -->
 
-	<command clazz="com.vimukti.accounter.mobile.commands.VoidTransactionCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.VoidTransactionCommand"
 		name="voidTransaction">
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.SalesPersonsListCommand"
+		clazz="com.nitya.accounter.mobile.commands.SalesPersonsListCommand"
 		name="salesPersonList">
 		<alias>salesPersons</alias>
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.WriteCheckCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.WriteCheckCommand"
 		name="newWriteCheck">
 		<alias>createWriteCheck</alias>
 		<alias>newCheck</alias>
@@ -988,7 +988,7 @@
 		<alias>updateCheck</alias>
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.CreateItemGroupCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.CreateItemGroupCommand"
 		name="itemGroup">
 		<alias>newItemGroup</alias>
 		<alias>addItemGroup</alias>
@@ -998,7 +998,7 @@
 		<alias>modifyItemGroup</alias>
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.QuotesListCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.QuotesListCommand"
 		name="quotesList">
 		<alias>quotes</alias>
 		<alias>estimates</alias>
@@ -1013,13 +1013,13 @@
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.CustomerRefundsListCommand"
+		clazz="com.nitya.accounter.mobile.commands.CustomerRefundsListCommand"
 		name="customerRefundsList">
 		<alias>customerRefunds</alias>
 		<alias>customerRefundList</alias>
 	</command>
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.CreateMeasurementCommand"
+		clazz="com.nitya.accounter.mobile.commands.CreateMeasurementCommand"
 		name="measurement">
 		<alias>newMeasurment</alias>
 		<alias>createMeasurement</alias>
@@ -1028,14 +1028,14 @@
 		<alias>modifyMeasurement</alias>
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.VATCodesListCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.VATCodesListCommand"
 		name="taxCodesList">
 		<alias>tAXCodes</alias>
 		<alias>vatCodes</alias>
 		<alias>vATCodesList</alias>
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.VATItemsListCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.VATItemsListCommand"
 		name="taxItemsList">
 		<alias>vATItems</alias>
 		<alias>vatItemsList</alias>
@@ -1044,61 +1044,61 @@
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.CreateJournalEntryCommand"
+		clazz="com.nitya.accounter.mobile.commands.CreateJournalEntryCommand"
 		name="newJournalEntry">
 		<alias>addJournalEntry</alias>
 
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.ShippingTermsListCommand"
+		clazz="com.nitya.accounter.mobile.commands.ShippingTermsListCommand"
 		name="shippingTermsList">
 		<alias>shippingTerms</alias>
 		<alias>shippingTermList</alias>
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.ShippingMethodListCommand"
+		clazz="com.nitya.accounter.mobile.commands.ShippingMethodListCommand"
 		name="shippingMethodList">
 		<alias>shippingMethods</alias>
 	</command>
 
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.BankAccountsListCommand"
+		clazz="com.nitya.accounter.mobile.commands.BankAccountsListCommand"
 		name="BankAccounts">
 		<alias>bankAccountsList</alias>
 		<alias>banksList</alias>
 		<alias>bankAccounts</alias>
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.SignupCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.SignupCommand"
 		name="signup">
 		<alias>newToAccounter</alias>
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.CreateFullCompanyCommand"
+		clazz="com.nitya.accounter.mobile.commands.CreateFullCompanyCommand"
 		name="createfullCompany">
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.CreatePartialCompanyCommand"
+		clazz="com.nitya.accounter.mobile.commands.CreatePartialCompanyCommand"
 		name="createPartialCompany">
 	</command>
 
 	<!-- <command -->
-	<!-- clazz="com.vimukti.accounter.mobile.commands.ReconcillationHistoryCommand" -->
+	<!-- clazz="com.nitya.accounter.mobile.commands.ReconcillationHistoryCommand" -->
 	<!-- name="History"> -->
 	<!-- <alias>Reconcillation History</alias> -->
 	<!-- </command> -->
 
-	<!-- <command clazz="com.vimukti.accounter.mobile.commands.NewProductItemCommand" 
+	<!-- <command clazz="com.nitya.accounter.mobile.commands.NewProductItemCommand" 
 		name="Product Item"> <alias>Create New Product Item</alias> <alias>Create 
 		Product Item</alias> <alias>Update Product Item</alias> <alias>Modify Product 
 		Item</alias> <alias>Edit Product Item</alias> </command> -->
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.CreateCustomerGroupCommand"
+		clazz="com.nitya.accounter.mobile.commands.CreateCustomerGroupCommand"
 		name="customerGroup">
 		<alias>createcustomergroup</alias>
 		<alias>updatecustomergroup</alias>
@@ -1106,7 +1106,7 @@
 		<alias>editcustomergroup</alias>
 	</command>
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.CreateCreditNoteCommand"
+		clazz="com.nitya.accounter.mobile.commands.CreateCreditNoteCommand"
 		name="newCreditNote">
 		<alias>createCreditNote</alias>
 		<alias>newCreditMemo</alias>
@@ -1118,26 +1118,26 @@
 		<alias>modifyCreditMemo</alias>
 		<alias>newCreditNotes</alias>
 	</command>
-	<command clazz="com.vimukti.accounter.mobile.commands.ClassListCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.ClassListCommand"
 		name="accounterClassList">
 		<alias>classeslist</alias>
 		<alias>classes</alias>
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.TaxAgenciesListCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.TaxAgenciesListCommand"
 		name="taxAgenciesList">
 		<alias>taxAgencielist</alias>
 		<alias>TaxAgencies</alias>
 
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.MeasurementListCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.MeasurementListCommand"
 		name="measurementsList">
 		<alias>measurmentlist</alias>
 		<alias>Measurments</alias>
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.ItemGroupsListCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.ItemGroupsListCommand"
 		name="itemGroupList">
 		<alias>itemGroupsList</alias>
 		<alias>itemGroupList</alias>
@@ -1145,18 +1145,18 @@
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.CustomerGroupListCommand"
+		clazz="com.nitya.accounter.mobile.commands.CustomerGroupListCommand"
 		name="customergroupList">
 		<alias>customergroups</alias>
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.VendorGroupListCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.VendorGroupListCommand"
 		name="vendorGroupList">
 		<alias>vendorGroups</alias>
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.PaymentTermsListCommand"
+		clazz="com.nitya.accounter.mobile.commands.PaymentTermsListCommand"
 		name="paymentTermsList">
 		<alias>paymentTermslist</alias>
 		<alias>paymentTerms</alias>
@@ -1164,61 +1164,61 @@
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.preferences.CompanyInfoPreferenceCommand"
+		clazz="com.nitya.accounter.mobile.commands.preferences.CompanyInfoPreferenceCommand"
 		name="comapnyInfo">
 		<alias>comapnyInfoPreferences</alias>
 		<alias>setCompanyInfo</alias>
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.preferences.VendorAndPurchasePreferencesCommand"
+		clazz="com.nitya.accounter.mobile.commands.preferences.VendorAndPurchasePreferencesCommand"
 		name="vendorAndPurchasePreferences">
 		<alias>vendorAndPurchases</alias>
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.preferences.CustomerAndSalesPreferencesCommand"
+		clazz="com.nitya.accounter.mobile.commands.preferences.CustomerAndSalesPreferencesCommand"
 		name="customersAndSales">
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.preferences.NumberFormatPreferencesCommand"
+		clazz="com.nitya.accounter.mobile.commands.preferences.NumberFormatPreferencesCommand"
 		name="DateFormats">
 	</command>
 
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.preferences.CategoriesPreferencesCommand"
+		clazz="com.nitya.accounter.mobile.commands.preferences.CategoriesPreferencesCommand"
 		name="categories">
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.ForgotPasswordCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.ForgotPasswordCommand"
 		name="forgotPassword">
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.ChangePasswordCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.ChangePasswordCommand"
 		name="changePassword">
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.TaxHistoryCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.TaxHistoryCommand"
 		name="taxHistory">
 
 	</command>
 
-	<command clazz="com.vimukti.accounter.mobile.commands.CreateWareHouseCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.CreateWareHouseCommand"
 		name="newWareHouse">
 		<alias>createWarehouse</alias>
 		<alias>stockwarehouseCombo</alias>
 		<alias>updateWarehouse</alias>
 	</command>
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.CreateWareHouseTransferCommand"
+		clazz="com.nitya.accounter.mobile.commands.CreateWareHouseTransferCommand"
 		name="newWarehouseTransfer">
 		<alias>createWarehouseTransfer</alias>
 		<alias>wareHouseTransfer</alias>
 		<alias>updateWarehouseTransfer</alias>
 	</command>
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.CreateStockAdjustmentCommand"
+		clazz="com.nitya.accounter.mobile.commands.CreateStockAdjustmentCommand"
 		name="newStockadjustment">
 		<alias>newStockAdjustment</alias>
 		<alias>createStockAdjustment</alias>
@@ -1226,140 +1226,140 @@
 		<alias>updateStockAdjustment</alias>
 	</command>
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.InventoryItemsListCommand"
+		clazz="com.nitya.accounter.mobile.commands.InventoryItemsListCommand"
 		name="InventoryItems">
 		<alias>inventoryItemsList</alias>
 	</command>
-	<command clazz="com.vimukti.accounter.mobile.commands.WareHouseListCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.WareHouseListCommand"
 		name="warehouseList">
 		<alias>wareHouses</alias>
 	</command>
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.WareHouseTransferListCommand"
+		clazz="com.nitya.accounter.mobile.commands.WareHouseTransferListCommand"
 		name="warehouseTransferList">
 		<alias>wareHouseTransfers</alias>
 	</command>
-	<command clazz="com.vimukti.accounter.mobile.commands.MeasurementListCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.MeasurementListCommand"
 		name="measurementList">
 		<alias>measurements</alias>
 	</command>
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.StockAdjustmentListCommand"
+		clazz="com.nitya.accounter.mobile.commands.StockAdjustmentListCommand"
 		name="stockAdjustmentList">
 		<alias>stockAdjustments</alias>
 	</command>
-	<command clazz="com.vimukti.accounter.mobile.commands.TaxGroupListCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.TaxGroupListCommand"
 		name="manageSalesTaxGroups">
 	</command>
-	<command clazz="com.vimukti.accounter.mobile.commands.PrintInvoiceCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.PrintInvoiceCommand"
 		name="printAndSendEmail">
 	</command>
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.delete.DeleteCompanyCommand"
+		clazz="com.nitya.accounter.mobile.commands.delete.DeleteCompanyCommand"
 		name="deletecompany">
 	</command>
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.delete.DeleteUserCommand"
+		clazz="com.nitya.accounter.mobile.commands.delete.DeleteUserCommand"
 		name="deleteUser">
 	</command>
-	<command clazz="com.vimukti.accounter.mobile.commands.ChangeCompanyCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.ChangeCompanyCommand"
 		name="changeCompany">
 	</command>
-	<command clazz="com.vimukti.accounter.mobile.commands.ShowWareHouseCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.ShowWareHouseCommand"
 		name="showWareHouse">
 	</command>
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.delete.DeleteWareHouseCommand"
+		clazz="com.nitya.accounter.mobile.commands.delete.DeleteWareHouseCommand"
 		name="deleteWareHouse">
 	</command>
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.CreatePriceLivelCommand"
+		clazz="com.nitya.accounter.mobile.commands.CreatePriceLivelCommand"
 		name="addNewPriceLevel">
 	</command>
-	<command clazz="com.vimukti.accounter.mobile.commands.CreateBankCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.CreateBankCommand"
 		name="newBank">
 	</command>
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.preferences.CurrencyFormatCommand"
+		clazz="com.nitya.accounter.mobile.commands.preferences.CurrencyFormatCommand"
 		name="currencyFormat">
 	</command>
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.CreatePurchaseOrderCommand"
+		clazz="com.nitya.accounter.mobile.commands.CreatePurchaseOrderCommand"
 		name="createPurchaseOrder">
 		<alias>updatePurchaseOrder</alias>
 		<alias>addNewPurchaseOrder</alias>
 	</command>
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.PurchaseOrderListCommand"
+		clazz="com.nitya.accounter.mobile.commands.PurchaseOrderListCommand"
 		name="purchaseOrderList">
 	</command>
-	<command clazz="com.vimukti.accounter.mobile.commands.NewEmailAccountCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.NewEmailAccountCommand"
 		name="createEmailAccount">
 	</command>
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.TestEmailAccountCommand"
+		clazz="com.nitya.accounter.mobile.commands.TestEmailAccountCommand"
 		name="testEmailAccount">
 	</command>
 	<command
-		clazz="com.vimukti.accounter.mobile.commands.SendInvoiceEmailCommand"
+		clazz="com.nitya.accounter.mobile.commands.SendInvoiceEmailCommand"
 		name="sendInvoiceToMail">
 	</command>
-	<command clazz="com.vimukti.accounter.mobile.commands.DepriciationCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.DepriciationCommand"
 		name="depreciation">
 	</command>
-	<command clazz="com.vimukti.accounter.mobile.commands.CreatePayHeadCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.CreatePayHeadCommand"
 		name="newPayHead">
 		<alias>updatePayHead</alias>
 	</command>
-	<command clazz="com.vimukti.accounter.mobile.commands.EmployeeListCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.EmployeeListCommand"
 		name="employeeList">
 	</command>
-	<command clazz="com.vimukti.accounter.mobile.commands.PayheadListCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.PayheadListCommand"
 		name="payheadList">
 	</command>
-	<command clazz="com.vimukti.accounter.mobile.commands.PayrollUnitListCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.PayrollUnitListCommand"
 		name="payrollUnitList">
 	</command>
-	<command clazz="com.vimukti.accounter.mobile.commands.PayStructureListCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.PayStructureListCommand"
 		name="payStructureList">
 	</command>
-	<command clazz="com.vimukti.accounter.mobile.commands.AttendanceOrProductionListCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.AttendanceOrProductionListCommand"
 		name="attendanceOrProductionTypeList">
 	</command>
 	
-	<command clazz="com.vimukti.accounter.mobile.commands.reports.PayheadSummaryCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.reports.PayheadSummaryCommand"
 		name="payHeadSummaryReport">
 	</command>
-	<command clazz="com.vimukti.accounter.mobile.commands.reports.PayHeadDetailCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.reports.PayHeadDetailCommand"
 		name="payHeadDetailReport">
 	</command>
-	<command clazz="com.vimukti.accounter.mobile.commands.reports.PaySlipSummaryReportCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.reports.PaySlipSummaryReportCommand"
 		name="paySlipSummary">
 	</command>
-	<command clazz="com.vimukti.accounter.mobile.commands.reports.PaySlipDetailReportCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.reports.PaySlipDetailReportCommand"
 		name="payslipDetail">
 	</command>>
-	<command clazz="com.vimukti.accounter.mobile.commands.CreateEmployeeCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.CreateEmployeeCommand"
 		name="newEmployee">
 		<alias>updateEmployee</alias>
 	</command>
-	<command clazz="com.vimukti.accounter.mobile.commands.CreateEmployeeGroupCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.CreateEmployeeGroupCommand"
 		name="newEmployeeGroup">
 		<alias>updateEmployeeGroup</alias>
 	</command>
-	<command clazz="com.vimukti.accounter.mobile.commands.CreatePayEmployeeCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.CreatePayEmployeeCommand"
 		name="newPayEmployee">
 		<alias>updatePayEmployee</alias>
 	</command>
-	<command clazz="com.vimukti.accounter.mobile.commands.CreatePayStructureCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.CreatePayStructureCommand"
 		name="newPayStructure">
 		<alias>updatePayStructure</alias>
 	</command>
-	<command clazz="com.vimukti.accounter.mobile.commands.CreatePayRollUnitCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.CreatePayRollUnitCommand"
 		name="newPayrollUnit">
 		<alias>updatePayrollUnit</alias>
 	</command>
-	<command clazz="com.vimukti.accounter.mobile.commands.CreateAttendanceOrProductionTypeCommand"
+	<command clazz="com.nitya.accounter.mobile.commands.CreateAttendanceOrProductionTypeCommand"
 		name="newAttOrProductionType">
 		<alias>updateAttOrProductionType</alias>
 	</command>

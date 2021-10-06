@@ -20,7 +20,7 @@
 	<property name="renamelog" value="${build.dir}/${name-version}_renamelog.xml" />
 	<property name="shrinklog" value="${build.dir}/${name-version}_shrinklog.xml" />
 
-	<property name="main-class" value="com.vimukti.accounter.main.ServerMain" />
+	<property name="main-class" value="com.nitya.accounter.main.ServerMain" />
 
 	<!-- Checking GWT path -->
 	<target name="check-gwtpath">
@@ -83,7 +83,7 @@
 			<jvmarg value="-Xmx1524m" />
 			<arg line="-war ./war/" />
 			<arg line="-style PRETTY" />
-			<arg line="com.vimukti.accounter.web.Accounter">
+			<arg line="com.nitya.accounter.web.Accounter">
 				
 			</arg>
 			<arg line="-localWorkers 2" />
@@ -100,7 +100,7 @@
 				<jvmarg value="-Xmx1524m" />
 				<arg line="-war ./war/" />
 				<arg line="-style DETAILED" />
-				<arg line="com.vimukti.accounter.admin.Admin">
+				<arg line="com.nitya.accounter.admin.Admin">
 				</arg>
 				<arg line="-localWorkers 2" />
 			</java>
@@ -115,7 +115,7 @@
 					<jvmarg value="-Xmx1524m" />
 					<arg line="-war ./war/" />
 					<arg line="-style DETAILED" />
-					<arg line="com.vimukti.accounter.setup.Setup">
+					<arg line="com.nitya.accounter.setup.Setup">
 						
 					</arg>
 					<arg line="-localWorkers 2" />
@@ -140,7 +140,7 @@
 				<include name="**/*.properties" />
 			</fileset>
 		</copy>-->
-		<jar destfile="build/${name-version}.jar" index="true">
+		<jar destfile="build/${name-version}.jar" index="true" duplicate="preserve">
 			<fileset dir="./war/WEB-INF/classes">
 				<include name="**/**" />
 			</fileset>
@@ -269,7 +269,7 @@
             <class  classes="protected"
                 methods="protected" fields="protected">
              <patternset>
-                <include name="com.vimukti.accounter.**.*"/>
+                <include name="com.nitya.accounter.**.*"/>
              	<include name="org.hibernate.dialect.**.*"/>
               </patternset>
             </class>
@@ -279,12 +279,12 @@
 			<rename mainclass="${main-class}" logfile="${renamelog}">
 				<!--<property name="error-checking" value="pedantic"/>-->
 				<keep>
-					<!--<class extends="com.vimukti.accounter.core.ObjectConvertUtil" methods="public" fields="none" />-->
-					<class extends="com.vimukti.accounter.core.CreatableObject" methods="public" fields="private" />
+					<!--<class extends="com.nitya.accounter.core.ObjectConvertUtil" methods="public" fields="none" />-->
+					<class extends="com.nitya.accounter.core.CreatableObject" methods="public" fields="private" />
 					<class extends="javax.servlet.http.HttpServlet" methods="public" fields="private" />
 
-					<class implements="com.vimukti.accounter.web.client.i18n.Messages" methods="public" fields="private" />
-					<class implements="com.vimukti.accounter.core.IAccounterServerCore" methods="public" fields="private" />
+					<class implements="com.nitya.accounter.web.client.i18n.Messages" methods="public" fields="private" />
+					<class implements="com.nitya.accounter.core.IAccounterServerCore" methods="public" fields="private" />
 					<class implements="javax.servlet.Filter" methods="public" fields="private" />
 					<class implements="javax.servlet.ServletContextListener" methods="public" fields="private" />
 					<class implements="com.google.gwt.user.client.rpc.RemoteService" methods="public" fields="private" />
@@ -294,10 +294,10 @@
 
 					<class methods="public" fields="private">
 						<patternset>
-							<include name="com.vimukti.accounter.core.*" />
+							<include name="com.nitya.accounter.core.*" />
 							<include name="org.hibernate.dialect.*" />
-							<include name="com.vimukti.accounter.ws.*" />
-							<include name="com.vimukti.accounter.web.server.i18n.*" />
+							<include name="com.nitya.accounter.ws.*" />
+							<include name="com.nitya.accounter.web.server.i18n.*" />
 						</patternset>
 					</class>
 				</keep>

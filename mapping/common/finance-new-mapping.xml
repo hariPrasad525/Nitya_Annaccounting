@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC
                 "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
                 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<hibernate-mapping package="com.vimukti.accounter.core"
+<hibernate-mapping package="com.nitya.accounter.core"
 	default-access="field" auto-import="false">
 	<class name="Client" table="CLIENT">
 		<id name="id" column="ID">
@@ -26,14 +26,14 @@
 		<property name="isEmailBounced" column="IS_EMAIL_BOUNCED" />
 
 		<property name="createdDate" column="CREATED_DATE"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<property name="transactionsCreatedCount" column="TRANSACTIONS_CREATED"
 			update="true"></property>
 		<property name="transactionsUpdatedCount" column="TRANSACTIONS_UPDATE"
 			update="true"></property>
 		<property name="companiesCount" column="COMPANIES" update="true"></property>
 		<property name="updateDate" column="UPDATE_DATE"
-			type="com.vimukti.accounter.core.LongUseType"></property>
+			type="com.nitya.accounter.core.LongUseType"></property>
 		<property name="openedCompaniesCount" column="OPENED_COMPANIES"
 			update="true"></property>
 		<property name="changedPasswordCount" column="CHANGED_PASSWORD"
@@ -60,15 +60,15 @@
 			cascade="all">
 			<key column="CLIENT_ID"></key>
 			<many-to-many column="LANGUAGE_CODE"
-				class="com.vimukti.accounter.web.server.translate.Language" />
+				class="com.nitya.accounter.web.server.translate.Language" />
 		</set>
 		<many-to-one name="clientSubscription"
-			class="com.vimukti.accounter.core.ClientSubscription" lazy="false"
+			class="com.nitya.accounter.core.ClientSubscription" lazy="false"
 			cascade="save-update" column="CLIENT_SUBSCRIPTION">
 		</many-to-one>
 		
 		<many-to-one name="licensePurchase"
-			class="com.vimukti.accounter.core.LicensePurchase"
+			class="com.nitya.accounter.core.LicensePurchase"
 			cascade="save-update" column="LICENSE_PURCHASE">
 		</many-to-one>
 	</class>
@@ -162,7 +162,7 @@
 		<id name="id" column="ID">
 			<generator class="identity" />
 		</id>
-		<many-to-one name="client" class="com.vimukti.accounter.core.Client"
+		<many-to-one name="client" class="com.nitya.accounter.core.Client"
 			lazy="false" column="CLIENT">
 		</many-to-one>
 		<property name="apiKey" column="API_KEY"></property>
@@ -200,7 +200,7 @@
 		<id name="id" column="ID">
 			<generator class="identity" />
 		</id>
-		<many-to-one name="client" class="com.vimukti.accounter.core.Client"
+		<many-to-one name="client" class="com.nitya.accounter.core.Client"
 			lazy="false" column="CLIENT">
 		</many-to-one>
 		<property name="networkId" column="NETWORK_ID"></property>
@@ -217,7 +217,7 @@
 	</class>
 	<class name="MobileCookie" table="MOBILE_COOKIE">
 		<id name="cookie" column="COOKIE"></id>
-		<many-to-one name="client" class="com.vimukti.accounter.core.Client"
+		<many-to-one name="client" class="com.nitya.accounter.core.Client"
 			lazy="false" column="CLIENT">
 		</many-to-one>
 	</class>

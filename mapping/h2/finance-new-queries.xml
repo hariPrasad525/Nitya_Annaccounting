@@ -4,17 +4,17 @@
 
 	<query name="getClient.by.mailId">
 		<query-param name="emailId" type="String" />
-		from com.vimukti.accounter.core.Client client
+		from com.nitya.accounter.core.Client client
 		where client.emailId
 		=:emailId
 	</query>
 	<query name="getAdvertisements">
-		from com.vimukti.accounter.core.Advertisement add
+		from com.nitya.accounter.core.Advertisement add
 	</query>
 
 	<query name="get.activation.by.token">
 		<query-param name="token" type="String" />
-		from com.vimukti.accounter.core.Activation activation
+		from com.nitya.accounter.core.Activation activation
 		where
 		activation.token
 		=:token
@@ -22,7 +22,7 @@
 
 	<query name="get.activation.by.emailid">
 		<query-param name="emailId" type="String" />
-		from com.vimukti.accounter.core.Activation activation
+		from com.nitya.accounter.core.Activation activation
 		where
 		activation.emailId
 		=:emailId
@@ -32,14 +32,14 @@
 
 	<query name="get.PayPalAccount.by.AccountID">
 		<query-param name="accountID" type="long" />
-		from com.vimukti.accounter.core.Account account
+		from com.nitya.accounter.core.Account account
 		where account.id=:accountID
 	</query>
 	
 	<query name="list.get.PaypalAccounts">
 		<query-param name="companyId" type="long" />
 		<query-param name="type" type="integer" />
-		from com.vimukti.accounter.core.Account account
+		from com.nitya.accounter.core.Account account
 		where account.company.id=:company  
 		and account.type=:type
 	</query>
@@ -47,14 +47,14 @@
 
 	<query name="delete.activation.by.emailId">
 		<query-param name="emailId" type="String" />
-		delete from com.vimukti.accounter.core.Activation activation
+		delete from com.nitya.accounter.core.Activation activation
 		where
 		activation.emailId=:emailId
 	</query>
 
 	<query name="delete.activation.by.Id">
 		<query-param name="id" type="integer" />
-		delete from com.vimukti.accounter.core.Activation activation
+		delete from com.nitya.accounter.core.Activation activation
 		where
 		activation.id=:id
 	</query>
@@ -62,7 +62,7 @@
 	<query name="get.companiesList.by.emailId.and.password">
 		<query-param name="emailId" type="String" />
 		<query-param name="password" type="String" />
-		from com.vimukti.accounter.core.Client client
+		from com.nitya.accounter.core.Client client
 		where client.emailId
 		=:emailId and client.password=:password
 	</query>
@@ -70,14 +70,14 @@
 	<query name="getclient.from.central.db.using.emailid.and.password">
 		<query-param name="emailId" type="String" />
 		<query-param name="password" type="String" />
-		from com.vimukti.accounter.core.Client client
+		from com.nitya.accounter.core.Client client
 		where
 		client.emailId=:emailId and client.password =:password
 	</query>
 
 	<query name="getServerCompany.by.name">
 		<query-param name="name" type="string" />
-		from com.vimukti.accounter.core.Company c where
+		from com.nitya.accounter.core.Company c where
 		c.preferences.tradingName=:name
 	</query>
 
@@ -137,7 +137,7 @@
 
 	<query name="getServerCompany.by.id">
 		<query-param name="id" type="integer" />
-		from com.vimukti.accounter.core.Company c where
+		from com.nitya.accounter.core.Company c where
 		c.id=:id
 	</query>
 
@@ -197,7 +197,7 @@
 
 	<query name="delete.ServerCompany.by.Id">
 		<query-param name="id" type="String" />
-		delete from com.vimukti.accounter.core.Company company
+		delete from com.nitya.accounter.core.Company company
 		where
 		company.id
 		=:id
@@ -205,7 +205,7 @@
 
 	<query name="update.client.emailStatus">
 		<query-param name="email" type="string" />
-		update com.vimukti.accounter.core.Client c set c.isEmailBounced = true
+		update com.nitya.accounter.core.Client c set c.isEmailBounced = true
 		where c.emailId=:email
 	</query>
 	
@@ -258,7 +258,7 @@
 	<query name="getUser.by.mailId.and.companyId">
 		<query-param name="emailId" type="String" />
 		<query-param name="companyId" type="long" />
-		from com.vimukti.accounter.core.User u
+		from com.nitya.accounter.core.User u
 		where u.client.emailId=:emailId
 		and u.company.id=:companyId
 	</query>
@@ -279,13 +279,13 @@
 	</sql-query>
 	<query name="delete.remembermeKeys">
 		<query-param name="key" type="String" />
-		delete from com.vimukti.accounter.core.RememberMeKey rk where
+		delete from com.nitya.accounter.core.RememberMeKey rk where
 		rk.key=:key
 	</query>
 
 	<query name="get.remembermeKey">
 		<query-param name="key" type="String" />
-		from com.vimukti.accounter.core.RememberMeKey rk where rk.key=:key
+		from com.nitya.accounter.core.RememberMeKey rk where rk.key=:key
 	</query>
 
 	<sql-query name="getExpensesTotalByType">
@@ -383,17 +383,17 @@
 
 	<query name="get.company.by.tradingname">
 		<query-param name="tradingName" type="String" />
-		from com.vimukti.accounter.core.Company c where
+		from com.nitya.accounter.core.Company c where
 		c.preferences.tradingName=:tradingName
 	</query>
 
 	<query name="get.all.clients">
-		from com.vimukti.accounter.core.Client
+		from com.nitya.accounter.core.Client
 	</query>
 
 	<query name="get.subscription">
 		<query-param name="type" type="int" />
-		from com.vimukti.accounter.core.Subscription where type=:type
+		from com.nitya.accounter.core.Subscription where type=:type
 	</query>
 	
 	<sql-query name="getHint.by.company">
@@ -436,17 +436,17 @@
 	
 	<query name="getLicense">
 		<query-param name="emailId" type="String" />
-		from com.vimukti.accounter.core.License ls  where ls.isActive=true
+		from com.nitya.accounter.core.License ls  where ls.isActive=true
 	</query>
 	
 	<query name="getLicenseByServerID">
 		<query-param name="serverId" type="String" />
-		from com.vimukti.accounter.core.License ls  where ls.serverId=:serverId
+		from com.nitya.accounter.core.License ls  where ls.serverId=:serverId
 	</query>
 	
 	<query name="getActiveLicenseOfClient">
 		<query-param name="client" type="Client" />
-		from com.vimukti.accounter.core.License ls  where ls.client=:client and ls.isActive=true
+		from com.nitya.accounter.core.License ls  where ls.client=:client and ls.isActive=true
 	</query>
 	
 </hibernate-mapping>

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<hibernate-mapping package="com.vimukti.accounter.core">
+<hibernate-mapping package="com.nitya.accounter.core">
 
 	<sql-query name="getAllInvoicesByAmount">
 		<query-param name="companyId" type="long" />

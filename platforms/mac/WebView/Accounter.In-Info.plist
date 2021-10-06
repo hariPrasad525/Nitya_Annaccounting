@@ -11,7 +11,7 @@
 	<key>CFBundleIconFile</key>
 	<string>AccounterIcon_512x512@2x.icns</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.vimukti.accounter</string>
+	<string>com.nitya.accounter</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>

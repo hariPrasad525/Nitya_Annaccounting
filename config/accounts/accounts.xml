@@ -1608,7 +1608,7 @@
 		<!-- End of Type-32 Industry Account lists -->
 		
 	</industry>
-	<industry type="33" name="Consulting">
+	<industry type="33" name="ITConsulting">
 		<accounts>
 			<account type="Income" name="Sales Income" default="true" systemOnly="false" countries="" cashFlow="Operating"></account>
 			<account type="Income" name="Sales Discounts" default="false" systemOnly="false" countries="" cashFlow="Operating"></account>

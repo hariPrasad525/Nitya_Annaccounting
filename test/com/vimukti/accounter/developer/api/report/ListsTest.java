@@ -5,8 +5,8 @@ import java.util.Map;
 
 import org.apache.commons.httpclient.methods.GetMethod;
 
+import com.nitya.accounter.developer.api.core.ApiResult;
 import com.vimukti.accounter.developer.api.core.AbstractTest;
-import com.vimukti.accounter.developer.api.core.ApiResult;
 
 public class ListsTest extends AbstractTest {
 	private String path;

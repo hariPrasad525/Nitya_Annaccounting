@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC
 "-//Hibernate/Hibernate Mapping DTD//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<hibernate-mapping package="com.vimukti.accounter.core"
+<hibernate-mapping package="com.nitya.accounter.core"
 	default-access="field">
 
 	<!-- <class name="User" table="USER"> <id name="id" column="ID"> <generator 
@@ -42,20 +42,20 @@
 
 	<query name="user.by.userId">
 		<query-param name="userid" type="string" />
-		from com.vimukti.accounter.core.User u where u.id=:userid
+		from com.nitya.accounter.core.User u where u.id=:userid
 	</query>
 
 	<query name="user.by.emailid">
 		<query-param name="company" type="Company" />
 		<query-param name="emailID" type="String" />
-		from com.vimukti.accounter.core.User u where u.client.emailId=:emailID
+		from com.nitya.accounter.core.User u where u.client.emailId=:emailID
 		and u.company=:company
 	</query>
 	
 	<query name="user.by.emailid.companyId">
 		<query-param name="companyId" type="long" />
 		<query-param name="emailID" type="String" />
-		from com.vimukti.accounter.core.User u where u.client.emailId=:emailID
+		from com.nitya.accounter.core.User u where u.client.emailId=:emailID
 		and u.company.id=:companyId
 	</query>
 
@@ -83,20 +83,20 @@
 	<!-- CHAT -->
 	<query name="activation.by.networkId">
 		<query-param name="networkId" type="String" />
-		from com.vimukti.accounter.core.IMActivation i where
+		from com.nitya.accounter.core.IMActivation i where
 		i.networkId=:networkId
 	</query>
 
 	<query name="activation.by.tocken">
 		<query-param name="tocken" type="String" />
-		from com.vimukti.accounter.core.IMActivation i where
+		from com.nitya.accounter.core.IMActivation i where
 		i.tocken=:tocken
 	</query>
 
 	<query name="imuser.by.networkId">
 		<query-param name="networkId" type="String" />
 		<query-param name="networkType" type="int" />
-		from com.vimukti.accounter.core.IMUser i where
+		from com.nitya.accounter.core.IMUser i where
 		i.networkId=:networkId
 		and i.networkType=:networkType
 	</query>

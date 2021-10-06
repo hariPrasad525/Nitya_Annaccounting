@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC
                 "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
                 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<hibernate-mapping package="com.vimukti.accounter.web.server.translate"
+<hibernate-mapping package="com.nitya.accounter.web.server.translate"
 	default-access="field" auto-import="false">
 	<class name="LocalMessage" table="LOCAL_MESSAGE">
 		<id name="id" column="ID">
@@ -15,7 +15,7 @@
 		<property name="value" type="text" column="VALUE"></property>
 		<property name="votes" column="VOTES" type="int"></property>
 		<property name="isApproved" column="IS_APPROVED"></property>
-		<many-to-one name="createdBy" class="com.vimukti.accounter.core.Client"
+		<many-to-one name="createdBy" class="com.nitya.accounter.core.Client"
 			column="CLIENT">
 		</many-to-one>
 		<property name="createdDate" column="CREATED_DATE" not-null="true" />
@@ -54,7 +54,7 @@
 		<many-to-one name="localMessage" column="LOCAL_MESSAGE_ID"
 			class="LocalMessage"></many-to-one>
 		<many-to-one name="client" column="CLIENT_ID"
-			class="com.vimukti.accounter.core.Client"></many-to-one>
+			class="com.nitya.accounter.core.Client"></many-to-one>
 	</class>
 
 	<class name="Language" table="LANGUAGE">
@@ -65,25 +65,25 @@
 
 	<query name="getMessageById">
 		<query-param name="id" type="long" />
-		from com.vimukti.accounter.web.server.translate.Message m where
+		from com.nitya.accounter.web.server.translate.Message m where
 		m.id=:id
 	</query>
 
 	<query name="getMessageByValue">
 		<query-param name="value" type="string" />
-		from com.vimukti.accounter.web.server.translate.Message m where
+		from com.nitya.accounter.web.server.translate.Message m where
 		m.value=:value
 	</query>
 
 	<query name="getKeyByValue">
 		<query-param name="value" type="string" />
-		from com.vimukti.accounter.web.server.translate.Key k where
+		from com.nitya.accounter.web.server.translate.Key k where
 		k.key=:value
 	</query>
 
 	<query name="getLocalMessageById">
 		<query-param name="id" type="long" />
-		from com.vimukti.accounter.web.server.translate.LocalMessage lm where
+		from com.nitya.accounter.web.server.translate.LocalMessage lm where
 		lm.id=:id
 	</query>
 
@@ -91,7 +91,7 @@
 		<query-param name="clientId" type="long" />
 		<query-param name="messageId" type="int" />
 		<query-param name="lang" type="string" />
-		from com.vimukti.accounter.web.server.translate.LocalMessage
+		from com.nitya.accounter.web.server.translate.LocalMessage
 		lm where
 		lm.createdBy.id=:clientId and lm.message.id=:messageId and
 		lm.lang.code=:lang
@@ -100,12 +100,12 @@
 	<query name="getVoteByClientId">
 		<query-param name="clientId" type="long" />
 		<query-param name="localMessageId" type="long" />
-		from com.vimukti.accounter.web.server.translate.Vote v where
+		from com.nitya.accounter.web.server.translate.Vote v where
 		v.client.id=:clientId and v.localMessage.id=:localMessageId
 	</query>
 
 	<!-- <query name="getLocalMessages"> <query-param name="messageId" type="int" 
-		/> <query-param name="lang" type="string" /> from com.vimukti.accounter.web.server.translate.LocalMessage 
+		/> <query-param name="lang" type="string" /> from com.nitya.accounter.web.server.translate.LocalMessage 
 		lm where lm.message.id=:messageId and lm.lang=:lang </query> -->
 
 	<!-- <sql-query name="getNextMessageId"> <query-param name="lastMessageId" 
@@ -133,12 +133,12 @@
 
 	<query name="getMessages">
 		from
-		com.vimukti.accounter.web.server.translate.Message m where m.id != 0
+		com.nitya.accounter.web.server.translate.Message m where m.id != 0
 	</query>
 
 	<query name="getKeys">
 		from
-		com.vimukti.accounter.web.server.translate.Key k
+		com.nitya.accounter.web.server.translate.Key k
 		where k.id != 0
 	</query>
 
@@ -319,20 +319,20 @@
 
 	<query name="getLanguageById">
 		<query-param name="code" type="string" />
-		from com.vimukti.accounter.web.server.translate.Language l where
+		from com.nitya.accounter.web.server.translate.Language l where
 		l.code=:code
 	</query>
 
 	<query name="getLanguages">
 		from
-		com.vimukti.accounter.web.server.translate.Language l where
+		com.nitya.accounter.web.server.translate.Language l where
 		l.code!=''
 	</query>
 
 	<query name="getLocalMessagesByMessageId">
 		<query-param name="messageId" type="long" />
 		<query-param name="lang" type="string" />
-		from com.vimukti.accounter.web.server.translate.LocalMessage lm where
+		from com.nitya.accounter.web.server.translate.LocalMessage lm where
 		lm.message.id=:messageId and lm.lang.code=:lang
 	</query>
 

@@ -2,10 +2,10 @@
 <!DOCTYPE hibernate-mapping PUBLIC
                 "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
                 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<hibernate-mapping package="com.vimukti.accounter.admin.core"
+<hibernate-mapping package="com.nitya.accounter.admin.core"
 	default-access="field" auto-import="false">
 	<!-- Admin users class -->
-	<class name="com.vimukti.accounter.admin.core.AdminUser" table="ADMIN_USER">
+	<class name="com.nitya.accounter.admin.core.AdminUser" table="ADMIN_USER">
 		<id name="id" column="ID">
 			<generator class="identity" />
 		</id>
@@ -17,7 +17,7 @@
 		<property name="isPermissionsGiven" column="IS_PERMISSIONS_GIVEN"></property>
 	</class>
 	
-	<class name="com.vimukti.accounter.admin.core.AdminTemplate" table="ADMIN_TEMPLATES">
+	<class name="com.nitya.accounter.admin.core.AdminTemplate" table="ADMIN_TEMPLATES">
 		<id name="id" column="ID">
 			<generator class="identity" />
 		</id>
@@ -40,11 +40,11 @@
 		<query-param name="emailId" type="String" />
 		<query-param name="password" type="String" />
 		
-		from com.vimukti.accounter.admin.core.AdminUser user where user.emailId =:emailId and user.password=:password
+		from com.nitya.accounter.admin.core.AdminUser user where user.emailId =:emailId and user.password=:password
 	</query>
 	
 	<query name="getAdminUsers">
-		from com.vimukti.accounter.admin.core.AdminUser adminuser 
+		from com.nitya.accounter.admin.core.AdminUser adminuser 
 
 	</query>
 

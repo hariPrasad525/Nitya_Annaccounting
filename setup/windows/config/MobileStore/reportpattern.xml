@@ -8,10 +8,20 @@
 			<command title="salesReports" />
 			<command title="vendorsandPayableReports" />
 			<command title="purchasesReports" />
+			<command title="payrollReports" />
 			<command if="trackTax" title="vATReports" />
 		</outputs>
 	</pattern>
 
+	<pattern login="true" if="payrollEnabled">
+		<input>payrollReports</input>
+		<outputs>
+			<command title="paySlipSummary" />
+			<command title="payslipDetail" />
+			<command title="payHeadSummaryReport" />
+			<command title="payHeadDetailReport" />
+		</outputs>
+	</pattern>
 	<pattern login="true">
 		<input>companyFinancialReports</input>
 		<outputs>

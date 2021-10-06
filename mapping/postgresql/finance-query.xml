@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<hibernate-mapping package="com.vimukti.accounter.core">
+<hibernate-mapping package="com.nitya.accounter.core">
 
 
 	<!-- QUERIES FOR DAOs -->
@@ -1563,6 +1563,28 @@
 				]]>
 
 	</sql-query>
+	
+	
+	<sql-query name="getSelectedClientItem">
+		<query-param name="selectedId" type="long" />
+
+		<return-scalar column="name" type="encryptedstring" />
+		<return-scalar column="description" type="encryptedstring" />
+		<return-scalar column="unitPrice" type="double" />
+		<return-scalar column="customerId" type="long" />
+		<return-scalar column="customerName" type="encryptedstring" />
+		<![CDATA[
+				SELECT   NAME AS name,
+							SALES_DESCRIPTION AS description,
+							SALES_PRICE AS unitPrice, 
+							CUSTOMER_ID AS customerId,
+							CUSTOMER_NAME AS customerName
+				FROM   ITEM 
+				WHERE  ID = :selectedId
+					]]>
+
+	</sql-query>
+	
 
 	<!-- To generate the Sales Items of Latest 10 -->
 	<sql-query name="getLatestSalesItems">
@@ -5134,6 +5156,115 @@
 				]]>
 
 	</sql-query>
+	
+	<sql-query name="getAllInvoiceFrequencybyCompany">
+		<query-param name="companyId" type="long" />
+		
+		<return-scalar column="ID" type="int" />
+		<return-scalar column="NAME" type="encryptedstring" />
+		<return-scalar column="VERSION" type="int" />
+		<return-scalar column="IS_DEFAULT" type="boolean" />
+		<![CDATA[
+				SELECT *
+				FROM   INVOICE_FREQUENCY_GROUP 
+				WHERE  COMPANY_ID = :companyId
+				]]>
+
+	</sql-query>
+	
+		<sql-query name="getInvoiceNameByItem">
+		<query-param name="itemId" type="long" />
+		
+		<return-scalar column="ID" type="int" />
+		<return-scalar column="NAME" type="encryptedstring" />
+	
+		<![CDATA[
+				SELECT  IF.ID as ID,
+						IF.NAME as NAME
+				FROM   INVOICE_FREQUENCY_GROUP IF
+				left JOIN ITEM I 
+				ON I.INVOICE_FREQUENCY_GROUP_ID = IF.ID 
+				WHERE  I.Id = :itemId
+				]]>
+
+	</sql-query>
+	
+		<sql-query name="getEmployeeTimeSheetList">
+		<query-param name="companyId" type="long" />
+		<query-param name="fromDate" type="long" />
+		<query-param name="toDate" type="long" />
+		
+		<return-scalar column="ITEM_NAME" type="encryptedstring" />
+		<return-scalar column="FROM_DATE" type="long" />
+		<return-scalar column="TO_DATE" type="long" />
+		<return-scalar column="HOURS" type="long" />
+		<return-scalar column="ITEM_ID" type="long" />
+		<return-scalar column="IS_BILLED" type="boolean" />
+		<return-scalar column="ID" type="long" />
+		
+		<return-scalar column="ATTACHMENT_ID" type="long" />
+		<return-scalar column="ATTACHMENT" type="string" />
+		<return-scalar column="NAME" type="encryptedstring" />
+		<return-scalar column="SIZE" type="long" />
+		<return-scalar column="VERSION" type="int" />
+	
+		<![CDATA[
+		SELECT             IT.Consultant_NAME  AS ITEM_NAME,
+				   IT.FROM_DATE        AS FROM_DATE,
+				   IT.TO_DATE          AS TO_DATE,
+				   IT.HOURS            AS HOURS,
+				   IT.ITEM_ID          AS ITEM_ID,
+				   IT.IS_BILLED        AS IS_BILLED,
+				   IT.ID			   AS ID,
+				   A.ID  			   AS Attachment_ID,
+				   A.ATTACHMENT_ID     AS ATTACHMENT,
+				   A.NAME              AS NAME,
+				   A.SIZE              AS SIZE,
+				   A.VERSION           AS VERSION
+				      
+				FROM   EMPLOYEE_TIME_SHEET IT
+					left join ATTACHMENTS A ON A.EMPLOYEETIMESHEET_ID=IT.ID
+				WHERE  IT.COMPANY_ID = :companyId 			
+				]]>
+
+	</sql-query>
+
+	
+	<sql-query name="updateTimeSheetBill">
+		<query-param name="empTimeSheetId" type="long" />
+		
+			<![CDATA[
+			UPDATE
+					 EMPLOYEE_TIME_SHEET  
+					set IS_BILLED = true
+						where  ID = :empTimeSheetId
+			
+				]]>
+
+	</sql-query>
+	
+		<sql-query name="getTimeSheetAttachments">
+		<query-param name="itemId" type="long" />
+		
+		<return-scalar column="ID" type="long" />
+		<return-scalar column="ATTACHMENT_ID" type="string" />
+		<return-scalar column="NAME" type="encryptedstring" />
+		<return-scalar column="SIZE" type="long" />
+		<return-scalar column="VERSION" type="int" />
+	
+		<![CDATA[
+				SELECT    A.ID  				AS ID,
+				   A.ATTACHMENT_ID        AS ATTACHMENT_ID,
+				   A.NAME          AS NAME,
+				   A.SIZE            AS SIZE,
+				   A.VERSION             AS VERSION
+				      
+				FROM   ATTACHMENTS A
+				WHERE  A.EMPLOYEETIMESHEET_ID = :itemId
+			
+				]]>
+
+	</sql-query>
 
 	<sql-query name="getCreatableStatementForCustomer">
 		<query-param name="companyId" type="long" />
@@ -6709,7 +6840,7 @@
 	<query name="getPortletPageConfiguration">
 		<query-param name="pageName" type="string" />
 		<query-param name="userId" type="long" />
-		from com.vimukti.accounter.core.PortletPageConfiguration p where
+		from com.nitya.accounter.core.PortletPageConfiguration p where
 		p.pageName=:pageName AND p.user.id=:userId
 	</query>
 
@@ -6741,14 +6872,14 @@
 
 	<query name="getCustomersOrderByName">
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.Customer c where c.company=:company
+		from com.nitya.accounter.core.Customer c where c.company=:company
 		and c.isActive=true
 		order by c.name
 	</query>
 
 	<query name="getVendorsOrderByName">
 		<query-param name="company" type="Company" />
-		from com.vimukti.accounter.core.Vendor c where c.isActive=true and
+		from com.nitya.accounter.core.Vendor c where c.isActive=true and
 		c.company=:company
 		order by c.name
 	</query>
@@ -6812,7 +6943,7 @@
 
 	<query name="getTaxreturnByTransactionid">
 		<query-param name="transaction" type="Transaction" />
-		from com.vimukti.accounter.core.TAXReturnEntry tr where
+		from com.nitya.accounter.core.TAXReturnEntry tr where
 		tr.transaction=:transaction
 	</query>
 

@@ -1,0 +1,20 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<g:FlowPanel styleName="companyInfoPanel">
+		<g:FlowPanel styleName="classTrackingPanel">
+			<g:FlowPanel>
+				<g:CheckBox ui:field="trackClassCheckBox" styleName="header" />
+			</g:FlowPanel>
+			<g:FlowPanel ui:field="hidePanel">
+				<g:Label ui:field="classLabel" />
+				<g:FlowPanel ui:field="radioButtonPanel">
+					<g:RadioButton name="" ui:field="onepeTransactionRadioButton" />
+					<g:Label ui:field="oneperTransactionLabel" />
+					<g:RadioButton name="" ui:field="oneperdetaillineRadioButton" />
+					<g:Label ui:field="oneperdetaillineLabel" />
+				</g:FlowPanel>
+			</g:FlowPanel>
+		</g:FlowPanel>
+	</g:FlowPanel>
+</ui:UiBinder> 

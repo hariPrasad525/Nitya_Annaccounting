@@ -7,7 +7,7 @@
 <uri>http://accounterlive.com/jsp/taglib/substr</uri>
 <tag>
     <name>i18n</name>
-    <tagclass>com.vimukti.accounter.web.server.i18n.I18nTagHandler</tagclass>
+    <tagclass>com.nitya.accounter.web.server.i18n.I18nTagHandler</tagclass>
     <info>Substring function.</info>
     <attribute>
       <name>msg</name>
