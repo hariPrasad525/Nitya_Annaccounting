@@ -1,0 +1,768 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+                "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.vimukti.accounter.core"
+	default-access="field" auto-import="false">
+	<class name="EmployeeGroup" table="EMPLOYEE_GROUP">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<many-to-one name="company" column="COMPANY_ID" class="Company">
+		</many-to-one>
+		<many-to-one name="createdBy" column="CREATED_BY" class="User"
+			not-null="true"></many-to-one>
+		<many-to-one name="lastModifier" column="LAST_MODIFIER"
+			class="User" not-null="true"></many-to-one>
+		<property name="createdDate" column="CREATED_DATE" not-null="true" />
+		<property name="lastModifiedDate" column="LAST_MODIFIED_DATE"
+			not-null="true" />
+		<property name="name" column="NAME" type="encryptedstring" />
+		<set name="employees" inverse="true">
+			<key column="EMPLOYEE_GROUP" />
+			<one-to-many class="Employee" />
+		</set>
+	</class>
+
+	<class name="PayrollUnit" table="PAY_ROLL_UNIT">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<many-to-one name="company" column="COMPANY_ID" class="Company">
+		</many-to-one>
+		<many-to-one name="createdBy" column="CREATED_BY" class="User"
+			not-null="true"></many-to-one>
+		<many-to-one name="lastModifier" column="LAST_MODIFIER"
+			class="User" not-null="true"></many-to-one>
+		<property name="createdDate" column="CREATED_DATE" not-null="true" />
+		<property name="lastModifiedDate" column="LAST_MODIFIED_DATE"
+			not-null="true" />
+
+		<property name="symbol" column="SYMBOL" type="encryptedstring" />
+		<property name="formalname" column="FORMAL_NAME" type="encryptedstring" />
+		<property name="noofDecimalPlaces" column="NO_OF_DECIMAL_PLACES" />
+
+	</class>
+
+	<class name="PayStructure" table="PAY_STRUCTURE">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<many-to-one name="company" column="COMPANY_ID" class="Company">
+		</many-to-one>
+		<many-to-one name="createdBy" column="CREATED_BY" class="User"
+			not-null="true"></many-to-one>
+		<many-to-one name="lastModifier" column="LAST_MODIFIER"
+			class="User" not-null="true"></many-to-one>
+		<property name="createdDate" column="CREATED_DATE" not-null="true" />
+		<property name="lastModifiedDate" column="LAST_MODIFIED_DATE"
+			not-null="true" />
+		<many-to-one name="employee" column="EMPLOYEE" class="Employee">
+		</many-to-one>
+		<many-to-one name="employeeGroup" column="EMPLOYEE_GROUP"
+			class="EmployeeGroup">
+		</many-to-one>
+		<list name="items" cascade="save-update,delete-orphan">
+			<key column="PAY_STRUCTURE" />
+			<list-index column="IDX" />
+			<one-to-many class="PayStructureItem" />
+		</list>
+
+	</class>
+
+	<class name="PayStructureItem" table="PAY_STRUCTURE_ITEM">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<many-to-one name="payStructure" column="PAY_STRUCTURE"
+			class="PayStructure" />
+		<many-to-one name="payHead" column="PAY_HEAD" class="PayHead" />
+		<property name="rate" column="RATE" />
+		<property name="effectiveFrom" column="EFFECTIVE_FROM"
+			type="com.vimukti.accounter.core.LongUseType" />
+	</class>
+
+	<class name="PayHead" table="PAY_HEAD">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<many-to-one name="company" column="COMPANY_ID" class="Company"
+			not-null="true">
+		</many-to-one>
+		<many-to-one name="createdBy" column="CREATED_BY" class="User"
+			not-null="true"></many-to-one>
+		<many-to-one name="lastModifier" column="LAST_MODIFIER"
+			class="User" not-null="true"></many-to-one>
+		<property name="createdDate" column="CREATED_DATE" not-null="true" />
+		<property name="lastModifiedDate" column="LAST_MODIFIED_DATE"
+			not-null="true" />
+		<property name="name" column="NAME" not-null="true"
+			type="encryptedstring" />
+		<property name="type" column="TYPE" />
+		<property name="roundingMethod" column="ROUNDING_METHOD" />
+		<property name="nameToAppearInPaySlip" column="NAME_TO_APPEAR_ON_PAYSLIP" />
+		<property name="calculationType" column="CALCULATION_TYPE" />
+		<property name="isAffectNetSalary" column="IS_AFFECT_NET_SALARY" />
+		<many-to-one name="account" column="ACCOUNT" class="Account" />
+		<many-to-one name="liabilityAccount" column="LIABILITY_ACCOUNT" class="Account" />
+		<many-to-one name="assetAccount" column="ASSET_ACCOUNT" class="Account" />
+		<property name="isDefault" column="IS_DEFAULT"></property>
+	    <property name="isEmployeerDeduction" column="IS_EMPER_DEDUCT" />
+		<joined-subclass name="AttendancePayHead" table="ATTENDANCE_PAYHEAD">
+			<key column="ID" />
+			<property name="attendanceType" column="ATTENDANCE_TYPE" />
+			<many-to-one name="payHead" column="PAY_HEAD" class="PayHead" />
+			<property name="calculationPeriod" column="CALCULATION_PERIOD" />
+			<property name="perDayCalculationBasis" column="PER_DAY_CALCULATION_BASIS" />
+			<many-to-one name="productionType" column="PRODUCTION_TYPE"
+				class="AttendanceOrProductionType" />
+		</joined-subclass>
+
+		<joined-subclass name="ComputionPayHead" table="COMPUTATION_PAY_HEAD">
+			<key column="ID" />
+			<property name="computationType" column="COMPUTATION_TYPE" />
+			<property name="calculationPeriod" column="CALCULATION_PERIOD" />
+			<list name="slabs" table="COMPUTATION_SLABS">
+				<key column="PAY_HEAD_ID" not-null="true" />
+				<list-index column="SLAB_INDEX" />
+				<composite-element class="ComputationSlab">
+					<property name="effectiveFrom" column="EFFECTIVE_FROM"
+						type="com.vimukti.accounter.core.LongUseType" />
+					<property name="fromAmount" column="FROM_AMOUNT" />
+					<property name="toAmount" column="TO_AMOUNT" />
+					<property name="slabType" column="SLAB_TYPE" />
+					<property name="value" column="VALUE" />
+				</composite-element>
+			</list>
+			<list name="formulaFunctions" table="FORMULA_FUNCTION">
+				<key column="PAY_HEAD_ID" not-null="true" />
+				<list-index column="FUNCTION_INDEX" />
+				<composite-element class="ComputaionFormulaFunction">
+					<property name="functionType" column="FUNCION_TYPE" />
+					<many-to-one name="payHead" column="PAY_HEAD" class="PayHead" />
+					<many-to-one name="attendanceType" column="ATTENDANCE_TYPE"
+						class="AttendanceOrProductionType" />
+				</composite-element>
+			</list>
+		</joined-subclass>
+
+		<joined-subclass name="FlatRatePayHead" table="FLAT_RATE_PAY_HEAD">
+			<key column="ID" />
+			<property name="calculationPeriod" column="CALCULATION_PERIOD" />
+			<property name="payFrequency" column="PAY_FREQUENCY" />
+			<property name="payType" column="PAY_TYPE" />
+		</joined-subclass>
+
+		<!-- <joined-subclass name="ProductionPayHead" table="PRODUCTION_PAY_HEAD"> 
+			<key column="ID" /> <many-to-one name="productionType" column="PRODUCTION_TYPE" 
+			class="AttendanceOrProductionType" /> </joined-subclass> -->
+
+		<joined-subclass name="UserDefinedPayHead" table="USER_DEFINED_PAY_HEAD">
+			<key column="ID" />
+
+		</joined-subclass>
+		
+	    <joined-subclass name="TaxComputationPayHead" table="TAX_COMPUTATION_PAY_HEAD">
+			<key column="ID" />
+			<many-to-one name="liveTaxRate" column="LIVE_TAX_RATE" class="LiveTaxRate">
+			</many-to-one>
+		</joined-subclass>
+		
+	</class>
+
+	<class name="AttendanceOrProductionType" table="ATTENDANCE_OR_PRODUCTION_TPE">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<many-to-one name="company" column="COMPANY_ID" class="Company">
+		</many-to-one>
+		<property name="type" column="TYPE" />
+		<property name="name" column="NAME" type="encryptedstring" />
+		<many-to-one name="unit" column="UNIT" class="PayrollUnit" />
+		<property name="periodType" column="PERIOD_TYPE" />
+		<many-to-one name="createdBy" column="CREATED_BY" class="User"
+			not-null="true" />
+		<many-to-one name="lastModifier" column="LAST_MODIFIER"
+			class="User" not-null="true" />
+		<property name="createdDate" column="CREATED_DATE" not-null="true" />
+		<property name="lastModifiedDate" column="LAST_MODIFIED_DATE"
+			not-null="true" />
+	</class>
+
+
+	<!-- <class name="EmployeeCategory" table="EMPLOYEE_CATEGORY"> <id name="id" 
+		column="ID"> <generator class="identity" /> </id> <many-to-one name="company" 
+		column="COMPANY_ID" class="Company"> </many-to-one> <many-to-one name="createdBy" 
+		column="CREATED_BY" class="User" not-null="true"></many-to-one> <many-to-one 
+		name="lastModifier" column="LAST_MODIFIER" class="User" not-null="true"></many-to-one> 
+		<property name="createdDate" column="CREATED_DATE" not-null="true" /> <property 
+		name="lastModifiedDate" column="LAST_MODIFIED_DATE" not-null="true" /> <property 
+		name="name" column="NAME" /> </class> -->
+
+	<class name="EmployeePayHeadComponent" table="EMPLOYEE_PAYHEAD_COMPONENT">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<many-to-one name="payHead" column="PAY_HEAD" class="PayHead">
+		</many-to-one>
+		<property name="version" column="VERSION"></property>
+		<many-to-one name="empPaymentDetails" class="EmployeePaymentDetails"
+			column="EMPLOYEE_PAYMENT_DETAILS_ID">
+		</many-to-one>
+		<property name="employeerDeductions" column="EMPYEER_DEDUCT" />
+		<property name="rate" column="RATE" />
+	</class>
+
+	<class name="EmployeePaymentDetails" table="EMPLOYEE_PAYMENT_DETAILS">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<property name="version" column="VERSION"></property>
+		<many-to-one name="payRun" column="PAY_RUN_ID" class="PayRun">
+		</many-to-one>
+		<many-to-one name="employee" column="EMPLOYEE" class="Employee">
+		</many-to-one>
+		<set name="payHeadComponents" inverse="true" cascade="save-update,delete-orphan">
+			<key column="EMPLOYEE_PAYMENT_DETAILS_ID" />
+			<one-to-many class="EmployeePayHeadComponent" />
+		</set>
+	</class>
+
+	<!-- <class name="AttendanceManagement" table="ATTENDANCE_MANAGEMENT"> <id 
+		name="id" column="ID"> <generator class="identity" /> </id> <many-to-one 
+		name="company" column="COMPANY_ID" class="Company"> </many-to-one> <list 
+		name="items" cascade="save-update,delete"> <key column="ATTENDANCE_MANAGEMENT" 
+		/> <list-index column="IDX" /> <one-to-many class="AttendanceManagementItem" 
+		/> </list> </class> -->
+
+	<class name="AttendanceManagementItem" table="ATTENDANCE_MANAGEMENT_ITEM">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<many-to-one name="employee" column="EMPLOYEE" class="Employee">
+		</many-to-one>
+		<!-- ATTENDANCE OR PRODUCTION ITEMS -->
+		<list name="attendanceOrProductionItems" table="ATTENDANCE_OR_PRODUCTION_ITEMS"
+			cascade="save-update,delete-orphan">
+			<key column="ATTENDANCE_MANAGEMENT_ITEM_ID" not-null="true" />
+			<list-index column="ATTENDANCE_OR_PRODUCTION_ITEMS_INDEX" />
+			<composite-element class="AttendanceOrProductionItem">
+				<many-to-one name="attendanceOrProductionType" column="ATTENDANCE_TYPE"
+					class="AttendanceOrProductionType">
+				</many-to-one>
+				<property name="value" column="VALUE" />
+			</composite-element>
+		</list>
+		<!--USER DEFINED PAYHEAD ITEMS -->
+		<list name="userDefinedPayheads" table="USER_DEFINED_PAYHEAD_ITEMS"
+			cascade="save-update,delete-orphan">
+			<key column="USER_DEFINED_PAYHEAD_ITEM_ID" not-null="true" />
+			<list-index column="USER_DEFINED_PAYHEAD_ITEM_INDEX" />
+			<composite-element class="UserDefinedPayheadItem">
+				<many-to-one name="payHead" column="PAY_HEAD" class="UserDefinedPayHead">
+				</many-to-one>
+				<property name="value" column="VALUE" />
+			</composite-element>
+		</list>
+		<property name="abscentDays" column="ABSCENT_DAYS" />
+	</class>
+
+	<sql-query name="EmployeeAttendanceCurrentBal">
+		<query-param name="company" type="long" />
+		<query-param name="employee" type="long" />
+		<query-param name="attendanceType" type="long" />
+
+		<return-scalar column="VAL" type="long" />
+		<![CDATA[
+			SELECT SUM(API.VALUE) AS VAL FROM
+					ATTENDANCE_MANAGEMENT_ITEM I
+					LEFT JOIN PAYEE E ON E.ID = I.EMPLOYEE
+					LEFT JOIN ATTENDANCE_OR_PRODUCTION_ITEMS API 
+					ON API.ATTENDANCE_MANAGEMENT_ITEM_ID = I.ID
+					WHERE E.COMPANY_ID = :company
+						  AND I.EMPLOYEE = :employee
+						  AND API.ATTENDANCE_TYPE = :attendanceType
+		]]>
+	</sql-query>
+
+
+	<query name="list.All.Employees">
+		<query-param name="company" type="Company" />
+		<query-param name="isActive" type="boolean" />
+		from com.vimukti.accounter.core.Employee e where
+		e.company=:company and
+		e.isActive =:isActive
+		order by e.id
+	</query>
+
+	<query name="list.All.Payheads">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.PayHead ph where
+		ph.company=:company
+		order by ph.id
+	</query>
+
+	<query name="list.All.PayrollUnits">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.PayrollUnit pr where
+		pr.company=:company
+		order by pr.id
+	</query>
+
+	<query name="list.Payhead">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.PayHead ph where
+		ph.company=:company
+		order by ph.id
+	</query>
+
+	<query name="list.PayrollUnit">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.PayrollUnit p where p.company=:company
+	</query>
+
+	<query name="list.PayStructure">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.PayStructure p where
+		p.company=:company
+	</query>
+
+	<query name="list.PayHeads">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.UserDefinedPayHead p where
+		p.company=:company
+	</query>
+	<query name="list.AttendanceProductionType">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.AttendanceOrProductionType p where
+		p.company=:company
+	</query>
+	<query name="list.EmployeeGroups">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.EmployeeGroup eg where
+		eg.company=:company
+	</query>
+
+	<!-- <query name="list.EmployeeCategories"> <query-param name="company" 
+		type="Company" /> from com.vimukti.accounter.core.EmployeeCategory ec where 
+		ec.company=:company </query> -->
+	<query name="getEmployee.by.Name">
+		<query-param name="company" type="Company" />
+		<query-param name="name" type="encryptedstring" />
+		<query-param name="id" type="long" />
+		from com.vimukti.accounter.core.Employee E where
+		E.company=:company and
+		E.name=:name and E.id != :id
+	</query>
+
+	<query name="getEmployeeGroup.by.Name">
+		<query-param name="company" type="Company" />
+		<query-param name="name" type="encryptedstring" />
+		<query-param name="id" type="long" />
+		from com.vimukti.accounter.core.EmployeeGroup E where
+		E.company=:company and
+		E.name=:name and E.id != :id
+	</query>
+
+	<query name="getPayhead.by.Name">
+		<query-param name="company" type="Company" />
+		<query-param name="name" type="encryptedstring" />
+		<query-param name="id" type="long" />
+		from com.vimukti.accounter.core.PayHead PH where
+		PH.company=:company
+		and
+		PH.name=:name and PH.id !=:id
+	</query>
+
+	<query name="getAttendanceType.by.Name">
+		<query-param name="company" type="Company" />
+		<query-param name="name" type="encryptedstring" />
+		<query-param name="id" type="long" />
+		from com.vimukti.accounter.core.AttendanceOrProductionType A where
+		A.company=:company and
+		A.name=:name and A.id != :id
+	</query>
+
+	<sql-query name="getPayStructureItem.by.employee">
+		<query-param name="companyId" type="long" />
+		<query-param name="employee" type="long" />
+		<query-param name="group" type="long" />
+		<query-param name="start" type="long"/>
+
+		<return class="com.vimukti.accounter.core.PayStructureItem"/>
+		<![CDATA[
+		SELECT psi.* 
+		FROM   pay_structure_item psi, 
+		       (SELECT pay_head            AS ph, 
+		               Max(effective_from) AS ef, 
+		               pay_structure       AS p_structure 
+		        FROM   pay_structure_item psi 
+		               left join pay_structure ps 
+		                      ON ps.id = psi.pay_structure 
+		        WHERE  ( ps.employee_group = :group 
+		                  OR ps.employee = :employee ) 
+		               AND ps.company_id = :companyId 
+		        GROUP  BY pay_head, 
+		                  pay_structure) AS test 
+		WHERE  pay_head = test.ph 
+		       AND effective_from = test.ef 
+		       AND test.ef <= :start 
+		       AND psi.pay_structure = test.p_structure 
+		ORDER  BY psi.rate DESC; 
+		]]>
+	</sql-query>
+
+	<query name="getEmployeesByGroup">
+		<query-param name="groupId" type="long"></query-param>
+		from com.vimukti.accounter.core.Employee e where
+		e.group.id=:groupId
+	</query>
+
+	<query name="getPayStructure">
+		<query-param name="employeeId" type="long"></query-param>
+		<query-param name="groupId" type="long"></query-param>
+		<query-param name="companyId" type="long"></query-param>
+		from com.vimukti.accounter.core.PayStructure p where
+		p.employee.id =
+		:employeeId or
+		p.employeeGroup.id = :groupId and
+		p.company.id =
+		:companyId
+	</query>
+
+	<sql-query name="getPaySlipSummary">
+		<query-param name="companyId" type="long" />
+		<query-param name="start" type="long" />
+		<query-param name="end" type="long" />
+
+		<return-scalar column="NAME" type="encryptedstring" />
+		<return-scalar column="NUMBER" type="encryptedstring" />
+		<return-scalar column="ACCOUNT_NUMBER" type="encryptedstring" />
+		<return-scalar column="BANK_NAME" type="encryptedstring" />
+		<return-scalar column="BRANCH" type="encryptedstring" />
+		<return-scalar column="AMOUNT" type="double" />
+		<return-scalar column="EMAIL" type="encryptedstring" />
+		<return-scalar column="EMPLOYEE_ID" type="long" />
+		<![CDATA[
+			SELECT 	P.NAME AS NAME,
+					E.NUMBER AS NUMBER,
+					P.BANK_ACCOUNT_NO AS ACCOUNT_NUMBER,
+					P.BANK_NAME AS BANK_NAME,
+					P.BANK_BRANCH AS BRANCH,
+					SUM(CASE WHEN PH.TYPE IN (1,6,7,8) THEN PC.RATE ELSE (-1 * PC.RATE) END) AS AMOUNT,
+					P.EMAIL_ID AS EMAIL,
+					P.ID AS EMPLOYEE_ID
+					FROM EMPLOYEE E 
+						LEFT OUTER JOIN PAYEE P ON P.ID = E.ID
+						LEFT JOIN EMPLOYEE_PAYMENT_DETAILS PD ON PD.EMPLOYEE = E.ID
+						LEFT JOIN EMPLOYEE_PAYHEAD_COMPONENT PC ON PC.EMPLOYEE_PAYMENT_DETAILS_ID = PD.ID
+						LEFT JOIN TRANSACTION T ON T.ID = PD.PAY_RUN_ID
+						LEFT JOIN PAY_HEAD PH ON PH.ID = PC.PAY_HEAD
+				
+						WHERE P.COMPANY_ID = :companyId
+								AND T.T_DATE BETWEEN :start AND :end
+								
+						GROUP BY P.ID,E.NUMBER	
+		]]>
+	</sql-query>
+
+	<sql-query name="getPaySheet">
+		<query-param name="companyId" type="long" />
+		<query-param name="start" type="long" />
+		<query-param name="end" type="long" />
+
+		<return-scalar column="EMPLOYEE_ID" type="long" />
+		<return-scalar column="EMPLOYEE_NAME" type="encryptedstring" />
+		<return-scalar column="PAYHEAD_ID" type="long" />
+		<return-scalar column="AMOUNT" type="double" />
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="PAYHEAD_ID" type="long" />
+		<![CDATA[
+			SELECT  E.ID AS EMPLOYEE_ID,
+					E.NAME AS EMPLOYEE_NAME,
+					PH.ID AS PAYHEAD_ID,
+					(SELECT SUM(CASE WHEN P.TYPE IN (1,6,7,8) THEN AT.RATE ELSE (-1 * AT.RATE) END)
+								 FROM   EMPLOYEE_PAYMENT_DETAILS PD
+									LEFT JOIN EMPLOYEE_PAYHEAD_COMPONENT AT
+									  ON PD.ID =AT.EMPLOYEE_PAYMENT_DETAILS_ID
+									LEFT JOIN TRANSACTION T ON T.ID = PD.PAY_RUN_ID
+									LEFT OUTER JOIN PAY_HEAD P
+									  ON P.ID = AT.PAY_HEAD
+									      
+								 WHERE  T.T_DATE BETWEEN :start AND :end
+									AND PD.EMPLOYEE = E.ID
+									AND PH.ID = P.ID
+									AND E.COMPANY_ID = :companyId)
+									AS AMOUNT,
+					EPC.ID AS TRANSACTION_ID,
+					PH.ID AS PAYHEAD_ID
+					
+					FROM EMPLOYEE_PAYMENT_DETAILS EPD
+						LEFT JOIN PAYEE E ON E.ID = EPD.EMPLOYEE
+						LEFT JOIN EMPLOYEE_PAYHEAD_COMPONENT EPC ON EPC.EMPLOYEE_PAYMENT_DETAILS_ID = EPD.ID
+						LEFT JOIN PAY_HEAD PH ON PH.ID = EPC.PAY_HEAD
+						LEFT JOIN TRANSACTION T ON T.ID = EPD.PAY_RUN_ID
+				
+						WHERE T.COMPANY_ID = :companyId AND
+							  T.T_DATE BETWEEN :start AND :end
+				
+						GROUP BY E.ID,PH.ID,EPC.ID	
+						
+						ORDER BY E.ID
+		]]>
+	</sql-query>
+
+	<sql-query name="getPayrunsList">
+		<query-param name="companyId" type="long" />
+		<query-param name="startDate" type="long" />
+		<query-param name="endDate" type="long" />
+		<query-param name="type" type="int" />
+		<return-scalar column="NAME" type="encryptedstring" />
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_NUMBER" type="encryptedstring" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TOTAL" type="double" />
+		<return-scalar column="IS_VOIDED" type="boolean" />
+			<![CDATA[
+			SELECT 	CASE WHEN PR.EMPLOYEE IS NULL THEN 
+					EG.NAME ELSE P.NAME END AS NAME,
+					T.ID AS TRANSACTION_ID,
+					T.NUMBER AS TRANSACTION_NUMBER,
+					T.T_DATE AS TRANSACTION_DATE,
+					T.TOTAL AS TOTAL,
+					CASE WHEN T.SAVE_STATUS =204 THEN TRUE ELSE FALSE 
+					END AS IS_VOIDED
+					FROM PAY_RUN PR 
+						LEFT OUTER JOIN TRANSACTION T ON T.ID = PR.ID
+						LEFT OUTER JOIN EMPLOYEE E ON E.ID=PR.EMPLOYEE
+						LEFT OUTER JOIN PAYEE P ON P.ID = E.ID
+						LEFT OUTER JOIN EMPLOYEE_GROUP EG
+					ON EG.ID=PR.EMPLOYEE_GROUP
+					WHERE T.COMPANY_ID =:companyId AND (PR.PAY_PERIOD_ENDDATE
+				BETWEEN :startDate AND :endDate OR PAY_PERIOD_STARTDATE 
+				BETWEEN :startDate AND :endDate) AND (CASE WHEN :type=1000 THEN TRUE ELSE T.SAVE_STATUS =204 END)
+				GROUP BY T.ID,PR.EMPLOYEE,PR.EMPLOYEE_GROUP,P.NAME,EG.NAME
+				ORDER BY T.T_DATE DESC, T.NUMBER DESC   
+			]]>
+	</sql-query>
+
+	<sql-query name="getPayEmployeeList">
+		<query-param name="companyId" type="long" />
+		<query-param name="startDate" type="long" />
+		<query-param name="endDate" type="long" />
+		<query-param name="type" type="int" />
+		<return-scalar column="NAME" type="encryptedstring" />
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_NUMBER" type="encryptedstring" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TOTAL" type="double" />
+		<return-scalar column="IS_VOIDED" type="boolean" />
+		<return-scalar column="AC_NAME" type="encryptedstring" />
+			<![CDATA[
+					SELECT CASE 
+					         WHEN PE.EMPLOYEE_ID IS NULL THEN EG.NAME 
+					         ELSE P.NAME 
+					       END      AS NAME, 
+					       T.ID     AS TRANSACTION_ID, 
+					       T.NUMBER AS TRANSACTION_NUMBER, 
+					       T.T_DATE AS TRANSACTION_DATE, 
+					       T.TOTAL  AS TOTAL, 
+					       CASE 
+					         WHEN T.SAVE_STATUS = 204 THEN TRUE 
+					         ELSE FALSE 
+					       END      AS IS_VOIDED ,
+					       A.NAME AS AC_NAME
+					FROM   PAY_EMPLOYEE PE 
+					       LEFT OUTER JOIN TRANSACTION T 
+					         ON T.ID = PE.ID 
+					       LEFT OUTER JOIN EMPLOYEE E 
+					         ON E.ID = PE.EMPLOYEE_ID 
+					       LEFT OUTER JOIN PAYEE P 
+					         ON P.ID = E.ID 
+					       LEFT OUTER JOIN EMPLOYEE_GROUP EG 
+					         ON EG.ID = PE.EMPLOYEE_GROUP_ID 
+					       LEFT OUTER JOIN ACCOUNT A 
+					         ON A.ID = PE.PAY_FROM_ID 
+					WHERE  T.COMPANY_ID = :companyId 
+					       AND T.T_DATE BETWEEN :startDate AND :endDate 
+					       AND ( CASE 
+					               WHEN :type = 1000 THEN TRUE 
+					               ELSE T.SAVE_STATUS = 204 
+					             END ) 
+					GROUP  BY T.ID, 
+					          PE.EMPLOYEE_ID, 
+					          PE.EMPLOYEE_GROUP_ID, 
+					          EG.NAME,P.NAME,
+					          P.NAME,A.ID
+					ORDER BY T.T_DATE DESC, T.NUMBER DESC          
+			]]>
+	</sql-query>
+
+	<sql-query name="getPayHeadDetials">
+		<query-param name="companyId" type="long" />
+		<query-param name="employeeId" type="long" />
+		<query-param name="start" type="long" />
+		<query-param name="end" type="long" />
+
+		<return-scalar column="PAY_HEAD_ID" type="long" />
+		<return-scalar column="NAME" type="encryptedstring" />
+		<return-scalar column="AMOUNT" type="double" />
+		<return-scalar column="TYPE" type="int" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="EMPYEER_DEDUCT" type="double" />
+		<![CDATA[
+			SELECT 	PH.ID AS PAY_HEAD_ID,
+					PH.NAME AS NAME,
+					SUM(EPC.RATE) AS AMOUNT,
+					CASE WHEN PH.TYPE IN(1,6,7,8) 
+						THEN 2
+						ELSE 3 END AS TYPE,
+					T.T_DATE AS TRANSACTION_DATE,
+					EPC.EMPYEER_DEDUCT as EMPYEER_DEDUCT
+					FROM EMPLOYEE_PAYMENT_DETAILS EPD
+						LEFT JOIN PAYEE E ON E.ID = EPD.EMPLOYEE
+						LEFT JOIN EMPLOYEE_PAYHEAD_COMPONENT EPC ON EPC.EMPLOYEE_PAYMENT_DETAILS_ID = EPD.ID
+						LEFT JOIN PAY_HEAD PH ON PH.ID = EPC.PAY_HEAD
+						LEFT JOIN TRANSACTION T ON T.ID = EPD.PAY_RUN_ID
+						
+					WHERE 	E.ID = :employeeId AND 
+							E.COMPANY_ID = :companyId AND
+							T.T_DATE BETWEEN :start AND :end
+				
+					GROUP BY PH.ID,E.ID,T.ID,EPC.EMPYEER_DEDUCT
+		]]>
+	</sql-query>
+
+	<sql-query name="getAttendanceDetials">
+		<query-param name="companyId" type="long" />
+		<query-param name="employeeId" type="long" />
+		<query-param name="start" type="long" />
+		<query-param name="end" type="long" />
+
+		<return-scalar column="ATTENDANCE_ID" type="long" />
+		<return-scalar column="NAME" type="encryptedstring" />
+		<return-scalar column="AMOUNT" type="double" />
+		<return-scalar column="PERIOD" type="int" />
+		<return-scalar column="TYPE" type="int" />
+		<return-scalar column="EMPLOYEE_ID" type="long" />
+		<return-scalar column="APT_TYPE" type="int" />
+		<return-scalar column="UNIT_NAME" type="encryptedstring" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<![CDATA[
+			SELECT 	AMI.ID AS ATTENDANCE_ID,
+					CASE WHEN API IS NULL then 'Present'
+					ELSE APT.NAME END AS NAME,
+					CASE WHEN API IS NULL 
+					THEN
+                    PR.NOOF_WORKING_DAYS -AMI.ABSCENT_DAYS
+					ELSE API.VALUE  END AS AMOUNT,
+					CASE WHEN API IS NULL
+					THEN 1
+					ELSE APT.PERIOD_TYPE END AS PERIOD,
+					1 AS TYPE,
+					P.ID AS EMPLOYEE_ID,
+					APT.TYPE AS APT_TYPE,
+					U.SYMBOL AS UNIT_NAME,
+					T.T_DATE As TRANSACTION_DATE				
+					FROM PAY_RUN PR
+						LEFT JOIN TRANSACTION T ON T.ID=PR.ID
+						LEFT JOIN ATTENDANCE_MANAGEMENT_ITEM AMI ON AMI.ATTENDANCE_MANAGEMENT = PR.ID
+						LEFT OUTER JOIN ATTENDANCE_OR_PRODUCTION_ITEMS API ON API.ATTENDANCE_MANAGEMENT_ITEM_ID = AMI.ID
+						LEFT OUTER JOIN PAYEE P ON P.ID =AMI.EMPLOYEE
+						LEFT JOIN ATTENDANCE_OR_PRODUCTION_TPE APT ON APT.ID = API.ATTENDANCE_TYPE
+						LEFT OUTER JOIN PAY_ROLL_UNIT U ON U.ID = APT.UNIT
+					WHERE 	P.ID = :employeeId AND 
+							P.COMPANY_ID = :companyId AND
+							AMI.ID IS NOT NULL AND
+							T.T_DATE BETWEEN :start AND :end				
+					GROUP BY PR.NOOF_WORKING_DAYS,AMI.ID,APT.ID,API.VALUE,P.ID,API.*,U.ID,T.ID
+		]]>
+	</sql-query>
+	<sql-query name="getTransactionPayEmployeeList">
+		<query-param name="employeeId" type="long" />
+		<query-param name="employeeGroupId" type="long" />
+		<query-param name="companyId" type="long" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="EMPLOYEE_NAME" type="encryptedstring" />
+		<return-scalar column="TRANSACTION_NUMBER" type="encryptedstring" />
+		<return-scalar column="ORIGINAL_AMOUNT" type="double" />
+		<return-scalar column="AMOUNT_DUE" type="double" />
+		<return-scalar column="PAYMENTS" type="double" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="PERIOD_START_DATE" type="long" />
+		<return-scalar column="PERIOD_END_DATE" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID AS TRANSACTION_ID,
+				       T.T_TYPE AS TRANSACTION_TYPE,
+				       (SELECT P.NAME
+				        FROM   PAYEE P
+				        WHERE  P.ID = PR.EMPLOYEE
+				               AND P.COMPANY_ID = :companyId) AS EMPLOYEE_NAME,
+				      T.NUMBER AS TRANSACTION_NUMBER,
+				      T.TOTAL AS ORIGINAL_AMOUNT,
+				      PR.BALANCE_DUE AS AMOUNT_DUE,
+				      PR.PAYMENTS AS PAYMENTS,
+				      T.T_DATE AS TRANSACTION_DATE,
+				      PR.PAY_PERIOD_STARTDATE AS PERIOD_START_DATE,
+				      PR.PAY_PERIOD_ENDDATE AS PERIOD_END_DATE
+				FROM   TRANSACTION T
+				       LEFT OUTER JOIN PAY_RUN PR
+				         ON T.ID = PR.ID
+				WHERE  T.T_TYPE =39
+				       AND T.SAVE_STATUS != 202
+				       AND ( PR.BALANCE_DUE > 0.0 )
+				       AND (CASE WHEN :employeeGroupId = 0 
+				       THEN PR.EMPLOYEE = :employeeId ELSE 
+				       PR.EMPLOYEE_GROUP =:employeeGroupId END)
+				       AND T.COMPANY_ID = :companyId  
+				]]>
+
+	</sql-query>
+		<sql-query name="getTransactionPayTaxList">
+		<query-param name="employeeId" type="long" />
+		<query-param name="employeeGroupId" type="long" />
+		<query-param name="companyId" type="long" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="EMPLOYEE_NAME" type="encryptedstring" />
+		<return-scalar column="TRANSACTION_NUMBER" type="encryptedstring" />
+		<return-scalar column="ORIGINAL_AMOUNT" type="double" />
+		<return-scalar column="AMOUNT_DUE" type="double" />
+		<return-scalar column="PAYMENTS" type="double" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="PERIOD_START_DATE" type="long" />
+		<return-scalar column="PERIOD_END_DATE" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID AS TRANSACTION_ID,
+				       T.T_TYPE AS TRANSACTION_TYPE,
+				       (SELECT P.NAME
+				        FROM   PAYEE P
+				        WHERE  P.ID = PR.EMPLOYEE
+				               AND P.COMPANY_ID = :companyId) AS EMPLOYEE_NAME,
+				      T.NUMBER AS TRANSACTION_NUMBER,
+				      T.TOTAL AS ORIGINAL_AMOUNT,
+				      PR.BALANCE_DUE AS AMOUNT_DUE,
+				      PR.PAYMENTS AS PAYMENTS,
+				      T.T_DATE AS TRANSACTION_DATE,
+				      PR.PAY_PERIOD_STARTDATE AS PERIOD_START_DATE,
+				      PR.PAY_PERIOD_ENDDATE AS PERIOD_END_DATE
+				FROM   TRANSACTION T
+				       LEFT OUTER JOIN PAY_RUN PR
+				         ON T.ID = PR.ID
+				WHERE  T.T_TYPE =39
+				       AND T.SAVE_STATUS != 202
+				       AND ( PR.BALANCE_DUE > 0.0 )
+				       AND (CASE WHEN :employeeGroupId = 0 
+				       THEN PR.EMPLOYEE = :employeeId ELSE 
+				       PR.EMPLOYEE_GROUP =:employeeGroupId END)
+				       AND T.COMPANY_ID = :companyId  
+				]]>
+
+	</sql-query>
+	
+</hibernate-mapping>

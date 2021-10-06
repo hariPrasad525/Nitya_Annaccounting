@@ -1,0 +1,314 @@
+<project name="accounter" basedir="." default="clean-setup">
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties" classpath="libs/ant-contrib.jar" />
+	<taskdef name="yguard" classname="com.yworks.yguard.YGuardTask" classpath="libs/yguard.jar" />
+	<property name="src.dir" value="./src" />
+	<property environment="env" />
+	<property name="build.dir" value="build" />
+	<property name="classes.dir" value="${build.dir}/classes" />
+	<property name="output.dir" value="output" />
+	<property name="setup.dir" value="setup" />
+	<property name="linuxtar-lib.dir" value="${setup.dir}/tar/libs" />
+	<property name="win-lib.dir" value="${setup.dir}/windows/libs" />
+	<property name="tmp.dir" value="${build.dir}/tmp" />
+		
+	<property name="gwt.sdk" location="gwt-2.8.2" />
+	<property name="version-number" value="1.0.9.11.67" />
+	<property name="name-version" value="${ant.project.name}-${version-number}" />
+
+	<property name="jar" value="${build.dir}/${name-version}.jar" />
+	<property name="obfjar" value="${build.dir}/${name-version}_obf.jar" />
+	<property name="renamelog" value="${build.dir}/${name-version}_renamelog.xml" />
+	<property name="shrinklog" value="${build.dir}/${name-version}_shrinklog.xml" />
+
+	<property name="main-class" value="com.vimukti.accounter.main.ServerMain" />
+
+	<!-- Checking GWT path -->
+	<target name="check-gwtpath">
+		<available file="${gwt.sdk}" property="gwt.present" />
+	</target>
+
+
+	<!-- gwt  libraries-->
+	<path id="gwtlibraries">
+		<pathelement location="${gwt.sdk}/gwt-user.jar" />
+		<pathelement location="${gwt.sdk}/validation-api-1.0.0.GA.jar" />
+		<pathelement location="${gwt.sdk}/validation-api-1.0.0.GA-sources.jar" />
+		<pathelement location="$./libs/gwt-comet-1.2.3.jar" />
+		<fileset dir="${gwt.sdk}" includes="gwt-dev*.jar" />
+		<fileset dir="./libs">
+			<include name="*.jar" />
+		</fileset>
+		<pathelement location="${src.dir}" />
+	</path>
+	<fileset file="war" id="war">
+		<exclude name=".svn" />
+	</fileset>
+
+	<!-- Cleaning -->
+	<target name="clean">
+		<delete dir="${build.dir}" />
+		<!--<delete defaultExcludes="false">
+			<fileset dir="./war/accounter" />
+		</delete>-->
+	</target>
+
+	<target name="compress">
+		<foreach target="compress_file" param="file">
+			<path>
+				<fileset dir="./war/" id="outputhtml">
+					<include name="**/*.js" />
+					<include name="**/*.css" />
+					<include name="**/*.html" />
+				</fileset>
+			</path>
+		</foreach>
+	</target>
+	<target name="compress_file" description="Compress file and make gz file">
+		<gzip src="${file}" zipfile="${file}.gz" />
+	</target>
+
+	<!--Compiling-->
+	<target name="compile" depends="check-gwtpath" if="gwt.present">
+		<mkdir dir="${classes.dir}" />
+		<mkdir dir="${libs.dir}" />
+		<javac srcdir="${src.dir}" destdir="./war/WEB-INF/classes" classpathref="gwtlibraries" debug="true" />
+	</target>
+	<target name="gwtcompile" description="GWT COMPILATION">
+		<mkdir dir="./war" />
+		<java classpathref="gwtlibraries" fork="true" classname="com.google.gwt.dev.Compiler">
+			<classpath>
+				<pathelement location="${acc.dir}/src" />
+				<pathelement location="./war/WEB-INF/classes" />
+			</classpath>
+			<jvmarg value="-Xmx1524m" />
+			<arg line="-war ./war/" />
+			<arg line="-style PRETTY" />
+			<arg line="com.vimukti.accounter.web.Accounter">
+				
+			</arg>
+			<arg line="-localWorkers 2" />
+		</java>
+	</target>
+	
+	<target name="gwtcompile-admin" description="GWT COMPILATION">
+			<mkdir dir="./war" />
+			<java classpathref="gwtlibraries" fork="true" classname="com.google.gwt.dev.Compiler">
+				<classpath>
+					<pathelement location="${acc.dir}/src" />
+					<pathelement location="./war/WEB-INF/classes" />
+				</classpath>
+				<jvmarg value="-Xmx1524m" />
+				<arg line="-war ./war/" />
+				<arg line="-style DETAILED" />
+				<arg line="com.vimukti.accounter.admin.Admin">
+				</arg>
+				<arg line="-localWorkers 2" />
+			</java>
+		</target>
+	<target name="gwtcompile-setup" description="GWT COMPILATION">
+				<mkdir dir="./war" />
+				<java classpathref="gwtlibraries" fork="true" classname="com.google.gwt.dev.Compiler">
+					<classpath>
+						<pathelement location="${acc.dir}/src" />
+						<pathelement location="./war/WEB-INF/classes" />
+					</classpath>
+					<jvmarg value="-Xmx1524m" />
+					<arg line="-war ./war/" />
+					<arg line="-style DETAILED" />
+					<arg line="com.vimukti.accounter.setup.Setup">
+						
+					</arg>
+					<arg line="-localWorkers 2" />
+				</java>
+			</target>
+
+	<target name="setup" depends="compress">
+		<!--<mkdir dir="${classes.dir}" />
+
+		<mkdir dir="${classes.dir}/war" />
+		<copy todir="${classes.dir}/war">
+			<fileset dir="./war">
+			</fileset>
+		</copy>
+		<mkdir dir="${classes.dir}/mapping" />
+		<copy todir="${classes.dir}/mapping">
+			<fileset dir="./mapping">
+			</fileset>
+		</copy>
+		<copy todir="${classes.dir}">
+			<fileset dir="src/">
+				<include name="**/*.properties" />
+			</fileset>
+		</copy>-->
+		<jar destfile="build/${name-version}.jar" index="true">
+			<fileset dir="./war/WEB-INF/classes">
+				<include name="**/**" />
+			</fileset>
+			<fileset file="./war">
+				<include name="war/**">
+				</include>
+				<exclude name="**/WEB-INF/deploy/**" />
+				<exclude name="**/WEB-INF/classes/**" />
+				<exclude name="**/WEB-INF/lib/**" />
+			</fileset>
+			<fileset file="./mapping">
+				<include name="mapping/**">
+				</include>
+			</fileset>
+			<!--<fileset dir="src/">
+				<include name="**/*.properties" />
+			</fileset>-->
+			<manifest>
+				<attribute name="Main-Class" value="${main-class}" />
+			</manifest>
+		</jar>
+	</target>
+
+
+	<!--tar Setup-->
+	<target name="linux-setup-tar" depends="setup">
+		<delete>
+			<fileset dir="${setup.dir}/tar">
+				<include name="lib/**" />
+				<exclude name="lib/gwt-dev.jar" /> 
+				<include name="config/**" />
+				<include name="conf/**" />
+				<include name="bat/**" />
+				<include name="log/**" />
+				<include name="logs/**" />
+			</fileset>
+		</delete>
+		<copy todir="${setup.dir}/tar">
+			<fileset dir="./">
+				<include name="config/**" />
+				<exclude name="config/config.ini" />
+			</fileset>
+		</copy>
+		<copy todir="${setup.dir}/tar">
+			<fileset dir="wrapper">
+				<include name="*.sh" />
+			</fileset>
+		</copy>
+		<copy todir="${setup.dir}/tar/lib">
+			<fileset dir="${build.dir}">
+				<include name="${name-version}.jar" />
+			</fileset>
+			<fileset dir="libs" />
+		</copy>
+		<mkdir dir="${tmp.dir}" />
+		<copy todir="${tmp.dir}">
+			<fileset dir="${setup.dir}/tar">
+				<exclude name=".svn/*" />
+			</fileset>
+		</copy>
+		<chmod file="${tmp.dir}/**" perm="+x" />
+		<chmod file="${tmp.dir}/wrapper/bat/**" perm="+x" />
+
+		<tar destfile="${output.dir}/${name-version}.tar" basedir="${tmp.dir}" />
+		<gzip destfile="${output.dir}/${name-version}.tar.gz" src="${output.dir}/${name-version}.tar" />
+		<delete dir="${tmp.dir}" />
+		<delete file="${output.dir}/${name-version}.tar" />
+	</target>
+
+	<!--Windows Setup-->
+	<target name="win-setup" depends="setup">
+		<delete>
+			<fileset dir="${setup.dir}/windows">
+				<include name="lib/**" />
+				<include name="config/**" />
+				<include name="conf/**" />
+				<include name="bat/**" />
+				<include name="log/**" />
+				<include name="logs/**" />
+			</fileset>
+		</delete>
+		<copy todir="${setup.dir}/windows">
+			<fileset dir="./">
+				<include name="config/**" />
+				<exclude name="config/config.ini" />
+			</fileset>
+		</copy>
+		<copy todir="${setup.dir}/windows">
+			<fileset dir="wrapper">
+				<exclude name="*.bat" />
+			</fileset>
+		</copy>
+		<copy todir="${setup.dir}/windows/lib/">
+			<fileset dir="${build.dir}">
+				<include name="${name-version}.jar" />
+			</fileset>
+			<fileset dir="libs" />
+		</copy>
+		<exec command="makensis ${setup.dir}/windows/AccounterSetup.nsi">
+		</exec>
+		<copy todir="${output.dir}">
+			<fileset dir="${setup.dir}/windows">
+				<include name="AccounterSetup.exe" />
+			</fileset>
+		</copy>
+		<delete>
+			<fileset dir="${setup.dir}/windows">
+				<include name="AccounterSetup.exe" />
+			</fileset>
+		</delete>
+
+		<move todir="${output.dir}">
+			<fileset dir="${setup.dir}/windows">
+				<include name="Accounter.exe" />
+			</fileset>
+		</move>
+	</target>
+
+	<target name="yguard">
+		<!-- the following can be adjusted to your needs -->
+		<yguard>
+			<inoutpair in="${jar}" out="${obfjar}" />
+
+			<!--<shrink logfile="${shrinklog}">
+          <keep>
+            <class  classes="protected"
+                methods="protected" fields="protected">
+             <patternset>
+                <include name="com.vimukti.accounter.**.*"/>
+             	<include name="org.hibernate.dialect.**.*"/>
+              </patternset>
+            </class>
+          </keep>
+        </shrink>-->
+
+			<rename mainclass="${main-class}" logfile="${renamelog}">
+				<!--<property name="error-checking" value="pedantic"/>-->
+				<keep>
+					<!--<class extends="com.vimukti.accounter.core.ObjectConvertUtil" methods="public" fields="none" />-->
+					<class extends="com.vimukti.accounter.core.CreatableObject" methods="public" fields="private" />
+					<class extends="javax.servlet.http.HttpServlet" methods="public" fields="private" />
+
+					<class implements="com.vimukti.accounter.web.client.i18n.Messages" methods="public" fields="private" />
+					<class implements="com.vimukti.accounter.core.IAccounterServerCore" methods="public" fields="private" />
+					<class implements="javax.servlet.Filter" methods="public" fields="private" />
+					<class implements="javax.servlet.ServletContextListener" methods="public" fields="private" />
+					<class implements="com.google.gwt.user.client.rpc.RemoteService" methods="public" fields="private" />
+					<class implements="java.io.Serializable" classes="private" methods="private" fields="private" />
+					<class implements="com.google.gwt.user.client.rpc.IsSerializable" classes="private" methods="private" fields="private" />
+					<field name="serialVersionUID" />
+
+					<class methods="public" fields="private">
+						<patternset>
+							<include name="com.vimukti.accounter.core.*" />
+							<include name="org.hibernate.dialect.*" />
+							<include name="com.vimukti.accounter.ws.*" />
+							<include name="com.vimukti.accounter.web.server.i18n.*" />
+						</patternset>
+					</class>
+				</keep>
+			</rename>
+		</yguard>
+	</target>
+
+	<target name="clean-setup" depends="clean,setup" />
+	<target name="clean-setup-obf" depends="clean,setup,yguard" />
+	<target name="setupandclean" depends="clean-setup,linux-setup-tar,win-setup" />
+
+</project>
+
+<!-- end file build.xml -->

@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.vimukti.accounter.core"
+	default-access="field">
+
+	<!-- <class name="User" table="USER"> <id name="id" column="ID"> <generator 
+		class="identity" /> </id> <property name="fullName" column="FULLNAME" /> <property 
+		name="displayName" column="DISPALYNAME" /> <property name="email" column="EMAIL_ID" 
+		/> <property name="userRole" column="USER_ROLE" /> <property name="company" 
+		column="COMPANY" /> <property name="address1" column="ADDRESS1" /> <property 
+		name="address2" column="ADDRESS2" /> <property name="city" column="CITY" 
+		/> <property name="province" column="PROVINCE" /> <property name="country" 
+		column="COUNTRY" /> <property name="zipCode" column="ZIPCODE" /> <property 
+		name="workphone" column="WORKPHONE" /> <property name="mobile" column="MOBILE" 
+		/> <property name="isLocked" column="ISLOCKED" /> <property name="isExternal" 
+		column="ISEXTERNAL" /> <property name="designation" column="DESIGNATION" 
+		/> <property name="title" column="TITLE" /> <property name="isItDeletedUser" 
+		column="IS_DELETED_USER" /> <map name="acessInfo" cascade="all,delete-orphan" 
+		table="ACCESS_INFO"> <key column="USER_ID" not-null="true" /> <index column="CATEGORY_NAME" 
+		type="string" /> <element column="ACESS_VALUE" type="string" /> </map> </class> -->
+
+	<sql-query name="getAllUsersIds">
+	
+		<![CDATA[
+				SELECT U.USERID
+				FROM   `USER` U  
+				]]>
+				
+	</sql-query>
+	
+	<sql-query name="getAllInternalUserIds">
+		
+		<![CDATA[
+				SELECT U.USERID
+				FROM   `USER` U
+				WHERE  U.ISEXTERNAL = FALSE  
+				]]>
+				
+	</sql-query>
+
+	<query name="user.by.userId">
+		<query-param name="userid" type="string" />
+		from com.vimukti.accounter.core.User u where u.id=:userid
+	</query>
+
+	<query name="user.by.emailid">
+		<query-param name="company" type="Company" />
+		<query-param name="emailID" type="String" />
+		from com.vimukti.accounter.core.User u where u.client.emailId=:emailID
+		and u.company=:company
+	</query>
+	
+	<query name="user.by.emailid.companyId">
+		<query-param name="companyId" type="long" />
+		<query-param name="emailID" type="String" />
+		from com.vimukti.accounter.core.User u where u.client.emailId=:emailID
+		and u.company.id=:companyId
+	</query>
+
+	<!-- full user count -->
+	<sql-query name="active_userscount">
+		
+		<![CDATA[
+				SELECT COUNT(*)
+				FROM   `USER`
+				WHERE  ISEXTERNAL = FALSE;  
+				]]>
+				
+	</sql-query>
+
+	<!-- lite user count -->
+	<sql-query name="lite_userscount">
+		
+		<![CDATA[
+				SELECT COUNT(*)
+				FROM   `USER`
+				WHERE  ISEXTERNAL = TRUE;  
+				]]>
+	</sql-query>
+
+	<!-- CHAT -->
+	<query name="activation.by.networkId">
+		<query-param name="networkId" type="String" />
+		from com.vimukti.accounter.core.IMActivation i where
+		i.networkId=:networkId
+	</query>
+
+	<query name="activation.by.tocken">
+		<query-param name="tocken" type="String" />
+		from com.vimukti.accounter.core.IMActivation i where
+		i.tocken=:tocken
+	</query>
+
+	<query name="imuser.by.networkId">
+		<query-param name="networkId" type="String" />
+		<query-param name="networkType" type="int" />
+		from com.vimukti.accounter.core.IMUser i where
+		i.networkId=:networkId
+		and i.networkType=:networkType
+	</query>
+
+</hibernate-mapping>

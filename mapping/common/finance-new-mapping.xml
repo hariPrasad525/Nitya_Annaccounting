@@ -1,0 +1,316 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+                "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.vimukti.accounter.core"
+	default-access="field" auto-import="false">
+	<class name="Client" table="CLIENT">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<property name="firstName" column="FIRST_NAME"></property>
+		<property name="lastName" column="LAST_NAME"></property>
+		<property name="fullName" column="FULL_NAME"></property>
+		<property name="emailId" unique="true" column="EMAIL_ID"></property>
+		<property name="password" column="PASSWORD"></property>
+		<property name="passwordRecoveryKey" column="PASSWORD_REOVERY_KEY"></property>
+		<property name="isActive" column="IS_ACTIVE"></property>
+		<property name="phoneNumber" column="PHONE_NUMBER"></property>
+		<property name="country" column="COUNTRY"></property>
+		<property name="isSubscribedToNewsLetters" column="IS_SUBSCRIBED_TO_NEWS_LETTER"></property>
+		<property name="isRequirePasswordReset" column="IS_REQUIRE_PASSWORD_RESET" />
+		<property name="loginCount" column="LOGIN_COUNT" update="true"></property>
+		<property name="lastLoginTime" column="LAST_LOGIN_TIME"
+			update="true"></property>
+		<property name="isDeleted" column="IS_DELETED" />
+		<property name="isEmailBounced" column="IS_EMAIL_BOUNCED" />
+
+		<property name="createdDate" column="CREATED_DATE"
+			type="com.vimukti.accounter.core.LongUseType"></property>
+		<property name="transactionsCreatedCount" column="TRANSACTIONS_CREATED"
+			update="true"></property>
+		<property name="transactionsUpdatedCount" column="TRANSACTIONS_UPDATE"
+			update="true"></property>
+		<property name="companiesCount" column="COMPANIES" update="true"></property>
+		<property name="updateDate" column="UPDATE_DATE"
+			type="com.vimukti.accounter.core.LongUseType"></property>
+		<property name="openedCompaniesCount" column="OPENED_COMPANIES"
+			update="true"></property>
+		<property name="changedPasswordCount" column="CHANGED_PASSWORD"
+			update="true"></property>
+		<property name="transactionCreatedFromDeviceCount" column="TRANSACTION_CREATED_FROM_DEVICE"
+			update="true"></property>
+		<property name="transactionUpdatedFromDeviceCount" column="TRANSACTION_UPDATE_FROM_DEVICE"
+			update="true"></property>
+		<property name="companiesFromDeviceCount" column="COMPANIES_COUNT_FROM_DEVICE"
+			update="true"></property>
+		<property name="loginFromDeviceCount" column="LOGGEDIN_COUNT_FROM_DEVICE"
+			update="true"></property>
+		<property name="premiumCompaniesCount" column="PREMIUM_COMPANIES"
+			update="true"></property>
+		<property name="subscriptionType" column="SUBSCRIPTION_TYPE"
+			update="true"></property>
+		<property name="isPremiumTrailDone" column="IS_PREMIUM_DONE"
+			update="true"></property>
+		<set name="users" inverse="true">
+			<key column="CLIENT_ID"></key>
+			<one-to-many class="User" />
+		</set>
+		<set name="languages" table="CLIENT_LANGUAGES" lazy="false"
+			cascade="all">
+			<key column="CLIENT_ID"></key>
+			<many-to-many column="LANGUAGE_CODE"
+				class="com.vimukti.accounter.web.server.translate.Language" />
+		</set>
+		<many-to-one name="clientSubscription"
+			class="com.vimukti.accounter.core.ClientSubscription" lazy="false"
+			cascade="save-update" column="CLIENT_SUBSCRIPTION">
+		</many-to-one>
+		
+		<many-to-one name="licensePurchase"
+			class="com.vimukti.accounter.core.LicensePurchase"
+			cascade="save-update" column="LICENSE_PURCHASE">
+		</many-to-one>
+	</class>
+
+	<class name="ClientSubscription" table="CLIENT_SUBSCRIPTION">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<many-to-one name="subscription" column="SUBSCRIPTION_ID"
+			class="Subscription" not-null="true">
+		</many-to-one>
+		<property name="lastModified" column="LAST_MODIFIED"></property>
+		<property name="createdDate" column="CREATED_DATE"></property>
+		<property name="expiredDate" column="EXPIRED_DATE"></property>
+		<property name="gracePeriodDate" column="GRACEPERIOD_DATE"></property>
+		<property name="premiumType" column="PREMIUM_TYPE"></property>
+		<property name="durationType" column="DURATION_TYPE"></property>
+		<property name="paypalSubscriptionProfileId" column="PAYPAL_PROFILE_ID"
+			 ></property>
+		<set name="members" table="MEMBERS">
+			<key column="MEMBER_ID" />
+			<element column="EMAIL_ID" type="string" />
+		</set>
+	</class>
+	<class name="Subscription" table="SUBSCRIPTION">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<property name="type" column="TYPE"></property>
+		<set name="features" table="FEATURES">
+			<key column="FEATURE_ID" />
+			<element column="FEATURE_NAME" type="string" />
+		</set>
+	</class>
+	<!-- <class name="Subscription" table="SUBSCRIPTION"> <id name="id" column="ID"> 
+		<generator class="identity" /> </id> <property name="date" column="DATE"></property> 
+		<property name="type" column="TYPE"></property> </class> -->
+
+	<class name="ClientPaypalDetails" table="CLIENT_PAYPAL_DETAILS">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<property name="firstname" column="FIRST_NAME"></property>
+		<property name="lastname" column="LAST_NAME"></property>
+		<property name="paymentStatus" column="PAYMENT_STATUS"></property>
+		<property name="payerEmail" column="PAYER_EMAIL"></property>
+		<property name="paymentGross" column="PAYMENT_GROSS" type='double'></property>
+		<property name="mcCurrency" column="MC_CURRENCY"></property>
+		<property name="addressCountry" column="ADDRESS_COUNTRY"></property>
+		<property name="clinetEmailId" column="CLIENT_EMAILID"></property>
+		<property name="mcGross" column="MC_GROSS"></property>
+		<property name="protectionEligibility" column="PROTECTION_ELIGIBILITY"></property>
+		<property name="payerId" column="PAYER_ID"></property>
+		<property name="paymentDate" column="PAYMENT_DATE"></property>
+		<property name="PDTpaymentSstatus" column="PDT_PAYMENT"></property>
+		<property name="charset" column="CHARSET"></property>
+		<property name="noptionSelection1" column="NOOPTION_SELECTION"></property>
+		<property name="nmcFee" column="NMC_FEE"></property>
+		<property name="notifyVersion" column="NOTIFY_VERSION"></property>
+		<property name="subscrId" column="SUBSCRIBER_ID"></property>
+		<property name="custom" column="CUSTOM"></property>
+		<property name="payerStatus" column="PAYER_STATUS"></property>
+		<property name="business" column="BUSINESS"></property>
+		<property name="verifySign" column="VERIFY_SIGN"></property>
+		<property name="optionName1" column="OPTION_NAME"></property>
+		<property name="txnId" column="TXN_ID"></property>
+		<property name="paymentType" column="PAYMENT_TYPE"></property>
+		<property name="payerBusinessName" column="PAYER_BUSINESS_NAME"></property>
+		<property name="btnId" column="BTN_ID"></property>
+		<property name="receiverEmail" column="RECEIVER_EMAIL"></property>
+		<property name="paymentFee" column="PAYMENT_FEE"></property>
+		<property name="receiverId" column="RECEIVER_ID"></property>
+		<property name="txnType" column="TXN_TYPE"></property>
+		<property name="itemName" column="ITEM_NAME"></property>
+		<property name="itemNumber" column="ITEM_NUMBER"></property>
+		<property name="residenceCountry" column="RESIDENT_COUNTRY"></property>
+		<property name="transactionSubject" column="TRANSACTION_SUBJECT"></property>
+		<property name="ipnTrackId" column="IPN_TRACKID"></property>
+
+	</class>
+	<class name="Activation" table="ACTIVATION">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<property name="emailId" column="EMAIL_ID"></property>
+		<property name="token" column="TOKEN"></property>
+		<property name="signUpDate" column="SIGN_UP_DATE"></property>
+	</class>
+
+	<class name="Developer" table="DEVELOPER">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<many-to-one name="client" class="com.vimukti.accounter.core.Client"
+			lazy="false" column="CLIENT">
+		</many-to-one>
+		<property name="apiKey" column="API_KEY"></property>
+		<property name="secretKey" column="SECRET_KEY"></property>
+		<property name="applicationName" column="APPLICATION_NAME"></property>
+		<property name="description" type="text" column="DESCRIPTION"></property>
+		<property name="integrationUrl" column="INTEGRATIONURL"></property>
+		<property name="applicationType" column="APPLICATIONTYPE"></property>
+		<property name="applicationUse" column="APPLICATIONUSE"></property>
+		<property name="developerEmailId" column="DEVELOPER_EMAIL_ID"></property>
+		<property name="contact" column="CONTACT"></property>
+		<property name="succeedRequests" column="SUCCEES_REQUESTS"></property>
+		<property name="failureRequests" column="FAILURE_REQUESTS"></property>
+
+	</class>
+
+	<class name="ServerMaintanance" table="SERVER_MAINTANANCE">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<property name="isUnderMaintanance" column="IS_UNDER_MAINTANANCE" />
+	</class>
+
+	<class name="RememberMeKey" table="REMEMBER_ME_KEY">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<property name="key" column="REMEMBER_KEY"></property>
+		<property name="emailID" column="EMAIL_ID"></property>
+		<property name="clientKey" column="CLIENT_KEY"></property>
+		<property name="serverKey" column="SERVER_KEY" type="binary"></property>
+	</class>
+
+	<class name="IMUser" table="I_M_USER">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<many-to-one name="client" class="com.vimukti.accounter.core.Client"
+			lazy="false" column="CLIENT">
+		</many-to-one>
+		<property name="networkId" column="NETWORK_ID"></property>
+		<property name="networkType" column="NETWORK_TYPE"></property>
+	</class>
+
+	<class name="IMActivation" table="IM_ACTIVATION">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<property name="networkId" column="NETWORK_ID"></property>
+		<property name="emailId" column="EMAILID"></property>
+		<property name="tocken" column="TOCKEN"></property>
+	</class>
+	<class name="MobileCookie" table="MOBILE_COOKIE">
+		<id name="cookie" column="COOKIE"></id>
+		<many-to-one name="client" class="com.vimukti.accounter.core.Client"
+			lazy="false" column="CLIENT">
+		</many-to-one>
+	</class>
+
+	<class name="PortletPageConfiguration" table="PORTLET_PAGE_CONFIGURATION">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<property name="pageName" column="PAGE_NAME" not-null="true"></property>
+		<list name="portlets" cascade="save-update,delete" lazy="false">
+			<key column="PORTLET_CONFIG_ID" />
+			<list-index column="PORTLET_CONFIGURATION_ID" />
+			<one-to-many class="PortletConfiguration" />
+		</list>
+		<many-to-one name="user" column="USER_ID" class="User"
+			lazy="false" not-null="true">
+		</many-to-one>
+		<property name="columns" column="COLUMNS" type="integer"></property>
+	</class>
+
+	<class name="PortletConfiguration" table="PORTLET_CONFIGURATION">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<property name="portletName" column="PORTLET_NAME"></property>
+		<property name="column" column="COLUMN_NO" type="integer"></property>
+		<map name="portletData" table="PORTLET_CONFIGURATION_PORTLETDATA">
+			<key column="id" />
+			<index column="KEY" type="string" />
+			<element column="VALUE" type="string" />
+		</map>
+	</class>
+
+
+	<class name="Property" table="PROPERTY">
+		<id name="id" column="ID"/>
+		<property name="value" column="VALUE" />
+	</class>
+	
+	<class name="License" table="LICENSE">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<many-to-one name="client" column="CLIENT_ID" class="Client">
+		</many-to-one>
+		<property name="licenseText" column="LICENSE_TEXT" type="text" not-null="true"/>
+		<property name="serverId" column="SERVER_ID" not-null="true"/>
+		<property name="organisation" column="ORGANISATION"/>
+		<property name="expiresOn" column="EXPIRES_ON"/>
+		
+		<property name="purchasedOn" column="PURCHASED_ON"/>
+		<property name="isActive" column="IS_ACTIVE"/>
+		<property name="version" column="VERSION"/>
+		<property name="noOfUsers" column="NO_OF_USERS"/>
+	</class>
+	
+	<class name="LicensePurchase" table="LICENSE_PURCHASE">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<many-to-one name="client" column="CLIENT_ID" class="Client"
+			not-null="true">
+		</many-to-one>
+		<property name="type" column="TYPE"/>
+		<property name="paypalSubscriptionID" column="PAYPAL_SUB_ID"/>
+		<property name="purchaseDate" column="PURCHASE_DATE"/>
+		<property name="expiredDate" column="EXPIRED_DATE"/>
+	</class>
+
+	<class name="InvoiceFrequencyGroup" table="INVOICE_FREQUENCY_GROUP">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<many-to-one name="company" column="COMPANY_ID"
+					 class="Company" not-null="true">
+		</many-to-one>
+		<property name="name" type="encryptedstring" not-null="true"
+				  column="NAME"></property>
+		<property name="version" column="VERSION"></property>
+		<many-to-one name="createdBy" column="CREATED_BY"
+					 class="User" not-null="true"></many-to-one>
+		<many-to-one name="lastModifier" column="LAST_MODIFIER"
+					 class="User" not-null="true"></many-to-one>
+		<property name="createdDate" column="CREATED_DATE"
+				  not-null="true" />
+		<property name="lastModifiedDate" column="LAST_MODIFIED_DATE"
+				  not-null="true" />
+		<property name="isDefault" column="IS_DEFAULT"></property>
+		<!-- <list name="items" table="ITEM_ITEM_GROUP" cascade="save-update"> -->
+		<!-- <key column="ITEM_GROUP_ID"></key> -->
+		<!-- <list-index column="IG_INDEX" /> -->
+		<!-- <many-to-many column="ITEM_ID" class="Item" /> -->
+		<!-- </list> -->
+	</class>
+
+</hibernate-mapping>

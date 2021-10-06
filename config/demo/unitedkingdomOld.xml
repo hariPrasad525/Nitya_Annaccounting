@@ -1,0 +1,1409 @@
+<?xml version="1.0"?>
+<ClientCompany>
+
+
+	<registrationNumber>10541244</registrationNumber>
+	<companyEmail>defaultcompany@mail.com</companyEmail>
+	<companyEmailForCustomers></companyEmailForCustomers>
+	<isConfigured>1</isConfigured>
+	<ein></ein>
+	<firstMonthOfFiscalYear>0</firstMonthOfFiscalYear>
+	<firstMonthOfIncomeTaxYear>0</firstMonthOfIncomeTaxYear>
+	<taxForm>0</taxForm>
+	<booksClosingDate>0</booksClosingDate>
+	<closingDateWarningType>0</closingDateWarningType>
+	<enableAccountNumbers>FALSE</enableAccountNumbers>
+	<customerType>0</customerType>
+	<enableAutoRecall>FALSE</enableAutoRecall>
+	<restartSetupInterviews>FALSE</restartSetupInterviews>
+	<fiscalYearStarting>0</fiscalYearStarting>
+	<industry>0</industry>
+	<bankAccountNo>1025635</bankAccountNo>
+	<sortCode>DF</sortCode>
+	
+	
+	
+	<customers>
+		<Customer id="1">
+			<custNameText>Blue Ribbons Pvt Ltd</custNameText>
+			<isactive>TRUE</isactive>
+			<customerSinceDate>09/08/2001</customerSinceDate>
+			<balanceText>100000</balanceText>
+			balanceDate
+			<balanceDate>09/08/2001</balanceDate>
+			<fonFaxForm>
+				<businessPhoneText>785965859</businessPhoneText>
+				<businessFaxText>785412589</businessFaxText>
+			</fonFaxForm>
+			<emailForm>
+				<businesEmailText>blue@mail.com</businesEmailText>
+				<webText>www.blue_ribbon_ltd.com</webText>
+			</emailForm>
+			<allContacts>
+				<isPrimary>John</isPrimary>
+				<name></name>
+				<title></title>
+				<businessPhone>78458236985</businessPhone>
+				<email>john@blue.com</email>
+			</allContacts>
+			<addrsForm>
+				<rAddress1Label></rAddress1Label>
+				<rAddress2Label></rAddress2Label>
+				<rCityLabel></rCityLabel>
+				<rStateComboLabel></rStateComboLabel>
+				<rPostalCodeLabel></rPostalCodeLabel>
+				<rCountryComboLabel></rCountryComboLabel>
+			</addrsForm>
+		</Customer>
+
+		<Customer id="2">
+			<custNameText>Mega Manufacture Corp.</custNameText>
+			<isactive>TRUE</isactive>
+			<customerSinceDate>15/08/2005</customerSinceDate>
+			<balanceText>200000</balanceText>
+			balanceDate
+			<balanceDate>15/08/2005</balanceDate>
+			<fonFaxForm>
+				<businessPhoneText>85698566215</businessPhoneText>
+				<businessFaxText>7854125696</businessFaxText>
+			</fonFaxForm>
+			<emailForm>
+				<businesEmailText></businesEmailText>
+				<webText></webText>
+			</emailForm>
+			<allContacts>
+				<isPrimary></isPrimary>
+				<name></name>
+				<title></title>
+				<businessPhone></businessPhone>
+				<email></email>
+			</allContacts>
+			<addrsForm>
+				<rAddress1Label></rAddress1Label>
+				<rAddress2Label></rAddress2Label>
+				<rCityLabel></rCityLabel>
+				<rStateComboLabel></rStateComboLabel>
+				<rPostalCodeLabel></rPostalCodeLabel>
+				<rCountryComboLabel></rCountryComboLabel>
+			</addrsForm>
+		</Customer>
+
+		<Customer id="3">
+			<custNameText>Heli Mart Ltd.</custNameText>
+			<isactive>TRUE</isactive>
+			<customerSinceDate>15/08/2005</customerSinceDate>
+			<balanceText>200000</balanceText>
+			balanceDate
+			<balanceDate>15/08/2005</balanceDate>
+			<fonFaxForm>
+				<businessPhoneText>85698566215</businessPhoneText>
+				<businessFaxText>7854125696</businessFaxText>
+			</fonFaxForm>
+			<emailForm>
+				<businesEmailText></businesEmailText>
+				<webText>www.heli-mart.in</webText>
+			</emailForm>
+			<allContacts>
+				<isPrimary>TRUE</isPrimary>
+				<name>John</name>
+				<title></title>
+				<businessPhone></businessPhone>
+				<email></email>
+			</allContacts>
+			<addrsForm>
+				<rAddress1Label></rAddress1Label>
+				<rAddress2Label></rAddress2Label>
+				<rCityLabel></rCityLabel>
+				<rStateComboLabel></rStateComboLabel>
+				<rPostalCodeLabel></rPostalCodeLabel>
+				<rCountryComboLabel></rCountryComboLabel>
+			</addrsForm>
+		</Customer>
+
+		<Customer id="4">
+			<custNameText>KeyBoard Wizards</custNameText>
+			<isactive>TRUE</isactive>
+			<customerSinceDate>26/10/2010</customerSinceDate>
+			<balanceText>200000</balanceText>
+			balanceDate
+			<balanceDate>26/10/2010</balanceDate>
+			<fonFaxForm>
+				<businessPhoneText>85698566215</businessPhoneText>
+				<businessFaxText>7854125696</businessFaxText>
+			</fonFaxForm>
+			<emailForm>
+				<businesEmailText></businesEmailText>
+				<webText></webText>
+			</emailForm>
+			<allContacts>
+				<isPrimary>TRUE</isPrimary>
+				<name>Maax</name>
+				<title></title>
+				<businessPhone></businessPhone>
+				<email></email>
+			</allContacts>
+			<addrsForm>
+				<rAddress1Label></rAddress1Label>
+				<rAddress2Label></rAddress2Label>
+				<rCityLabel></rCityLabel>
+				<rStateComboLabel></rStateComboLabel>
+				<rPostalCodeLabel></rPostalCodeLabel>
+				<rCountryComboLabel></rCountryComboLabel>
+			</addrsForm>
+		</Customer>
+
+		<Customer id="5">
+			<custNameText>Micro Communication</custNameText>
+			<isactive>TRUE</isactive>
+			<customerSinceDate>05/03/2001</customerSinceDate>
+			<balanceText>200000</balanceText>
+			balanceDate
+			<balanceDate>05/03/2001</balanceDate>
+			<fonFaxForm>
+				<businessPhoneText>85698566215</businessPhoneText>
+				<businessFaxText>7854125696</businessFaxText>
+			</fonFaxForm>
+			<emailForm>
+				<businesEmailText></businesEmailText>
+				<webText></webText>
+			</emailForm>
+			<allContacts>
+				<isPrimary>TRUE</isPrimary>
+				<name>Michle</name>
+				<title></title>
+				<businessPhone>745548455784</businessPhone>
+				<email></email>
+			</allContacts>
+			<addrsForm>
+				<rAddress1Label></rAddress1Label>
+				<rAddress2Label></rAddress2Label>
+				<rCityLabel></rCityLabel>
+				<rStateComboLabel></rStateComboLabel>
+				<rPostalCodeLabel></rPostalCodeLabel>
+				<rCountryComboLabel></rCountryComboLabel>
+			</addrsForm>
+		</Customer>
+
+		<Customer id="6">
+			<custNameText>Railings in Outerspace Ltd.</custNameText>
+			<isactive>TRUE</isactive>
+			<customerSinceDate>15/08/2005</customerSinceDate>
+			<balanceText>200000</balanceText>
+			balanceDate
+			<balanceDate>15/08/2005</balanceDate>
+			<fonFaxForm>
+				<businessPhoneText>85698566215</businessPhoneText>
+				<businessFaxText>7854125696</businessFaxText>
+			</fonFaxForm>
+			<emailForm>
+				<businesEmailText>railings@mail.com</businesEmailText>
+				<webText>www.rainlings_corp.com</webText>
+			</emailForm>
+			<allContacts>
+				<isPrimary>TRUE</isPrimary>
+				<name>John</name>
+				<title></title>
+				<businessPhone>4585965235</businessPhone>
+				<email>john@mail.com</email>
+			</allContacts>
+			<addrsForm>
+				<rAddress1Label>23 Streetmap</rAddress1Label>
+				<rAddress2Label></rAddress2Label>
+				<rCityLabel>Bridgetown</rCityLabel>
+				<rStateComboLabel></rStateComboLabel>
+				<rPostalCodeLabel>UK-12569</rPostalCodeLabel>
+				<rCountryComboLabel>United kingdom</rCountryComboLabel>
+			</addrsForm>
+		</Customer>
+	</customers>
+
+
+	<Suppliers>
+		<Supplier id="1">
+			<vendorNameText>Desk Chair Target Ltd.</vendorNameText>
+			<vendorNoText></vendorNoText>
+			<fileAsText></fileAsText>
+			<taxID></taxID>
+			<statusCheck></statusCheck>
+			<vendorSinceDate>15/06/1988</vendorSinceDate>
+			<track1099MISC></track1099MISC>
+			<balanceText>100000</balanceText>
+			<memoArea></memoArea>
+			<fonFaxForm>
+				<businessPhoneText>85698566215</businessPhoneText>
+				<businessFaxText>7854125696</businessFaxText>
+			</fonFaxForm>
+			<emailForm>
+				<businesEmailText>mac@mail.com</businesEmailText>
+				<webText>www.rainlings_corp.com</webText>
+			</emailForm>
+			<allContacts>
+				<isPrimary>TRUE</isPrimary>
+				<name>John</name>
+				<title></title>
+				<businessPhone>4585965235</businessPhone>
+				<email>john@mail.com</email>
+			</allContacts>
+			<addrsForm>
+				<rAddress1Label></rAddress1Label>
+				<rAddress2Label></rAddress2Label>
+				<rCityLabel></rCityLabel>
+				<rStateComboLabel></rStateComboLabel>
+				<rPostalCodeLabel></rPostalCodeLabel>
+				<rCountryComboLabel></rCountryComboLabel>
+			</addrsForm>
+		</Supplier>
+
+		<Supplier id="2">
+			<vendorNameText>Domestic Computers Ltd.</vendorNameText>
+			<vendorNoText></vendorNoText>
+			<fileAsText></fileAsText>
+			<taxID></taxID>
+			<statusCheck></statusCheck>
+			<vendorSinceDate>15/06/1988</vendorSinceDate>
+			<track1099MISC></track1099MISC>
+			<balanceText>100000</balanceText>
+			<memoArea></memoArea>
+			<fonFaxForm>
+				<businessPhoneText>85698566215</businessPhoneText>
+				<businessFaxText>7854125696</businessFaxText>
+			</fonFaxForm>
+			<emailForm>
+				<businesEmailText>mac@mail.com</businesEmailText>
+				<webText>www.rainlings_corp.com</webText>
+			</emailForm>
+			<allContacts>
+				<isPrimary>TRUE</isPrimary>
+				<name>John</name>
+				<title></title>
+				<businessPhone>4585965235</businessPhone>
+				<email>john@mail.com</email>
+			</allContacts>
+			<addrsForm>
+				<rAddress1Label></rAddress1Label>
+				<rAddress2Label></rAddress2Label>
+				<rCityLabel></rCityLabel>
+				<rStateComboLabel></rStateComboLabel>
+				<rPostalCodeLabel></rPostalCodeLabel>
+				<rCountryComboLabel></rCountryComboLabel>
+			</addrsForm>
+		</Supplier>
+
+		<Supplier id="3">
+			<vendorNameText>Lighting laser Dept</vendorNameText>
+			<vendorNoText></vendorNoText>
+			<fileAsText></fileAsText>
+			<taxID></taxID>
+			<statusCheck></statusCheck>
+			<vendorSinceDate>15/06/1988</vendorSinceDate>
+			<track1099MISC></track1099MISC>
+			<balanceText>100000</balanceText>
+			<memoArea></memoArea>
+			<fonFaxForm>
+				<businessPhoneText>85698566215</businessPhoneText>
+				<businessFaxText>7854125696</businessFaxText>
+			</fonFaxForm>
+			<emailForm>
+				<businesEmailText>mac@mail.com</businesEmailText>
+				<webText>www.rainlings_corp.com</webText>
+			</emailForm>
+			<allContacts>
+				<isPrimary>TRUE</isPrimary>
+				<name>John</name>
+				<title></title>
+				<businessPhone>4585965235</businessPhone>
+				<email>john@mail.com</email>
+			</allContacts>
+			<addrsForm>
+				<rAddress1Label></rAddress1Label>
+				<rAddress2Label></rAddress2Label>
+				<rCityLabel></rCityLabel>
+				<rStateComboLabel></rStateComboLabel>
+				<rPostalCodeLabel></rPostalCodeLabel>
+				<rCountryComboLabel></rCountryComboLabel>
+			</addrsForm>
+		</Supplier>
+
+		<Supplier id="4">
+			<vendorNameText>Slim LIne Office Product ltd.</vendorNameText>
+			<vendorNoText></vendorNoText>
+			<fileAsText></fileAsText>
+			<taxID></taxID>
+			<statusCheck></statusCheck>
+			<vendorSinceDate>15/06/1988</vendorSinceDate>
+			<track1099MISC></track1099MISC>
+			<balanceText>100000</balanceText>
+			<memoArea></memoArea>
+			<fonFaxForm>
+				<businessPhoneText>85698566215</businessPhoneText>
+				<businessFaxText>7854125696</businessFaxText>
+			</fonFaxForm>
+			<emailForm>
+				<businesEmailText>mac@mail.com</businesEmailText>
+				<webText>www.rainlings_corp.com</webText>
+			</emailForm>
+			<allContacts>
+				<isPrimary>TRUE</isPrimary>
+				<name>John</name>
+				<title></title>
+				<businessPhone>4585965235</businessPhone>
+				<email>john@mail.com</email>
+			</allContacts>
+			<addrsForm>
+				<rAddress1Label></rAddress1Label>
+				<rAddress2Label></rAddress2Label>
+				<rCityLabel></rCityLabel>
+				<rStateComboLabel></rStateComboLabel>
+				<rPostalCodeLabel></rPostalCodeLabel>
+				<rCountryComboLabel></rCountryComboLabel>
+			</addrsForm>
+		</Supplier>
+
+		<Supplier id="5">
+			<vendorNameText>Studio Lmk Traders</vendorNameText>
+			<vendorNoText></vendorNoText>
+			<fileAsText></fileAsText>
+			<taxID></taxID>
+			<statusCheck></statusCheck>
+			<vendorSinceDate>15/06/1988</vendorSinceDate>
+			<track1099MISC></track1099MISC>
+			<balanceText>100000</balanceText>
+			<memoArea></memoArea>
+			<fonFaxForm>
+				<businessPhoneText>85698566215</businessPhoneText>
+				<businessFaxText>7854125696</businessFaxText>
+			</fonFaxForm>
+			<emailForm>
+				<businesEmailText>mac@mail.com</businesEmailText>
+				<webText>www.rainlings_corp.com</webText>
+			</emailForm>
+			<allContacts>
+				<isPrimary>TRUE</isPrimary>
+				<name>John</name>
+				<title></title>
+				<businessPhone>4585965235</businessPhone>
+				<email>john@mail.com</email>
+			</allContacts>
+			<addrsForm>
+				<rAddress1Label></rAddress1Label>
+				<rAddress2Label></rAddress2Label>
+				<rCityLabel></rCityLabel>
+				<rStateComboLabel></rStateComboLabel>
+				<rPostalCodeLabel></rPostalCodeLabel>
+				<rCountryComboLabel></rCountryComboLabel>
+			</addrsForm>
+		</Supplier>
+
+	</Suppliers>
+
+
+	<Items>
+		<Item id="1">
+			<nameText>Paper products</nameText>
+			<weightText>50</weightText>
+			<salesDescArea>paper documents</salesDescArea>
+			<salesPriceText>1500</salesPriceText>
+			<accountCombo>1002 YG Income Account</accountCombo>
+			<comCheck></comCheck>
+			<stdCostText></stdCostText>
+			<itemTaxCheck>1100</itemTaxCheck>
+			<itemGroupCombo></itemGroupCombo>
+			<taxCode></taxCode>
+			<activeCheck></activeCheck>
+			<purchaseDescArea></purchaseDescArea>
+			<purchasePriceTxt></purchasePriceTxt>
+			<expAccCombo></expAccCombo>
+			<prefVendorCombo></prefVendorCombo>
+			<vendItemNumText></vendItemNumText>
+			<isellCheck>TRUE</isellCheck>
+			<ibuyCheck></ibuyCheck>
+		</Item>
+		<Item id="2">
+			<nameText>System Integration</nameText>
+			<weightText></weightText>
+			<salesDescArea>system integration in different range</salesDescArea>
+			<salesPriceText>5000</salesPriceText>
+			<accountCombo>4000 Sales Income</accountCombo>
+			<comCheck></comCheck>
+			<stdCostText>5000</stdCostText>
+			<itemTaxCheck>TRUE</itemTaxCheck>
+			<itemGroupCombo></itemGroupCombo>
+			<taxCode></taxCode>
+			<activeCheck></activeCheck>
+			<purchaseDescArea></purchaseDescArea>
+			<purchasePriceTxt></purchasePriceTxt>
+			<expAccCombo></expAccCombo>
+			<prefVendorCombo></prefVendorCombo>
+			<vendItemNumText></vendItemNumText>
+			<isellCheck>TRUE</isellCheck>
+			<ibuyCheck></ibuyCheck>
+		</Item>
+		<Item id="3">
+			<nameText>Mobile Service</nameText>
+			<weightText></weightText>
+			<salesDescArea>Mobile repair Software updates</salesDescArea>
+			<salesPriceText>5060</salesPriceText>
+			<accountCombo>1002 YG Income Account</accountCombo>
+			<comCheck></comCheck>
+			<stdCostText>5000</stdCostText>
+			<itemTaxCheck>TRUE</itemTaxCheck>
+			<itemGroupCombo></itemGroupCombo>
+			<taxCode></taxCode>
+			<activeCheck></activeCheck>
+			<purchaseDescArea></purchaseDescArea>
+			<purchasePriceTxt></purchasePriceTxt>
+			<expAccCombo></expAccCombo>
+			<prefVendorCombo></prefVendorCombo>
+			<vendItemNumText></vendItemNumText>
+			<isellCheck>TRUE</isellCheck>
+			<ibuyCheck></ibuyCheck>
+		</Item>
+		<Item id="4">
+			<nameText>Assembled Computers</nameText>
+			<weightText>0</weightText>
+			<salesDescArea>Sales on Assembled computers</salesDescArea>
+			<salesPriceText>25000</salesPriceText>
+			<accountCombo>4000-Sales Income</accountCombo>
+			<comCheck></comCheck>
+			<stdCostText>30000</stdCostText>
+			<itemTaxCheck>TRUE</itemTaxCheck>
+			<itemGroupCombo></itemGroupCombo>
+			<taxCode></taxCode>
+			<activeCheck></activeCheck>
+			<purchaseDescArea></purchaseDescArea>
+			<purchasePriceTxt></purchasePriceTxt>
+			<expAccCombo></expAccCombo>
+			<prefVendorCombo></prefVendorCombo>
+			<vendItemNumText></vendItemNumText>
+			<isellCheck>TRUE</isellCheck>
+			<ibuyCheck></ibuyCheck>
+		</Item>
+		<Item id="5">
+			<nameText>Repair Service</nameText>
+			<weightText>0</weightText>
+			<salesDescArea>repair services</salesDescArea>
+			<salesPriceText>1500</salesPriceText>
+			<accountCombo>4000-Sales Income</accountCombo>
+			<comCheck></comCheck>
+			<stdCostText>2000</stdCostText>
+			<itemTaxCheck></itemTaxCheck>
+			<itemGroupCombo></itemGroupCombo>
+			<taxCode></taxCode>
+			<activeCheck></activeCheck>
+			<purchaseDescArea></purchaseDescArea>
+			<purchasePriceTxt></purchasePriceTxt>
+			<expAccCombo></expAccCombo>
+			<prefVendorCombo></prefVendorCombo>
+			<vendItemNumText></vendItemNumText>
+			<isellCheck>TRUE</isellCheck>
+			<ibuyCheck></ibuyCheck>
+		</Item>
+		<Item id="6">
+			<nameText>Software service</nameText>
+			<weightText>50</weightText>
+			<salesDescArea>Software Service Providing</salesDescArea>
+			<salesPriceText>2000</salesPriceText>
+			<accountCombo>4000-Sales Income</accountCombo>
+			<comCheck></comCheck>
+			<stdCostText>2000</stdCostText>
+			<itemTaxCheck></itemTaxCheck>
+			<itemGroupCombo></itemGroupCombo>
+			<taxCode></taxCode>
+			<activeCheck></activeCheck>
+			<purchaseDescArea></purchaseDescArea>
+			<purchasePriceTxt></purchasePriceTxt>
+			<expAccCombo></expAccCombo>
+			<prefVendorCombo></prefVendorCombo>
+			<vendItemNumText></vendItemNumText>
+			<isellCheck>TRUE</isellCheck>
+			<ibuyCheck></ibuyCheck>
+		</Item>
+	</Items>
+
+	<Quotes>
+		<Quote id="1">
+			<transactionDateItem>12/8/2006</transactionDateItem>
+			<locationCombo>United Kingdom</locationCombo>
+			<customerCombo>Helicopted Limited</customerCombo>
+			<billToTextArea></billToTextArea>
+			<shipToCombo></shipToCombo>
+			<phoneSelect>8745851255</phoneSelect>
+			<salesPersonCombo></salesPersonCombo>
+			<payTermsSelect></payTermsSelect>
+			<quoteExpiryDate></quoteExpiryDate>
+			<deliveryDate></deliveryDate>
+			<memoTextAreaItem></memoTextAreaItem>
+			<taxCodeSelect>S-17.5%</taxCodeSelect>
+			<customerTransactionTable>
+				<CustomerItemTransactionTable id="1">
+					<name>Paper Products</name>
+					<description>files, documents</description>
+					<quantity>50</quantity>
+					<unitPrice>1500</unitPrice>
+					<discount>0.00</discount>
+					<lineTotal>75000</lineTotal>
+				</CustomerItemTransactionTable>
+			</customerTransactionTable>
+		</Quote>
+	</Quotes>
+
+	<Invoices>
+		<Invoice id="1">
+			<transactionDateItem>21/12/2005</transactionDateItem>
+			<transactionNumber>INV1025</transactionNumber>
+			<locationCombo>United Kingdom</locationCombo>
+			<customerCombo></customerCombo>
+			<quoteLabel></quoteLabel>
+			<contactCombo>John</contactCombo>
+			<billToTextArea></billToTextArea>
+			<shipToCombo></shipToCombo>
+			<shipToAddress>
+				<Address>
+					<type></type>
+					<street>Bridgton Street</street>
+					<city></city>
+					<stateOrProvinence></stateOrProvinence>
+					<zipOrPostalCode>UK 501425</zipOrPostalCode>
+					<ountryOrRegion>United Kingdom</ountryOrRegion>
+					<isSelected></isSelected>
+					<address1></address1>
+				</Address>
+			</shipToAddress>
+			<salesPersonCombo></salesPersonCombo>
+			<shippingMethodsCombo></shippingMethodsCombo>
+			<dueDateItem>11/12/2010</dueDateItem>
+			<deliveryDate></deliveryDate>
+			<orderNumText>INV-58965215</orderNumText>
+			<memoTextAreaItem></memoTextAreaItem>
+			<taxCodeSelect></taxCodeSelect>
+			<vatinclusiveCheck></vatinclusiveCheck>
+			<customerTransactionTable>
+				<CustomerItemTransactionTable id="1">
+					<name>Paper Products</name>
+					<description>files, documents</description>
+					<quantity>50</quantity>
+					<unitPrice>1500</unitPrice>
+					<discount>0.00</discount>
+					<lineTotal>75000</lineTotal>
+				</CustomerItemTransactionTable>
+			</customerTransactionTable>
+		</Invoice>
+
+
+		<Invoice id="2">
+			<transactionDateItem>21/12/2005</transactionDateItem>
+			<transactionNumber>INV1025</transactionNumber>
+			<locationCombo>United Kingdom</locationCombo>
+			<customerCombo></customerCombo>
+			<quoteLabel></quoteLabel>
+			<contactCombo>John</contactCombo>
+			<billToTextArea></billToTextArea>
+			<shipToCombo></shipToCombo>
+			<shipToAddress>
+				<Address>
+					<type></type>
+					<street>Bridgton Street</street>
+					<city></city>
+					<stateOrProvinence></stateOrProvinence>
+					<zipOrPostalCode>UK 501425</zipOrPostalCode>
+					<ountryOrRegion>United Kingdom</ountryOrRegion>
+					<isSelected></isSelected>
+					<address1></address1>
+				</Address>
+			</shipToAddress>
+			<salesPersonCombo></salesPersonCombo>
+			<shippingMethodsCombo></shippingMethodsCombo>
+			<dueDateItem>11/12/2010</dueDateItem>
+			<deliveryDate></deliveryDate>
+			<orderNumText>INV-58965215</orderNumText>
+			<memoTextAreaItem></memoTextAreaItem>
+			<taxCodeSelect></taxCodeSelect>
+			<vatinclusiveCheck></vatinclusiveCheck>
+			<customerTransactionTable>
+				<CustomerItemTransactionTable id="1">
+					<name>Paper Products</name>
+					<description>files, documents</description>
+					<quantity>50</quantity>
+					<unitPrice>1500</unitPrice>
+					<discount>0.00</discount>
+					<lineTotal>75000</lineTotal>
+				</CustomerItemTransactionTable>
+			</customerTransactionTable>
+		</Invoice>
+
+
+		<Invoice id="3">
+			<transactionDateItem>21/12/2005</transactionDateItem>
+			<transactionNumber>INV1025</transactionNumber>
+			<locationCombo>United Kingdom</locationCombo>
+			<customerCombo></customerCombo>
+			<quoteLabel></quoteLabel>
+			<contactCombo>John</contactCombo>
+			<billToTextArea></billToTextArea>
+			<shipToCombo></shipToCombo>
+			<shipToAddress>
+				<Address>
+					<type></type>
+					<street>Bridgton Street</street>
+					<city></city>
+					<stateOrProvinence></stateOrProvinence>
+					<zipOrPostalCode>UK 501425</zipOrPostalCode>
+					<ountryOrRegion>United Kingdom</ountryOrRegion>
+					<isSelected></isSelected>
+					<address1></address1>
+				</Address>
+			</shipToAddress>
+			<salesPersonCombo></salesPersonCombo>
+			<shippingMethodsCombo></shippingMethodsCombo>
+			<dueDateItem>11/12/2010</dueDateItem>
+			<deliveryDate></deliveryDate>
+			<orderNumText>INV-58965215</orderNumText>
+			<memoTextAreaItem></memoTextAreaItem>
+			<taxCodeSelect></taxCodeSelect>
+			<vatinclusiveCheck></vatinclusiveCheck>
+			<customerTransactionTable>
+				<CustomerItemTransactionTable id="1">
+					<name>Paper Products</name>
+					<description>files, documents</description>
+					<quantity>50</quantity>
+					<unitPrice>1500</unitPrice>
+					<discount>0.00</discount>
+					<lineTotal>75000</lineTotal>
+				</CustomerItemTransactionTable>
+			</customerTransactionTable>
+		</Invoice>
+
+		<Invoice id="4">
+			<transactionDateItem>21/12/2005</transactionDateItem>
+			<transactionNumber>INV1025</transactionNumber>
+			<locationCombo>United Kingdom</locationCombo>
+			<customerCombo></customerCombo>
+			<quoteLabel></quoteLabel>
+			<contactCombo>John</contactCombo>
+			<billToTextArea></billToTextArea>
+			<shipToCombo></shipToCombo>
+			<shipToAddress>
+				<Address>
+					<type></type>
+					<street>Bridgton Street</street>
+					<city></city>
+					<stateOrProvinence></stateOrProvinence>
+					<zipOrPostalCode>UK 501425</zipOrPostalCode>
+					<ountryOrRegion>United Kingdom</ountryOrRegion>
+					<isSelected></isSelected>
+					<address1></address1>
+				</Address>
+			</shipToAddress>
+			<salesPersonCombo></salesPersonCombo>
+			<shippingMethodsCombo></shippingMethodsCombo>
+			<dueDateItem>11/12/2010</dueDateItem>
+			<deliveryDate></deliveryDate>
+			<orderNumText>INV-58965215</orderNumText>
+			<memoTextAreaItem></memoTextAreaItem>
+			<taxCodeSelect></taxCodeSelect>
+			<vatinclusiveCheck></vatinclusiveCheck>
+			<customerTransactionTable>
+				<CustomerItemTransactionTable id="1">
+					<name>Paper Products</name>
+					<description>files, documents</description>
+					<quantity>50</quantity>
+					<unitPrice>1500</unitPrice>
+					<discount>0.00</discount>
+					<lineTotal>75000</lineTotal>
+				</CustomerItemTransactionTable>
+			</customerTransactionTable>
+		</Invoice>
+	</Invoices>
+
+
+	<SalesOrders>
+		<SalesOrder id="1">
+			<statusSelect></statusSelect>
+			<transactionDateItem></transactionDateItem>
+			<transactionNumber></transactionNumber>
+			<locationCombo></locationCombo>
+			<customerCombo></customerCombo>
+			<quoteLabel></quoteLabel>
+			<contactCombo></contactCombo>
+			<billToTextArea></billToTextArea>
+			<shipToCombo></shipToCombo>
+			<shipToAddress>
+				<Address>
+					<type></type>
+					<street></street>
+					<city></city>
+					<stateOrProvinence></stateOrProvinence>
+					<zipOrPostalCode></zipOrPostalCode>
+					<ountryOrRegion></ountryOrRegion>
+					<isSelected></isSelected>
+					<address1></address1>
+				</Address>
+			</shipToAddress>
+			<phoneSelect></phoneSelect>
+			<customerOrderText></customerOrderText>
+			<salesPersonCombo></salesPersonCombo>
+			<payTermsSelect></payTermsSelect>
+			<shippingTermsCombo></shippingTermsCombo>
+			<shippingMethodsCombo></shippingMethodsCombo>
+			<dueDateItem></dueDateItem>
+			<memoTextAreaItem></memoTextAreaItem>
+			<customerTransactionTable>
+				<CustomerItemTransactionTable>
+					<id></id>
+					<type></type>
+					<item></item>
+					<name></name>
+					<taxCode></taxCode>
+					<vatItem></vatItem>
+					<account></account>
+					<tAccount></tAccount>
+					<tItem></tItem>
+					<description></description>
+					<quantity></quantity>
+					<unitPrice></unitPrice>
+					<discount></discount>
+					<lineTotal></lineTotal>
+					<isTaxable></isTaxable>
+					<transaction></transaction>
+					<usedamt></usedamt>
+					<backOrder></backOrder>
+					<VATfraction></VATfraction>
+					<isVoid></isVoid>
+				</CustomerItemTransactionTable>
+			</customerTransactionTable>
+		</SalesOrder>
+	</SalesOrders>
+
+
+	<PurchaseOrders>
+		<PurchaseOrder id="1">
+			<statusSelect>OPEN</statusSelect>
+			<transactionNumber>PO1025</transactionNumber>
+			<locationCombo>UK</locationCombo>
+			<netAmount>10000</netAmount>
+			<vatinclusiveCheck>TRUE</vatinclusiveCheck>
+			<taxCodeSelect></taxCodeSelect>
+			<vendorCombo></vendorCombo>
+			<contactCombo></contactCombo>
+			<billtoAreaItem></billtoAreaItem>
+			<shipToAddress>
+				<Address>
+					<type></type>
+					<street></street>
+					<city></city>
+					<stateOrProvinence></stateOrProvinence>
+					<zipOrPostalCode></zipOrPostalCode>
+					<ountryOrRegion></ountryOrRegion>
+					<isSelected></isSelected>
+					<address1></address1>
+				</Address>
+			</shipToAddress>
+			<phoneSelect></phoneSelect>
+			<purchaseOrderText></purchaseOrderText>
+			<payTermsSelect></payTermsSelect>
+			<shippingTermsCombo></shippingTermsCombo>
+			<shippingMethodsCombo></shippingMethodsCombo>
+			<dueDateItem></dueDateItem>
+			<despatchDateItem></despatchDateItem>
+			<despatchDateItem></despatchDateItem>
+			<memoTextAreaItem></memoTextAreaItem>
+			<vendorAccountTransactionTable>
+				<id></id>
+				<type></type>
+				<item></item>
+				<name></name>
+				<taxCode></taxCode>
+				<vatItem></vatItem>
+				<account></account>
+				<tAccount></tAccount>
+				<tItem></tItem>
+				<description></description>
+				<quantity></quantity>
+				<unitPrice></unitPrice>
+				<discount></discount>
+				<lineTotal></lineTotal>
+				<isTaxable></isTaxable>
+				<transaction></transaction>
+				<usedamt></usedamt>
+				<backOrder></backOrder>
+				<VATfraction></VATfraction>
+				<isVoid></isVoid>
+			</vendorAccountTransactionTable>
+			<vendorItemTransactionTable>
+				<id></id>
+				<type></type>
+				<item></item>
+				<name></name>
+				<taxCode></taxCode>
+				<vatItem></vatItem>
+				<account></account>
+				<tAccount></tAccount>
+				<tItem></tItem>
+				<description></description>
+				<quantity></quantity>
+				<unitPrice></unitPrice>
+				<discount></discount>
+				<lineTotal></lineTotal>
+				<isTaxable></isTaxable>
+				<transaction></transaction>
+				<usedamt></usedamt>
+				<backOrder></backOrder>
+				<VATfraction></VATfraction>
+				<isVoid></isVoid>
+			</vendorItemTransactionTable>
+		</PurchaseOrder>
+	</PurchaseOrders>
+
+	<Accounts>
+		<Account id="1">
+			<accTypeSelect>Bank</accTypeSelect>
+			<accNoText>1004</accNoText>
+			<accNameText>Account 1</accNameText>
+			<statusBox>TRUE</statusBox>
+			<cashFlowCatSelect></cashFlowCatSelect>
+			<cashFlowof></cashFlowof>
+			<opBalText></opBalText>
+			<currentBalanceText>0.00</currentBalanceText>
+			<asofDate>22/12/2001</asofDate>
+			<catSelect></catSelect>
+			<subAccSelect></subAccSelect>
+			<hierText></hierText>
+			<accInfoForm></accInfoForm>
+			<cashAccountCheck></cashAccountCheck>
+			<commentsArea></commentsArea>
+		</Account>
+
+		<Account id="2">
+			<accTypeSelect>Bank</accTypeSelect>
+			<accNoText>1005</accNoText>
+			<accNameText>Account 2</accNameText>
+			<statusBox></statusBox>
+			<cashFlowCatSelect></cashFlowCatSelect>
+			<cashFlowof></cashFlowof>
+			<opBalText></opBalText>
+			<currentBalanceText>20000</currentBalanceText>
+			<asofDate>21/06/2001</asofDate>
+			<catSelect></catSelect>
+			<subAccSelect></subAccSelect>
+			<hierText></hierText>
+			<accInfoForm></accInfoForm>
+			<cashAccountCheck></cashAccountCheck>
+			<commentsArea></commentsArea>
+		</Account>
+
+
+		<Account id="3">
+			<accTypeSelect>Income</accTypeSelect>
+			<accNoText>1006</accNoText>
+			<accNameText>Account 3</accNameText>
+			<statusBox></statusBox>
+			<cashFlowCatSelect></cashFlowCatSelect>
+			<cashFlowof></cashFlowof>
+			<opBalText></opBalText>
+			<currentBalanceText>30000</currentBalanceText>
+			<asofDate>12/10/2010</asofDate>
+			<catSelect></catSelect>
+			<subAccSelect></subAccSelect>
+			<hierText></hierText>
+			<accInfoForm></accInfoForm>
+			<cashAccountCheck></cashAccountCheck>
+			<commentsArea></commentsArea>
+		</Account>
+
+
+		<Account id="4">
+			<accTypeSelect></accTypeSelect>
+			<accNoText></accNoText>
+			<accNameText></accNameText>
+			<statusBox></statusBox>
+			<cashFlowCatSelect></cashFlowCatSelect>
+			<cashFlowof></cashFlowof>
+			<opBalText></opBalText>
+			<currentBalanceText></currentBalanceText>
+			<asofDate></asofDate>
+			<catSelect></catSelect>
+			<subAccSelect></subAccSelect>
+			<hierText></hierText>
+			<accInfoForm></accInfoForm>
+			<cashAccountCheck></cashAccountCheck>
+			<commentsArea></commentsArea>
+		</Account>
+
+
+	</Accounts>
+
+	<NewCashSales>
+
+		<NewCashSale>
+			<transactionDateItem></transactionDateItem>
+			<transactionNumber></transactionNumber>
+			<locationCombo></locationCombo>
+			<customerCombo></customerCombo>
+			<phoneSelect></phoneSelect>
+			<billToTextArea></billToTextArea>
+			<shipToAddress>
+				<Address>
+					<type></type>
+					<street></street>
+					<city></city>
+					<stateOrProvinence></stateOrProvinence>
+					<zipOrPostalCode></zipOrPostalCode>
+					<ountryOrRegion></ountryOrRegion>
+					<isSelected></isSelected>
+					<address1></address1>
+				</Address>
+			</shipToAddress>
+			<salesPersonCombo></salesPersonCombo>
+			<paymentMethodCombo></paymentMethodCombo>
+			<depositInCombo></depositInCombo>
+			<shippingTermsCombo></shippingTermsCombo>
+			<shippingMethodsCombo></shippingMethodsCombo>
+			<deliveryDate></deliveryDate>
+			<memoTextAreaItem></memoTextAreaItem>
+			<taxCodeSelect></taxCodeSelect>
+			<taxTotalNonEditableText></taxTotalNonEditableText>
+			<vatinclusiveCheck></vatinclusiveCheck>
+			<customerAccountTransactionTable>
+				<id></id>
+				<type></type>
+				<item></item>
+				<name></name>
+				<taxCode></taxCode>
+				<vatItem></vatItem>
+				<account></account>
+				<tAccount></tAccount>
+				<tItem></tItem>
+				<description></description>
+				<quantity></quantity>
+				<unitPrice></unitPrice>
+				<discount></discount>
+				<lineTotal></lineTotal>
+				<isTaxable></isTaxable>
+				<transaction></transaction>
+				<usedamt></usedamt>
+				<backOrder></backOrder>
+				<VATfraction></VATfraction>
+				<isVoid></isVoid>
+			</customerAccountTransactionTable>
+			<customerItemTransactionTable>
+				<id></id>
+				<type></type>
+				<item></item>
+				<name></name>
+				<taxCode></taxCode>
+				<vatItem></vatItem>
+				<account></account>
+				<tAccount></tAccount>
+				<tItem></tItem>
+				<description></description>
+				<quantity></quantity>
+				<unitPrice></unitPrice>
+				<discount></discount>
+				<lineTotal></lineTotal>
+				<isTaxable></isTaxable>
+				<transaction></transaction>
+				<usedamt></usedamt>
+				<backOrder></backOrder>
+				<VATfraction></VATfraction>
+				<isVoid></isVoid>
+			</customerItemTransactionTable>
+		</NewCashSale>
+
+	</NewCashSales>
+
+
+	<VendorCreditNotes>
+
+		<VendorCreditNote>
+			<transactionDateItem>15/10/2001</transactionDateItem>
+			<transactionNumber>CN10256</transactionNumber>
+			<locationCombo>UK</locationCombo>
+			<vendorCombo></vendorCombo>
+			<contactCombo></contactCombo>
+			<phoneSelect>7585458896</phoneSelect>
+			<netAmount>10215425</netAmount>
+			<memoTextAreaItem></memoTextAreaItem>
+			<vatinclusiveCheck></vatinclusiveCheck>
+			<vendorAccountTransactionTable>
+				<id></id>
+				<type></type>
+				<item></item>
+				<name></name>
+				<taxCode></taxCode>
+				<vatItem></vatItem>
+				<account></account>
+				<tAccount></tAccount>
+				<tItem></tItem>
+				<description></description>
+				<quantity></quantity>
+				<unitPrice></unitPrice>
+				<discount></discount>
+				<lineTotal></lineTotal>
+				<isTaxable></isTaxable>
+				<transaction></transaction>
+				<usedamt></usedamt>
+				<backOrder></backOrder>
+				<VATfraction></VATfraction>
+				<isVoid></isVoid>
+			</vendorAccountTransactionTable>
+			<vendorItemTransactionTable>
+				<id></id>
+				<type></type>
+				<item></item>
+				<name></name>
+				<taxCode></taxCode>
+				<vatItem></vatItem>
+				<account></account>
+				<tAccount></tAccount>
+				<tItem></tItem>
+				<description></description>
+				<quantity></quantity>
+				<unitPrice></unitPrice>
+				<discount></discount>
+				<lineTotal></lineTotal>
+				<isTaxable></isTaxable>
+				<transaction></transaction>
+				<usedamt></usedamt>
+				<backOrder></backOrder>
+				<VATfraction></VATfraction>
+				<isVoid></isVoid>
+			</vendorItemTransactionTable>
+		</VendorCreditNote>
+	</VendorCreditNotes>
+
+
+
+	<ClientEnterBills>
+
+		<ClientEnterBill id="1">
+			<transactionDateItem></transactionDateItem>
+			<transactionNumber></transactionNumber>
+			<locationCombo></locationCombo>
+			<vatinclusiveCheck></vatinclusiveCheck>
+			<vendorTDSTaxCode></vendorTDSTaxCode>
+			<vendorCombo></vendorCombo>
+			<contactCombo></contactCombo>
+			<billToCombo></billToCombo>
+			<phoneSelect></phoneSelect>
+			<dueDateItem></dueDateItem>
+			<paymentTermsCombo></paymentTermsCombo>
+			<deliveryDateItem></deliveryDateItem>
+			<vatinclusiveCheck></vatinclusiveCheck>
+			<memoTextAreaItem></memoTextAreaItem>
+			<vendorAccountTransactionTable>
+				<id></id>
+				<type></type>
+				<item></item>
+				<name></name>
+				<taxCode></taxCode>
+				<vatItem></vatItem>
+				<account></account>
+				<tAccount></tAccount>
+				<tItem></tItem>
+				<description></description>
+				<quantity></quantity>
+				<unitPrice></unitPrice>
+				<discount></discount>
+				<lineTotal></lineTotal>
+				<isTaxable></isTaxable>
+				<transaction></transaction>
+				<usedamt></usedamt>
+				<backOrder></backOrder>
+				<VATfraction></VATfraction>
+				<isVoid></isVoid>
+			</vendorAccountTransactionTable>
+			<vendorItemTransactionTable>
+				<id></id>
+				<type></type>
+				<item></item>
+				<name></name>
+				<taxCode></taxCode>
+				<vatItem></vatItem>
+				<account></account>
+				<tAccount></tAccount>
+				<tItem></tItem>
+				<description></description>
+				<quantity></quantity>
+				<unitPrice></unitPrice>
+				<discount></discount>
+				<lineTotal></lineTotal>
+				<isTaxable></isTaxable>
+				<transaction></transaction>
+				<usedamt></usedamt>
+				<backOrder></backOrder>
+				<VATfraction></VATfraction>
+				<isVoid></isVoid>
+			</vendorItemTransactionTable>
+		</ClientEnterBill>
+	</ClientEnterBills>
+
+	<PayBills>
+		<PayBill id='1'>
+			<locationCombo>United Kingdom</locationCombo>
+			<date>11/06/2010</date>
+			<transactionNumber>BILL115289</transactionNumber>
+			<vendorCombo></vendorCombo>
+			<payFromCombo></payFromCombo>
+			<paymentMethodCombo></paymentMethodCombo>
+			<dueDate></dueDate>
+			<vendorPaymentMethodCombo></vendorPaymentMethodCombo>
+			<endBalText></endBalText>
+			<memoTextAreaItem></memoTextAreaItem>
+			<paybillTransactionList>
+				<PayBillTransactionList>
+					<type></type>
+					<dueDate></dueDate>
+					<vendorName></vendorName>
+					<billNumber></billNumber>
+					<originalAmount></originalAmount>
+					<amountDue></amountDue>
+					<discountDate></discountDate>
+					<cashDiscount></cashDiscount>
+					<credits></credits>
+					<payment></payment>
+					<paymentMethod></paymentMethod>
+				</PayBillTransactionList>
+			</paybillTransactionList>
+		</PayBill>
+
+		<PayBill id='2'>
+			<locationCombo></locationCombo>
+			<date></date>
+			<transactionNumber></transactionNumber>
+			<vendorCombo></vendorCombo>
+			<payFromCombo></payFromCombo>
+			<paymentMethodCombo></paymentMethodCombo>
+			<dueDate></dueDate>
+			<vendorPaymentMethodCombo></vendorPaymentMethodCombo>
+			<endBalText></endBalText>
+			<memoTextAreaItem></memoTextAreaItem>
+			<paybillTransactionList>
+				<PayBillTransactionList>
+					<type></type>
+					<dueDate></dueDate>
+					<vendorName></vendorName>
+					<billNumber></billNumber>
+					<originalAmount></originalAmount>
+					<amountDue></amountDue>
+					<discountDate></discountDate>
+					<cashDiscount></cashDiscount>
+					<credits></credits>
+					<payment></payment>
+					<paymentMethod></paymentMethod>
+				</PayBillTransactionList>
+			</paybillTransactionList>
+		</PayBill>
+
+		<PayBill id='3'>
+			<locationCombo></locationCombo>
+			<date></date>
+			<transactionNumber></transactionNumber>
+			<vendorCombo></vendorCombo>
+			<payFromCombo></payFromCombo>
+			<paymentMethodCombo></paymentMethodCombo>
+			<dueDate></dueDate>
+			<vendorPaymentMethodCombo></vendorPaymentMethodCombo>
+			<endBalText></endBalText>
+			<memoTextAreaItem></memoTextAreaItem>
+			<paybillTransactionList>
+				<PayBillTransactionList>
+					<type></type>
+					<dueDate></dueDate>
+					<vendorName></vendorName>
+					<billNumber></billNumber>
+					<originalAmount></originalAmount>
+					<amountDue></amountDue>
+					<discountDate></discountDate>
+					<cashDiscount></cashDiscount>
+					<credits></credits>
+					<payment></payment>
+					<paymentMethod></paymentMethod>
+				</PayBillTransactionList>
+			</paybillTransactionList>
+		</PayBill>
+	</PayBills>
+
+	<CreditCardCharges>
+		<CreditCardCharge>
+			<Ccard></Ccard>
+			<transactionDateItem></transactionDateItem>
+			<transactionNumber></transactionNumber>
+			<locationCombo></locationCombo>
+			<contactCombo></contactCombo>
+			<billToAreaItem></billToAreaItem>
+			<phoneSelect></phoneSelect>
+			<payMethSelect></payMethSelect>
+			<payFrmSelect></payFrmSelect>
+			<cheqNoText></cheqNoText>
+			<delivDate></delivDate>
+			<termsForm></termsForm>
+			<vatinclusiveCheck></vatinclusiveCheck>
+			<memoTextAreaItem></memoTextAreaItem>
+			<vendorAccountTransactionTable>
+				<VendorAccountTransactionTable>
+					<id></id>
+					<type></type>
+					<item></item>
+					<name></name>
+					<taxCode></taxCode>
+					<vatItem></vatItem>
+					<account></account>
+					<tAccount></tAccount>
+					<tItem></tItem>
+					<description></description>
+					<quantity></quantity>
+					<unitPrice></unitPrice>
+					<discount></discount>
+					<lineTotal></lineTotal>
+					<isTaxable></isTaxable>
+					<transaction></transaction>
+					<usedamt></usedamt>
+					<backOrder></backOrder>
+					<VATfraction></VATfraction>
+				</VendorAccountTransactionTable>
+			</vendorAccountTransactionTable>
+			<VendorItemTransactionTable>
+				<vendorItemTransactionTable>
+					<name></name>
+					<description></description>
+					<quantity></quantity>
+					<quantity></quantity>
+					<unitPrice></unitPrice>
+					<discount></discount>
+					<lineTotal></lineTotal>
+					<isTaxable></isTaxable>
+				</vendorItemTransactionTable>
+			</VendorItemTransactionTable>
+		</CreditCardCharge>
+	</CreditCardCharges>
+
+
+
+
+	<CashPurchases>
+		<CashPurchase>
+			<transactionDateItem></transactionDateItem>
+			<transactionNumber></transactionNumber>
+			<locationCombo></locationCombo>
+			<vendorCombo></vendorCombo>
+			<payFromCombo></payFromCombo>
+			<checkNo></checkNo>
+			<deliveryDateItem></deliveryDateItem>
+			<paymentMethodCombo></paymentMethodCombo>
+			<vatinclusiveCheck></vatinclusiveCheck>
+			<memoTextAreaItem></memoTextAreaItem>
+			<vendorAccountTransactionTable>
+				<VendorAccountTransactionTable>
+					<id></id>
+					<type></type>
+					<item></item>
+					<name></name>
+					<taxCode></taxCode>
+					<vatItem></vatItem>
+					<account></account>
+					<tAccount></tAccount>
+					<tItem></tItem>
+					<description></description>
+					<quantity></quantity>
+					<unitPrice></unitPrice>
+					<discount></discount>
+					<lineTotal></lineTotal>
+					<isTaxable></isTaxable>
+					<transaction></transaction>
+					<usedamt></usedamt>
+					<backOrder></backOrder>
+					<VATfraction></VATfraction>
+				</VendorAccountTransactionTable>
+			</vendorAccountTransactionTable>
+			<VendorItemTransactionTable>
+				<vendorItemTransactionTable>
+					<name></name>
+					<description></description>
+					<quantity></quantity>
+					<quantity></quantity>
+					<unitPrice></unitPrice>
+					<discount></discount>
+					<lineTotal></lineTotal>
+					<isTaxable></isTaxable>
+				</vendorItemTransactionTable>
+			</VendorItemTransactionTable>
+		</CashPurchase>
+	</CashPurchases>
+
+	<WriteChecks>
+		<WriteCheck>
+			<transactionNumber></transactionNumber>
+			<locationCombo></locationCombo>
+			<date></date>
+			<vendorTDSTaxCode></vendorTDSTaxCode>
+			<balText></balText>
+			<bankAccSelect></bankAccSelect>
+			<paytoSelect></paytoSelect>
+			<billToCombo></billToCombo>
+			<amtText></amtText>
+			<memoTextAreaItem></memoTextAreaItem>
+			<vatinclusiveCheck></vatinclusiveCheck>
+			<vendorAccountTransactionTable>
+				<VendorAccountTransactionTable>
+					<id></id>
+					<type></type>
+					<item></item>
+					<name></name>
+					<taxCode></taxCode>
+					<vatItem></vatItem>
+					<account></account>
+					<tAccount></tAccount>
+					<tItem></tItem>
+					<description></description>
+					<quantity></quantity>
+					<unitPrice></unitPrice>
+					<discount></discount>
+					<lineTotal></lineTotal>
+					<isTaxable></isTaxable>
+					<transaction></transaction>
+					<usedamt></usedamt>
+					<backOrder></backOrder>
+					<VATfraction></VATfraction>
+				</VendorAccountTransactionTable>
+			</vendorAccountTransactionTable>
+			<VendorItemTransactionTable>
+				<vendorItemTransactionTable>
+					<name></name>
+					<description></description>
+					<quantity></quantity>
+					<quantity></quantity>
+					<unitPrice></unitPrice>
+					<discount></discount>
+					<lineTotal></lineTotal>
+					<isTaxable></isTaxable>
+				</vendorItemTransactionTable>
+			</VendorItemTransactionTable>
+
+		</WriteCheck>
+
+	</WriteChecks>
+
+	<MakeDeposits>
+		<MakeDeposit>
+			<date>15/26/2011</date>
+			<locationCombo>United Kingdom</locationCombo>
+			<transNumber>DEP1589425</transNumber>
+			<depositInSelect></depositInSelect>
+			<vendorSelect>Blue Ribbons Pvt Ltd</vendorSelect>
+			<financeAccountSelect></financeAccountSelect>
+			<customerSelect></customerSelect>
+			<memoText></memoText>
+			<cashBackAccountSelect></cashBackAccountSelect>
+			<cashBackMemoText></cashBackMemoText>
+			<cashBackAmountText>1500</cashBackAmountText>
+			<totText></totText>
+			<deposit>
+				<ClientTransactionMakeDeposit>
+					<vendor></vendor>
+					<customer></customer>
+					<reference></reference>
+				</ClientTransactionMakeDeposit>
+			</deposit>
+		</MakeDeposit>
+	</MakeDeposits>
+</ClientCompany>

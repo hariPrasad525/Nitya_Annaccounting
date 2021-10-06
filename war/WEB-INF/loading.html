@@ -1,0 +1,104 @@
+<html>
+	<title>Anna Accounting</title>
+	 <style type="text/css">
+        #loading {
+            position: absolute;
+            left: 42%;
+            top: 35%;
+            padding: 2px;
+            z-index: 20001;
+            height: auto;
+            border: 1px solid #CCCCCC;
+            box-shadow: 0 0 10px #177ea9;
+            background: none repeat scroll 0 0 white;
+            border-radius: 10px 10px 10px 10px;
+        }
+
+        #loading a {
+            color: #225588;
+        }
+        #loading .loadingIndicator div{
+                color: #177ea9;
+			    font-size: 20px;
+			    font-weight: normal;
+			    padding-left: 10px;
+        }
+        #loading .loadingIndicator {
+			 color: #444444;
+			 font-family: tahoma,arial,helvetica;
+			 font-weight: bold;
+			 height: auto;
+			 line-height: normal;
+			 margin: 0;
+			 padding: 10px;
+            
+        }
+
+        #loadingMsg {
+            font: normal 10px arial, tahoma, sans-serif;
+        }
+    </style>
+	<script type="text/javascript">
+	
+	if(document.addEventListener) {   // Mozilla, Opera, Webkit are all happy with this
+	    document.addEventListener("DOMContentLoaded", function()
+	    {
+        	document.removeEventListener( "DOMContentLoaded", arguments.callee, false);
+        	loadXMLDoc();
+    	}, false);
+	}
+	else if(document.attachEvent) {   // IE is different...
+    	document.attachEvent("onreadystatechange", function()
+    	{
+        	if(document.readyState === "complete") {
+            	document.detachEvent("onreadystatechange", arguments.callee);
+            	loadXMLDoc();
+        	}
+    	});
+	}
+	var xmlhttp;
+	function loadXMLDoc()
+	{
+		
+		if (window.XMLHttpRequest)
+  		{// code for IE7+, Firefox, Chrome, Opera, Safari
+  			xmlhttp=new XMLHttpRequest();
+  		}
+		else
+  		{// code for IE6, IE5
+  			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  		}
+		xmlhttp.onreadystatechange=function()
+  		{
+  			if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    		{
+    			var msg = xmlhttp.responseText;
+    			if(msg=='0'){
+    				setTimeout("checkAgain()",5000);
+    			}else if(msg='1'){
+    				 window.location='/desk/startupcomplete';
+    			}
+    		}
+  		}
+		xmlhttp.open("POST","/desk/startup",true);
+		xmlhttp.send();
+	}
+	
+	function checkAgain(){
+		xmlhttp.open("POST","/desk/startup",true);
+		xmlhttp.send();
+	}
+	
+	</script>
+	<body>
+		<div id="loading">
+	    <div class="loadingIndicator">
+	       <div class="loadingIndicator"> 
+			<div>Loading Anna Accounting</div>
+				<img src="../images/Main-page-loading.gif" alt="Main page">
+    		<div>Please Wait</div>
+    	   </div>
+	    </div>
+		</div>
+	</body>
+</html>

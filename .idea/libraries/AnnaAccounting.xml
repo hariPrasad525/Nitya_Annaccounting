@@ -1,0 +1,20 @@
+<component name="libraryTable">
+  <library name="AnnaAccounting">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="file://$PROJECT_DIR$/gwt-2.8.2/doc/javadoc" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/api/java" />
+      <root url="file://$PROJECT_DIR$/gwt-2.8.2/samples/DynaTable/src" />
+      <root url="file://$PROJECT_DIR$/gwt-2.8.2/samples/Hello/src" />
+      <root url="file://$PROJECT_DIR$/gwt-2.8.2/samples/JSON/src" />
+      <root url="file://$PROJECT_DIR$/gwt-2.8.2/samples/Mail/src" />
+      <root url="file://$PROJECT_DIR$/gwt-2.8.2/samples/Showcase/src" />
+      <root url="file://$PROJECT_DIR$/src" />
+      <root url="file://$PROJECT_DIR$/test" />
+    </SOURCES>
+  </library>
+</component>

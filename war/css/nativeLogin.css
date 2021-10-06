@@ -1,0 +1,22 @@
+/** Add css rules here for your application. */
+	/** This css file only for MAC application of accounter  */
+	/*
+ *	@author A.Praveena
+ *
+ */
+ 
+.main_body-container,.middle-part{
+	background:none !important;
+}
+.header,.login_logo_image,.footer{
+    display:none;
+}
+#mid{
+    margin:0px 56px 0 56px !important;
+}
+#mid-1{
+    margin-top:120px !important;
+}
+.success_login{
+    display:block !important;
+}

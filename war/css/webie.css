@@ -1,0 +1,137 @@
+/* IE9*/
+.page_header .panel2{
+	float:left;
+}
+.page_header .panel1{
+	float:left;
+}
+.page_header .header_links{
+	float:left;
+}
+.companies_link_parent {
+	display: inherit;
+	float:left;
+}
+.group-toolbar .grouped-buttons{
+	float:left;
+}
+#group1 .viewTitle{
+	float:left;
+}
+#group1 button{
+	float:left;
+}
+
+.datenumber-panel .formItem .gwt-Label{
+	float:left;
+}
+.dateItem_datePanel{
+	float:left;
+}
+.dateItem_datePanel input[type="text"]{
+	float:left;
+}
+.dateItem_datePanel .calendar-picker{
+	float:left;
+}
+.dateItem_datePanel .formItem{
+	float:left;
+}
+ .formItem{
+	margin-bottom:0px !important;
+}
+.dateItem_datePanel{
+	margin-bottom:10px;
+}
+.memoForm .memoArea .gwt-Label{
+	float:left;
+}
+.memoForm .memoArea textarea{
+	float:left;
+}
+.formItem .gwt-Label{
+	float:left;
+}
+.formItem .label{
+	float:left;
+}
+.button_bar{
+	clear:left;
+	float:right;
+	width:auto;
+}
+.bottomPanel .memoForm{
+	float:left;
+}
+.bottomPanel .totalForm{
+	float:right;
+}
+.gridPanel{
+	clear:both;
+}
+.downarrow-button{
+	float:left;
+	height:22px;
+}
+.editTable .gwt-TextBox{
+	float:left;
+}
+input[type="text"]{
+	float:left;
+}
+.editTable{
+	clear:both;
+}
+.formItem input[type="text"]{
+   	margin-bottom:10px;
+}
+.formItem textarea{
+	margin-bottom:10px;
+}
+.leftVLay{
+	float:left;
+}
+.rightVLay{
+	float:right;
+}
+.customerSinceDate{
+	float:left;
+}
+.listgrid{
+	clear:both;
+}
+.Transactions_center #listPanel{
+	float:left;
+}
+.Transactions_center #TransactionsListView{
+	float:left;
+}
+#newAccountView .topHLay .leftLayout .frameTitle{
+	width:auto;
+}
+#newAccountView .commentsArea{
+	clear:both;
+}
+#newAccountView .checkboxItem{
+	clear:both;
+}
+#newAccountView .balanceForm{
+	clear:both;
+}
+#PreferenceSettingsView .mainPanel .pre_scroll_table{
+	float:left;
+	width:79%;
+}
+#PreferenceSettingsView .mainPanel .titlesPanel{
+	float:left;
+}
+#SalesTaxGroupListView .sales_tax_buttons{
+	width:8%;
+	float:left;
+}
+#SalesTaxGroupListView #TaxGroupGrid{
+	float:left;
+}
+#SalesTaxGroupListView #SalesTaxItemsGrid{
+	clear:both;
+}

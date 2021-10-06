@@ -1,0 +1,1489 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field">
+
+	<query name="getClient.by.mailId">
+		<query-param name="emailId" type="String" />
+		from com.vimukti.accounter.core.Client client
+		where client.emailId
+		=:emailId
+	</query>
+	<query name="getAdvertisements">
+		from com.vimukti.accounter.core.Advertisement add
+	</query>
+
+	<query name="get.activation.by.token">
+		<query-param name="token" type="String" />
+		from com.vimukti.accounter.core.Activation activation
+		where
+		activation.token
+		=:token
+	</query>
+
+	<query name="get.activation.by.emailid">
+		<query-param name="emailId" type="String" />
+		from com.vimukti.accounter.core.Activation activation
+		where
+		activation.emailId
+		=:emailId
+	</query>
+
+	
+
+	<query name="get.PayPalAccount.by.AccountID">
+		<query-param name="accountID" type="long" />
+		from com.vimukti.accounter.core.Account account
+		where account.id=:accountID
+	</query>
+	
+	<query name="list.get.PaypalAccounts">
+		<query-param name="companyId" type="long" />
+		<query-param name="type" type="integer" />
+		from com.vimukti.accounter.core.Account account
+		where account.company.id=:company  
+		and account.type=:type
+	</query>
+
+
+	<query name="delete.activation.by.emailId">
+		<query-param name="emailId" type="String" />
+		delete from com.vimukti.accounter.core.Activation activation
+		where
+		activation.emailId=:emailId
+	</query>
+
+	<query name="delete.activation.by.Id">
+		<query-param name="id" type="integer" />
+		delete from com.vimukti.accounter.core.Activation activation
+		where
+		activation.id=:id
+	</query>
+
+	<query name="get.companiesList.by.emailId.and.password">
+		<query-param name="emailId" type="String" />
+		<query-param name="password" type="String" />
+		from com.vimukti.accounter.core.Client client
+		where client.emailId
+		=:emailId and client.password=:password
+	</query>
+
+	<query name="getclient.from.central.db.using.emailid.and.password">
+		<query-param name="emailId" type="String" />
+		<query-param name="password" type="String" />
+		from com.vimukti.accounter.core.Client client
+		where
+		client.emailId=:emailId and client.password =:password
+	</query>
+
+	<query name="getServerCompany.by.name">
+		<query-param name="name" type="string" />
+		from com.vimukti.accounter.core.Company c where
+		c.preferences.tradingName=:name
+	</query>
+
+	<sql-query name="get.client.created.companies">
+		<query-param name="clientId" type="long" />
+	
+		<![CDATA[
+				SELECT *
+				FROM   company
+				WHERE  created_by IN (SELECT id
+                				    	FROM   users
+                      					WHERE  client_id = :clientId)  
+				]]>
+
+	</sql-query>
+	
+	<query name="get.users.by.unique.email">
+		<query-param name="email" type="String" />
+		from com.vimukti.accounter.core.User user
+		where user.uniqueId= :email
+	</query>
+
+	<sql-query name="transactions.count.per.month">
+		<query-param name="companyId" type="long" />
+		<query-param name="startDate" type="long" />
+
+		<return-scalar column="TRANSACTION_COUNT" type="int" />
+		
+		<![CDATA[
+				SELECT COUNT(*) AS TRANSACTION_COUNT
+				FROM   TRANSACTION
+				WHERE  company_id = :companyId
+       			AND created_date >= :startDate 
+				]]>
+
+	</sql-query>
+
+	<sql-query name="get.company.contactsupport">
+		<query-param name="companyId" type="long" />
+
+		<return-scalar column="CONTACT_SUPPORT" type="boolean" />
+		
+		<![CDATA[
+				SELECT CONTACT_SUPPORT
+				FROM   COMPANY
+				WHERE  ID = :companyId  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="get.created.users">
+		<query-param name="users" type="String" />	
+		<![CDATA[
+				SELECT C.EMAIL_ID AS EMAIL_ID
+				FROM   USERS U
+				       LEFT JOIN CLIENT C
+				         ON C.ID = U.CLIENT_ID
+				WHERE  C.EMAIL_ID IN ( :users )
+				GROUP  BY C.EMAIL_ID  
+		]]>
+
+	</sql-query>
+
+	<query name="getServerCompany.by.id">
+		<query-param name="id" type="integer" />
+		from com.vimukti.accounter.core.Company c where
+		c.id=:id
+	</query>
+
+	<sql-query name="list.Users.by.emailIds">
+		<query-param name="users" type="String" />
+
+		<return-scalar column="EMAIL_ID" type="string" />
+		<return-scalar column="FIRST_NAME" type="string" />
+		<return-scalar column="LAST_NAME" type="string" />
+		<return-scalar column="COMPANY_ID" type="long" />
+		<return-scalar column="IS_DELETED" type="boolean" />
+		<![CDATA[
+				SELECT C.EMAIL_ID,
+				       C.FIRST_NAME,
+				       C.LAST_NAME,
+				       U.COMPANY_ID,
+				       U.IS_DELETED
+				FROM   USERS U
+				       LEFT JOIN CLIENT C
+				         ON C.ID = U.CLIENT_ID
+				WHERE  C.EMAIL_ID IN ( :users )  
+		]]>
+
+	</sql-query>
+
+	<sql-query name="unlock.company">
+		<query-param name="companyId" type="long" />
+		
+		<![CDATA[
+				UPDATE company 
+				SET    is_locked = false 
+				WHERE  id = :companyId 
+		]]>
+
+	</sql-query>
+
+	<sql-query name="lock.company">
+		<query-param name="companyId" type="long" />
+		
+		<![CDATA[
+				UPDATE company 
+				SET    is_locked = true 
+				WHERE  id = :companyId 
+		]]>
+
+	</sql-query>
+
+	<sql-query name="delete.Client.Companies">
+		<query-param name="serverCompanyID" type="String" />
+		
+		<![CDATA[
+				DELETE FROM CLIENT_COMPANIES
+				WHERE  COMPANY_ID = :serverCompanyID  
+		]]>
+
+	</sql-query>
+
+	<query name="delete.ServerCompany.by.Id">
+		<query-param name="id" type="String" />
+		delete from com.vimukti.accounter.core.Company company
+		where
+		company.id
+		=:id
+	</query>
+
+	<query name="update.client.emailStatus">
+		<query-param name="email" type="string" />
+		update com.vimukti.accounter.core.Client c set c.isEmailBounced = true
+		where c.emailId=:email
+	</query>
+	
+	<sql-query name="get.company.passwordkey">
+		<query-param name="companyName" type="String" />
+		
+		<return-scalar column="PASSWORD_KEY" type="binary" />
+		<return-scalar column="ID" type="long" />
+		<![CDATA[
+				SELECT c.password_recovery_key AS password_key, 
+				       c.id 
+				FROM   company c 
+				WHERE  c.trading_name = :companyName 			
+		]]>
+
+	</sql-query>
+	
+	<sql-query name="get.client.passwordkey">
+		<query-param name="emailId" type="String" />
+		
+		<return-scalar column="PASSWORD_KEY" type="binary" />
+		<return-scalar column="ID" type="long" />
+		<![CDATA[
+				SELECT c.password_reovery_key AS password_key, 
+				       c.id 
+				FROM   client c 
+				WHERE  c.email_id = :emailId 			
+		]]>
+
+	</sql-query>
+	
+	<sql-query name="get.companyId.secret.createdUserId">
+		<query-param name="companyName" type="String" />
+		
+		<return-scalar column="C_ID" type="long" />
+		<return-scalar column="SECRET_KEY" type="binary" />
+		<return-scalar column="U_ID" type="long" />
+		<![CDATA[
+				SELECT c.id AS c_id, 
+				       c.secret_key, 
+				       u.id AS u_id 
+				FROM   company c 
+				       LEFT JOIN users u 
+				         ON u.id = c.created_by 
+				WHERE  c.trading_name = :companyName 			
+		]]>
+
+	</sql-query>
+	
+	<query name="getUser.by.mailId.and.companyId">
+		<query-param name="emailId" type="String" />
+		<query-param name="companyId" type="long" />
+		from com.vimukti.accounter.core.User u
+		where u.client.emailId=:emailId
+		and u.company.id=:companyId
+	</query>
+
+	<sql-query name="getUserIds.invited.by.client">
+		<query-param name="emailId" type="String" />
+		<query-param name="clientId" type="long" />
+		SELECT * FROM USERS U2 WHERE U2.ID IN (SELECT U.ID AS USER_ID
+		FROM
+		USERS U LEFT JOIN CLIENT C2 ON C2.ID=U.CLIENT_ID
+		WHERE
+		U.IS_DELETED=FALSE AND C2.EMAIL_ID=:emailId AND
+		U.COMPANY_ID IN
+		(SELECT
+		C.ID FROM COMPANY C WHERE C.CREATED_BY IN
+		(SELECT U1.ID FROM USERS U1
+		WHERE U1.CLIENT_ID=:clientId)))
+	</sql-query>
+	<query name="delete.remembermeKeys">
+		<query-param name="key" type="String" />
+		delete from com.vimukti.accounter.core.RememberMeKey rk where
+		rk.key=:key
+	</query>
+
+	<query name="get.remembermeKey">
+		<query-param name="key" type="String" />
+		from com.vimukti.accounter.core.RememberMeKey rk where rk.key=:key
+	</query>
+
+	<sql-query name="getExpensesTotalByType">
+		<query-param name="expenseType" type="long" />
+		<query-param name="companyId" type="long" />
+		<query-param name="startDate" type="long" />
+		<query-param name="endDate" type="long" />
+		
+		<![CDATA[
+				SELECT SUM(T.TOTAL * T.CURRENCY_FACTOR) AS TOTAL
+				FROM   TRANSACTION T
+				       LEFT OUTER JOIN CASH_PURCHASE CP
+				         ON CP.ID = T.ID
+				       LEFT OUTER JOIN ACCOUNT A
+				         ON A.ID = CP.PAYFROM_ACCOUNT_ID
+				       LEFT OUTER JOIN CREDIT_CARD_CHARGES CC
+				         ON CC.ID = T.ID
+				       LEFT OUTER JOIN PAYEE P
+				         ON P.ID = CC.VENDOR_ID
+				       LEFT OUTER JOIN USERS U
+				         ON U.ID = CP.EMPLOYEE
+				       LEFT OUTER JOIN CLIENT C
+				         ON C.ID = U.CLIENT_ID
+				WHERE  CASE
+				         WHEN :expenseType IN ( 26, 27, 28 ) THEN T.T_TYPE = :expenseType
+				         ELSE T.T_TYPE IN ( 26, 27, 28 )
+				       END
+				       AND T.T_DATE BETWEEN :startDate AND :endDate
+				       AND T.SAVE_STATUS = 203
+				       AND T.COMPANY_ID = :companyId  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="isCompanyLocked">
+		<query-param name="companyId" type="long" />
+		<return-scalar column="IS_LOCKED" type="boolean" />
+		<![CDATA[
+				SELECT IS_LOCKED
+				FROM   COMPANY
+				WHERE  ID = :companyId  
+				]]>
+
+	</sql-query>
+	
+	<sql-query name="isCompanyDeleted">
+		<query-param name="companyId" type="long" />
+		<return-scalar column="IS_DELETED" type="boolean" />
+		<![CDATA[
+				SELECT IS_DELETED
+				FROM   COMPANY
+				WHERE  ID = :companyId  
+				]]>
+	</sql-query>
+
+	
+	
+
+	<sql-query name="isCompanyExists">
+		<query-param name="companyId" type="long" />
+
+		<return-scalar column="COMPANY_ID" type="long" />
+		
+		<![CDATA[
+				SELECT ID AS COMPANY_ID
+				FROM   COMPANY
+				WHERE  ID = :companyId  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getCompaniesByClientId">
+		<query-param name="clientId" type="long" />
+		
+		<![CDATA[
+				SELECT C.COMPANY_ID
+				FROM   USERS C
+				WHERE  C.CLIENT_ID = :clientId  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getCompanySecret">
+		<query-param name="companyId" type="long" />
+
+		<return-scalar column="SECRET" type="binary" />
+		
+		<![CDATA[
+				SELECT C.SECRET_KEY AS SECRET
+				FROM   COMPANY C
+				WHERE  C.ID = :companyId  
+				]]>
+
+	</sql-query>
+
+	<query name="get.company.by.tradingname">
+		<query-param name="tradingName" type="String" />
+		from com.vimukti.accounter.core.Company c where
+		c.preferences.tradingName=:tradingName
+	</query>
+
+	<sql-query name="get.all.clients">
+		<return-scalar column="CLIENT_ID" type="long" />
+		<![CDATA[
+			SELECT C.id AS CLIENT_ID
+			FROM   client C
+			       left join client_subscription CS
+			              ON CS.id = C.client_subscription
+			WHERE  is_deleted = FALSE
+			       AND ( CS.expired_date + interval '1' day < current_timestamp
+			             AND CASE
+			                   WHEN CS.graceperiod_date IS NOT NULL THEN
+			                   CS.graceperiod_date < current_timestamp
+			                   ELSE  CS.subscription_id=3
+			                 END )
+		 ]]>
+	</sql-query>
+
+	<query name="get.subscription">
+		<query-param name="type" type="int" />
+		from com.vimukti.accounter.core.Subscription where type=:type
+	</query>
+	
+	<sql-query name="getHint.by.company">
+		<query-param name="companyId" type="long" />
+		select password_HInt from company where id=:companyId
+	</sql-query>
+	
+	<sql-query name="insertAllFeatures">
+		insert into features values(3,'create company');
+		insert into features values(3,'brnading theme0');
+		insert into features values(3,'history');
+		insert into features values(3,'user activity');
+		insert into features values(3,'class');
+		insert into features values(3,'location');
+		insert into features values(3,'attachments');
+		insert into features values(3,'billable exenses');
+		insert into features values(3,'credtis and charges');
+		insert into features values(3,'merging');
+		insert into features values(3,'job costing');
+		insert into features values(3,'encryption');
+		insert into features values(3,'invite users');
+		insert into features values(3,'inventory');
+		insert into features values(3,'extra reports');
+		insert into features values(3,'multi currency');
+		insert into features values(3,'salse order');
+		insert into features values(3,'purchase order');
+		insert into features values(3,'recurring transactions');
+		insert into features values(3,'drafts');
+		insert into features values(3,'dash board widgets');
+		insert into features values(3,'BUDGET');
+		insert into features values(3,'transactions');
+		insert into features values(3,'fixed asset');
+		insert into features values(3,'import');
+		insert into features values(3,'transaction navigation');
+		insert into features values(3,'historical unitprices');
+		insert into features values(3,'import bank statements');
+		insert into features values(3,'pay roll');
+	</sql-query>
+	
+	
+	<query name="getLicense">
+		<query-param name="emailId" type="String" />
+		from com.vimukti.accounter.core.License ls  where ls.isActive=true
+	</query>
+	
+	<query name="getLicenseByServerID">
+		<query-param name="serverId" type="String" />
+		from com.vimukti.accounter.core.License ls  where ls.serverId=:serverId
+	</query>
+	
+	<query name="getActiveLicenseOfClient">
+		<query-param name="client" type="Client" />
+		from com.vimukti.accounter.core.License ls  where ls.client=:client and ls.isActive=true
+	</query>
+	
+	
+	<sql-query name="getInvoicesListByCustomer">
+		<query-param name="companyId" type="long" />
+		<query-param name="fromDate" type="long" />
+		<query-param name="toDate" type="long" />
+		<query-param name="customerId" type="long" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TRANSACTION_NUMBER" type="encryptedstring" />
+		<return-scalar column="DUE_DATE" type="long" />
+		<return-scalar column="TRANSACTION_NET_AMOUNT" type="double" />
+		<return-scalar column="ISVOIDED" type="boolean" />
+		<return-scalar column="TRANSACTION_MEMO" type="encryptedstring" />
+		<return-scalar column="TRANSACTION_STATUS" type="int" />
+		<return-scalar column="CUSTOMER_NAME" type="encryptedstring" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="BALANCE" type="double" />
+		<return-scalar column="CURRENCY_ID" type="long" />
+		
+		<![CDATA[
+				SELECT T.CURRENCY   AS CURRENCY_ID,
+				       T.MEMO       AS TRANSACTION_MEMO,
+				       T.ID         AS TRANSACTION_ID,
+				       T.T_TYPE     AS TRANSACTION_TYPE,
+				       T.T_DATE     AS TRANSACTION_DATE,
+				       T.NUMBER     TRANSACTION_NUMBER,
+				       P.NAME       AS CUSTOMER_NAME,
+				       T.NET_AMOUNT AS TRANSACTION_NET_AMOUNT,
+				       CASE
+				         WHEN T.T_TYPE = 8 THEN I.DUE_DATE
+				         ELSE NULL
+				       END          AS DUE_DATE,
+				       T.TOTAL      AS TOTAL_PRICE,
+				       CASE
+				         WHEN T.T_TYPE = 8 THEN I.BALANCE_DUE
+				         ELSE 0.0
+				       END          AS BALANCE,
+				       CASE
+				         WHEN T.SAVE_STATUS = 204 THEN TRUE
+				         ELSE FALSE
+				       END          AS ISVOIDED,
+				       T.SAVE_STATUS     AS TRANSACTION_STATUS
+				FROM   TRANSACTION T
+				       LEFT OUTER JOIN INVOICE I
+				         ON T.ID = I.ID
+				       LEFT OUTER JOIN CUSTOMER C
+				         ON C.ID = I.CUSTOMER_ID
+				       LEFT OUTER JOIN PAYEE P
+				         ON P.ID = C.ID
+				WHERE  T.T_TYPE = 8
+				       AND T.COMPANY_ID = :companyId
+				       AND T.T_DATE BETWEEN :fromDate AND :toDate
+				       AND C.ID = :customerId AND T.SAVE_STATUS != 202
+				ORDER  BY DUE_DATE  
+				]]>
+
+	</sql-query>
+	
+	<sql-query name="getOpenInvoicesListByCustomer">
+		<query-param name="companyId" type="long" />
+		<query-param name="fromDate" type="long" />
+		<query-param name="toDate" type="long" />
+		<query-param name="customerId" type="long" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TRANSACTION_NUMBER" type="encryptedstring" />
+		<return-scalar column="DUE_DATE" type="long" />
+		<return-scalar column="TRANSACTION_NET_AMOUNT" type="double" />
+		<return-scalar column="ISVOIDED" type="boolean" />
+		<return-scalar column="TRANSACTION_MEMO" type="encryptedstring" />
+		<return-scalar column="TRANSACTION_STATUS" type="int" />
+		<return-scalar column="CUSTOMER_NAME" type="encryptedstring" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="BALANCE" type="double" />
+		<return-scalar column="CURRENCY_ID" type="long" />
+		
+		<![CDATA[
+				SELECT T.CURRENCY   AS CURRENCY_ID,
+				       T.MEMO       AS TRANSACTION_MEMO,
+				       T.ID         AS TRANSACTION_ID,
+				       T.T_TYPE     AS TRANSACTION_TYPE,
+				       T.T_DATE     AS TRANSACTION_DATE,
+				       T.NUMBER     TRANSACTION_NUMBER,
+				       P.NAME       AS CUSTOMER_NAME,
+				       T.NET_AMOUNT AS TRANSACTION_NET_AMOUNT,
+				       CASE
+				         WHEN T.T_TYPE = 8 THEN I.DUE_DATE
+				         ELSE NULL
+				       END          AS DUE_DATE,
+				       T.TOTAL      AS TOTAL_PRICE,
+				       CASE
+				         WHEN T.T_TYPE = 8 THEN I.BALANCE_DUE
+				         ELSE 0.0
+				       END          AS BALANCE,
+				       CASE
+				         WHEN T.SAVE_STATUS = 204 THEN TRUE
+				         ELSE FALSE
+				       END          AS ISVOIDED,
+				       T.SAVE_STATUS     AS TRANSACTION_STATUS
+				FROM   TRANSACTION T
+				       LEFT OUTER JOIN INVOICE I
+				         ON T.ID = I.ID
+				       LEFT OUTER JOIN CUSTOMER C
+				         ON C.ID = I.CUSTOMER_ID
+				       LEFT OUTER JOIN PAYEE P
+				         ON P.ID = C.ID
+				WHERE  T.T_TYPE = 8
+				       AND T.SAVE_STATUS != 202
+				       AND T.COMPANY_ID = :companyId
+				       AND T.T_DATE BETWEEN :fromDate AND :toDate
+				       AND C.ID = :customerId
+				       AND I.BALANCE_DUE > 0
+				ORDER  BY DUE_DATE  
+				]]>
+
+	</sql-query>
+	
+	<sql-query name="getDraftInvoicesListByCustomer">
+		<query-param name="companyId" type="long" />
+		<query-param name="fromDate" type="long" />
+		<query-param name="toDate" type="long" />
+		<query-param name="customerId" type="long" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TRANSACTION_NUMBER" type="encryptedstring" />
+		<return-scalar column="DUE_DATE" type="long" />
+		<return-scalar column="TRANSACTION_NET_AMOUNT" type="double" />
+		<return-scalar column="ISVOIDED" type="boolean" />
+		<return-scalar column="TRANSACTION_MEMO" type="encryptedstring" />
+		<return-scalar column="TRANSACTION_STATUS" type="int" />
+		<return-scalar column="CUSTOMER_NAME" type="encryptedstring" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="BALANCE" type="double" />
+		<return-scalar column="CURRENCY_ID" type="long" />
+		
+		<![CDATA[
+				SELECT T.CURRENCY   AS CURRENCY_ID,
+				       T.MEMO       AS TRANSACTION_MEMO,
+				       T.ID         AS TRANSACTION_ID,
+				       T.T_TYPE     AS TRANSACTION_TYPE,
+				       T.T_DATE     AS TRANSACTION_DATE,
+				       T.NUMBER     TRANSACTION_NUMBER,
+				       P.NAME       AS CUSTOMER_NAME,
+				       T.NET_AMOUNT AS TRANSACTION_NET_AMOUNT,
+				       CASE
+				         WHEN T.T_TYPE = 8 THEN I.DUE_DATE
+				         ELSE NULL
+				       END          AS DUE_DATE,
+				       T.TOTAL      AS TOTAL_PRICE,
+				       CASE
+				         WHEN T.T_TYPE = 8 THEN I.BALANCE_DUE
+				         ELSE 0.0
+				       END          AS BALANCE,
+				       CASE
+				         WHEN T.SAVE_STATUS = 204 THEN TRUE
+				         ELSE FALSE
+				       END          AS ISVOIDED,
+				       T.SAVE_STATUS     AS TRANSACTION_STATUS
+				FROM   TRANSACTION T
+				       LEFT OUTER JOIN INVOICE I
+				         ON T.ID = I.ID
+				       LEFT OUTER JOIN CUSTOMER C
+				         ON C.ID = I.CUSTOMER_ID
+				       LEFT OUTER JOIN PAYEE P
+				         ON P.ID = C.ID
+				WHERE  T.T_TYPE = 8
+				       AND T.SAVE_STATUS != 202
+				       AND T.COMPANY_ID = :companyId
+				       AND T.T_DATE BETWEEN :fromDate AND :toDate
+				       AND C.ID = :customerId
+				       AND T.SAVE_STATUS = 201
+				ORDER  BY DUE_DATE  
+				]]>
+
+	</sql-query>
+	
+	<sql-query name="getOverdueInvoicesListByCustomer">
+		<query-param name="companyId" type="long" />
+		<query-param name="fromDate" type="long" />
+		<query-param name="toDate" type="long" />
+		<query-param name="customerId" type="long" />
+		<query-param name="currentDate" type="long" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TRANSACTION_NUMBER" type="encryptedstring" />
+		<return-scalar column="DUE_DATE" type="long" />
+		<return-scalar column="TRANSACTION_NET_AMOUNT" type="double" />
+		<return-scalar column="ISVOIDED" type="boolean" />
+		<return-scalar column="TRANSACTION_MEMO" type="encryptedstring" />
+		<return-scalar column="TRANSACTION_STATUS" type="int" />
+		<return-scalar column="CUSTOMER_NAME" type="encryptedstring" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="BALANCE" type="double" />
+		<return-scalar column="CURRENCY_ID" type="long" />
+
+		<![CDATA[
+				SELECT T.CURRENCY   AS CURRENCY_ID,
+				       T.MEMO       AS TRANSACTION_MEMO,
+				       T.ID         AS TRANSACTION_ID,
+				       T.T_TYPE     AS TRANSACTION_TYPE,
+				       T.T_DATE     AS TRANSACTION_DATE,
+				       T.NUMBER     TRANSACTION_NUMBER,
+				       P.NAME       AS CUSTOMER_NAME,
+				       T.NET_AMOUNT AS TRANSACTION_NET_AMOUNT,
+				       CASE
+				         WHEN T.T_TYPE = 8 THEN I.DUE_DATE
+				         ELSE NULL
+				       END          AS DUE_DATE,
+				       T.TOTAL      AS TOTAL_PRICE,
+				       CASE
+				         WHEN T.T_TYPE = 8 THEN I.BALANCE_DUE
+				         ELSE 0.0
+				       END          AS BALANCE,
+				       CASE
+				         WHEN T.SAVE_STATUS = 204 THEN TRUE
+				         ELSE FALSE
+				       END          AS ISVOIDED,
+				       T.SAVE_STATUS     AS TRANSACTION_STATUS
+				FROM   TRANSACTION T
+				       LEFT OUTER JOIN INVOICE I
+				         ON T.ID = I.ID
+				       LEFT OUTER JOIN CUSTOMER C
+				         ON C.ID = I.CUSTOMER_ID
+				       LEFT OUTER JOIN PAYEE P
+				         ON P.ID = C.ID
+				WHERE  T.SAVE_STATUS <> 204
+				       AND T.T_TYPE = 8
+				       AND T.SAVE_STATUS != 202
+				       AND T.COMPANY_ID = :companyId
+				       AND T.T_DATE BETWEEN :fromDate AND :toDate
+				       AND I.DUE_DATE <= :currentDate
+				       AND C.ID = :customerId
+				ORDER  BY DUE_DATE  
+				]]>
+
+	</sql-query>
+	
+	<sql-query name="getCashSalesByCustomer">
+		<query-param name="companyId" type="long" />
+		<query-param name="fromDate" type="long" />
+		<query-param name="toDate" type="long" />
+		<query-param name="customerId" type="long" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TRANSACTION_NUMBER" type="encryptedstring" />
+		<return-scalar column="DUE_DATE" type="long" />
+		<return-scalar column="TRANSACTION_NET_AMOUNT" type="double" />
+		<return-scalar column="ISVOIDED" type="boolean" />
+		<return-scalar column="TRANSACTION_MEMO" type="encryptedstring" />
+		<return-scalar column="TRANSACTION_STATUS" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="BALANCE" type="double" />
+		<return-scalar column="CURRENCY_ID" type="long" />
+		<return-scalar column="CUSTOMER_NAME" type="encryptedstring" />
+		
+		<![CDATA[
+				SELECT T.MEMO       AS TRANSACTION_MEMO,
+				       T.CURRENCY   AS CURRENCY_ID,
+				       T.ID         AS TRANSACTION_ID,
+				       T.T_TYPE     AS TRANSACTION_TYPE,
+				       T.T_DATE     AS TRANSACTION_DATE,
+				       T.NUMBER     AS TRANSACTION_NUMBER,
+				       P.NAME       AS CUSTOMER_NAME,
+				       T.NET_AMOUNT AS TRANSACTION_NET_AMOUNT,
+				       NULL         AS DUE_DATE,
+				       T.TOTAL      AS TOTAL_PRICE,
+				       0.0          AS BALANCE,
+				       CASE
+				         WHEN T.SAVE_STATUS = 204 THEN TRUE
+				         ELSE FALSE
+				       END          AS ISVOIDED,
+				       T.SAVE_STATUS     AS TRANSACTION_STATUS
+				FROM   TRANSACTION T
+				       LEFT OUTER JOIN CASH_SALES CS
+				         ON T.ID = CS.ID
+				       LEFT OUTER JOIN CUSTOMER C
+				         ON C.ID = CS.CUSTOMER_ID
+				       LEFT OUTER JOIN PAYEE P
+				         ON P.ID = C.ID
+				WHERE  T.T_TYPE = 1
+				       AND T.SAVE_STATUS != 202
+				       AND T.COMPANY_ID = :companyId
+				       AND T.T_DATE BETWEEN :fromDate AND :toDate
+				       AND C.ID = :customerId  
+				]]>
+
+	</sql-query>
+	
+	<sql-query name="getDraftCashSalesByCustomer">
+		<query-param name="companyId" type="long" />
+		<query-param name="fromDate" type="long" />
+		<query-param name="toDate" type="long" />
+		<query-param name="customerId" type="long" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TRANSACTION_NUMBER" type="encryptedstring" />
+		<return-scalar column="DUE_DATE" type="long" />
+		<return-scalar column="TRANSACTION_NET_AMOUNT" type="double" />
+		<return-scalar column="ISVOIDED" type="boolean" />
+		<return-scalar column="TRANSACTION_MEMO" type="encryptedstring" />
+		<return-scalar column="TRANSACTION_STATUS" type="int" />
+		<return-scalar column="CUSTOMER_NAME" type="encryptedstring" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="BALANCE" type="double" />
+		<return-scalar column="CURRENCY_ID" type="long" />
+		
+		<![CDATA[
+				SELECT T.MEMO       AS TRANSACTION_MEMO,
+				       T.CURRENCY   AS CURRENCY_ID,
+				       T.ID         AS TRANSACTION_ID,
+				       T.T_TYPE     AS TRANSACTION_TYPE,
+				       T.T_DATE     AS TRANSACTION_DATE,
+				       T.NUMBER     AS TRANSACTION_NUMBER,
+				       P.NAME       AS CUSTOMER_NAME,
+				       T.NET_AMOUNT AS TRANSACTION_NET_AMOUNT,
+				       NULL         AS DUE_DATE,
+				       T.TOTAL      AS TOTAL_PRICE,
+				       0.0          AS BALANCE,
+				       CASE
+				         WHEN T.SAVE_STATUS = 204 THEN TRUE
+				         ELSE FALSE
+				       END          AS ISVOIDED,
+				       T.SAVE_STATUS     AS TRANSACTION_STATUS
+				FROM   TRANSACTION T
+				       LEFT OUTER JOIN CASH_SALES CS
+				         ON T.ID = CS.ID
+				       LEFT OUTER JOIN CUSTOMER C
+				         ON C.ID = CS.CUSTOMER_ID
+				       LEFT OUTER JOIN PAYEE P
+				         ON P.ID = C.ID
+				WHERE  T.T_TYPE = 1
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS = 201
+				       AND T.SAVE_STATUS != 202
+				       AND T.T_DATE BETWEEN :fromDate AND :toDate
+				       AND C.ID = :customerId  
+				]]>
+
+	</sql-query>
+	
+	<sql-query name="getAllCustomerCreditMemosByCustomer">
+		<query-param name="companyId" type="long" />
+		<query-param name="fromDate" type="long" />
+		<query-param name="toDate" type="long" />
+		<query-param name="customerId" type="long" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TRANSACTION_NUMBER" type="encryptedstring" />
+		<return-scalar column="DUE_DATE" type="long" />
+		<return-scalar column="TRANSACTION_NET_AMOUNT" type="double" />
+		<return-scalar column="ISVOIDED" type="boolean" />
+		<return-scalar column="TRANSACTION_MEMO" type="encryptedstring" />
+		<return-scalar column="TRANSACTION_STATUS" type="int" />
+		<return-scalar column="CUSTOMER_NAME" type="encryptedstring" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="BALANCE" type="double" />
+		<return-scalar column="CURRENCY_ID" type="long" />
+		
+		<![CDATA[
+				SELECT T.MEMO       AS TRANSACTION_MEMO,
+				       T.CURRENCY   AS CURRENCY_ID,
+				       T.ID         AS TRANSACTION_ID,
+				       T.T_TYPE     AS TRANSACTION_TYPE,
+				       T.T_DATE     AS TRANSACTION_DATE,
+				       T.NUMBER     AS TRANSACTION_NUMBER,
+				       P.NAME       AS CUSTOMER_NAME,
+				       T.NET_AMOUNT AS TRANSACTION_NET_AMOUNT,
+				       T.TOTAL      AS TOTAL_PRICE,
+				       CASE
+				         WHEN T.SAVE_STATUS = 204 THEN TRUE
+				         ELSE FALSE
+				       END          AS ISVOIDED,
+				       NULL         AS DUE_DATE,
+				       0.0          AS BALANCE,
+				       T.SAVE_STATUS     AS TRANSACTION_STATUS
+				FROM   TRANSACTION T
+				       LEFT OUTER JOIN CUSTOMER_CREDIT_MEMO CCM
+				         ON T.ID = CCM.ID
+				       LEFT OUTER JOIN CUSTOMER C
+				         ON C.ID = CCM.CUSTOMER_ID
+				       LEFT OUTER JOIN PAYEE P
+				         ON P.ID = C.ID
+				WHERE  T.T_TYPE = 4
+				       AND T.SAVE_STATUS != 202
+				       AND T.COMPANY_ID = :companyId
+				       AND T.T_DATE BETWEEN :fromDate AND :toDate
+				       AND C.ID = :customerId  
+				]]>
+
+	</sql-query>
+	
+	<sql-query name="getOpendCustomerCreditMemosByCustomer">
+		<query-param name="companyId" type="long" />
+		<query-param name="fromDate" type="long" />
+		<query-param name="toDate" type="long" />
+		<query-param name="customerId" type="long" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TRANSACTION_NUMBER" type="encryptedstring" />
+		<return-scalar column="DUE_DATE" type="long" />
+		<return-scalar column="TRANSACTION_NET_AMOUNT" type="double" />
+		<return-scalar column="ISVOIDED" type="boolean" />
+		<return-scalar column="TRANSACTION_MEMO" type="encryptedstring" />
+		<return-scalar column="TRANSACTION_STATUS" type="int" />
+		<return-scalar column="CUSTOMER_NAME" type="encryptedstring" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="BALANCE" type="double" />
+		<return-scalar column="CURRENCY_ID" type="long" />
+		
+		<![CDATA[
+				SELECT T.MEMO       AS TRANSACTION_MEMO,
+				       T.CURRENCY   AS CURRENCY_ID,
+				       T.ID         AS TRANSACTION_ID,
+				       T.T_TYPE     AS TRANSACTION_TYPE,
+				       T.T_DATE     AS TRANSACTION_DATE,
+				       T.NUMBER     AS TRANSACTION_NUMBER,
+				       P.NAME       AS CUSTOMER_NAME,
+				       T.NET_AMOUNT AS TRANSACTION_NET_AMOUNT,
+				       T.TOTAL      AS TOTAL_PRICE,
+				       CASE
+				         WHEN T.SAVE_STATUS = 204 THEN TRUE
+				         ELSE FALSE
+				       END          AS ISVOIDED,
+				       NULL         AS DUE_DATE,
+				       0.0          AS BALANCE,
+				       T.SAVE_STATUS     AS TRANSACTION_STATUS
+				FROM   TRANSACTION T
+				       LEFT OUTER JOIN CUSTOMER_CREDIT_MEMO CCM
+				         ON T.ID = CCM.ID
+				       LEFT OUTER JOIN CUSTOMER C
+				         ON C.ID = CCM.CUSTOMER_ID
+				       LEFT OUTER JOIN PAYEE P
+				         ON P.ID = C.ID
+				WHERE  T.T_TYPE = 4
+				       AND T.STATUS = 101
+				       AND T.SAVE_STATUS != 202
+				       AND T.COMPANY_ID = :companyId
+				       AND T.T_DATE BETWEEN :fromDate AND :toDate
+				       AND C.ID = :customerId  
+				]]>
+
+	</sql-query>
+	
+	<sql-query name="getDraftCustomerCreditMemosByCustomer">
+		<query-param name="companyId" type="long" />
+		<query-param name="fromDate" type="long" />
+		<query-param name="toDate" type="long" />
+		<query-param name="customerId" type="long" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TRANSACTION_NUMBER" type="encryptedstring" />
+		<return-scalar column="DUE_DATE" type="long" />
+		<return-scalar column="TRANSACTION_NET_AMOUNT" type="double" />
+		<return-scalar column="ISVOIDED" type="boolean" />
+		<return-scalar column="TRANSACTION_MEMO" type="encryptedstring" />
+		<return-scalar column="TRANSACTION_STATUS" type="int" />
+		<return-scalar column="CUSTOMER_NAME" type="encryptedstring" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="BALANCE" type="double" />
+		<return-scalar column="CURRENCY_ID" type="long" />
+		
+		<![CDATA[
+				SELECT T.MEMO       AS TRANSACTION_MEMO,
+				       T.CURRENCY   AS CURRENCY_ID,
+				       T.ID         AS TRANSACTION_ID,
+				       T.T_TYPE     AS TRANSACTION_TYPE,
+				       T.T_DATE     AS TRANSACTION_DATE,
+				       T.NUMBER     AS TRANSACTION_NUMBER,
+				       P.NAME       AS CUSTOMER_NAME,
+				       T.NET_AMOUNT AS TRANSACTION_NET_AMOUNT,
+				       T.TOTAL      AS TOTAL_PRICE,
+				       CASE
+				         WHEN T.SAVE_STATUS = 204 THEN TRUE
+				         ELSE FALSE
+				       END          AS ISVOIDED,
+				       NULL         AS DUE_DATE,
+				       0.0          AS BALANCE,
+				       T.SAVE_STATUS     AS TRANSACTION_STATUS
+				FROM   TRANSACTION T
+				       LEFT OUTER JOIN CUSTOMER_CREDIT_MEMO CCM
+				         ON T.ID = CCM.ID
+				       LEFT OUTER JOIN CUSTOMER C
+				         ON C.ID = CCM.CUSTOMER_ID
+				       LEFT OUTER JOIN PAYEE P
+				         ON P.ID = C.ID
+				WHERE  T.T_TYPE = 4
+				       AND T.SAVE_STATUS = 201
+				       AND T.SAVE_STATUS != 202
+				       AND T.COMPANY_ID = :companyId
+				       AND T.T_DATE BETWEEN :fromDate AND :toDate
+				       AND C.ID = :customerId  
+				]]>
+
+	</sql-query>
+	
+	<sql-query name="getAllReceivePaymentsByCustomer">
+		<query-param name="companyId" type="long" />
+		<query-param name="fromDate" type="long" />
+		<query-param name="toDate" type="long" />
+		<query-param name="customerId" type="long" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TRANSACTION_NUMBER" type="encryptedstring" />
+		<return-scalar column="DUE_DATE" type="long" />
+		<return-scalar column="TRANSACTION_NET_AMOUNT" type="double" />
+		<return-scalar column="IS_VOIDED" type="boolean" />
+		<return-scalar column="TRANSACTION_MEMO" type="encryptedstring" />
+		<return-scalar column="TRANSACTION_STATUS" type="int" />
+		<return-scalar column="CUSTOMER_NAME" type="encryptedstring" />
+		<return-scalar column="PAYMENT_METHOD_NAME" type="encryptedstring" />
+		<return-scalar column="CHECK_NUMBER" type="encryptedstring" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT NULL             AS DUE_DATE,
+				       T.MEMO           AS TRANSACTION_MEMO,
+				       T.ID             AS TRANSACTION_ID,
+				       T.T_TYPE         AS TRANSACTION_TYPE,
+				       T.T_DATE         AS TRANSACTION_DATE,
+				       T.NUMBER         AS TRANSACTION_NUMBER,
+				       P.NAME           AS CUSTOMER_NAME,
+				       T.PAYMENT_METHOD AS PAYMENT_METHOD_NAME,
+				       T.TOTAL          AS TRANSACTION_NET_AMOUNT,
+				       CASE
+				         WHEN T.SAVE_STATUS = 204 THEN TRUE
+				         ELSE FALSE
+				       END              AS IS_VOIDED,
+				       T.SAVE_STATUS         AS TRANSACTION_STATUS,
+				       RP.CHECK_NUMBER  AS CHECK_NUMBER,
+				       T.CURRENCY       AS CURRENCY
+				FROM   TRANSACTION T
+				       LEFT OUTER JOIN RECEIVE_PAYMENT RP
+				         ON T.ID = RP.ID
+				       LEFT OUTER JOIN CUSTOMER_PREPAYMENT CP
+				         ON T.ID = CP.ID
+				       LEFT OUTER JOIN CUSTOMER C
+				         ON ( C.ID = RP.CUSTOMER_ID
+				               OR C.ID = CP.CUSTOMER_ID )
+				       LEFT OUTER JOIN PAYEE P
+				         ON P.ID = C.ID
+				WHERE  ( T.T_TYPE = 12
+				          OR T.T_TYPE = 29 )
+				       AND T.SAVE_STATUS != 202
+				       AND T.COMPANY_ID = :companyId
+				       AND T.T_DATE BETWEEN :fromDate AND :toDate
+				       AND C.ID = :customerId  
+				]]>
+
+	</sql-query>
+	
+	<sql-query name="getReceivePaymentsbyTypeByCustomer">
+		<query-param name="companyId" type="long" />
+		<query-param name="fromDate" type="long" />
+		<query-param name="toDate" type="long" />
+		<query-param name="customerId" type="long" />
+		<query-param name="paymentmethod" type="encryptedstring" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TRANSACTION_NUMBER" type="encryptedstring" />
+		<return-scalar column="DUE_DATE" type="long" />
+		<return-scalar column="TRANSACTION_NET_AMOUNT" type="double" />
+		<return-scalar column="IS_VOIDED" type="boolean" />
+		<return-scalar column="TRANSACTION_MEMO" type="encryptedstring" />
+		<return-scalar column="TRANSACTION_STATUS" type="int" />
+		<return-scalar column="CUSTOMER_NAME" type="encryptedstring" />
+		<return-scalar column="PAYMENT_METHOD_NAME" type="encryptedstring" />
+		<return-scalar column="CHECK_NUMBER" type="encryptedstring" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT NULL             AS DUE_DATE,
+				       T.MEMO           AS TRANSACTION_MEMO,
+				       T.ID             AS TRANSACTION_ID,
+				       T.T_TYPE         AS TRANSACTION_TYPE,
+				       T.T_DATE         AS TRANSACTION_DATE,
+				       T.NUMBER         AS TRANSACTION_NUMBER,
+				       P.NAME           AS CUSTOMER_NAME,
+				       T.PAYMENT_METHOD AS PAYMENT_METHOD_NAME,
+				       T.TOTAL          AS TRANSACTION_NET_AMOUNT,
+				       CASE
+				         WHEN T.SAVE_STATUS = 204 THEN TRUE
+				         ELSE FALSE
+				       END              AS IS_VOIDED,
+				       T.SAVE_STATUS         AS TRANSACTION_STATUS,
+				       RP.CHECK_NUMBER  AS CHECK_NUMBER,
+				       T.CURRENCY       AS CURRENCY
+				FROM   TRANSACTION T
+				       LEFT OUTER JOIN RECEIVE_PAYMENT RP
+				         ON T.ID = RP.ID
+				       LEFT OUTER JOIN CUSTOMER_PREPAYMENT CP
+				         ON CP.ID = T.ID
+				       LEFT OUTER JOIN CUSTOMER C
+				         ON ( C.ID = RP.CUSTOMER_ID
+				               OR C.ID = CP.CUSTOMER_ID )
+				       LEFT OUTER JOIN PAYEE P
+				         ON P.ID = C.ID
+				WHERE  ( T.T_TYPE = 12
+				          OR T.T_TYPE = 29 )
+				       AND T.PAYMENT_METHOD LIKE :paymentmethod
+				       AND T.SAVE_STATUS != 202
+				       AND T.COMPANY_ID = :companyId
+				       AND T.T_DATE BETWEEN :fromDate AND :toDate
+				       AND C.ID = :customerId  
+				]]>
+
+	</sql-query>
+	
+	<sql-query name="getAllCustomerRefundsByCustomer">
+		<query-param name="companyId" type="long" />
+		<query-param name="fromDate" type="long" />
+		<query-param name="toDate" type="long" />
+		<query-param name="customerId" type="long" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TRANSACTION_NUMBER" type="encryptedstring" />
+		<return-scalar column="DUE_DATE" type="long" />
+		<return-scalar column="TRANSACTION_NET_AMOUNT" type="double" />
+		<return-scalar column="ISVOIDED" type="boolean" />
+		<return-scalar column="TRANSACTION_MEMO" type="encryptedstring" />
+		<return-scalar column="TRANSACTION_STATUS" type="int" />
+		<return-scalar column="CUSTOMER_NAME" type="encryptedstring" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="BALANCE" type="double" />
+		<return-scalar column="CURRENCY_ID" type="long" />
+		
+		<![CDATA[
+				SELECT T.MEMO     AS TRANSACTION_MEMO,
+				       T.CURRENCY AS CURRENCY_ID,
+				       T.ID       AS TRANSACTION_ID,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.NUMBER   AS TRANSACTION_NUMBER,
+				       P.NAME     AS CUSTOMER_NAME,
+				       T.TOTAL    AS TRANSACTION_NET_AMOUNT,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       CASE
+				         WHEN T.SAVE_STATUS = 204 THEN TRUE
+				         ELSE FALSE
+				       END        AS ISVOIDED,
+				       NULL       AS DUE_DATE,
+				       0.0        AS BALANCE,
+				       T.SAVE_STATUS   AS TRANSACTION_STATUS
+				FROM   TRANSACTION T
+				       LEFT OUTER JOIN CUSTOMER_REFUND CCM
+				         ON T.ID = CCM.ID
+				       LEFT OUTER JOIN CUSTOMER C
+				         ON C.ID = CCM.CUSTOMER_ID
+				       LEFT OUTER JOIN PAYEE P
+				         ON P.ID = C.ID
+				WHERE  T.T_TYPE = 5
+				       AND T.SAVE_STATUS != 202
+				       AND T.COMPANY_ID = :companyId
+				       AND T.T_DATE BETWEEN :fromDate AND :toDate
+				       AND C.ID = :customerId  
+				]]>
+
+	</sql-query>
+	
+	<sql-query name="getDraftCustomerRefundsByCustomer">
+		<query-param name="companyId" type="long" />
+		<query-param name="fromDate" type="long" />
+		<query-param name="toDate" type="long" />
+		<query-param name="customerId" type="long" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TRANSACTION_NUMBER" type="encryptedstring" />
+		<return-scalar column="DUE_DATE" type="long" />
+		<return-scalar column="TRANSACTION_NET_AMOUNT" type="double" />
+		<return-scalar column="ISVOIDED" type="boolean" />
+		<return-scalar column="TRANSACTION_MEMO" type="encryptedstring" />
+		<return-scalar column="TRANSACTION_STATUS" type="int" />
+		<return-scalar column="CUSTOMER_NAME" type="encryptedstring" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="BALANCE" type="double" />
+		<return-scalar column="CURRENCY_ID" type="long" />
+		
+		<![CDATA[
+				SELECT T.MEMO     AS TRANSACTION_MEMO,
+				       T.CURRENCY AS CURRENCY_ID,
+				       T.ID       AS TRANSACTION_ID,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.NUMBER   AS TRANSACTION_NUMBER,
+				       P.NAME     AS CUSTOMER_NAME,
+				       T.TOTAL    AS TRANSACTION_NET_AMOUNT,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       CASE
+				         WHEN T.SAVE_STATUS = 204 THEN TRUE
+				         ELSE FALSE
+				       END        AS ISVOIDED,
+				       NULL       AS DUE_DATE,
+				       0.0        AS BALANCE,
+				       T.SAVE_STATUS   AS TRANSACTION_STATUS
+				FROM   TRANSACTION T
+				       LEFT OUTER JOIN CUSTOMER_REFUND CCM
+				         ON T.ID = CCM.ID
+				       LEFT OUTER JOIN CUSTOMER C
+				         ON C.ID = CCM.CUSTOMER_ID
+				       LEFT OUTER JOIN PAYEE P
+				         ON P.ID = C.ID
+				WHERE  T.T_TYPE = 5
+				       AND T.SAVE_STATUS = 201
+				       AND T.SAVE_STATUS != 202
+				       AND T.COMPANY_ID = :companyId
+				       AND T.T_DATE BETWEEN :fromDate AND :toDate
+				       AND C.ID = :customerId  
+				]]>
+
+	</sql-query>
+	
+	<sql-query name="getCustomerRefundsByTypeByCustomer">
+		<query-param name="companyId" type="long" />
+		<query-param name="fromDate" type="long" />
+		<query-param name="toDate" type="long" />
+		<query-param name="customerId" type="long" />
+		<query-param name="paymentmethod" type="long" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TRANSACTION_NUMBER" type="encryptedstring" />
+		<return-scalar column="DUE_DATE" type="long" />
+		<return-scalar column="TRANSACTION_NET_AMOUNT" type="double" />
+		<return-scalar column="ISVOIDED" type="boolean" />
+		<return-scalar column="TRANSACTION_MEMO" type="encryptedstring" />
+		<return-scalar column="TRANSACTION_STATUS" type="int" />
+		<return-scalar column="CUSTOMER_NAME" type="encryptedstring" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="BALANCE" type="double" />
+		<return-scalar column="CURRENCY_ID" type="long" />
+		
+		<![CDATA[
+				SELECT T.MEMO     AS TRANSACTION_MEMO,
+				       T.CURRENCY AS CURRENCY_ID,
+				       T.ID       AS TRANSACTION_ID,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.NUMBER   AS TRANSACTION_NUMBER,
+				       P.NAME     AS CUSTOMER_NAME,
+				       T.TOTAL    AS TRANSACTION_NET_AMOUNT,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       CASE
+				         WHEN T.SAVE_STATUS = 204 THEN TRUE
+				         ELSE FALSE
+				       END        AS ISVOIDED,
+				       NULL       AS DUE_DATE,
+				       0.0        AS BALANCE,
+				       T.SAVE_STATUS   AS TRANSACTION_STATUS
+				FROM   TRANSACTION T
+				       LEFT OUTER JOIN CUSTOMER_REFUND CCM
+				         ON T.ID = CCM.ID
+				       LEFT OUTER JOIN CUSTOMER C
+				         ON C.ID = CCM.CUSTOMER_ID
+				       LEFT OUTER JOIN PAYEE P
+				         ON P.ID = C.ID
+				WHERE  T.T_TYPE = 5
+				       AND T.PAYMENT_METHOD LIKE :paymentmethod
+				       AND T.SAVE_STATUS != 202
+				       AND T.COMPANY_ID = :companyId
+				       AND T.T_DATE BETWEEN :fromDate AND :toDate
+				       AND C.ID = :customerId  
+				]]>
+
+	</sql-query>
+	
+	<sql-query name="getAllQuotesByCustomer">
+		<query-param name="companyId" type="long" />
+		<query-param name="fromDate" type="long" />
+		<query-param name="toDate" type="long" />
+		<query-param name="customerId" type="long" />
+		<query-param name="estimateType" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TRANSACTION_NUMBER" type="encryptedstring" />
+		<return-scalar column="DUE_DATE" type="long" />
+		<return-scalar column="TRANSACTION_NET_AMOUNT" type="double" />
+		<return-scalar column="ISVOIDED" type="boolean" />
+		<return-scalar column="TRANSACTION_MEMO" type="encryptedstring" />
+		<return-scalar column="TRANSACTION_STATUS" type="int" />
+		<return-scalar column="CUSTOMER_NAME" type="encryptedstring" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		
+		<![CDATA[
+				SELECT T.MEMO        AS TRANSACTION_MEMO,
+				       T.ID          AS TRANSACTION_ID,
+				       T.T_TYPE      AS TRANSACTION_TYPE,
+				       T.T_DATE      AS TRANSACTION_DATE,
+				       T.NUMBER      TRANSACTION_NUMBER,
+				       P.NAME        AS CUSTOMER_NAME,
+				       T.NET_AMOUNT  AS TRANSACTION_NET_AMOUNT,
+				       NULL          AS DUE_DATE,
+				       T.TOTAL       AS TOTAL_PRICE,
+				       CASE
+				         WHEN T.SAVE_STATUS = 204 THEN TRUE
+				         ELSE FALSE
+				       END           AS ISVOIDED,
+				       T.SAVE_STATUS AS TRANSACTION_STATUS
+				FROM   TRANSACTION T
+				       LEFT OUTER JOIN ESTIMATE E
+				         ON T.ID = E.ID
+				       LEFT OUTER JOIN CUSTOMER C
+				         ON C.ID = E.CUSTOMER_ID
+				       LEFT OUTER JOIN PAYEE P
+				         ON P.ID = C.ID
+				WHERE  T.T_TYPE = 7
+				       AND T.SAVE_STATUS != 202
+				       AND E.ESTIMATETYPE = :estimateType
+				       AND T.COMPANY_ID = :companyId
+				       AND T.T_DATE BETWEEN :fromDate AND :toDate
+				       AND C.ID = :customerId  
+				]]>
+
+	</sql-query>
+	
+	<sql-query name="getDraftQuotesByCustomer">
+		<query-param name="companyId" type="long" />
+		<query-param name="fromDate" type="long" />
+		<query-param name="toDate" type="long" />
+		<query-param name="customerId" type="long" />
+		<query-param name="estimateType" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TRANSACTION_NUMBER" type="encryptedstring" />
+		<return-scalar column="DUE_DATE" type="long" />
+		<return-scalar column="TRANSACTION_NET_AMOUNT" type="double" />
+		<return-scalar column="ISVOIDED" type="boolean" />
+		<return-scalar column="TRANSACTION_MEMO" type="encryptedstring" />
+		<return-scalar column="TRANSACTION_STATUS" type="int" />
+		<return-scalar column="CUSTOMER_NAME" type="encryptedstring" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+
+		<![CDATA[
+				SELECT T.MEMO        AS TRANSACTION_MEMO,
+				       T.ID          AS TRANSACTION_ID,
+				       T.T_TYPE      AS TRANSACTION_TYPE,
+				       T.T_DATE      AS TRANSACTION_DATE,
+				       T.NUMBER      TRANSACTION_NUMBER,
+				       P.NAME        AS CUSTOMER_NAME,
+				       T.NET_AMOUNT  AS TRANSACTION_NET_AMOUNT,
+				       NULL          AS DUE_DATE,
+				       T.TOTAL       AS TOTAL_PRICE,
+				       CASE
+				         WHEN T.SAVE_STATUS = 204 THEN TRUE
+				         ELSE FALSE
+				       END           AS ISVOIDED,
+				       T.SAVE_STATUS AS TRANSACTION_STATUS
+				FROM   TRANSACTION T
+				       LEFT OUTER JOIN ESTIMATE E
+				         ON T.ID = E.ID
+				       LEFT OUTER JOIN CUSTOMER C
+				         ON C.ID = E.CUSTOMER_ID
+				       LEFT OUTER JOIN PAYEE P
+				         ON P.ID = C.ID
+				WHERE  T.T_TYPE = 7
+				       AND T.SAVE_STATUS != 202
+				       AND E.ESTIMATETYPE = :estimateType
+				       AND T.SAVE_STATUS = 201
+				       AND T.COMPANY_ID = :companyId
+				       AND T.T_DATE BETWEEN :fromDate AND :toDate
+				       AND C.ID = :customerId  
+				]]>
+
+	</sql-query>
+	
+	<sql-query name="getAllSalesOrdersByCustomer">
+		<query-param name="companyId" type="long" />
+		<query-param name="fromDate" type="long" />
+		<query-param name="toDate" type="long" />
+		<query-param name="customerId" type="long" />
+		<query-param name="estimateType" type="int" />
+		<query-param name="status" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TRANSACTION_NUMBER" type="encryptedstring" />
+		<return-scalar column="DUE_DATE" type="long" />
+		<return-scalar column="TRANSACTION_NET_AMOUNT" type="double" />
+		<return-scalar column="ISVOIDED" type="boolean" />
+		<return-scalar column="TRANSACTION_MEMO" type="encryptedstring" />
+		<return-scalar column="TRANSACTION_STATUS" type="int" />
+		<return-scalar column="CUSTOMER_NAME" type="encryptedstring" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+
+		<![CDATA[
+				SELECT T.MEMO        AS TRANSACTION_MEMO,
+				       T.ID          AS TRANSACTION_ID,
+				       T.T_TYPE      AS TRANSACTION_TYPE,
+				       T.T_DATE      AS TRANSACTION_DATE,
+				       T.NUMBER      TRANSACTION_NUMBER,
+				       P.NAME        AS CUSTOMER_NAME,
+				       T.NET_AMOUNT  AS TRANSACTION_NET_AMOUNT,
+				       NULL          AS DUE_DATE,
+				       T.TOTAL       AS TOTAL_PRICE,
+				       CASE
+				         WHEN T.SAVE_STATUS = 204 THEN TRUE
+				         ELSE FALSE
+				       END           AS ISVOIDED,
+				       T.SAVE_STATUS AS TRANSACTION_STATUS
+				FROM   TRANSACTION T
+				       LEFT OUTER JOIN ESTIMATE E
+				         ON T.ID = E.ID
+				       LEFT OUTER JOIN CUSTOMER C
+				         ON C.ID = E.CUSTOMER_ID
+				       LEFT OUTER JOIN PAYEE P
+				         ON P.ID = C.ID
+				WHERE  T.T_TYPE = 7
+				       AND T.SAVE_STATUS != 202
+				      	and
+						(:status=1 or
+						:status=T.SAVE_STATUS or
+						(:status=T.STATUS and T.SAVE_STATUS !=201 and
+						T.SAVE_STATUS != 204))
+				       AND E.ESTIMATETYPE = :estimateType
+				       AND T.COMPANY_ID = :companyId
+				       AND T.T_DATE BETWEEN :fromDate AND :toDate
+				       AND C.ID = :customerId  
+				]]>
+
+	</sql-query>
+	
+	<sql-query name="getAllTransactionsByCustomer">
+		<query-param name="companyId" type="long" />
+		<query-param name="fromDate" type="long" />
+		<query-param name="toDate" type="long" />
+		<query-param name="customerId" type="long" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TRANSACTION_NUMBER" type="encryptedstring" />
+		<return-scalar column="DUE_DATE" type="long" />
+		<return-scalar column="TRANSACTION_NET_AMOUNT" type="double" />
+		<return-scalar column="ISVOIDED" type="boolean" />
+		<return-scalar column="TRANSACTION_MEMO" type="encryptedstring" />
+		<return-scalar column="TRANSACTION_STATUS" type="int" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.SAVE_STATUS AS TRANSACTION_STATUS,
+				       T.NUMBER      AS TRANSACTION_NUMBER,
+				       CASE
+				         WHEN T.T_TYPE = 8 THEN I.DUE_DATE
+				         ELSE NULL
+				       END           AS DUE_DATE,
+				       CASE
+				         WHEN T.SAVE_STATUS = 204 THEN TRUE
+				         ELSE FALSE
+				       END           AS ISVOIDED,
+				       T.MEMO        AS TRANSACTION_MEMO,
+				       T.ID          AS TRANSACTION_ID,
+				       T.T_DATE      AS TRANSACTION_DATE,
+				       T.T_TYPE      AS TRANSACTION_TYPE,
+				       T.TOTAL       AS TRANSACTION_NET_AMOUNT,
+				       T.CURRENCY    AS CURRENCY
+				FROM   TRANSACTION T
+				       LEFT JOIN INVOICE I
+				         ON I.ID = T.ID
+				       LEFT JOIN CASH_SALES CS
+				         ON CS.ID = T.ID
+				       LEFT JOIN CUSTOMER_CREDIT_MEMO CCM
+				         ON CCM.ID = T.ID
+				       LEFT JOIN CUSTOMER_REFUND CR
+				         ON CR.ID = T.ID
+				       LEFT JOIN ESTIMATE E
+				         ON E.ID = T.ID AND E.ESTIMATETYPE NOT IN (4,5) 
+				       LEFT JOIN RECEIVE_PAYMENT RP
+				         ON RP.ID = T.ID
+				       LEFT JOIN CUSTOMER_PREPAYMENT CP
+				         ON CP.ID = T.ID
+				       LEFT JOIN WRITE_CHECKS WC
+				       	 ON WC.ID = T.ID
+				       LEFT JOIN PAYEE P
+				         ON P.ID = I.CUSTOMER_ID
+				             OR P.ID = CS.CUSTOMER_ID
+				             OR P.ID = CCM.CUSTOMER_ID
+				             OR P.ID = CR.CUSTOMER_ID
+				             OR P.ID = E.CUSTOMER_ID
+				             OR P.ID = RP.CUSTOMER_ID
+				             OR P.ID = CP.CUSTOMER_ID
+				             OR P.ID = WC.CUSTOMER_ID
+				WHERE  T.SAVE_STATUS != 202
+				       AND T.COMPANY_ID = :companyId
+				       AND T.T_DATE BETWEEN :fromDate AND :toDate
+				       AND P.ID = :customerId  
+				]]>
+
+	</sql-query>
+</hibernate-mapping>

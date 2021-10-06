@@ -1,0 +1,186 @@
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='war/files/FinancePrint.css' media='all'></link>
+</head>
+<div style="margin:40px;">
+<table width="100%">
+    <tr>
+	  <td style="vertical-align: top;" align="left">
+		<div class="gwt-HTML">
+			<p>
+				<font style="font-family:sans-serif;" >
+				<strong> ${companyName}</strong></font><br>
+				<font style="font-family:sans-serif; color:#504040;">
+				&nbsp;${companyRegistrationAddress}</font></br>
+		    </p>
+		</div>
+	  </td>
+	</tr>
+</table>
+<table width="100%">
+  <tr>
+	  <td width="55%" style="border-bottom:3px solid" ></td>
+	  <td align="center;">
+		 <div class="credit_zoho_header">
+			<p align="center">
+				<font color="black" style="font-family:sans-serif;" size="6px">
+				<strong>Credit Note</strong></font>
+			</p>
+		  </div>
+	  </td>
+	  <td width="25%" style="border-bottom:3px solid"></td>
+  </tr>
+</table>
+<table style="width:100%;margin:40px 0px 20px" class="credit_zoho_table" cellspacing="10" >
+<!-- $BeginBlock creditHead -->
+	<tr>
+	    <td>
+		   <table  class="gridHeader" border="1">
+				<colgroup><col></colgroup>
+				<tr>
+					<td style="padding:3px" class="gridHeaderBackGround credit-head"><center>Credit To</center></td>
+				</tr>
+				
+				<tr>
+					<td align="left" class="credit_to_zoho" >
+					   <div align="left">${customerNameNBillAddress}</div>
+					</td>
+				</tr>
+				
+	       </table>
+		</td>
+		<td style="vertical-align: top;" align="right">
+			<div class="gwt-HTML">
+				<div>
+					<table border="1">
+					<colgroup><col></colgroup>
+					
+					<tr>
+						<td class="credit-head" style="padding: 6px;"> Credit Note Number</td>
+						<td align="right" width="55%" style="padding: 6px;">${creditNoteNumber}</td>
+					</tr>
+					<tr>
+						<td class="credit-head" style="padding: 6px;">Credit Note Date</td>
+						<td align="right" width="55%" style="padding: 6px;">${creditNoteDate}</td>
+					</tr>
+					<tr>
+						<td class="credit-head" style="padding: 6px;">Customer Number</td>
+						<td align="right" width="55%" style=" padding: 6px;">${customerNumber}</td>
+					</tr>
+					
+					</table>
+				</div>
+			</div>
+		</td>
+	</tr>
+<!-- $EndBlock creditHead -->
+</table>
+<table border="1" class="credit_zoho_main" width="100%">
+<!-- $BeginBlock  itemDetails -->
+  <tr><!-- $BeginBlock showLabels -->
+    <th class="credit-head"><p class="fontSetting">Description</p></th>
+	<th class="credit-head"><p class="fontSetting">Qty</p></th>
+	<th class="credit-head"><p class="fontSetting">Unit Price</p></th>
+	<th class="credit-head"><p class="fontSetting">Total Price</p></th>
+	<!-- $BeginBlock vatBlock -->
+	<th class="credit-head"><p class="fontSetting">${vatRate}</p></th>
+	<th class="credit-head"><p class="fontSetting">${vatAmount}</p></th>
+	<!-- $EndBlock vatBlock -->
+	<!-- $EndBlock showLabels -->
+  </tr>
+  <tbody height="400">
+ <!-- $BeginBlock itemRecord --> <tr class="item-row">
+	<td class="description">
+	   <div><p class="fontSetting">${description}</p></div>
+	</td>
+	<td align="right" class="qty">
+	   <div><p class="fontSetting">${quantity}</p></div>
+	</td>
+	<td align="right">
+	   <div class="cost">
+	     <p class="fontSetting">${unitPrice}</p>
+	   </div>
+	</td>
+    <td align="right">
+	   <div class="price">
+	     <p class="fontSetting">${itemTotalPrice}</p>
+	   </div>
+	</td>
+	<!-- $BeginBlock vatValueBlock -->
+	<td align="right" class="vatRate">
+	   <p class="fontSetting"><span >${itemVatRate}</span></p>
+	</td>
+	<td align="right" class="vatAmount">
+	   <div><p class="fontSetting">${itemVatAmount}</p></div>
+	</td>
+	<!-- $EndBlock vatValueBlock -->
+  </tr><!-- $EndBlock itemRecord -->
+  </tbody>
+</table>
+
+<table class="credit_zoho_total">
+    <tr>
+    	<!-- $BeginBlock memoblock -->
+		<td class="blank memo-text" colspan="4" rowspan="3" >
+		  <p class="fontSetting">${memoText}</p>
+		</td>
+		<!-- $EndBlock memoblock -->
+		<td class="total-line, item-column" ><p class="fontSetting">&nbsp;&nbsp;Sub Total</p></td>
+		<td class="total-value, item-column">
+		  <div id="subtotal">
+			<p class="fontSetting">
+			 ${subTotal}
+			</p>
+		  </div>
+		</td>
+  </tr>
+  <!-- $BeginBlock VatTotal -->
+  <tr>
+		<td class="total-line, item-column" id="vat-total" ><p class="fontSetting">&nbsp;&nbsp;${vatlabel}</p></td>
+		<td class="total-value, item-column" align="right">
+		   <div id="total"><p class="fontSetting">${vatTotalValue}</p></div>
+		</td>
+  </tr>
+   <!-- $EndBlock VatTotal -->
+  <tr style="border-top:1px solid">
+		<td class="total-line balance, item-column"><p class="fontSetting">&nbsp;&nbsp;TOTAL</p></td>
+		<td class="total-value, item-column" align="right">
+		  <div class="total"><p class="fontSetting">${total}</p></div>
+		</td>
+  </tr><!-- $EndBlock itemDetails -->
+</table>
+
+<table  border="0" width="100%" style="clear:both" >
+	<tr>
+		<td>
+		  <table>
+			<tr>
+			  <td style="vertical-align: top;" align="center">
+				<table >
+					<tr>
+						<td align="right" style="vertical-align: top;">
+							<table >
+							<colgroup><col></colgroup>
+							<!-- $BeginBlock regAddress -->
+							<tr>
+								<td><center>${compRegNamenNumber}</center></td>
+							</tr>
+							<!-- $EndBlock regAddress -->
+							</table>
+						</td>
+					</tr>
+				</table>
+				</td>
+			 </tr>
+		   </table>
+		</td>
+		<td width="10%" style="vertical-align: bottom;">
+			<div align="right" style="margin-bottom:14px;">
+				<img src="war\files\footer-print-img.jpg" width="67.5px" height="25px">
+			</div>
+		</td>
+	</tr>
+</table>
+</div>
+</html>
+

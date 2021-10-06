@@ -1,0 +1,190 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<g:FlowPanel styleName="companyInfoPanel">
+		<g:FlowPanel ui:field="mainPanel">
+			<g:FlowPanel>
+				<g:Label ui:field="companyNameLabel" styleName="header" />
+				<g:TextBox ui:field="companyNameTextBox" visibleLength="60" />
+			</g:FlowPanel>
+			<g:FlowPanel>
+				<g:CheckBox ui:field="isShowLegalName" />
+			</g:FlowPanel>
+			<g:FlowPanel ui:field="legalNamePanel">
+				<g:Label ui:field="legalNameLabel" styleName="header" />
+				<g:TextBox ui:field="legalNameTextBox" />
+			</g:FlowPanel>
+		</g:FlowPanel>
+		<g:FlowPanel>
+			<g:FlowPanel ui:field="tradingAddressPanel" styleName="address_panel">
+				<g:Label ui:field="tradingAddressTitle" styleName="header" />
+				<g:Label ui:field="tradingAddressDescription" />
+				<g:FlowPanel ui:field="tradingAddressSubPanel">
+					<g:Grid>
+						<g:row>
+							<g:customCell>
+								<g:Label ui:field="tAddress1Label" />
+							</g:customCell>
+							<g:customCell>
+								<g:TextBox ui:field="tAddress1TextBox" />
+							</g:customCell>
+						</g:row>
+						<g:row>
+							<g:customCell>
+								<g:Label ui:field="tAddress2Label" />
+							</g:customCell>
+							<g:customCell>
+								<g:TextBox ui:field="tAddress2TextBox" />
+							</g:customCell>
+						</g:row>
+						<g:row>
+							<g:customCell>
+								<g:Label ui:field="tCityLabel" />
+							</g:customCell>
+							<g:customCell>
+								<g:TextBox ui:field="tCityTextBox" />
+							</g:customCell>
+						</g:row>
+						<g:row>
+							<g:customCell>
+								<g:Label ui:field="tPostalCodeLabel" />
+							</g:customCell>
+							<g:customCell>
+								<g:TextBox ui:field="tPostalCodeTextBox" />
+							</g:customCell>
+						</g:row>
+						<g:row>
+							<g:customCell>
+								<g:Label ui:field="tCountryLabel" />
+							</g:customCell>
+							<g:customCell>
+								<g:ListBox ui:field="tCountryCombo"
+									enabled="false" />
+							</g:customCell>
+						</g:row>
+						<g:row>
+							<g:customCell>
+								<g:Label ui:field="tStateLabel" />
+							</g:customCell>
+							<g:customCell>
+								<g:ListBox ui:field="tStateCombo" />
+							</g:customCell>
+						</g:row>
+					</g:Grid>
+				</g:FlowPanel>
+			</g:FlowPanel>
+			<g:FlowPanel>
+				<g:CheckBox ui:field="isShowRegisteredAddressCheckBox" />
+			</g:FlowPanel>
+			<g:FlowPanel ui:field="registeredAddressPanel">
+				<g:Label ui:field="registeredAddressTitle" styleName="header" />
+				<g:Label ui:field="registeredAddressDescription" />
+
+				<g:FlowPanel ui:field="registeredAddressSubPanel">
+					<g:Grid>
+						<g:row>
+							<g:customCell>
+								<g:Label ui:field="rAddress1Label" />
+							</g:customCell>
+							<g:customCell>
+								<g:TextBox ui:field="rAddress1TextBox" />
+							</g:customCell>
+						</g:row>
+						<g:row>
+							<g:customCell>
+								<g:Label ui:field="rAddress2Label" />
+							</g:customCell>
+							<g:customCell>
+								<g:TextBox ui:field="rAddress2TextBox" />
+							</g:customCell>
+						</g:row>
+						<g:row>
+							<g:customCell>
+								<g:Label ui:field="rCityLabel" />
+							</g:customCell>
+							<g:customCell>
+								<g:TextBox ui:field="rCityTextBox" />
+							</g:customCell>
+						</g:row>
+						<g:row>
+							<g:customCell>
+								<g:Label ui:field="rPostalCodeLabel" />
+							</g:customCell>
+							<g:customCell>
+								<g:TextBox ui:field="rPostalCodeTextbox" />
+							</g:customCell>
+						</g:row>
+						<g:row>
+							<g:customCell>
+								<g:Label ui:field="rCountryComboLabel" />
+							</g:customCell>
+							<g:customCell>
+								<g:ListBox ui:field="rCountryCombo" enabled="false" />
+							</g:customCell>
+						</g:row>
+						<g:row>
+							<g:customCell>
+								<g:Label ui:field="rStateComboLabel" />
+							</g:customCell>
+							<g:customCell>
+								<g:ListBox ui:field="rStateCombo" />
+							</g:customCell>
+						</g:row>
+					</g:Grid>
+				</g:FlowPanel>
+			</g:FlowPanel>
+		</g:FlowPanel>
+		<g:FlowPanel>
+			<g:FlowPanel>
+				<g:Grid>
+					<g:row>
+						<g:customCell>
+							<g:Label ui:field="companyEmailHeaderLabel" />
+						</g:customCell>
+						<g:customCell>
+							<g:TextBox ui:field="companyEmailTextBox" />
+						</g:customCell>
+					</g:row>
+				</g:Grid>
+			</g:FlowPanel>
+			<g:FlowPanel>
+				<g:Label ui:field="emailIDDescriptionLabel" />
+			</g:FlowPanel>
+		</g:FlowPanel>
+		<g:FlowPanel>
+			<g:FlowPanel>
+				<g:Grid>
+					<g:row>
+						<g:customCell>
+							<g:Label ui:field="companyWebsiteHeaderLabel" />
+						</g:customCell>
+						<g:customCell>
+							<g:TextBox visibleLength="35" ui:field="companyWebsiteTextBox" />
+						</g:customCell>
+					</g:row>
+				</g:Grid>
+			</g:FlowPanel>
+		</g:FlowPanel>
+		<g:FlowPanel>
+			<g:FlowPanel>
+				<g:Grid>
+					<g:row>
+						<g:customCell>
+							<g:Label ui:field="companyPhoneNumberLabel" />
+						</g:customCell>
+						<g:customCell>
+							<g:TextBox ui:field="companyPhoneNumberTextBox" />
+						</g:customCell>
+					</g:row>
+				</g:Grid>
+			</g:FlowPanel>
+			<g:FlowPanel>
+				<g:Label ui:field="fiscalYearLabel" styleName="header" />
+				<g:FlowPanel styleName="fiscal-year-width">
+					<g:Label ui:field="fiscalStarts" styleName="company-preferences-labels" />
+					<g:ListBox ui:field="fiscalStartsList" />
+				</g:FlowPanel>
+			</g:FlowPanel>
+		</g:FlowPanel>
+	</g:FlowPanel>
+</ui:UiBinder> 

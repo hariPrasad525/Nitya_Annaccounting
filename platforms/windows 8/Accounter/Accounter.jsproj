@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|AnyCPU">
+      <Configuration>Debug</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|ARM">
+      <Configuration>Debug</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x86">
+      <Configuration>Debug</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|AnyCPU">
+      <Configuration>Release</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM">
+      <Configuration>Release</Configuration>
+      <Platform>ARM</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x86">
+      <Configuration>Release</Configuration>
+      <Platform>x86</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>cbd3502d-e964-43dc-884e-1e92fe9ccbf1</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).Default.props" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).props" />
+  <PropertyGroup>
+    <TargetPlatformIdentifier>Windows</TargetPlatformIdentifier>
+    <TargetPlatformVersion>8.0</TargetPlatformVersion>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+    <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
+    <PackageCertificateThumbprint>03E60574B424BD32EBB804662021199E1C4F31E7</PackageCertificateThumbprint>
+    <PackageCertificateKeyFile>Accounter_StoreKey.pfx</PackageCertificateKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppxManifest Include="package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+    <None Include="Accounter_StoreKey.pfx" />
+    <None Include="Accounter_TemporaryKey.pfx" />
+    <Content Include="accounter.client\0326AF455425F6065C00E0361659A798.cache.png" />
+    <Content Include="accounter.client\0A9476898799A150D840F0B1C3672921.cache.png" />
+    <Content Include="accounter.client\0F89659FF3F324AE4116F700257E32BD.cache.gif" />
+    <Content Include="accounter.client\10880C7EFE8FDE3AA6400FEAC3BD9C66.cache.jpg" />
+    <Content Include="accounter.client\113D8D84B992801FC4F92996043C5114.cache.html" />
+    <Content Include="accounter.client\13D2931874E71D07F248A0CDF051CC85.cache.png" />
+    <Content Include="accounter.client\153AD54C7E1A29D0B56D715EF89BCD5C.cache.jpg" />
+    <Content Include="accounter.client\223E04DC70F69BC559571D1C0E0667E5.cache.png" />
+    <Content Include="accounter.client\25A181283EA26610C29230D6E760F590.cache.jpg" />
+    <Content Include="accounter.client\2E2B6A754366ABABA08FB3BC15B4D3E6.cache.png" />
+    <Content Include="accounter.client\396F806CD63ABD414BFBB9D57429F05B.cache.png" />
+    <Content Include="accounter.client\3AAB9044D4F5F39CC3FBD39A2A354036.cache.jpg" />
+    <Content Include="accounter.client\3E13412DD77AE068AAF96B6978824A75.cache.png" />
+    <Content Include="accounter.client\4870E0617598EBF1F73493E9B385DAFC.cache.png" />
+    <Content Include="accounter.client\490E2262742307182C245E6A4985251B.cache.png" />
+    <Content Include="accounter.client\4DDB40AA17C23C64D093683B99FF12BE.cache.jpg" />
+    <Content Include="accounter.client\4E28E37C5D5722716B31F825D3B8714C.cache.png" />
+    <Content Include="accounter.client\5270A31ECEE8D9CA8B1C7AC4B7333959.cache.jpg" />
+    <Content Include="accounter.client\66FAFF6775587E3EF29F727766FC4A11.cache.png" />
+    <Content Include="accounter.client\6863D4FF14CEE49346BB14AC34FF410F.cache.gif" />
+    <Content Include="accounter.client\814AB8865E7726F3F496C476AC2C7198.cache.jpg" />
+    <Content Include="accounter.client\8DF1DD9438FB53F1D57718A906429D27.cache.png" />
+    <Content Include="accounter.client\9A8CFFCD082307801CD220AA798197CF.cache.png" />
+    <Content Include="accounter.client\AB196D9D7834625802449A82C5811B43.cache.png" />
+    <Content Include="accounter.client\accounter.client.nocache.js" />
+    <Content Include="accounter.client\B2565205A34B4AF81697A7ED49A9EE12.cache.png" />
+    <Content Include="accounter.client\C439497B18965CE28EBA74AB7CBF4246.cache.jpg" />
+    <Content Include="accounter.client\C77F3D50F5205D30FB598C8FCD84050F.cache.gif" />
+    <Content Include="accounter.client\clear.cache.gif" />
+    <Content Include="accounter.client\D01324AFDD06DBBE22E0A6B91BC9B941.cache.png" />
+    <Content Include="accounter.client\D8986D892FBE6DA4D6A47706F839A5AA.cache.gif" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\1.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\10.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\100.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\101.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\102.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\103.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\104.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\105.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\106.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\107.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\108.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\109.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\11.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\110.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\111.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\112.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\113.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\114.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\115.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\116.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\117.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\118.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\119.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\12.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\120.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\121.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\122.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\123.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\124.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\125.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\126.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\13.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\14.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\15.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\16.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\17.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\18.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\19.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\2.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\20.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\21.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\22.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\23.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\24.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\25.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\26.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\27.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\28.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\29.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\3.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\30.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\31.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\32.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\33.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\34.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\35.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\36.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\37.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\38.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\39.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\4.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\40.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\41.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\42.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\43.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\44.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\45.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\46.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\47.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\48.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\49.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\5.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\50.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\51.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\52.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\53.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\54.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\55.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\56.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\57.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\58.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\59.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\6.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\60.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\61.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\62.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\63.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\64.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\65.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\66.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\67.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\68.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\69.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\7.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\70.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\71.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\72.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\73.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\74.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\75.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\76.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\77.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\78.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\79.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\8.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\80.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\81.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\82.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\83.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\84.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\85.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\86.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\87.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\88.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\89.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\9.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\90.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\91.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\92.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\93.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\94.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\95.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\96.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\97.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\98.cache.js" />
+    <Content Include="accounter.client\deferredjs\113D8D84B992801FC4F92996043C5114\99.cache.js" />
+    <Content Include="accounter.client\DF7764EEC1903CD03C9545B354D8D8E4.cache.png" />
+    <Content Include="accounter.client\E05F785D190760DA4C19D23315A1D2B4.cache.png" />
+    <Content Include="accounter.client\E44767377485D18D6B6864F65BA8EF73.cache.png" />
+    <Content Include="accounter.client\EDC7827FEEA59EE44AD790B1C6430C45.cache.png" />
+    <Content Include="accounter.client\F3EFD625FA53D3A7E8D2324406E0C902.cache.png" />
+    <Content Include="accounter.client\F51CECE68BC97433E941427BA6C853B7.cache.jpg" />
+    <Content Include="default.html" />
+    <Content Include="images\Add.png" />
+    <Content Include="images\back.png" />
+    <Content Include="images\bullet-green.png" />
+    <Content Include="images\bullet-red.png" />
+    <Content Include="images\calendar.png" />
+    <Content Include="images\closeItem.png" />
+    <Content Include="images\icon.png" />
+    <Content Include="images\logo.png" />
+    <Content Include="images\menu.png" />
+    <Content Include="images\search.png" />
+    <Content Include="images\small.png" />
+    <Content Include="images\smalllogo.png" />
+    <Content Include="images\splash.png" />
+    <Content Include="images\storelogo.png" />
+    <Content Include="images\storelogog.png" />
+    <Content Include="js\default.js" />
+    <Content Include="css\default.css" />
+    <None Include="Package.StoreAssociation.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="Microsoft.WinJS.1.0, Version=1.0" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

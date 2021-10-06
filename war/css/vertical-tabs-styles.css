@@ -1,0 +1,225 @@
+body,h1,h2,h3,p,quote,small,form,input,ul,li,ol,label {
+	/* Simple page reset */
+	margin: 0;
+	padding: 0;
+}
+
+body { /* Setting default text color, background and a font stack */
+	/*font-size: 0.825em;
+	font-family: Arial, Helvetica, sans-serif;*/
+	
+}
+
+#revitalContainer {
+	/* i need an overall container b/c im going horizontal */
+	margin: 20px auto;
+	padding: 0;
+	width: 817px;
+}
+
+/*-------------  the tabs
+---------------------------------------*/
+.tabContainer { /* The UL */
+	margin: 10px 0px 0px 0px;
+	padding: 0;
+	width: 257px; /* this is specific to my design */
+	z-index: 15; /* make sit on top of the content */
+	float: left;
+}
+
+.tabContainer li {
+	/* This will arrange the LI-s next to each other --  now it makes them display in column */
+	display: block;
+	width: 267px; /* this is specific to my design */
+	height: 40px;
+	/* this is needed for column display , make sure it matches the height down below for the a, the .left and the .right */
+	margin: 10px 0 10px -4px;
+	padding: 0;
+}
+
+.tabContainer li a,.tabContainer li a:visited {
+	display: block;
+    float: left;
+    font-size: 18px;
+    height: 54px;
+    line-height: 3.7;
+    margin: 0;
+    padding: 0 0 0 20px;
+    position: relative;
+    width: 238px;
+}
+
+#overLine { /* The line above the active button. */
+	position: absolute;
+	height: 50px;
+	width: 20px;
+	float: left;
+	left: 257px;
+	top: 0px;
+	z-index: 20;
+	overflow: hidden;
+}
+
+#main {
+	
+}
+
+ul .left { /* The left span in the hyperlink */
+	height: 54px;
+    left: 0;
+    margin-left: -5px;
+    margin-top: -3px;
+    position: absolute;
+    top: 0;
+    width: 20px;
+}
+
+ul .right { /* The right span in the hyperlink */
+	height: 63px;
+    margin-top: -11px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 34px;
+}
+
+/* Styling the colors individually: */
+ul a.red {
+	font-size: 13px !important;
+	font-family: arial;
+	color: #008AC3;
+}
+
+ul a.red span.left {
+	
+}
+
+ul a.red span.right {
+	
+}
+
+ul a.red:hover span.right,.feature_active span.right {
+	background: url("../images/bar-right.png") no-repeat scroll center 11px
+		#ffffff;
+	background-color: #F4F4F4;
+}
+
+ul a.red:hover span.left,.feature_active span.left {
+	background: url("../images/bar-left.png") no-repeat scroll center 3px
+		transparent;
+}
+
+/* The hover states: */
+ul a:hover {
+	background-position: bottom center;
+	text-decoration: none;
+}
+
+ul a:hover span.left {
+	background-position: left bottom;
+}
+
+ul a:hover span.right {
+	background-position: right bottom;
+}
+
+/*-------------  the content
+---------------------------------------*/
+#tabContent {
+	height: 600px;
+	padding: 0;
+	width: 657px;
+	background-color: #F4F4F4;
+	margin-top:30px;
+}
+
+.top-paragraph-image {
+	margin: -20px 0px 0px 0px;
+}
+
+#contentHolder {
+	margin: 0px 31px 0 35px;
+	color: #000;
+	padding: 0px;
+}
+
+#contentHolder h4 {
+	color: #008AC3;
+	font-size: 30px;
+	text-align: left;
+}
+
+#contentHolder h3 {
+	color: #008AC3;
+	font-size: 22px;
+	text-align: left;
+}
+
+.preloader {
+	display: block;
+	margin: 120px auto;
+}
+
+/* The styles below are only necessary for the styling of the demo page: */
+h1 {
+	background: #121b21;
+	border-bottom: 1px solid black;
+	font-size: 1.5em;
+	font-weight: normal;
+	margin-bottom: 15px;
+	padding: 15px;
+	text-align: center;
+}
+
+h2 {
+	font-size: 0.9em;
+	font-weight: normal;
+	padding-right: 40px;
+	position: relative;
+	right: 0;
+	text-align: right;
+	text-transform: uppercase;
+	top: -48px;
+}
+
+a,a:visited {
+	color: #008AC3;
+	text-decoration: none;
+	outline: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+.tabContainer li a:hover,.feature_active a {
+	background: url("../images/bar-mid.png") repeat-x scroll center center
+		transparent;
+	color: white !important;
+}
+
+.real-bottom-data {
+	margin-top: 25px;
+	margin-left: -20px;
+}
+
+.real-left-side {
+	float: left;
+	width: 280px;
+	margin-left: -20px;
+}
+
+.real-right-image input[type="image"],.real-right-image img {
+	height: 110px;
+	width: 100px;
+}
+.features-page h3{
+    float:left;
+}
+.real-right-image{
+    float:right;
+    margin:18 0 0 15px;
+}
+.feature-desc{
+   
+}

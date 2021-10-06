@@ -1,0 +1,3571 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.vimukti.accounter.core">
+
+	<sql-query name="getAllInvoicesByAmount">
+		<query-param name="companyId" type="long" />
+		<query-param name="amount" type="double" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[	
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   INVOICE I
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = I.ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN T.TOTAL = :amount
+				         ELSE CASE
+				                WHEN 1 = :match THEN T.TOTAL >= :amount
+				                ELSE CASE
+				                       WHEN 2 = :match THEN T.TOTAL <= :amount
+				                       ELSE CASE
+				                              WHEN 3 = 0 THEN T.TOTAL = :amount
+				                            END
+				                     END
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE DESC  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllInvoicesByCustomerName">
+		<query-param name="companyId" type="long" />
+		<query-param name="name" type="string" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   INVOICE I
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = I.ID
+				       LEFT JOIN PAYEE P
+				         ON P.ID = I.CUSTOMER_ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN P.NAME = :name
+				         ELSE CASE
+				                WHEN 3 = :match THEN P.NAME LIKE :name
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE DESC  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllInvoicesByDate">
+		<query-param name="companyId" type="long" />
+		<query-param name="date" type="long" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   INVOICE I
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = I.ID
+				WHERE  T.T_DATE = :date
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE DESC  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllInvoicesByDueDate">
+		<query-param name="companyId" type="long" />
+		<query-param name="date" type="long" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   INVOICE I
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = I.ID
+				WHERE  I.DUE_DATE = :date
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE DESC  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllInvoicesByDescOrMemo">
+		<query-param name="companyId" type="long" />
+		<query-param name="memo" type="string" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   INVOICE I
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = I.ID
+				WHERE  T.MEMO LIKE :memo
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE DESC  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllInvoicesByInvoiceNo">
+		<query-param name="companyId" type="long" />
+		<query-param name="number" type="string" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   INVOICE I
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = I.ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN T.NUMBER = :number
+				         ELSE CASE
+				                WHEN 3 = :match THEN T.NUMBER LIKE :number
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE DESC  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllInvoicesByProductOrService">
+		<query-param name="companyId" type="long" />
+		<query-param name="name" type="string" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   INVOICE I
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = I.ID
+				       LEFT JOIN TRANSACTION_ITEM TI
+				         ON TI.TRANSACTION_ID = I.ID
+				       LEFT JOIN ITEM IT
+				         ON IT.ID = TI.ITEM_ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN IT.NAME = :name
+				         ELSE CASE
+				                WHEN 3 = :match THEN IT.NAME LIKE :name
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE DESC  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllTransactionsByAmount">
+		<query-param name="companyId" type="long" />
+		<query-param name="amount" type="double" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   TRANSACTION T
+				WHERE  CASE
+				         WHEN 0 = :match THEN T.TOTAL = :amount
+				         ELSE CASE
+				                WHEN 1 = :match THEN T.TOTAL >= :amount
+				                ELSE CASE
+				                       WHEN 2 = :match THEN T.TOTAL <= :amount
+				                     END
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE DESC  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllTransactionsByDate">
+		<query-param name="companyId" type="long" />
+		<query-param name="date" type="long" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   TRANSACTION T
+				WHERE  T.T_DATE = :date
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE DESC  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllTransactionsByDescOrMemo">
+		<query-param name="companyId" type="long" />
+		<query-param name="memo" type="string" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   TRANSACTION T
+				WHERE  T.MEMO LIKE :memo
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE DESC  
+				]]>
+
+	</sql-query>
+
+
+	<sql-query name="getAllTransactionsByPayeeName">
+		<query-param name="companyId" type="long" />
+		<query-param name="name" type="string" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   TRANSACTION T
+				       LEFT JOIN INVOICE I
+				         ON I.ID = T.ID
+				       LEFT JOIN VENDOR_CREDIT_MEMO VCM
+				         ON VCM.ID = T.ID
+				       LEFT JOIN CASH_SALES CS
+				         ON CS.ID = T.ID
+				       LEFT JOIN CREDIT_CARD_CHARGES CCC
+				         ON CCC.ID = T.ID
+				       LEFT JOIN CUSTOMER_CREDIT_MEMO CCM
+				         ON CCM.ID = T.ID
+				       LEFT JOIN CUSTOMER_REFUND CR
+				         ON CR.ID = T.ID
+				       LEFT JOIN ENTER_BILL EB
+				         ON EB.ID = T.ID
+				       LEFT JOIN ESTIMATE E
+				         ON E.ID = T.ID
+				       LEFT JOIN JOURNAL_ENTRY J
+				         ON J.ID = T.ID
+				       LEFT JOIN PAY_BILL PB
+				         ON PB.ID = T.ID
+				       LEFT JOIN VENDOR_PAYMENT VP
+				         ON VP.ID = T.ID
+				       LEFT JOIN RECEIVE_PAYMENT RP
+				         ON RP.ID = T.ID
+				       LEFT JOIN TAX_ADJUSTMENT TA
+				         ON TA.ID = T.ID
+				       LEFT JOIN PAY_TAX PT
+				         ON PT.ID = T.ID
+				       LEFT JOIN PAYEE P
+				         ON P.ID = I.CUSTOMER_ID
+				             OR P.ID = VCM.VENDOR_ID
+				             OR P.ID = CS.CUSTOMER_ID
+				             OR P.ID = CCC.VENDOR_ID
+				             OR P.ID = CCM.CUSTOMER_ID
+				             OR P.ID = CR.CUSTOMER_ID
+				             OR P.ID = EB.VENDOR_ID
+				             OR P.ID = E.CUSTOMER_ID
+				             OR P.ID = J.PAYEE_ID
+				             OR P.ID = PB.VENDOR_ID
+				             OR P.ID = VP.VENDOR_ID
+				             OR P.ID = RP.CUSTOMER_ID
+				             OR P.ID = TA.TAX_AGENCY_ID
+				             OR P.ID = PT.TAX_AGENCY_ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN P.NAME = :name
+				         ELSE CASE
+				                WHEN 3 = :match THEN P.NAME LIKE :name
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE DESC  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllEnterBillssByAmount">
+		<query-param name="companyId" type="long" />
+		<query-param name="amount" type="double" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   ENTER_BILL E
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = E.ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN T.TOTAL = :amount
+				         ELSE CASE
+				                WHEN 1 = :match THEN T.TOTAL >= :amount
+				                ELSE CASE
+				                       WHEN 2 = :match THEN T.TOTAL <= :amount
+				                       ELSE CASE
+				                              WHEN 3 = 0 THEN T.TOTAL = :amount
+				                            END
+				                     END
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE DESC  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllEnterBillssByAccounName">
+		<query-param name="companyId" type="long" />
+		<query-param name="accountName" type="string" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   ENTER_BILL E
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = E.ID
+				       LEFT JOIN ACCOUNT_TRANSACTION AT
+				         ON AT.TRANSACTION_ID = E.ID
+				       LEFT JOIN ACCOUNT A
+				         ON A.ID = AT.ACCOUNT_ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN A.NAME = :accountName
+				         ELSE CASE
+				                WHEN 3 = :match THEN A.NAME LIKE :accountName
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE DESC  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllEnterBillsByProductOrService">
+		<query-param name="companyId" type="long" />
+		<query-param name="name" type="string" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   ENTER_BILL E
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = E.ID
+				       LEFT JOIN TRANSACTION_ITEM TI
+				         ON TI.TRANSACTION_ID = E.ID
+				       LEFT JOIN ITEM I
+				         ON I.ID = TI.ITEM_ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN I.NAME = :name
+				         ELSE CASE
+				                WHEN 3 = :match THEN I.NAME LIKE :name
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE DESC  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllEnterBillsByDate">
+		<query-param name="companyId" type="long" />
+		<query-param name="date" type="long" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   ENTER_BILL E
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = E.ID
+				WHERE  T.T_DATE = :date
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE DESC  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllEnterBillsByDescOrMemo">
+		<query-param name="companyId" type="long" />
+		<query-param name="memo" type="string" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   ENTER_BILL E
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = E.ID
+				WHERE  T.MEMO LIKE :memo
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE DESC  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllEnterBillsByDueDate">
+		<query-param name="companyId" type="long" />
+		<query-param name="date" type="long" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   ENTER_BILL E
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = E.ID
+				WHERE  E.DUE_DATE = :date
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE DESC  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllEnterBillsByVendorName">
+		<query-param name="companyId" type="long" />
+		<query-param name="name" type="string" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   ENTER_BILL E
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = E.ID
+				       LEFT JOIN PAYEE P
+				         ON P.ID = E.VENDOR_ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN P.NAME = :name
+				         ELSE CASE
+				                WHEN 3 = :match THEN P.NAME LIKE :name
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE DESC  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllPayBillsByVendorName">
+		<query-param name="companyId" type="long" />
+		<query-param name="name" type="string" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID            AS TRANSACTION_ID,
+				       T.T_DATE        AS TRANSACTION_DATE,
+				       T.T_TYPE        AS TRANSACTION_TYPE,
+				       T.TOTAL         AS TOTAL_PRICE,
+				       T.CURRENCY      AS CURRENCY
+				FROM   TRANSACTION T
+					   LEFT JOIN PAY_BILL PB
+				         ON T.ID = PB.ID
+				       LEFT JOIN VENDOR_PAYMENT VP
+				         ON T.ID = VP.ID
+				       LEFT JOIN PAYEE P
+				         ON P.ID = PB.VENDOR_ID
+				         OR P.ID = VP.VENDOR_ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN P.NAME = :name
+				         ELSE CASE
+				                WHEN 3 = :match THEN P.NAME LIKE :name
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				       AND T.T_TYPE IN ( 11, 25 )
+				ORDER  BY T.T_DATE DESC  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllPayBillssByAccounName">
+		<query-param name="companyId" type="long" />
+		<query-param name="name" type="string" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID            AS TRANSACTION_ID,
+				       T.T_DATE        AS TRANSACTION_DATE,
+				       T.T_TYPE        AS TRANSACTION_TYPE,
+				       T.TOTAL         AS TOTAL_PRICE,
+				       T.CURRENCY      AS CURRENCY
+				FROM   TRANSACTION T
+					   LEFT JOIN PAY_BILL PB
+				         ON T.ID = PB.ID
+				       LEFT JOIN VENDOR_PAYMENT VP
+				         ON T.ID = VP.ID
+				       LEFT JOIN ACCOUNT_TRANSACTION AT
+				         ON AT.TRANSACTION_ID = PB.ID
+				         OR AT.TRANSACTION_ID = VP.ID
+				       LEFT JOIN ACCOUNT A
+				         ON A.ID = AT.ACCOUNT_ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN A.NAME = :name
+				         ELSE CASE
+				                WHEN 3 = :match THEN A.NAME LIKE :name
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				       AND T.T_TYPE IN ( 11, 25 )
+				ORDER  BY T.T_DATE DESC  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllPayBillssByAmount">
+		<query-param name="companyId" type="long" />
+		<query-param name="amount" type="double" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+
+		<![CDATA[
+				SELECT T.ID            AS TRANSACTION_ID,
+				       T.T_DATE        AS TRANSACTION_DATE,
+				       T.T_TYPE        AS TRANSACTION_TYPE,
+				       T.TOTAL         AS TOTAL_PRICE,
+				       T.CURRENCY      AS CURRENCY
+				FROM   TRANSACTION T
+					   LEFT JOIN PAY_BILL PB
+				         ON T.ID = PB.ID
+				       LEFT JOIN VENDOR_PAYMENT VP
+				         ON T.ID = VP.ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN T.TOTAL = :amount
+				         ELSE CASE
+				                WHEN 1 = :match THEN T.TOTAL >= :amount
+				                ELSE CASE
+				                       WHEN 2 = :match THEN T.TOTAL <= :amount
+				                       ELSE CASE
+				                              WHEN 3 = 0 THEN T.TOTAL = :amount
+				                            END
+				                     END
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				       AND T.T_TYPE IN ( 11, 25 )
+				ORDER  BY T.T_DATE DESC  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllPayBillsByDate">
+		<query-param name="companyId" type="long" />
+		<query-param name="date" type="long" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID            AS TRANSACTION_ID,
+				       T.T_DATE        AS TRANSACTION_DATE,
+				       T.T_TYPE        AS TRANSACTION_TYPE,
+				       T.TOTAL         AS TOTAL_PRICE,
+				       T.CURRENCY      AS CURRENCY
+				FROM   TRANSACTION T
+					   LEFT JOIN PAY_BILL P
+				         ON T.ID = P.ID
+				       LEFT JOIN VENDOR_PAYMENT VP
+				         ON T.ID = VP.ID
+				WHERE  T.T_DATE = :date
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				       AND T.T_TYPE IN ( 11, 25 )
+				ORDER  BY T.T_DATE DESC  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllPayBillsByChequeNo">
+		<query-param name="companyId" type="long" />
+		<query-param name="number" type="string" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID           AS TRANSACTION_ID,
+				       T.T_DATE       AS TRANSACTION_DATE,
+				       T.T_TYPE       AS TRANSACTION_TYPE,
+				       T.TOTAL        AS TOTAL_PRICE,
+				       T.CURRENCY     AS CURRENCY
+				FROM   TRANSACTION T
+					   LEFT JOIN PAY_BILL P
+				         ON T.ID = P.ID
+				       LEFT JOIN VENDOR_PAYMENT VP
+				         ON T.ID = VP.ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN (P.CHECK_NUMBER = :number OR VP.CHECK_NUMBER = :number)
+				         ELSE CASE
+				                WHEN 3 = :match THEN (P.CHECK_NUMBER LIKE :number OR VP.CHECK_NUMBER LIKE :number)
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				       AND T.T_TYPE IN ( 11, 25 )
+				ORDER  BY T.T_DATE DESC  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllCashExpensesByVendorName">
+		<query-param name="companyId" type="long" />
+		<query-param name="name" type="string" />
+		<query-param name="type" type="long" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   TRANSACTION T
+				       LEFT JOIN CASH_PURCHASE CP
+				         ON CP.ID = T.ID
+				       LEFT JOIN PAYEE P
+				         ON P.ID = CP.VENDOR_ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN P.NAME = :name
+				         ELSE CASE
+				                WHEN 3 = :match THEN P.NAME LIKE :name
+				              END
+				       END
+				       AND T.T_TYPE = :type
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE DESC  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllCashExpensesByAccounName">
+		<query-param name="companyId" type="long" />
+		<query-param name="name" type="string" />
+		<query-param name="type" type="long" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   TRANSACTION T
+					   LEFT JOIN CASH_PURCHASE P
+				         ON T.ID = P.ID
+				       LEFT JOIN ACCOUNT_TRANSACTION AT
+				         ON AT.TRANSACTION_ID = P.ID
+				       LEFT JOIN ACCOUNT A
+				         ON A.ID = AT.ACCOUNT_ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN A.NAME = :name
+				         ELSE CASE
+				                WHEN 3 = :match THEN A.NAME LIKE :name
+				              END
+				       END
+				       AND T.T_TYPE = :type
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE DESC  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllCashExpensesByAmount">
+		<query-param name="companyId" type="long" />
+		<query-param name="amount" type="double" />
+		<query-param name="type" type="long" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   TRANSACTION T
+				       LEFT JOIN CASH_PURCHASE CP
+				         ON CP.ID = T.ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN T.TOTAL = :amount
+				         ELSE CASE
+				                WHEN 1 = :match THEN T.TOTAL >= :amount
+				                ELSE CASE
+				                       WHEN 2 = :match THEN T.TOTAL <= :amount
+				                       ELSE CASE
+				                              WHEN 3 = 0 THEN T.TOTAL = :amount
+				                            END
+				                     END
+				              END
+				       END
+				       AND T.T_TYPE = :type
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE DESC  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllCashExpensesByDate">
+		<query-param name="companyId" type="long" />
+		<query-param name="date" type="long" />
+		<query-param name="type" type="long" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   TRANSACTION T
+				       LEFT JOIN CASH_PURCHASE CP
+				         ON CP.ID = T.ID
+				WHERE  T.T_TYPE = :type
+				       AND T.T_DATE = :date
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE DESC  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllCashExpensesByProductOrService">
+		<query-param name="companyId" type="long" />
+		<query-param name="name" type="string" />
+		<query-param name="type" type="long" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   TRANSACTION T
+				       LEFT JOIN CASH_PURCHASE CP
+				         ON CP.ID = T.ID
+				       LEFT JOIN TRANSACTION_ITEM TI
+				         ON TI.TRANSACTION_ID = CP.ID
+				       LEFT JOIN ITEM I
+				         ON I.ID = TI.ITEM_ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN I.NAME = :name
+				         ELSE CASE
+				                WHEN 3 = :match THEN I.NAME LIKE :name
+				              END
+				       END
+				       AND T.T_TYPE = :type
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE DESC  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllCashExpensesByDescOrMemo">
+		<query-param name="companyId" type="long" />
+		<query-param name="memo" type="string" />
+		<query-param name="type" type="long" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   TRANSACTION T
+				       LEFT JOIN CASH_PURCHASE CP
+				         ON CP.ID = T.ID
+				WHERE  T.T_TYPE = :type
+				       AND T.MEMO LIKE :memo
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE DESC  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllCreditCardExpensesByVendorName">
+		<query-param name="companyId" type="long" />
+		<query-param name="name" type="string" />
+		<query-param name="type" type="long" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   TRANSACTION T
+				       LEFT JOIN CREDIT_CARD_CHARGES CP
+				         ON CP.ID = T.ID
+				       LEFT JOIN PAYEE P
+				         ON P.ID = CP.VENDOR_ID
+				WHERE  T.T_TYPE = :type
+				       AND CASE
+				             WHEN 0 = :match THEN P.NAME = :name
+				             ELSE CASE
+				                    WHEN 3 = :match THEN P.NAME LIKE :name
+				                  END
+				           END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE DESC  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllCreditCardExpensesByAccounName">
+		<query-param name="companyId" type="long" />
+		<query-param name="name" type="string" />
+		<query-param name="type" type="long" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   TRANSACTION T
+				       LEFT JOIN CREDIT_CARD_CHARGES CP
+				         ON CP.ID = T.ID
+				       LEFT JOIN ACCOUNT_TRANSACTION AT
+				         ON AT.TRANSACTION_ID = T.ID
+				       LEFT JOIN ACCOUNT A
+				         ON A.ID = AT.ACCOUNT_ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN A.NAME = :name
+				         ELSE CASE
+				                WHEN 3 = :match THEN A.NAME = :name
+				              END
+				       END
+				       AND T.T_TYPE = :type
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE DESC  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllCreditCardExpensesByAmount">
+		<query-param name="companyId" type="long" />
+		<query-param name="amount" type="double" />
+		<query-param name="type" type="long" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   TRANSACTION T
+				       LEFT JOIN CREDIT_CARD_CHARGES CP
+				         ON CP.ID = T.ID
+				WHERE  T.T_TYPE = :type
+				       AND CASE
+				             WHEN 0 = :match THEN T.TOTAL = :amount
+				             ELSE CASE
+				                    WHEN 1 = :match THEN T.TOTAL >= :amount
+				                    ELSE CASE
+				                           WHEN 2 = :match THEN T.TOTAL <= :amount
+				                           ELSE CASE
+				                                  WHEN 3 = 0 THEN T.TOTAL = :amount
+				                                END
+				                         END
+				                  END
+				           END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE DESC  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllCreditCardExpensesByDate">
+		<query-param name="companyId" type="long" />
+		<query-param name="date" type="long" />
+		<query-param name="type" type="long" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   TRANSACTION T
+				       LEFT JOIN CREDIT_CARD_CHARGES CP
+				         ON CP.ID = T.ID
+				WHERE  T.T_TYPE = :type
+				       AND T.T_DATE = :date
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE DESC  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllCreditCardExpensesByProductOrService">
+		<query-param name="companyId" type="long" />
+		<query-param name="name" type="string" />
+		<query-param name="type" type="long" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   TRANSACTION T
+				       LEFT JOIN CREDIT_CARD_CHARGES CP
+				         ON CP.ID = T.ID
+				       LEFT JOIN TRANSACTION_ITEM TI
+				         ON TI.TRANSACTION_ID = CP.ID
+				       LEFT JOIN ITEM I
+				         ON I.ID = TI.ITEM_ID
+				WHERE  T.T_TYPE = :type
+				       AND CASE
+				             WHEN 0 = :match THEN I.NAME = :name
+				             ELSE CASE
+				                    WHEN 3 = :match THEN I.NAME LIKE :name
+				                  END
+				           END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE DESC  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllCreditCardExpensesByDescOrMemo">
+		<query-param name="companyId" type="long" />
+		<query-param name="memo" type="string" />
+		<query-param name="type" type="long" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   TRANSACTION T
+				       LEFT JOIN CREDIT_CARD_CHARGES CP
+				         ON CP.ID = T.ID
+				WHERE  T.T_TYPE = :type
+				       AND T.MEMO LIKE :memo
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE DESC  
+				]]>
+
+	</sql-query>
+
+
+	<sql-query name="getAllWriteChecksByCustomerName">
+		<query-param name="companyId" type="long" />
+		<query-param name="name" type="string" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   WRITE_CHECKS W
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = W.ID
+				       LEFT JOIN PAYEE P
+				         ON P.ID = W.CUSTOMER_ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN P.NAME = :name
+				         ELSE CASE
+				                WHEN 3 = :match THEN P.NAME LIKE :name
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE DESC  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllWriteChecksByVendorName">
+		<query-param name="companyId" type="long" />
+		<query-param name="name" type="string" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   WRITE_CHECKS W
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = W.ID
+				       LEFT JOIN PAYEE P
+				         ON P.ID = W.VENDOR_ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN P.NAME = :name
+				         ELSE CASE
+				                WHEN 3 = :match THEN P.NAME LIKE :name
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE DESC  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllWriteChecksByAccounName">
+		<query-param name="companyId" type="long" />
+		<query-param name="name" type="string" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   WRITE_CHECKS W
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = W.ID
+				       LEFT JOIN ACCOUNT_TRANSACTION AT
+				         ON AT.TRANSACTION_ID = W.ID
+				       LEFT JOIN ACCOUNT A
+				         ON A.ID = AT.ACCOUNT_ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN A.NAME = :name
+				         ELSE CASE
+				                WHEN 3 = :match THEN A.NAME LIKE :name
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE DESC  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllWriteChecksByAmount">
+		<query-param name="companyId" type="long" />
+		<query-param name="amount" type="double" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   WRITE_CHECKS W
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = W.ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN T.TOTAL = :amount
+				         ELSE CASE
+				                WHEN 1 = :match THEN T.TOTAL >= :amount
+				                ELSE CASE
+				                       WHEN 2 = :match THEN T.TOTAL <= :amount
+				                       ELSE CASE
+				                              WHEN 3 = 0 THEN T.TOTAL = :amount
+				                            END
+				                     END
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE DESC  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllWriteChecksByDate">
+		<query-param name="companyId" type="long" />
+		<query-param name="date" type="long" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   WRITE_CHECKS W
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = W.ID
+				WHERE  T.T_DATE = :date
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllWriteChecksByDescOrMemo">
+		<query-param name="companyId" type="long" />
+		<query-param name="memo" type="string" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   WRITE_CHECKS W
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = W.ID
+				WHERE  T.MEMO LIKE :memo
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllWriteChecksByChequeNo">
+		<query-param name="companyId" type="long" />
+		<query-param name="number" type="string" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   WRITE_CHECKS W
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = W.ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN W.CHECK_NUMBER = :number
+				         ELSE CASE
+				                WHEN 3 = :match THEN W.CHECK_NUMBER = :number
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllCreditCardChargesByAmount">
+		<query-param name="companyId" type="long" />
+		<query-param name="amount" type="double" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   CREDIT_CARD_CHARGES CCC
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = CCC.ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN T.TOTAL = :amount
+				         ELSE CASE
+				                WHEN 1 = :match THEN T.TOTAL >= :amount
+				                ELSE CASE
+				                       WHEN 2 = :match THEN T.TOTAL <= :amount
+				                       ELSE CASE
+				                              WHEN 3 = :match THEN T.TOTAL = :amount
+				                            END
+				                     END
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllCreditCardChargesByAccounName">
+		<query-param name="companyId" type="long" />
+		<query-param name="name" type="string" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   CREDIT_CARD_CHARGES CCC
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = CCC.ID
+				       LEFT JOIN ACCOUNT_TRANSACTION AT
+				         ON AT.TRANSACTION_ID = CCC.ID
+				       LEFT JOIN ACCOUNT A
+				         ON A.ID = AT.ACCOUNT_ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN A.NAME = :name
+				         ELSE CASE
+				                WHEN 3 = :match THEN A.NAME LIKE :name
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllCreditCardChargesByDate">
+		<query-param name="companyId" type="long" />
+		<query-param name="date" type="long" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   CREDIT_CARD_CHARGES CCC
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = CCC.ID
+				WHERE  T.T_DATE = :date
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllCreditCardChargesByDescOrMemo">
+		<query-param name="companyId" type="long" />
+		<query-param name="memo" type="long" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   CREDIT_CARD_CHARGES CCC
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = CCC.ID
+				WHERE  T.MEMO LIKE :memo
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllCreditCardChargesByProductOrService">
+		<query-param name="companyId" type="long" />
+		<query-param name="name" type="long" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   CREDIT_CARD_CHARGES CCC
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = CCC.ID
+				       LEFT JOIN TRANSACTION_ITEM TI
+				         ON TI.TRANSACTION_ID = CCC.ID
+				       LEFT JOIN ITEM I
+				         ON I.ID = TI.ITEM_ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN I.NAME = :name
+				         ELSE CASE
+				                WHEN 3 = :match THEN I.NAME LIKE :name
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllCreditCardChargesByVendorName">
+		<query-param name="companyId" type="long" />
+		<query-param name="name" type="long" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   CREDIT_CARD_CHARGES CCC
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = CCC.ID
+				       LEFT JOIN PAYEE P
+				         ON P.ID = CCC.VENDOR_ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN P.NAME = :name
+				         ELSE CASE
+				                WHEN 3 = :match THEN P.NAME LIKE :name
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllCustomerCreditNotesByAmount">
+		<query-param name="companyId" type="long" />
+		<query-param name="amount" type="double" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   CUSTOMER_CREDIT_MEMO CCM
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = CCM.ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN T.TOTAL = :amount
+				         ELSE CASE
+				                WHEN 1 = :match THEN T.TOTAL >= :amount
+				                ELSE CASE
+				                       WHEN 2 = :match THEN T.TOTAL <= :amount
+				                       ELSE CASE
+				                              WHEN 3 = 0 THEN T.TOTAL = :amount
+				                            END
+				                     END
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllCustomerCreditNotesByCustomerName">
+		<query-param name="companyId" type="long" />
+		<query-param name="name" type="string" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   CUSTOMER_CREDIT_MEMO CCM
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = CCM.ID
+				       LEFT JOIN PAYEE P
+				         ON P.ID = CCM.CUSTOMER_ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN P.NAME = :name
+				         ELSE CASE
+				                WHEN 3 = :match THEN P.NAME LIKE :name
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllCustomerCreditNotesByDate">
+		<query-param name="companyId" type="long" />
+		<query-param name="date" type="long" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   CUSTOMER_CREDIT_MEMO CCM
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = CCM.ID
+				WHERE  T.T_DATE = :date
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllCustomerCreditNotesByCreditNoteeNo">
+		<query-param name="companyId" type="long" />
+		<query-param name="number" type="string" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   CUSTOMER_CREDIT_MEMO CCM
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = CCM.ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN T.NUMBER = :number
+				         ELSE CASE
+				                WHEN 3 = :match THEN T.NUMBER LIKE :number
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllCustomerCreditNotesByDescOrMemo">
+		<query-param name="companyId" type="long" />
+		<query-param name="memo" type="double" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   CUSTOMER_CREDIT_MEMO CCM
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = CCM.ID
+				WHERE  T.MEMO LIKE :memo
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllCustomerCreditNotesByProductOrService">
+		<query-param name="companyId" type="long" />
+		<query-param name="name" type="double" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   CUSTOMER_CREDIT_MEMO CCM
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = CCM.ID
+				       LEFT JOIN TRANSACTION_ITEM TI
+				         ON TI.TRANSACTION_ID = CCM.ID
+				       LEFT JOIN ITEM I
+				         ON I.ID = TI.ITEM_ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN I.NAME = :name
+				         ELSE CASE
+				                WHEN 3 = :match THEN I.NAME LIKE :name
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllEstimatesByCustomerName">
+		<query-param name="companyId" type="long" />
+		<query-param name="name" type="string" />
+		<query-param name="estimateType" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   ESTIMATE E
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = E.ID
+				       LEFT JOIN PAYEE P
+				         ON P.ID = E.CUSTOMER_ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN P.NAME = :name
+				         ELSE CASE
+				                WHEN 3 = :match THEN P.NAME LIKE :name
+				              END
+				       END
+				       AND E.ESTIMATETYPE = :estimateType
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllEstimatesByInvoiceDate">
+		<query-param name="companyId" type="long" />
+		<query-param name="date" type="long" />
+		<query-param name="estimateType" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   ESTIMATE E
+				       LEFT JOIN INVOICE I
+				         ON I.ID = E.USED_INVOICE
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = I.ID
+				WHERE  T.T_DATE = :date
+				       AND E.ESTIMATETYPE = :estimateType
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllEstimatesByDescOrMemo">
+		<query-param name="companyId" type="long" />
+		<query-param name="memo" type="string" />
+		<query-param name="estimateType" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   ESTIMATE E
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = E.ID
+				WHERE  T.MEMO LIKE :memo
+				       AND E.ESTIMATETYPE = :estimateType
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllEstimatesByProductOrService">
+		<query-param name="companyId" type="long" />
+		<query-param name="name" type="string" />
+		<query-param name="match" type="int" />
+		<query-param name="estimateType" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   ESTIMATE E
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = E.ID
+				       LEFT JOIN TRANSACTION_ITEM TI
+				         ON TI.TRANSACTION_ID = E.ID
+				       LEFT JOIN ITEM I
+				         ON I.ID = TI.ITEM_ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN I.NAME = :name
+				         ELSE CASE
+				                WHEN 3 = :match THEN I.NAME LIKE :name
+				              END
+				       END
+				       AND E.ESTIMATETYPE = :estimateType
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllEstimatesByAccounName">
+		<query-param name="companyId" type="long" />
+		<query-param name="name" type="string" />
+		<query-param name="match" type="int" />
+		<query-param name="estimateType" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   ESTIMATE E
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = E.ID
+				       LEFT JOIN ACCOUN_TRANSACTION AT
+				         ON AT.TRANSACTION_ID = E.ID
+				       LEFT JOIN ACCOUNT A
+				         ON A.ID = AT.ACCOUNT_ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN A.NAME = :name
+				         ELSE CASE
+				                WHEN 3 = :match THEN A.NAME LIKE :name
+				              END
+				       END
+				       AND E.ESTIMATETYPE = :estimateType
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllEstimatesByChargeNo">
+		<query-param name="companyId" type="long" />
+		<query-param name="number" type="string" />
+		<query-param name="match" type="int" />
+		<query-param name="estimateType" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   ESTIMATE E
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = E.ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN T.NUMBER = :number
+				         ELSE CASE
+				                WHEN 3 = :match THEN T.NUMBER LIKE :number
+				              END
+				       END
+				       AND E.ESTIMATETYPE = :estimateType
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllEstimatesByEstimateNo">
+		<query-param name="companyId" type="long" />
+		<query-param name="number" type="string" />
+		<query-param name="match" type="int" />
+		<query-param name="estimateType" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   ESTIMATE E
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = E.ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN T.NUMBER = :number
+				         ELSE CASE
+				                WHEN 3 = :match THEN T.NUMBER LIKE :number
+				              END
+				       END
+				       AND E.ESTIMATETYPE = :estimateType
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllEstimatesByCreditNo">
+		<query-param name="companyId" type="long" />
+		<query-param name="number" type="string" />
+		<query-param name="match" type="int" />
+		<query-param name="estimateType" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   ESTIMATE E
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = E.ID
+				WHERE  ( CASE
+				           WHEN 0 = :match THEN T.NUMBER = :number
+				           WHEN 3 = :match THEN ( T.NUMBER LIKE :number
+				                                  AND E.ESTIMATETYPE = :estimateType )
+				         END )
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllEstimatesByAmount">
+		<query-param name="companyId" type="long" />
+		<query-param name="amount" type="double" />
+		<query-param name="match" type="int" />
+		<query-param name="estimateType" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   ESTIMATE E
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = E.ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN T.TOTAL = :amount
+				         WHEN 1 = :match THEN T.TOTAL >= :amount
+				         WHEN 2 = :match THEN T.TOTAL <= :amount
+				         WHEN 3 = 0 THEN T.TOTAL = :amount
+				       END
+				       AND E.ESTIMATETYPE = :estimateType
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllEstimatesByDate">
+		<query-param name="companyId" type="long" />
+		<query-param name="date" type="long" />
+		<query-param name="estimateType" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   ESTIMATE E
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = E.ID
+				WHERE  T.T_DATE = :date
+				       AND E.ESTIMATETYPE = :estimateType
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllEstimatesByDueDate">
+		<query-param name="companyId" type="long" />
+		<query-param name="date" type="long" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   ESTIMATE E
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = E.ID
+				WHERE  T.T_DATE = :date
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllReceivePaymentsByCustomerName">
+		<query-param name="companyId" type="long" />
+		<query-param name="name" type="string" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   RECEIVE_PAYMENT RP
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = RP.ID
+				       LEFT JOIN PAYEE P
+				         ON P.ID = RP.CUSTOMER_ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN P.NAME = :name
+				         WHEN 3 = :match THEN P.NAME LIKE :name
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllReceivePaymentsByAmount">
+		<query-param name="companyId" type="long" />
+		<query-param name="amount" type="double" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   RECEIVE_PAYMENT RP
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = RP.ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN T.TOTAL = :amount
+				         WHEN 1 = :match THEN T.TOTAL >= :amount
+						 WHEN 2 = :match THEN T.TOTAL <= :amount
+						 WHEN 3 = 0 THEN T.TOTAL = :amount
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllReceivePaymentsByAccount">
+		<query-param name="companyId" type="long" />
+		<query-param name="name" type="string" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   RECEIVE_PAYMENT RP
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = RP.ID
+				       LEFT JOIN ACCOUNT_TRANSACTION AT
+				         ON AT.TRANSACTION_ID = RP.ID
+				       LEFT JOIN ACCOUNT A
+				         ON A.ID = AT.ACCOUNT_ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN A.NAME = :name
+				         ELSE CASE
+				                WHEN 3 = :match THEN A.NAME LIKE :name
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllReceivePaymentsByDate">
+		<query-param name="companyId" type="long" />
+		<query-param name="date" type="long" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   RECEIVE_PAYMENT RP
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = RP.ID
+				WHERE  T.T_DATE = :date
+				       AND T.COMPANY_ID = :companyId
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllReceivePaymentsByDescOrMemo">
+		<query-param name="companyId" type="long" />
+		<query-param name="memo" type="string" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   RECEIVE_PAYMENT RP
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = RP.ID
+				WHERE  T.MEMO LIKE :memo
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllReceivePaymentsByReceivedChequeNo">
+		<query-param name="companyId" type="long" />
+		<query-param name="number" type="string" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   RECEIVE_PAYMENT RP
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = RP.ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN RP.CHECK_NUMBER = :number
+   			             WHEN 3 = :match THEN RP.CHECK_NUMBER LIKE :number
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllCustomerRefundsByCustomerName">
+		<query-param name="companyId" type="long" />
+		<query-param name="name" type="string" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   CUSTOMER_REFUND CR
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = CR.ID
+				       LEFT JOIN PAYEE P
+				         ON P.ID = CR.CUSTOMER_ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN P.NAME = :name
+				         WHEN 3 = :match THEN P.NAME LIKE :name
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllCustomerRefundsByAmount">
+		<query-param name="companyId" type="long" />
+		<query-param name="amount" type="double" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   RECEIVE_PAYMENT RP
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = RP.ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN T.TOTAL = :amount
+				         ELSE CASE
+				                WHEN 1 = :match THEN T.TOTAL >= :amount
+				                ELSE CASE
+				                       WHEN 2 = :match THEN T.TOTAL <= :amount
+				                       ELSE CASE
+				                              WHEN 3 = 0 THEN T.TOTAL = :amount
+				                            END
+				                     END
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllCustomerRefundsByDate">
+		<query-param name="companyId" type="long" />
+		<query-param name="date" type="long" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   RECEIVE_PAYMENT RP
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = RP.ID
+				WHERE  T.T_DATE = :date
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllCustomerRefundsByDescOrMemo">
+		<query-param name="companyId" type="long" />
+		<query-param name="memo" type="string" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   RECEIVE_PAYMENT RP
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = RP.ID
+				WHERE  T.MEMO LIKE :memo
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllCustomerRefundsByRefundNo">
+		<query-param name="companyId" type="long" />
+		<query-param name="number" type="string" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   RECEIVE_PAYMENT RP
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = RP.ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN T.NUMBER = :number
+				         ELSE CASE
+				                WHEN 3 = :match THEN T.NUMBER LIKE :number
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllCashSalesByCustomerName">
+		<query-param name="companyId" type="long" />
+		<query-param name="name" type="string" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   CASH_SALES CS
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = CS.ID
+				       LEFT JOIN PAYEE P
+				         ON P.ID = CS.CUSTOMER_ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN P.NAME = :name
+				         ELSE CASE
+				                WHEN 3 = :match THEN P.NAME LIKE :name
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllCashSalesByAmount">
+		<query-param name="companyId" type="long" />
+		<query-param name="amount" type="double" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   CASH_SALES CS
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = CS.ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN T.TOTAL = :amount
+				         ELSE CASE
+				                WHEN 1 = :match THEN T.TOTAL >= :amount
+				                ELSE CASE
+				                       WHEN 2 = :match THEN T.TOTAL <= :amount
+				                       ELSE CASE
+				                              WHEN 3 = 0 THEN T.TOTAL = :amount
+				                            END
+				                     END
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllCashSalesByDate">
+		<query-param name="companyId" type="long" />
+		<query-param name="date" type="long" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   CASH_SALES CS
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = CS.ID
+				WHERE  T.T_DATE = :date
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllCashSalesByDescOrMemo">
+		<query-param name="companyId" type="long" />
+		<query-param name="memo" type="string" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   CASH_SALES CS
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = CS.ID
+				WHERE  T.MEMO LIKE :memo
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllCashSalesByCashSaleNo">
+		<query-param name="companyId" type="long" />
+		<query-param name="number" type="string" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   CASH_SALES CS
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = CS.ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN T.NUMBER = :number
+				         ELSE CASE
+				                WHEN 3 = :match THEN T.NUMBER LIKE :number
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllCashSalesByProductOrService">
+		<query-param name="companyId" type="long" />
+		<query-param name="saleNo" type="string" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   CASH_SALES CS
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = CS.ID
+				       LEFT JOIN TRANSACTION_ITEM TI
+				         ON TI.TRANSACTION_ID = CS.ID
+				       LEFT JOIN ITEM I
+				         ON I.ID = TI.ITEM_ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN I.NAME = :name
+				         ELSE CASE
+				                WHEN 3 = :match THEN I.NAME LIKE :name
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllTransfersByAmount">
+		<query-param name="companyId" type="long" />
+		<query-param name="amount" type="double" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   TRANSFER_FUND TF
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = TF.ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN T.TOTAL = :amount
+				         ELSE CASE
+				                WHEN 1 = :match THEN T.TOTAL >= :amount
+				                ELSE CASE
+				                       WHEN 2 = :match THEN T.TOTAL <= :amount
+				                       ELSE CASE
+				                              WHEN 3 = 0 THEN T.TOTAL = :amount
+				                            END
+				                     END
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllDepositsByAmount">
+		<query-param name="companyId" type="long" />
+		<query-param name="amount" type="double" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   MAKE_DEPOSIT MD
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = MD.ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN T.TOTAL = :amount
+				         ELSE CASE
+				                WHEN 1 = :match THEN T.TOTAL >= :amount
+				                ELSE CASE
+				                       WHEN 2 = :match THEN T.TOTAL <= :amount
+				                       ELSE CASE
+				                              WHEN 3 = 0 THEN T.TOTAL = :amount
+				                            END
+				                     END
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllTransfersByDate">
+		<query-param name="companyId" type="long" />
+		<query-param name="date" type="long" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   TRANSFER_FUND TF
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = TF.ID
+				WHERE  T.T_DATE = :date
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllDepositsByDate">
+		<query-param name="companyId" type="long" />
+		<query-param name="date" type="long" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   MAKE_DEPOSIT MD
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = MD.ID
+				WHERE  T.T_DATE = :date
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllTransfersByDescOrMemo">
+		<query-param name="companyId" type="long" />
+		<query-param name="memo" type="string" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   TRANSFER_FUND TF
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = TF.ID
+				WHERE  T.MEMO LIKE :memo
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllDepositsByDescOrMemo">
+		<query-param name="companyId" type="long" />
+		<query-param name="memo" type="string" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   MAKE_DEPOSIT MD
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = MD.ID
+				WHERE  T.MEMO LIKE :memo
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllTransfersByAccounName">
+		<query-param name="companyId" type="long" />
+		<query-param name="name" type="string" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   TRANSFER_FUND TF
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = TF.ID
+				       LEFT JOIN ACCOUNT INA
+				         ON INA.ID = TF.DEPOSIT_IN_ID
+				       LEFT JOIN ACCOUNT FRA
+				         ON FRA.ID = TF.DEPOSIT_FROM_ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN ( INA.NAME = :name
+				                                 OR FRA. NAME = :name )
+				         ELSE CASE
+				                WHEN 3 = :match THEN ( INA.NAME LIKE :name
+				                                        OR FRA. NAME LIKE :name )
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllDepositsByAccounName">
+		<query-param name="companyId" type="long" />
+		<query-param name="name" type="string" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   MAKE_DEPOSIT MD
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = MD.ID
+				       LEFT JOIN ACCOUNT INA
+				         ON INA.ID = MD.DEPOSIT_TO
+				       LEFT JOIN TRANSACTION_DEPOSIT_ITEM TD
+				         ON TD.MAKE_DEPOSIT_ID = MD.ID
+				       LEFT JOIN ACCOUNT FRA
+				         ON FRA.ID = TD.ACCOUNT_ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN ( INA.NAME = :name
+				                                 OR FRA. NAME = :name )
+				         ELSE CASE
+				                WHEN 3 = :match THEN ( INA.NAME LIKE :name
+				                                        OR FRA. NAME LIKE :name )
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllVendorCreditsByVendorName">
+		<query-param name="companyId" type="long" />
+		<query-param name="name" type="string" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   VENDOR_CREDIT_MEMO VCM
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = VCM.ID
+				       LEFT JOIN PAYEE P
+				         ON P.ID = VCM.VENDOR_ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN P.NAME = :name
+				         ELSE CASE
+				                WHEN 3 = :match THEN P.NAME LIKE :name
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllVendorCreditsByAmount">
+		<query-param name="companyId" type="long" />
+		<query-param name="amount" type="double" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   VENDOR_CREDIT_MEMO VCM
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = VCM.ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN T.TOTAL = :amount
+				         ELSE CASE
+				                WHEN 1 = :match THEN T.TOTAL >= :amount
+				                ELSE CASE
+				                       WHEN 2 = :match THEN T.TOTAL <= :amount
+				                       ELSE CASE
+				                              WHEN 3 = 0 THEN T.TOTAL = :amount
+				                            END
+				                     END
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllVendorCreditsByDate">
+		<query-param name="companyId" type="long" />
+		<query-param name="date" type="long" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   VENDOR_CREDIT_MEMO VCM
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = VCM.ID
+				WHERE  T.T_DATE = :date
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllVendorCreditsByDescOrMemo">
+		<query-param name="companyId" type="long" />
+		<query-param name="memo" type="string" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   VENDOR_CREDIT_MEMO VCM
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = VCM.ID
+				WHERE  T.MEMO LIKE :memo
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllVendorCreditsByAccounName">
+		<query-param name="companyId" type="long" />
+		<query-param name="name" type="string" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   VENDOR_CREDIT_MEMO VCM
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = VCM.ID
+				       LEFT JOIN ACCOUNT_TRANSACTION AT
+				         ON AT.TRANSACTION_ID = VCM.ID
+				       LEFT JOIN ACCOUNT A
+				         ON A.ID = AT.ACCOUNT_ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN A.NAME = :name
+				         ELSE CASE
+				                WHEN 3 = :match THEN A.NAME LIKE :name
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllVendorCreditsByProductOrService">
+		<query-param name="companyId" type="long" />
+		<query-param name="name" type="string" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   CASH_SALES CS
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = CS.ID
+				       LEFT JOIN TRANSACTION_ITEM TI
+				         ON TI.TRANSACTION_ID = CS.ID
+				       LEFT JOIN ITEM IT
+				         ON IT.ID = TI.ITEM_ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN IT.NAME = :name
+				         ELSE CASE
+				                WHEN 3 = :match THEN IT.NAME LIKE :name
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllTaxAdjustmentsByAccounName">
+		<query-param name="companyId" type="long" />
+		<query-param name="name" type="string" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   TAX_ADJUSTMENT TA
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = TA.ID
+				       LEFT JOIN ACCOUNT_TRANSACTION AT
+				         ON AT.TRANSACTION_ID = TA.ID
+				       LEFT JOIN ACCOUNT A
+				         ON A.ID = AT.ACCOUNT_ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN A.NAME = :name
+				         ELSE CASE
+				                WHEN 3 = :match THEN A.NAME LIKE :name
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllTaxAdjustmentsByDate">
+		<query-param name="companyId" type="long" />
+		<query-param name="date" type="long" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   TAX_ADJUSTMENT TA
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = TA.ID
+				WHERE  T.T_DATE = :date
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllTaxAdjustmentsByDescOrMemo">
+		<query-param name="companyId" type="long" />
+		<query-param name="memo" type="string" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   TAX_ADJUSTMENT TA
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = TA.ID
+				WHERE  T.MEMO LIKE :memo
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllTaxPaymentsByAccounName">
+		<query-param name="companyId" type="long" />
+		<query-param name="name" type="string" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   PAY_TAX PT
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = PT.ID
+				       LEFT JOIN ACCOUNT_TRANSACTION AT
+				         ON AT.TRANSACTION_ID = PT.ID
+				       LEFT JOIN ACCOUNT A
+				         ON A.ID = AT.ACCOUNT_ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN A.NAME = :name
+				         ELSE CASE
+				                WHEN 3 = :match THEN A.NAME LIKE :name
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllTaxPaymentsByDate">
+		<query-param name="companyId" type="long" />
+		<query-param name="date" type="long" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   PAY_TAX PT
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = PT.ID
+				WHERE  T.T_DATE = :date
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllTaxPaymentsByDescOrMemo">
+		<query-param name="companyId" type="long" />
+		<query-param name="memo" type="string" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   PAY_TAX PT
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = PT.ID
+				WHERE  T.MEMO LIKE :memo
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllJournalEntriesByDate">
+		<query-param name="companyId" type="long" />
+		<query-param name="date" type="long" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   JOURNAL_ENTRY JE
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = JE.ID
+				WHERE  T.T_DATE = :date
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllJournalEntriesByEntryNo">
+		<query-param name="companyId" type="long" />
+		<query-param name="number" type="string" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   JOURNAL_ENTRY JE
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = JE.ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN T.NUMBER = :number
+				         ELSE CASE
+				                WHEN 3 = :match THEN T.NUMBER LIKE :number
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllJournalEntriesByDescOrMemo">
+		<query-param name="companyId" type="long" />
+		<query-param name="memo" type="string" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   JOURNAL_ENTRY JE
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = JE.ID
+				WHERE  T.MEMO LIKE :memo
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getAllJournalEntriesByAccount">
+		<query-param name="companyId" type="long" />
+		<query-param name="name" type="string" />
+		<query-param name="match" type="int" />
+
+		<return-scalar column="TRANSACTION_ID" type="long" />
+		<return-scalar column="TRANSACTION_DATE" type="long" />
+		<return-scalar column="TRANSACTION_TYPE" type="int" />
+		<return-scalar column="TOTAL_PRICE" type="double" />
+		<return-scalar column="CURRENCY" type="long" />
+		
+		<![CDATA[
+				SELECT T.ID       AS TRANSACTION_ID,
+				       T.T_DATE   AS TRANSACTION_DATE,
+				       T.T_TYPE   AS TRANSACTION_TYPE,
+				       T.TOTAL    AS TOTAL_PRICE,
+				       T.CURRENCY AS CURRENCY
+				FROM   JOURNAL_ENTRY JE
+				       LEFT JOIN TRANSACTION T
+				         ON T.ID = JE.ID
+				       LEFT JOIN ACCOUNT_TRANSACTION AT
+				         ON AT.TRANSACTION_ID = JE.ID
+				       LEFT JOIN ACCOUNT A
+				         ON A.ID = AT.ACCOUNT_ID
+				WHERE  CASE
+				         WHEN 0 = :match THEN A.NAME = :name
+				         ELSE CASE
+				                WHEN 3 = :match THEN A.NAME LIKE :name
+				              END
+				       END
+				       AND T.COMPANY_ID = :companyId
+				       AND T.SAVE_STATUS NOT IN ( 201, 202 )
+				ORDER  BY T.T_DATE  
+				]]>
+
+	</sql-query>
+
+	<!-- <sql-query name="getAllPayBillsByProductOrService"> <query-param name="companyId" 
+		type="long" /> <query-param name="name" type="string" /> <return-scalar column="TRANSACTION_ID" 
+		type="long" /> <return-scalar column="TRANSACTION_DATE" type="long" /> <return-scalar 
+		column="TRANSACTION_TYPE" type="int" /> <return-scalar column="TOTAL_PRICE" 
+		type="double" /> SELECT T.ID AS TRANSACTION_ID, T.T_DATE AS TRANSACTION_DATE, 
+		T.T_TYPE AS TRANSACTION_TYPE, T.TOTAL AS TOTAL_PRICE FROM ENTER_BILL E LEFT 
+		JOIN TRANSACTION T ON T.ID = E.ID LEFT JOIN PAYEE P ON P.ID=E.VENDOR_ID WHERE 
+		T.TOTAL=:value AND T.COMPANY_ID=:companyId </sql-query> -->
+
+	<!-- <sql-query name="getAllWriteChecksByProductOrService"> <query-param 
+		name="companyId" type="long" /> <query-param name="memo" type="string" /> 
+		<return-scalar column="TRANSACTION_ID" type="long" /> <return-scalar column="TRANSACTION_DATE" 
+		type="long" /> <return-scalar column="TRANSACTION_TYPE" type="int" /> <return-scalar 
+		column="TOTAL_PRICE" type="double" /> SELECT T.ID AS TRANSACTION_ID, T.T_DATE 
+		AS TRANSACTION_DATE, T.T_TYPE AS TRANSACTION_TYPE, T.TOTAL AS TOTAL_PRICE 
+		FROM WRITE_CHECKS W LEFT JOIN TRANSACTION T ON T.ID = W.ID WHERE T.MEMO=:memo 
+		AND T.COMPANY_ID=:companyId ORDER BY T.T_DATE </sql-query> -->
+
+</hibernate-mapping>

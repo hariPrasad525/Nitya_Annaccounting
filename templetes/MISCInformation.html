@@ -1,0 +1,160 @@
+
+<html>
+<!-- $BeginBlock theme -->
+ <body>
+    <h4>${i18_Payer_Information}</h4>
+	<table cellpadding="5" border="0" style="margin-left:20px">
+	   <tr>
+	     <td>${i18_Company_Name}</td>
+	     <!-- $BeginBlock changeCompanyName -->
+		 <td>${companyName}</td>
+		  <!-- $EndBlock changeCompanyName -->
+	   </tr>
+
+	   <tr>
+	     <td style="vertical-align:top">${i18_Company_Address}</td>
+	     <!-- $BeginBlock changeCompanyAddress1 -->
+		 <td>${companyAddress1}<br>
+		 <!-- $EndBlock changeCompanyAddress1 -->
+		 
+			<!-- $BeginBlock changeCompanyAddress2 -->
+		 	${companyAddress2}<br>
+		 	<!-- $EndBlock changeCompanyAddress2 -->
+
+			<!-- $BeginBlock changeCompanyAddress3 -->
+		 	${companyAddress3}<br>
+		 	<!-- $EndBlock changeCompanyAddress3 -->
+
+			<!-- $BeginBlock changeCompanyAddress4 -->
+		 	${companyAddress4}<br>
+		 	<!-- $EndBlock changeCompanyAddress4 -->
+
+		 </td>
+	   </tr>
+	   <tr>
+	      <td>${i18_Id_Number}</td>
+		 <!-- $BeginBlock changeCompanyId -->
+		 <td>${companyId}</td>
+		 <!-- $EndBlock changeCompanyId -->
+	   </tr>
+	</table>
+	<h4>${i18_Recipient_Information}</h4>
+
+    <table border="1" cellpadding="5" style="border-collapse:collapse;width:80%">
+	   <tr>
+	      <th style="height:80px;">${i18_1099_vendors_that_meet_threshold}</th>
+		  <th>${i18_Box1}</th>
+		  <th>${i18_Box2}</th>
+		  <th>${i18_Box3}</th>
+		  <th>${i18_Box4}</th>
+
+		  <th>${i18_Box5}</th>
+		  <th>${i18_Box6}</th>
+		  <th>${i18_Box7}</th>
+		  <th>${i18_Box8}</th>
+		  <th>${i18_Box9}</th>
+		  <th>${i18_Box10}</th>
+
+	   </tr>
+	   <!-- $BeginBlock addRows -->
+	   <tr>
+	      <td style="height:80px">
+		      <table cellpadding="5" border="0" style="margin-left:20px">
+				   <tr>
+					 <td>Company Name :</td>
+					  <!-- $BeginBlock changeVendorName -->
+					 <td>${vendorName}</td>
+					  <!-- $EndBlock changeVendorName -->
+				   </tr>
+
+				   <tr>
+					 <td style="vertical-align:top">Company Address :</td>
+					  <!-- $BeginBlock changeVendorCompanyAddress1 -->
+					 <td>${VendorCompanyAddress1}<br>
+					 <!-- $EndBlock changeVendorCompanyAddress1 -->
+					
+					 <!-- $BeginBlock changeVendorCompanyAddress2 -->
+					 ${VendorCompanyAddress2}<br>
+					 <!-- $EndBlock changeVendorCompanyAddress2 -->
+
+					 <!-- $BeginBlock changeVendorCompanyAddress3 -->
+					 ${VendorCompanyAddress3}<br>
+					 <!-- $EndBlock changeVendorCompanyAddress3 -->
+					 
+					 <!-- $BeginBlock changeVendorCompanyAddress4 -->
+					 ${VendorCompanyAddress4}<br>
+					 <!-- $EndBlock changeVendorCompanyAddress4 -->
+					 </td>
+				   </tr>
+				   <tr>
+					  <td>Id Number</td>
+					 	     
+					 <!-- $BeginBlock changeVendorCompanyId -->
+					 <td>${VendorCompanyId}</td>
+					 <!-- $EndBlock changeVendorCompanyId -->
+					 
+				   </tr>
+			  </table>
+		  </td>
+ 			<!-- $BeginBlock changebox1Value -->
+		  <td>${box1Value}</td>
+		   <!-- $EndBlock changebox1Value -->
+		    
+		   			<!-- $BeginBlock changebox2Value -->
+		  <td>${box2Value}</td>
+		   <!-- $EndBlock changebox2Value -->
+		   
+		   			<!-- $BeginBlock changebox3Value -->
+		  <td>${box3Value}</td>
+		   <!-- $EndBlock changebox3Value -->
+		   
+		  			<!-- $BeginBlock changebox4Value -->
+		  <td>${box4Value}</td>
+		   <!-- $EndBlock changebox4Value -->
+		   
+		   		  <!-- $BeginBlock changebox5Value -->
+		  <td>${box5Value}</td>
+		   <!-- $EndBlock changebox5Value -->
+		   
+		   			<!-- $BeginBlock changebox6Value -->
+		  <td>${box6Value}</td>
+		   <!-- $EndBlock changebox6Value -->
+		   
+		 			<!-- $BeginBlock changebox7Value -->
+		  <td>${box7Value}</td>
+		   <!-- $EndBlock changebox7Value -->
+		   
+		 			<!-- $BeginBlock changebox8Value -->
+		  <td>${box8Value}</td>
+		   <!-- $EndBlock changebox8Value -->
+		   
+		 			<!-- $BeginBlock changebox9Value -->
+		  <td>${box9Value}</td>
+		   <!-- $EndBlock changebox9Value -->
+		   
+		  			<!-- $BeginBlock changebox10Value -->
+		  <td>${box10Value}</td>
+		   <!-- $EndBlock changebox10Value -->
+
+	   </tr>
+	    <!-- $EndBlock addRows -->
+	</table>
+	<h4>${i18_Summary_for_1099}</h4>
+	<table cellpadding="5" border="0" style="margin-left:20px">
+	   <tr>
+	     <td>${i18_Total_number_of_forms}</td>
+		 <!-- $BeginBlock changenoOfForms -->
+		<td>${noOfForms}</td>
+		<!-- $EndBlock changenoOfForms -->
+
+	   </tr>
+	   <tr>
+	      <td>${i18_Total_amount_reported}</td>
+		  <!-- $BeginBlock changetotalPaymment -->
+		<td>${totalPaymment}</td>
+		<!-- $EndBlock changetotalPaymment -->
+	   </tr>
+	</table>
+ </body>
+ <!-- $EndBlock theme -->
+</html>

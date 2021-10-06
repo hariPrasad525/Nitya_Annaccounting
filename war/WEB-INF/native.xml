@@ -1,0 +1,353 @@
+<menus>
+      <Main text="Dashboard" att="">
+         <url>https://www.accounterlive.com/accounter#dashBoard</url>
+      </Main>
+      <Main text="Company">
+         <Menu text="New Journal Entry">
+           <url>https://www.accounterlive.com/accounter#newJournalEntry</url>
+         </Menu>
+         <Menu text="New Account">
+           <url>https://www.accounterlive.com/accounter#newAccount</url>
+         </Menu>
+         <Menu text="Company Preferences">
+           <url>https://www.accounterlive.com/accounter#companyPreferences</url>
+         </Menu>
+         <Menu text="Manage Support Lists">
+           <Menu text="Customer Group List">
+             <url>https://www.accounterlive.com/accounter#customerGroupList</url>
+           </Menu>
+           <Menu text="Supplier Group List">
+             <url>https://www.accounterlive.com/accounter#supplierGroupList</url>
+           </Menu>
+           <Menu text="Payment Term List">
+             <url>https://www.accounterlive.com/accounter#paymentTerms</url>
+           </Menu>
+           <Menu text="Shipping Method List">
+             <url>https://www.accounterlive.com/accounter#shippingMethodsList</url>
+           </Menu>
+           <Menu text="Shipping Term List">
+             <url>https://www.accounterlive.com/accounter#shippingTermsList</url>
+           </Menu>
+           <Menu text="Price Level List">
+             <url>https://www.accounterlive.com/accounter#priceLevels</url>
+           </Menu>
+           <Menu text="Item Group List">
+             <url>https://www.accounterlive.com/accounter#itemGroupList</url>
+           </Menu>
+           <Menu text="Credit Rating List">
+             <url>https://www.accounterlive.com/accounter#creditRatingList</url>
+           </Menu>
+         </Menu>
+         <Menu text="Manage Fiscal Year">
+            <url>https://www.accounterlive.com/accounter#manageFiscalYear</url>
+         </Menu>
+         <Menu text="Company Lists">
+            <Menu text="Accounts List">
+                <url>https://www.accounterlive.com/accounter#accountsList</url>
+            </Menu>
+            <Menu text="Journal Entries">
+                <url>https://www.accounterlive.com/accounter#journalEntries</url>
+            </Menu>
+            <Menu text="Items">
+                <url>https://www.accounterlive.com/accounter#items</url>
+            </Menu>
+            <Menu text="Customers">
+                <url>https://www.accounterlive.com/accounter#customers</url>
+            </Menu>
+            <Menu text="Suppliers">
+                <url>https://www.accounterlive.com/accounter#supplierList</url>
+            </Menu>
+            <Menu text="Payments">
+                <url>https://www.accounterlive.com/accounter#payments</url>
+            </Menu>
+            <Menu text="Sales Persons">
+                <url>https://www.accounterlive.com/accounter#salesPersons</url>
+            </Menu>
+        </Menu>
+      </Main>
+      <Main text="VAT">
+         <Menu text="New">
+             <Menu text="New VAT Item">
+                 <url>https://www.accounterlive.com/accounter#newVatItem</url>
+             </Menu>
+             <Menu text="New VAT Code">
+                 <url>https://www.accounterlive.com/accounter#newVatCode</url>
+             </Menu>
+             <Menu text="New VAT Agency">
+                 <url>https://www.accounterlive.com/accounter#newVatAgency</url>
+             </Menu>
+         </Menu>
+         <Menu text="VAT Adjustment">
+             <url>https://www.accounterlive.com/accounter#vatAdjustment</url>
+         </Menu>
+         <Menu text="File VAT">
+             <url>https://www.accounterlive.com/accounter#fileVAT</url>
+         </Menu>
+         <Menu text="Pay VAT">
+             <url>https://www.accounterlive.com/accounter#payVat</url>
+         </Menu>
+         <Menu text="Receive VAT">
+             <url>https://www.accounterlive.com/accounter#receiveVat</url>
+         </Menu>
+         <Menu text="VAT List">
+              <Menu text="VAT Items">
+                  <url>https://www.accounterlive.com/accounter#vatItems</url>
+              </Menu>
+              <Menu text="VAT Codes">
+                  <url>https://www.accounterlive.com/accounter#vatCodes</url>
+              </Menu>
+         </Menu>
+      </Main>
+      <Main text="Customer">
+           <Menu text="Customers Home">
+               <url>https://www.accounterlive.com/accounter#customerHome</url>
+           </Menu>
+           <Menu text="New">
+               <Menu text="New Customer">
+                   <url>https://www.accounterlive.com/accounter#newCustomer</url>
+               </Menu>
+               <Menu text="New Item">
+                   <url>https://www.accounterlive.com/accounter#newCustomerItem</url>
+               </Menu>
+               <Menu text="New Quote">
+                   <url>https://www.accounterlive.com/accounter#newQuote</url>
+               </Menu>
+               <Menu text="New Invoice">
+                   <url>https://www.accounterlive.com/accounter#newInvoice</url>
+               </Menu>
+               <Menu text="New Cash Sale">
+                   <url>https://www.accounterlive.com/accounter#newCashSale</url>
+               </Menu>
+               <Menu text="New Credit">
+                   <url>https://www.accounterlive.com/accounter#newCredit</url>
+               </Menu>
+           </Menu>
+           <Menu text="Customer PrePayment">
+                <url>https://www.accounterlive.com/accounter#customerPrepayment</url>
+           </Menu>
+           <Menu text="Receive Payment">
+                <url>https://www.accounterlive.com/accounter#receivePayment</url>
+           </Menu>
+           <Menu text="Customer Refund">
+                <url>https://www.accounterlive.com/accounter#customerRefund</url>
+           </Menu>
+           <Menu text="Customer List">
+                <Menu text="Customers">
+                   <url>https://www.accounterlive.com/accounter#customers</url>
+               </Menu>
+               <Menu text="Items">
+                   <url>https://www.accounterlive.com/accounter#items</url>
+               </Menu>
+               <Menu text="Quotes">
+                   <url>https://www.accounterlive.com/accounter#quotes</url>
+               </Menu>
+               <Menu text="Invoices">
+                   <url>https://www.accounterlive.com/accounter#invoices</url>
+               </Menu>
+               <Menu text="Receive Payments">
+                   <url>https://www.accounterlive.com/accounter#receivePayments</url>
+               </Menu>
+               <Menu text="Customer Refunds">
+                   <url>https://www.accounterlive.com/accounter#customerRefunds</url>
+               </Menu>
+           </Menu>
+      </Main>
+      <Main text="Supplier">
+           <Menu text="Suppliers Home">
+              <url>https://www.accounterlive.com/accounter#supplierHome</url>
+           </Menu>
+           <Menu text="New">
+              <Menu text="New Supplier">
+                 <url>https://www.accounterlive.com/accounter#newSupplier</url>
+              </Menu>
+              <Menu text="New Item">
+                 <url>https://www.accounterlive.com/accounter#newSupplierItem</url>
+              </Menu>
+              <Menu text="Cash Purchase">
+                 <url>https://www.accounterlive.com/accounter#newCashPurchase</url>
+              </Menu>
+              <Menu text="Supplier Credit">
+                 <url>https://www.accounterlive.com/accounter#supplierCredit</url>
+              </Menu>
+           </Menu>
+           <Menu text="Enter Bill">
+               <url>https://www.accounterlive.com/accounter#enterBill</url>
+           </Menu>
+           <Menu text="Pay Bills">
+               <url>https://www.accounterlive.com/accounter#payBill</url>
+           </Menu>
+           <Menu text="Issue Payments">
+               <url>https://www.accounterlive.com/accounter#issuePayments</url>
+           </Menu>
+           <Menu text="Supplier PrePayment">
+               <url>https://www.accounterlive.com/accounter#supplierPrePayment</url>
+           </Menu>
+           <Menu text="Record Expenses">
+               <url>https://www.accounterlive.com/accounter#recordExpenses</url>
+           </Menu>
+           <Menu text="Expense Claims">
+               <url>https://www.accounterlive.com/accounter#expenseClaims</url>
+           </Menu>
+           <Menu text="Supplier Lists">
+                <Menu text="Supplier">
+                    <url>https://www.accounterlive.com/accounter#supplierList</url>
+                </Menu>
+                <Menu text="Items">
+                    <url>https://www.accounterlive.com/accounter#purchaseItems</url>
+                </Menu>
+                <Menu text="Bills And Expenses">
+                    <url>https://www.accounterlive.com/accounter#billsAndExpenses</url>
+                </Menu>
+                <Menu text="Supplier Payments">
+                    <url>https://www.accounterlive.com/accounter#supplierPayments</url>
+                </Menu>
+           </Menu>
+      </Main>
+      <Main text="Banking">
+           <Menu text="New Bank Account">
+               <url>https://www.accounterlive.com/accounter#newBankAccount</url>
+           </Menu>
+           <Menu text="Deposit / Transfer Funds">
+               <url>https://www.accounterlive.com/accounter#depositTransferFunds</url>
+           </Menu>
+           <Menu text="Pay Bills">
+               <url>https://www.accounterlive.com/accounter#payBill</url>
+           </Menu>
+           <Menu text="New Credit Card Charge">
+               <url>https://www.accounterlive.com/accounter#creditCardCharge</url>
+           </Menu>
+           <Menu text="Banking List">
+                <Menu text="Payments">
+                   <url>https://www.accounterlive.com/accounter#payments</url>
+                </Menu>
+           </Menu>
+      </Main>
+      <Main text="Sales">
+           <Menu text="Sales Order">
+               <url>https://www.accounterlive.com/accounter#salesOrder</url>
+           </Menu>
+           <Menu text="SalesOrder List">
+               <url>https://www.accounterlive.com/accounter#salesOrderList</url>
+           </Menu>
+           <Menu text="SalesOrder Report">
+               <url>https://www.accounterlive.com/accounter#salesOrderReport</url>
+           </Menu>
+      </Main>
+      <Main text="Purchases">
+           <Menu text="Purchase Order">
+               <url>https://www.accounterlive.com/accounter#purchaseOrder</url>
+           </Menu>
+           <Menu text="PurchaseOrder List">
+               <url>https://www.accounterlive.com/accounter#purchaseOrderList</url>
+           </Menu>
+           <Menu text="PurchaseOrder Report">
+               <url>https://www.accounterlive.com/accounter#purchaseOrderReport</url>
+           </Menu>
+      </Main>
+      <Main text="Reports">
+           <Menu text="Company And Financial">
+                <Menu text="Profit And Loss">
+                    <url>https://www.accounterlive.com/accounter#profitAndLoss</url>
+                </Menu>
+                <Menu text="Balance Sheet">
+                    <url>https://www.accounterlive.com/accounter#balanceSheet</url>
+                </Menu>
+                <Menu text="Cash Flow Report">
+                    <url>https://www.accounterlive.com/accounter#cashFlowReport</url>
+                </Menu>
+                <Menu text="Trial Balance">
+                    <url>https://www.accounterlive.com/accounter#trialBalance</url>
+                </Menu>
+                <Menu text="Transaction Detail By Account">
+                    <url>https://www.accounterlive.com/accounter#transactionDetailByAccount</url>
+                </Menu>
+                <Menu text="Expense Report">
+                    <url>https://www.accounterlive.com/accounter#expenseReport</url>
+                </Menu>
+           </Menu>
+           <Menu text="Customers And Receivables">
+                <Menu text="A/R Ageing Summary">
+                    <url>https://www.accounterlive.com/accounter#arAgingSummary</url>
+                </Menu>
+                <Menu text="A/R Ageing Detail">
+                    <url>https://www.accounterlive.com/accounter#arAgingDetail</url>
+                </Menu>
+                <Menu text="Customer Statement">
+                    <url>https://www.accounterlive.com/accounter#customerStatement</url>
+                </Menu>
+                <Menu text="Customer Transaction History">
+                    <url>https://www.accounterlive.com/accounter#customerTransactionHistory</url>
+                </Menu>
+            </Menu>
+            <Menu text="Sales">
+                <Menu text="Sales By Customer Summary">
+                    <url>https://www.accounterlive.com/accounter#salesByCustomerSummary</url>
+                </Menu>
+                <Menu text="Sales By Customer Detail">
+                    <url>https://www.accounterlive.com/accounter#salesByCustomerDetail</url>
+                </Menu>
+                <Menu text="Sales By Item Summary">
+                    <url>https://www.accounterlive.com/accounter#salesByItemSummary</url>
+                </Menu>
+                <Menu text="Sales By Item Detail">
+                    <url>https://www.accounterlive.com/accounter#salesByItemDetail</url>
+                </Menu>
+                <Menu text="Sales Order Report">
+                    <url>https://www.accounterlive.com/accounter#salesOrderReport</url>
+                </Menu>
+             </Menu>
+             <Menu text="Suppliers And Payables">
+                <Menu text="A/P Ageing Summary">
+                    <url>https://www.accounterlive.com/accounter#apAgingSummary</url>
+                </Menu>
+                <Menu text="A/P Ageing Detail">
+                    <url>https://www.accounterlive.com/accounter#apAgingDetail</url>
+                </Menu>
+                <Menu text="Supplier Transaction History">
+                    <url>https://www.accounterlive.com/accounter#supplierTransactionHistory</url>
+                </Menu>
+              </Menu>
+              <Menu text="Purchases">
+                <Menu text="Purchase By Supplier Summary">
+                    <url>https://www.accounterlive.com/accounter#purchaseBySupplierSummary</url>
+                </Menu>
+                <Menu text="Purchase By Supplier Detail">
+                    <url>https://www.accounterlive.com/accounter#purchaseBySupplierDetail</url>
+                </Menu>
+                <Menu text="Purchase By Item Summary">
+                    <url>https://www.accounterlive.com/accounter#purchaseByItemSummary</url>
+                </Menu>
+                <Menu text="Purchase By Item Detail">
+                    <url>https://www.accounterlive.com/accounter#purchaseByItemDetail</url>
+                </Menu>
+                <Menu text="Purchase Order Report">
+                    <url>https://www.accounterlive.com/accounter#purchaseOrderReport</url>
+                </Menu>
+              </Menu>
+              <Menu text="VAT">
+                <Menu text="Prior VAT Returns">
+                    <url>https://www.accounterlive.com/accounter#priorVatReturns</url>
+                </Menu>
+                <Menu text="VAT Detail">
+                    <url>https://www.accounterlive.com/accounter#vatDetail</url>
+                </Menu>
+                <Menu text="VAT 100">
+                    <url>https://www.accounterlive.com/accounter#vat100</url>
+                </Menu>
+                <Menu text="Uncategorised VAT Amounts">
+                    <url>https://www.accounterlive.com/accounter#uncategorisedVatAmounts</url>
+                </Menu>
+                <Menu text="VAT Item Summary">
+                    <url>https://www.accounterlive.com/accounter#vatItemSummary</url>
+                </Menu>
+                <Menu text="EC Sales List">
+                    <url>https://www.accounterlive.com/accounter#ecSalesList</url>
+                </Menu>
+              </Menu>
+      </Main>
+      <Main text="Settings">
+           <Menu text="General Settings">
+               <url>https://www.accounterlive.com/accounter#generalSettings</url>
+           </Menu>
+      </Main>
+   </menus>

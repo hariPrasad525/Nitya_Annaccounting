@@ -1,0 +1,461 @@
+/** calendar sytles   */
+.colorBack {
+	background-color: #FFFFFF;
+}
+
+.colorTextNormal {
+	color: #6A6A6B;
+	z-index:1000;
+}
+
+.colorText {
+	color: #446C88;
+}
+
+.colorTextHeader {
+	color: #000000;
+}
+
+.colorBackToday {
+	background-color: #FFFFCC;
+}
+
+.colorHeader {
+	background-color: #E8EEF7;
+}
+
+.colorTodayHeader {
+	background-color: #AAAAAA;
+	text-align: center;
+}
+
+.colorLines {
+	background-color: #DDD;
+}
+
+.resizeLine {
+	background-color: #CCDDEE;
+	cursor: row-resize;
+}
+
+.colorTextDisabled {
+	color: #BABDC4;
+}
+
+.colorHeaderSelected {
+	background-color: #BABDC4;
+}
+
+.weekheader {
+	background-color: #BBB;
+	color: #000000;
+	table-layout: fixed;
+}
+
+.colorTimeLine {
+	background-color: #EEE;
+}
+
+.dottedLines {
+	border-top: 1px dashed #CCDDEE;
+}
+
+.multidayeventtable {
+	background-color: #EEE;
+	margin-right: 15px;
+}
+
+.colordayheader {
+	background-color: #BBB;
+	text-align: center;
+}
+
+.tablestyle {
+	background-color: #BBB;
+	border: 1px;
+	border-color: #CCDDEE;
+}
+
+.colorSelection {
+	background-color: #DDD;
+}
+
+.daypanel {
+	overflow: auto;
+}
+
+.testdayeventbody {
+	background-color: #D96666;
+	cursor: pointer;
+	color: #FFF;
+	border: 1px solid #000;
+}
+
+.dragSelection {
+	background-color: #e1ecff;
+	opacity: 0.7;
+	z-index: 3000000;
+	filter: alpha(opacity = 70);
+}
+
+.calendarAnchorText {
+	cursor: pointer;
+}
+
+/** this will prevent user selection on text,but it will work for mozila
+		 only,FIXME please **/
+.calendar-tool-editor{
+-moz-user-select:none;
+-khtml-user-select: none;
+user-select: none;
+padding-left:0 !important;
+}
+
+
+/**
+calendar styles
+**/
+.calendarEvent1-header {
+	background-color: #B1365F;
+	color: #FFF;
+	border-width: 0px 1px 1px !important;
+	border-color: #000 !important;
+	border-style: solid !important;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.calendarEvent1 {
+	background-color: #B1365F;
+	cursor: pointer;
+	color: #FFF;
+	border: 1px solid black;
+	-moz-border-radius: 4px;
+	overflow: hidden;
+}
+
+.dayEventbody1Header {
+	background: #B1365F;
+	color: #FFF;
+	font-size: 10px;
+}
+
+.dayEventbody1 {
+	background-color: #E67399;
+	border: 1px solid #000;
+}
+
+.calendarEvent2-header {
+	background-color: #2952A3;
+	color: #FFF;
+	border-width: 0px 1px 1px !important;
+	border-color: #000 !important;
+	border-style: solid !important;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.calendarEvent2 {
+	background-color: #2952A3;
+	cursor: pointer;
+	color: #FFF;
+	border: 1px solid black;
+	-moz-border-radius: 4px;
+	overflow: hidden;
+}
+
+.dayEventbody2Header {
+	background: #2952A3;
+	color: #FFF;
+	font-size: 10px;
+}
+
+.dayEventbody2 {
+	background-color: #668CD9;
+	border: 1px solid #000;
+}
+
+.calendarEvent3-header {
+	background-color: #0D7813;
+	color: #FFF;
+	border-width: 0px 1px 1px !important;
+	border-color: #000 !important;
+	border-style: solid !important;
+	white-space: nowrap;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.calendarEvent3 {
+	background-color: #0D7813;
+	cursor: pointer;
+	color: #FFF;
+	/*border-width:1px 1px 0;
+	border-style: solid;
+	border-color: #000;*/
+	border: 1px solid #000;
+	-moz-border-radius: 4px;
+	overflow:hidden;
+}
+
+.dayEventbody3Header {
+	background: #0D7813;
+	color: #FFF;
+	font-size: 10px;
+}
+
+.dayEventbody3 {
+	background-color: #4CB052;
+	border: 1px solid #000;
+}
+
+.calendarEvent4-header {
+	background-color: #E6804D;
+	color: #FFF;
+	border-width: 0px 1px 1px !important;
+	border-color: #000 !important;
+	border-style: solid !important;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.calendarEvent4 {
+	background-color: #E6804D;
+	cursor: pointer;
+	color: #FFF;
+	border: 1px solid black;
+	-moz-border-radius: 3px;
+	overflow: hidden;
+}
+
+.dayEventbody4Header {
+	background: #E6804D;
+	color: #FFF;
+	font-size: 10px;
+}
+
+.dayEventbody4 {
+	background-color: #FF9F71;
+	border: 1px solid #000;
+}
+
+.calendarEvent5-header {
+	background-color: #5229A3;
+	color: #FFF;
+	border-width: 0px 1px 1px !important;
+	border-color: #000 !important;
+	border-style: solid !important;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.calendarEvent5 {
+	background-color: #5229A3;
+	cursor: pointer;
+	color: #FFF;
+	border: 1px solid black;
+	-moz-border-radius: 4px;
+	overflow: hidden;
+}
+
+.dayEventbody5Header {
+	background: #5229A3;
+	color: #FFF;
+	font-size: 10px;
+}
+
+.dayEventbody5 {
+	background-color: #8C66D9;
+	border: 1px solid #000;
+}
+
+.calendarEvent6-header {
+	background-color: #AB8B00;
+	color: #FFF;
+	border-width: 0px 1px 1px !important;
+	border-color: #000 !important;
+	border-style: solid !important;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.calendarEvent6 {
+	background-color: #AB8B00;
+	cursor: pointer;
+	color: #FFF;
+	border: 1px solid black;
+	-moz-border-radius: 4px;
+	overflow: hidden;
+}
+
+.dayEventbody6Header {
+	background: #AB8B00;
+	color: #FFF;
+	font-size: 10px;
+}
+
+.dayEventbody6 {
+	background-color: #E0C240;
+	border: 1px solid #000;
+}
+
+.calendarEvent7-header {
+	background-color: #FC5B77;
+	color: #FFF;
+	border-width: 0px 1px 1px !important;
+	border-color: #000 !important;
+	border-style: solid !important;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.calendarEvent7 {
+	background-color: #FC5B77;
+	cursor: pointer;
+	color: #FFF;
+	border: 1px solid black;
+	-moz-border-radius: 4px;
+	overflow: hidden;
+}
+
+.dayEventbody7Header {
+	background: #FC5B77;
+	color: #FFF;
+	font-size: 10px;
+}
+
+.dayEventbody7 {
+	background-color: #FF94A5;
+	border: 1px solid #000;
+}
+
+.calendarEvent8-header {
+	background-color: #009FFF;
+	color: #FFF;
+	border-width: 0px 1px 1px !important;
+	border-color: #000 !important;
+	border-style: solid !important;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.calendarEvent8 {
+	background-color: #009FFF;
+	cursor: pointer;
+	color: #FFF;
+	border: 1px solid black;
+	-moz-border-radius: 4px;
+	overflow: hidden;
+}
+
+.dayEventbody8Header {
+	background: #009FFF;
+	color: #FFF;
+	font-size: 10px;
+}
+
+.dayEventbody8 {
+	background-color: #9AD0F1;
+	border: 1px solid #000;
+}
+
+.calendarEvent9-header {
+	background-color: #9D00FF;
+	color: #FFF;
+	border-width: 0px 1px 1px !important;
+	border-color: #000 !important;
+	border-style: solid !important;
+	white-space: nowrap;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.calendarEvent9 {
+	background-color: #9D00FF;
+	cursor: pointer;
+	color: #FFF;
+	/*border-width:1px 1px 0;
+	border-style: solid;
+	border-color: #000;*/
+	border: 1px solid #000;
+	-moz-border-radius: 4px;
+	overflow:hidden;
+}
+
+.dayEventbody9Header {
+	background: #9D00FF;
+	color: #FFF;
+	font-size: 10px;
+}
+
+.dayEventbody9 {
+	background-color: #CA8CF4;
+	border: 1px solid #000;
+}
+
+.calendarEvent10-header {
+	background-color: #227A8F;
+	color: #FFF;
+	border-width: 0px 1px 1px !important;
+	border-color: #000 !important;
+	border-style: solid !important;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.calendarEvent10 {
+	background-color: #227A8F;
+	cursor: pointer;
+	color: #FFF;
+	border: 1px solid black;
+	-moz-border-radius: 3px;
+	overflow: hidden;
+}
+
+.dayEventbody10Header {
+	background: #227A8F;
+	color: #FFF;
+	font-size: 10px;
+}
+
+.dayEventbody10 {
+	background-color: #80B4C0;
+	border: 1px solid #000;
+}
+
+/**
+.today-calender {
+	background: transparent url(images/today-button-image.png) repeat scroll 0 0;
+	width: 60px;
+	height: 23px;
+}
+
+.previous-calender {
+	background: transparent url(images/left-arrow-button.png) repeat scroll 0 0;
+	width: 33px;
+	height: 23px;
+}
+
+.next-calender {
+	background: transparent url(images/right-arrow-button.png) repeat scroll 0 0;
+	width: 33px;
+	height: 23px;
+}**/
+.dateselectiobuttons {
+	background: url("/images/header-c.png") repeat-x scroll 0 -5px transparent;
+}
+
+.task-event-icon, .calendar-event-icon{
+	padding-left: 20px; 
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: 1px 0;
+}
+
+.task-event-icon{
+	background-image: url('images/createTaskNote.png');
+}
+
+.calendar-event-icon{
+	background-image: url('images/create-event.png');
+}

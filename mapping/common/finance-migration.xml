@@ -1,0 +1,398 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+                "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.vimukti.accounter.core"
+	default-access="field" auto-import="false">
+
+	<query name="get.All.InventoryItem">
+		<query-param name="companyId" type="long"/>
+		from com.vimukti.accounter.core.Item it where it.company.id=:companyId and it.type in (2,4) 
+	</query>
+
+	<sql-query name="getNextAccountNumber">
+		<query-param name="companyId" type="long" />
+		<query-param name="subbaseType" type="int" />
+		
+		<return-scalar column="A_NUMBER" type="encryptedstring" />
+		
+		<![CDATA[
+				SELECT A_NUMBER
+				FROM   ACCOUNT A
+				WHERE  SUB_BASE_TYPE = :subbaseType
+				       AND A.COMPANY_ID = :companyId  
+				]]>
+
+	</sql-query> 
+	
+	<query name="get.AssetsAccountOfCompany">
+		<query-param name="companyId" type="long"/>
+		from com.vimukti.accounter.core.Account a where a.company.id=:companyId and a.type=5
+	</query>
+	
+	<query name="get.Account.by.Name">
+		<query-param name="companyId" type="long"/>
+		<query-param name="accountName" type="String"/>
+		from com.vimukti.accounter.core.Account a where a.name=:accountName and a.company.id=:companyId
+	</query>
+	
+	<query name="getAccountTransactions">
+		<query-param name="companyId" type="long"/>
+		<query-param name="accountId" type="long"/>
+		from com.vimukti.accounter.core.AccountTransaction at where at.account.id=:accountId and at.company.id=:companyId
+	</query>
+	
+	<query name="get.AccountTransaction.Of.Item">
+		<query-param name="itemId" type="long"/>
+		select at from com.vimukti.accounter.core.AccountTransaction  at left join at.transaction.transactionItems as ti
+		where ti.type=1 and ti.item.id=:itemId and 
+		(at.account.id=ti.item.expenseAccount.id or at.account.id=ti.item.assestsAccount.id) and 
+		(at.transaction.type in (1,14,8,37) or (at.transaction.type=36 and ti.quantity.value &lt; 0))
+	</query>
+	
+	<sql-query name="delete.InventoryPurchases.Of.Company">
+		<query-param name="companyId" type="long" />
+		
+		<![CDATA[
+				DELETE FROM INVENTORY_PURCHASE IP
+				USING  TRANSACTION_ITEM,
+				       TRANSACTION
+				WHERE  TRANSACTION_ITEM_ID = TRANSACTION_ITEM.ID
+				       AND TRANSACTION_ITEM.TRANSACTION_ID = TRANSACTION.ID
+				       AND TRANSACTION.COMPANY_ID = :companyId  
+				]]>
+		
+	</sql-query>	
+	
+	<query name="get.AccountTransactions.Of.AccountReceivables">
+		<query-param name="companyId" type="long" />
+		from com.vimukti.accounter.core.AccountTransaction at 
+		where at.account.id=at.company.accountsReceivableAccount.id and at.company.id=:companyId
+	</query>
+	
+	<query name="get.AccountTransactions.Of.AccountPayables">
+		<query-param name="companyId" type="long" />
+		from com.vimukti.accounter.core.AccountTransaction at 
+		where at.account.id=at.company.accountsPayableAccount.id and at.company.id=:companyId
+	</query>
+	
+	<query name="getAllTransactionOfCompany">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.Transaction t  where t.company=:company and t.saveStatus not in (201,202,204) order by t.type, t.id
+	</query>
+	
+	
+	<query name="getNextCompany">
+		<query-param name="companyId" type="long" />
+		from com.vimukti.accounter.core.Company c where c.version!=7 and 
+		c.isConfigured=true and isLocked=false and c.id &gt; :companyId  order by id
+	</query>
+	
+	<query name="getAccountTransactionsOfVoidTransaction">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.AccountTransaction at where at.transaction.saveStatus in (201,202,204) and at.company=:company
+	</query>
+	
+	<query name="get.All.TdsChallans">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.TDSChalanDetail tc where
+		tc.company=:company
+	</query>
+
+	<query name="get.all.Items">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.Item it where it.type in(2,4) and it.company=:company order by it.id
+	</query>
+
+	<sql-query name="get.all.inventory.items.transactions">
+		<query-param name="companyId" type="long" />
+		<return-scalar column="T_ID" type="long" />
+		<![CDATA[
+			SELECT t.id AS T_ID 
+			FROM   TRANSACTION t 
+			       LEFT JOIN transaction_item ti 
+			              ON ti.transaction_id = t.id 
+			       LEFT JOIN item i 
+			              ON i.id = ti.item_id 
+			WHERE  t.company_id = :companyId 
+			       AND t.save_status NOT IN ( 201, 202, 204 ) 
+			       AND ( i.type = 2 ) 
+			GROUP  BY t.id 
+			ORDER  BY t.t_type, 
+			          t.id 
+			]]>
+	</sql-query>
+
+	<query name="getItemsOfAverageCostZero">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.Item i where i.type in (2,4) and i.averageCost=0 and i.company=:company
+	</query>
+	
+	<query name="getInventoryOfAverageCostNegative">
+		<query-param name="company" type="company"/>
+		from com.vimukti.accounter.core.Item i where i.type in (2,4) and i.averageCost &lt; 0 and i.company=:company
+	</query>
+	
+	<sql-query name="make.all.accounttransaction.can.updateaccount">
+		<query-param name="company" type="Company"/>
+		UPDATE ACCOUNT_TRANSACTION SET UPDATE_ACCOUNT=TRUE WHERE UPDATE_ACCOUNT=FALSE; 
+	</sql-query>
+	
+	<sql-query name="set.current.balance">
+		<query-param name="cid" type="long"/>
+		UPDATE account A
+		SET    current_balance = (SELECT SUM(at.amount)
+		                          FROM   account_transaction at
+		                          WHERE  at.account_id = a.id)
+		WHERE  a.id IN (SELECT account_id
+		                FROM   (SELECT a2.id           AS account_id,
+		                               SUM(at2.amount) AS at_amount,
+		                               a2.current_balance
+		                        FROM   account a2
+		                               left join account_transaction at2
+		                                      ON at2.account_id = a2.id
+		                        WHERE  a2.company_id = :cid
+		                        GROUP  BY a2.id) AS tab
+		                WHERE at_amount is not null and Abs(at_amount - current_balance) > 0.01)
+		       AND a.company_id = :cid
+	</sql-query>
+	<sql-query name="set.total.balance.normal">
+		<query-param name="cid" type="long"/>
+		UPDATE account a
+		SET    total_balance = current_balance
+		WHERE  id NOT IN (SELECT a2.parent_id
+		                  FROM   account a2
+		                  WHERE  a2.parent_id IS NOT NULL
+		                         AND a2.company_id = :cid
+		                  GROUP  BY a2.parent_id)
+		       AND total_balance != current_balance
+		       AND a.company_id = :cid
+	</sql-query>
+	<sql-query name="set.total.balance.2nd.stage">
+		<query-param name="cid" type="long"/>
+		UPDATE account aa
+		SET    total_balance = ( current_balance
+		                         + (SELECT SUM(aa2.current_balance)
+		                            FROM   account aa2
+		                            WHERE  aa2.parent_id = aa.id
+		                                   AND aa2.company_id = :cid) )
+		WHERE  aa.id IN (SELECT a.parent_id
+		                 FROM   account a
+		                 WHERE  a.parent_id IS NOT NULL
+		                        AND a.company_id = :cid
+		                        AND (SELECT a2.parent_id
+		                             FROM   account a2
+		                             WHERE  a2.id = a.parent_id
+		                                    AND a2.company_id = :cid
+		                                    AND (SELECT parent_id
+		                                         FROM   account a3
+		                                         WHERE  a3.id = a2.parent_id
+		                                                AND a3.company_id = :cid)
+		                                        IS NULL
+		                            ) IS NOT
+		                            NULL)
+		       AND aa.company_id = :cid
+	</sql-query>
+	<sql-query name="set.total.balance.1st.stage">
+		<query-param name="cid" type="long"/>
+		UPDATE account aa
+		SET    total_balance = ( current_balance
+		                         + (SELECT SUM(aa2.current_balance)
+		                            FROM   account aa2
+		                            WHERE  aa2.parent_id = aa.id
+		                                   AND aa2.company_id = :cid) )
+		WHERE  aa.id IN (SELECT a.parent_id
+		                 FROM   account a
+		                 WHERE  a.parent_id IS NOT NULL
+		                        AND a.company_id = :cid
+		                        AND (SELECT a2.parent_id
+		                             FROM   account a2
+		                             WHERE  a2.id = a.parent_id
+		                                    AND a2.company_id = :cid) IS NULL)
+		       AND aa.company_id = :cid
+	</sql-query>
+	<sql-query name="set.total.balance.in.account_currency.primary">
+		<query-param name="cid" type="long"/>
+		UPDATE account aa
+		SET    total_balance_in_account_currency = total_balance
+		WHERE  aa.id IN (SELECT a.id
+		                 FROM   account a
+		                        left join company c
+		                               ON c.id = a.company_id
+		                 WHERE  a.total_balance != a.total_balance_in_account_currency
+		                        AND a.account_currency = c.primary_currency
+		                        AND a.company_id = :cid)
+		       AND aa.company_id = :cid
+	</sql-query>
+	
+	<sql-query name="set.total.balance.in.account_currency.other">
+		<query-param name="cid" type="long"/>
+		UPDATE account a
+		SET    total_balance_in_account_currency = (SELECT SUM(
+		                                           at2.amount / t2.currency_factor)
+		                                            FROM   account_transaction at2
+		                                                   left join TRANSACTION t2
+		                                                          ON
+		                                                   at2.transaction_id = t2.id
+		                                            WHERE  at2.account_id = a.id
+		                                                   AND
+		                                           t2.company_id = :cid)
+		WHERE  id IN (SELECT account_id
+		              FROM   (SELECT a2.id                                AS account_id,
+		                             SUM(at.amount / t.currency_factor)   AS at_amount,
+		                             a2.total_balance_in_account_currency AS tbac
+		                      FROM   account a2
+		                             left join account_transaction at
+		                                    ON at.account_id = a2.id
+		                             left join TRANSACTION t
+		                                    ON t.id = at.transaction_id
+		                             left join company c
+		                                    ON c.id = a2.company_id
+		                      WHERE  a2.account_currency != c.primary_currency
+		                             AND a2.company_id = :cid
+		                      GROUP  BY a2.id) AS tab
+		              WHERE  at_amount is not null and  Abs(at_amount - tbac) > 0.01)
+		       AND a.company_id = :cid
+	</sql-query>
+	
+	<query name="get.buildassemblies">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.BuildAssembly ba where ba.company=:company order by ba.id
+	</query>
+	
+	<query name="get.buildassembly.items">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.Item it where it.company=:company and it.type=4 and 
+		it.id in (select inventoryAssembly.id from com.vimukti.accounter.core.BuildAssembly ba where ba.company=:company) 
+		order by it.id
+	</query>
+	
+	<query name="get.Incorrect.AccountTransactions">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.AccountTransaction at where at.company= :company 
+		and at.company!=at.account.company 
+	</query>
+	
+	<query name="get.Account.By.Name">
+		<query-param name="company" type="Company" />
+		<query-param name="name" type="String" />
+		from com.vimukti.accounter.core.Account a where a.company=:company and a.name=:name
+	</query>
+	
+	<sql-query name="get.Incorrect.Accounts">
+		<query-param name="cid" type="long"/>
+		
+		<return-scalar column="account_id" type="long" />
+		<return-scalar column="at_sum" type="double" />
+		<return-scalar column="current_balance" type="double" />
+		SELECT account_id,
+		       at_sum,
+		       current_balance
+		FROM   (SELECT a.id              AS account_id,
+		               SUM(at.amount)    AS at_sum,
+		               a.current_balance AS current_balance
+		        FROM   account a
+		               left join account_transaction at
+		                      ON at.account_id = a.id
+		        WHERE  a.company_id = :cid
+		        GROUP  BY a.id) AS tab
+		WHERE  Abs(tab.at_sum - tab.current_balance) > 0.001;  
+	</sql-query>
+	
+	
+	<query name="getDefaultAccounts">
+		<query-param name="company" type="Company"/>
+		from com.vimukti.accounter.core.Account a where a.isDefault=true and a.company= :company
+	</query>
+	
+	<sql-query name="insert.Payee.update">
+		<query-param name="payeeId" type="long"/>
+		<query-param name="transactionId" type="long"/>
+		<query-param name="companyId" type="long"/>
+		<query-param name="createdBy" type="long"/>
+		<query-param name="amount" type="long"/>
+		INSERT INTO payee_update
+		            (company_id,
+		             payee,
+		             TRANSACTION,
+		             amount,
+		             created_by,
+		             last_modifier,
+		             created_date,
+		             last_modified_date)
+		VALUES     (:companyId,
+		            :payeeId,
+		            :transactionId,
+		            :amount,
+		            :createdBy,
+		            :createdBy,
+		            current_timestamp,
+		            current_timestamp );  
+	</sql-query>
+	
+	<sql-query name="get.Payee.Balance">
+		<query-param name="payeeId" type="long"/>
+		
+		<return-scalar column="PAYEE_BALANCE" type="double"/>
+		
+		SELECT ( CASE WHEN p.TYPE=1 THEN -p.opening_balance ELSE p.opening_balance END +
+		         SUM(
+		                amount) ) AS PAYEE_BALANCE
+		FROM   payee_update pu
+		       left join payee p
+		              ON p.id = pu.payee
+		WHERE  p.id = :payeeId
+		GROUP  BY p.id;  
+	</sql-query>
+	
+	<query name="get.All.Transactions">
+		<query-param name="companyID" type="long"/>
+		from com.vimukti.accounter.core.Transaction t where t.company.id=:companyID order by t.transactionDate ASC, t.number ASC
+	</query>
+	
+	<sql-query name="getStockTransfers">
+		<query-param name="companyId" type="long"/>
+		
+		<return-scalar column="created_by" type="long"/>
+		<return-scalar column="last_modifier" type="long"/>
+		<return-scalar column="created_on" type="java.sql.Timestamp"/>
+		<return-scalar column="last_modified_on" type="java.sql.Timestamp"/>
+		<return-scalar column="from_warehouse" type="long"/>
+		<return-scalar column="to_warehouse" type="long"/>
+		<return-scalar column="sf_id" type="long"/>
+		
+		SELECT created_by,
+		       last_modifier,
+		       created_on,
+		       last_modified_on,
+		       from_warehouse,
+		       to_warehouse,
+		       id as sf_id
+		FROM   stock_transfer
+		WHERE  company_id = :companyId
+	</sql-query>
+	
+	<sql-query name="getStockTransfersItems">
+		<query-param name="stockTranfer" type="long"/>
+		
+		SELECT sti.*
+		FROM   stock_transfer_item sti
+		WHERE  stock_transfer = :stockTranfer
+	</sql-query>
+	
+	<sql-query name="updateInventoryHistory">
+		<query-param name="companyId" type="long"/>
+		<query-param name="warehouse" type="long"/>
+		UPDATE inventory_history IH
+		SET    warehouse = :warehouse
+		WHERE  IH.company_id = :companyId  
+	</sql-query>
+	
+	<sql-query name="delete.StockTransfer">
+		<query-param name="stockTranfer" type="long"/>
+		DELETE FROM stock_transfer
+		WHERE  id = :stockTranfer
+	</sql-query>
+	
+	
+</hibernate-mapping>

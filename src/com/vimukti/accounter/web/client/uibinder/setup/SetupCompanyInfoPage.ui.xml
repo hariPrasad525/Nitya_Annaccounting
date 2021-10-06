@@ -1,0 +1,82 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:p1="urn:import:com.google.gwt.user.cellview.client">
+	<g:FlowPanel ui:field="mainViewPanel" styleName="setup_common_head">
+		<g:Label ui:field="headerLabel" styleName="setup_header_label" />
+		<g:FlowPanel ui:field="viewPanel">
+			<g:Label styleName="setup_label" ui:field="AccounterInfo"></g:Label>
+			<g:FlowPanel ui:field="companyInfoField" styleName="company_Info_table">
+				<g:FlowPanel styleName="display-name-panel">
+					<g:Label styleName="setup_label" width="" height=""
+						ui:field="displayNameLabel" />
+					<g:TextBox styleName="setup_textbox" ui:field="companyName" />
+				</g:FlowPanel>
+				<g:FlowPanel styleName="legal-name-panel">
+					<g:Label styleName="setup_label" height="" width=""
+						ui:field="legalNameLabel" />
+					<g:TextBox styleName="setup_textbox" ui:field="legalName" />
+				</g:FlowPanel>
+				<g:FlowPanel styleName="legal-form-panel">
+					<g:Label styleName="setup_label" />
+					<g:Label styleName="setup_label" wordWrap="true" ui:field="LegalForm"></g:Label>
+				</g:FlowPanel>
+				<g:FlowPanel styleName="tax-id-panel">
+					<g:Label styleName="setup_label" ui:field="taxIDLabel" />
+					<g:TextBox styleName="setup_textbox" ui:field="taxId" />
+				</g:FlowPanel>
+				<g:FlowPanel styleName="ein-panel">
+					<g:Label styleName="setup_label" />
+					<g:Label styleName="setup_label" wordWrap="true" ui:field="EIN"></g:Label>
+				</g:FlowPanel>
+				<g:FlowPanel styleName="country-panel">
+					<g:Label styleName="setup_label" ui:field="countryLabel" />
+					<g:ListBox styleName="setup_listbox" ui:field="country" />
+				</g:FlowPanel>
+				<g:FlowPanel styleName="state-panel">
+					<g:Label styleName="setup_label" ui:field="stateLabel" />
+					<g:ListBox styleName="setup_listbox" ui:field="stateListBox" />
+				</g:FlowPanel>
+				<g:FlowPanel styleName="street-address-one-panel">
+					<g:Label styleName="setup_label" ui:field="streetAdreess1Label" />
+					<g:TextBox styleName="setup_textbox" ui:field="streetAddress1" />
+				</g:FlowPanel>
+				<g:FlowPanel styleName="street-address-two-panel">
+					<g:Label styleName="setup_label" ui:field="streetAddress2Label" />
+					<g:TextBox styleName="setup_textbox" ui:field="streetAdress2" />
+				</g:FlowPanel>
+				<g:FlowPanel styleName="city-panel">
+					<g:Label styleName="setup_label" ui:field="cityLabel" />
+					<g:TextBox styleName="setup_textbox" ui:field="cityTextBox" />
+				</g:FlowPanel>
+				<g:FlowPanel styleName="zip-panel">
+					<g:Label styleName="setup_label" ui:field="zipLabel" />
+					<g:TextBox styleName="setup_textbox" ui:field="zip" />
+				</g:FlowPanel>
+				<g:FlowPanel styleName="phone-panel">
+					<g:Label styleName="setup_label" ui:field="phoneLabel" />
+					<g:TextBox styleName="setup_textbox" ui:field="phone" />
+				</g:FlowPanel>
+				<g:FlowPanel styleName="fax-panel">
+					<g:Label styleName="setup_label" ui:field="faxLabel" />
+					<g:TextBox styleName="setup_textbox" ui:field="fax" />
+				</g:FlowPanel>
+				<g:FlowPanel styleName="format-panel">
+					<g:Label styleName="setup_label" />
+					<g:Label styleName="setup_label" wordWrap="true" ui:field="useFormat"></g:Label>
+				</g:FlowPanel>
+				<g:FlowPanel styleName="email-panel">
+					<g:Label styleName="setup_label" ui:field="emailAdressLabel" />
+					<g:TextBox styleName="setup_textbox" ui:field="emailAddress" />
+				</g:FlowPanel>
+				<g:FlowPanel styleName="website-panel">
+					<g:Label styleName="setup_label" ui:field="webSiteLabel" />
+					<g:TextBox styleName="setup_textbox" ui:field="webSite" />
+				</g:FlowPanel>
+				<g:FlowPanel styleName="timezone-panel">
+					<g:Label styleName="setup_label" ui:field="timezone" />
+					<g:ListBox styleName="setup_listbox" ui:field="timezoneslistbox" />
+				</g:FlowPanel>
+			</g:FlowPanel>
+		</g:FlowPanel>
+	</g:FlowPanel>
+</ui:UiBinder> 

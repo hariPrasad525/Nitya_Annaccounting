@@ -1,0 +1,1819 @@
+@font-face {
+	font-family: "ColabThi";
+	src: url("Fonts/ColabThi.otf") format("truetype");
+}
+
+* {
+	outline: none;
+}
+
+body,html {
+	height: auto;
+}
+
+button::-moz-focus-inner,input[type="reset"]::-moz-focus-inner,input[type="button"]::-moz-focus-inner,input[type="submit"]::-moz-focus-inner,input [type="checkbox"]::-moz-focus-inner,input[type="file"]>input[type="button"]::-moz-focus-inner
+	{
+	border: none;
+}
+
+.signup-submit-button,.signup-submit-mid,#contact_form_cont,#services_form_cont,.right-middle,.remaining-header-part-login,.maintainence_message,.createbutton,.loginbutton,#forgot-login,.reset-button,.OkButton,.mandatory
+	{
+	float: right;
+}
+
+#label_holder,#label_holder,.right-side-options,.signup-submit #openid-cancel,p,div ul li,.delete_company,.create_new_company,.allviews-common-button,.mid-login-box1 td,.terms-error,#accounterForm fieldset td
+	{
+	font-size: 13px;
+}
+
+body,.email,.password,.company-name,.body-container,.company_list_buttons,#appVersions,#mainFooter
+	{
+	text-align: center;
+}
+
+.unavailable_page,.maintanance_subcont,#maintananceContainer,.form-box,#commanContainer .accounterform,.new_login_page,.admin_details_header
+	{
+	overflow: auto;
+}
+
+#mid-2,#mid,#but-g,#but-mid,.invoicing,#bank-layout,#contact-layout,.left-side-options,.terms-error input[type="checkbox"],.seperator,.left-middle,.image-text-button,.find-an-acciuntant,.try-free,.Benifits,.Pricing-Plans,.features-tree,.menu-bar,#mid-right,#mid-left,#about-layout,#support-width,#about-1,#privacy-layout,#home-bg,#fea-bg,#abt-bg,#sup-bg,#blog-bg,.maintainence_logo,.rememberMe,#feedDiv,.new_login_accounterform,.left-arrow,#contact_content,.stepcarousel .panel
+	{
+	float: left;
+}
+
+#banner-mid2,#banner-mid1,#banner-mid-tab,#banner-mid,.signup-submit #openid-cancel,.easiest-label,.account-sys-label,.forget-but,#signup-mid
+.button-tryfree-pricing-page,.business-dashboard a,.fea a,.supp a,.use a,.pro a,.home a,#but-mid,.allviews-common-button,.signup-submit-mid
+	{
+	color: white;
+}
+
+#about-1,#privacy-layout,#contact-layout,#mid-2,#mid,#top,#bot,.shadow-line,#down,#mid-left,#about-layout,#support-width,.pricing-box-shadow,.box-shadow,.monthly-box ul,.Annaul-box ul,#appVersions,#mainFooter,.admin_details_header,.newsletter,.form-bottom-options,.activate-code
+	{
+	clear: both;
+}
+
+#manage-layout,#about-layout,#about-1,#online-accounting-1,#invoicing-layout,#privacy-layout,#bank-layout,#contact-layout,#mid-2,#mid-1,#mid,#mid-right,.online-accounting,.bank-reconciliation,.invoicing,.find-an-acciuntant,.body-container,.main_body-container
+	{
+	font-family: arial;
+}
+
+#mid,.login_box,.reset-login-box,.activation_code_box,.left-side-box {
+	border: 1px solid #929292
+}
+
+#about-1,#online-accounting-1,#invoicing-layout,#privacy-layout,#bank-layout,#contact-layout,#mid-2
+	{
+	text-align: justify;
+}
+
+.allviews-common-button,.signup-submit-mid,#notifyMe {
+	cursor: pointer;
+}
+
+#mid-1,#mid {
+	height: auto;
+}
+
+body {
+	font-family: Arial Unicode MS, Arial, sans-serif;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+body,ul,li,ol,p,table,tr,td,table,html {
+	margin: 0px;
+	padding: 0px;
+}
+
+.header,.middle-part,.footer,#commanNewContainer,#commanContainer,.signup-box,#maintananceContainer
+	{
+	text-align: left;
+}
+
+.lower-part ol {
+	padding: 0 15px 25px;
+}
+
+.lower-part ol li {
+	width: 290px;
+	vertical-align: top;
+}
+
+div ul li,.contact_form_cont table tr td:first-child,.left-side-box table tr td:first-child
+	{
+	color: #000;
+}
+
+div ul li hover {
+	color: #c5c5c5;
+}
+
+a.create_new_company.button-links{
+   text-decoration: none !important;
+   background: #008AC3;
+   color: white !important;
+   text-shadow: none !important;
+   width: 33% !important;
+   position: relative;
+   left: 30%;
+   font-size: 1.2rem;
+}
+
+.create_new_company,.allviews-common-button,.online-accounting,.bank-reconciliation,.invoicing,.find-an-acciuntant,.header_p_style
+	{
+	font-weight: bold;
+}
+
+.header_p_style,.common-box,.allviews-common-button,form,.easiest-label,.account-sys-label
+	{
+	font-family: sans-serif;
+}
+
+.header_p_style {
+	font-size: 15px;
+	margin-bottom: 8px;
+}
+
+.main_body-container,.body-container,#maintananceContainer,.login_box,.left-side-box,#mid-1
+	{
+	margin: 0px auto;
+}
+
+.main_body-container {
+	background: none repeat scroll 0 0 #008AC3;
+}
+
+.body-container {
+	width: 956px !important;
+}
+
+.remaining-header-part-login {
+	font-size: 23px;
+	margin: 5px 15px 0 0;
+}
+
+#mygallery.stepcarousel img{
+	width:500px;
+}
+
+p {
+	line-height: 18px;
+}
+
+#login-id {
+	color: #ffffff !important;
+	font-size: 17px;
+	margin-left: 16px;
+	line-height: 2;
+}
+
+#feedDivUl li a,#unChangedNewsDiv a,#appVersions a,#appVersions span,#mainFooter a,#mainFooter span,a:visited,#home-bg,#fea-bg,#abt-bg,#sup-bg,#blog-bg,a:link,.signup-submit #openid-cancel
+	{
+	text-decoration: none;
+}
+
+.account-sys-label {
+	font-weight: normal;
+	font-size: 35px;
+}
+
+.easiest-label {
+	font-size: 18px;
+}
+
+.logo-image {
+	padding: 15px 0 15px 15px;
+}
+
+.online-accounting,.bank-reconciliation,.invoicing,.find-an-acciuntant {
+	margin-left: 11px;
+	margin-right: 23pt;
+	width: 190px;
+}
+
+#but-g {
+	color: red;
+	font-size: 26px;
+	line-height: 1.9;
+	margin: 0px -5px;
+}
+
+#but-g hover {
+	border: 1px solid green;
+}
+
+.right-big {
+	margin-left: -7px;
+}
+
+#top {
+	background-color: #f7f6f2;
+}
+
+#cen {
+	height: 330px !important;
+	padding-top: 50px;
+}
+
+#mid {
+	background-color: #ffffff;
+	width: 845px !important;
+	margin: 56px 56px 0 56px;
+}
+
+#mid-1 {
+	background-color: #F4F4F4;
+	border: 1px solid #CCCCCC;
+	font-size: 15px;
+	width: 720px;
+}
+
+#mid-2 {
+	background-color: #f4f4f4;
+	height: 550px;
+	width: 863px !important;
+	margin-top: 40px;
+	margin-left: 60px;
+	border: 1px solid #ccc;
+	font-size: 15px;
+}
+
+#contact-layout {
+	background-color: #f4f4f4;
+	height: 345px !important;
+	width: 863px !important;
+	margin-top: 40px;
+	margin-left: 60px;
+	border: 1px solid #ccc;
+	font-size: 15px;
+}
+
+#privacy-layout {
+	background-color: #f4f4f4;
+	height: 350px;
+	width: 850px !important;
+	margin-top: 40px;
+	margin-left: 60px;
+	border: 1px solid #ccc;
+	font-size: 15px;
+}
+
+#about-1 {
+	background-color: #F4F4F4;
+	border: 1px solid #CCCCCC;
+	height: 690px !important;
+	margin-left: 60px;
+	margin-top: 40px;
+	width: 840px !important;
+	font-size: 15px;
+}
+
+#support-width {
+	background-color: #F4F4F4;
+	border: 1px solid #CCCCCC;
+	height: 470px !important;
+	margin-left: 60px;
+	margin-top: 40px;
+	font-family: arial !important;
+	font-size: 15px;
+	width: 840px !important;
+}
+
+#about-layout {
+	background-color: #F4F4F4;
+	border: 1px solid #CCCCCC;
+	height: 435px !important;
+	margin-left: 60px;
+	margin-top: 40px;
+	width: 863px !important;
+	font-size: 15px;
+}
+
+#mid-left {
+	background-color: #d9d9d9;
+	height: 831px;
+	width: 215px !important;
+	margin-top: 40px;
+	margin-left: 50px;
+	border: 1px solid #ccc;
+}
+
+#mid-right {
+	background-color: #f4f4f4;
+	height: 831px;
+	width: 657px;
+	margin-top: 40px;
+	font-family: arial;
+	font-size: 15px;
+	border: 1px solid #ccc;
+	font-size: 15px;
+}
+
+#down {
+	height: 50px;
+}
+
+#bot {
+	height: 55px !important;
+	background-color: #072027 !important;
+}
+
+li {
+	display: inline-block;
+	list-style-type: none;
+}
+
+.menu-bar-login {
+	height: 47px;
+	background-color: #072027;
+	font-family: Georgia;
+	width: 100%;
+}
+
+.menu-bar {
+	margin-top: 5px;
+}
+
+#home-bg,#fea-bg,#abt-bg,#sup-bg,#blog-bg {
+	margin-left: 13px;
+	padding: 8px 4px 0px;
+	padding: 5.5px\0;
+	color: #ffffff;
+	font-size: 16px;
+	outline: 0 none;
+}
+
+.header-hover {
+	color: #3299a4 !important;
+}
+
+.image-text-button {
+	margin-left: 30px;
+	margin-top: 30px;
+}
+
+.left-middle {
+	margin-left: 11px;
+	margin-top: 10px;
+	width: 398px;
+}
+
+.right-middle {
+	margin-left: 20px;
+	margin-top: 15px;
+	width: 521px;
+}
+
+a:visited {
+	color: #FFFFFF;
+}
+
+.online-accounting a,.bank-reconciliation a,.invoicing a,.find-an-acciuntant a
+	{
+	color: #079dd2;
+	font-size: 17px;
+}
+
+.fea-list a,.supp-list a,.use-lists a,.pro-list a,.home-list a {
+	color: #A0A0A0 !important;
+}
+
+.image-text-button input[type="button"] {
+	height: 45px;
+	width: 200px;
+	margin-left: 80px;
+}
+
+.seperator {
+	background: url("../images/signup-page-vertical-line.png") repeat-y
+		scroll 0 0 transparent;
+	height: 830px;
+	margin-top: 41px;
+	padding: 1px;
+}
+
+.sites-header {
+	color: #3299a4 !important;
+	font-size: 35px;
+	vertical-align: bottom;
+	line-height: 1.8;
+}
+
+.lower-part {
+	padding: 20px 0px 0px 20px;
+	background: white;
+}
+
+.pro,.fea,.use,.supp,.home {
+	background: url("../images/footer-line.png") repeat-x scroll left bottom
+		transparent;
+	padding: 5px 5px 10px 30px;
+}
+
+.footer-options {
+	font-size: 17px;
+	padding: 7px;
+	line-height: 2.3;
+}
+
+.footer-options a {
+	color: #fff !important;
+	margin-right: 20px;
+}
+
+.footer-options a:HOVER,.privacy_policy a {
+	color: #3299a4 !important;
+}
+
+ul li a {
+	color: #008AC3;
+}
+
+ul li a:HOVER,ul li a:FOCUS {
+	color: #3299a4 !important;
+}
+
+.pro-list,.fea-list,.supp-list,.use-lists {
+	margin: 10px 0 0 30px;
+}
+
+#features-normal input[type="image"],#home-normal input[type="image"],#about-normal input[type="image"],#pricing-normal input[type="image"],#support-normal input[type="image"],.features input[type="image"],.home input[type="image"],.about-page input[type="image"],.pricing-page input[type="image"],.support-page input[type="image"]
+	{
+	position: relative;
+}
+
+.right-button,.left-button {
+	margin-left: 20px;
+}
+
+.screen-dot {
+	margin-left: 20px;
+	margin-bottom: 6px;
+}
+
+.middle-signup-box h2 {
+	margin: 0px 0px 10px 20px;
+	color: #008AC3;
+}
+
+#left-box {
+	margin-bottom: -6px;
+	margin-bottom: -9px\0;
+	margin-left: 39px;
+}
+
+#select-box {
+	margin-top: 10px;
+	width: 222px;
+}
+
+#left-box-l {
+	margin-left: 87px;
+}
+
+#pwd-box {
+	margin-left: 60px;
+}
+
+#cmp-box {
+	margin-left: 20px;
+}
+
+input[type="text"] {
+	padding: 0 5px;
+}
+
+.signup-left .accounterForm input[type=text] {
+	background: url("../images/text-box.png") no-repeat scroll left top
+		transparent;
+	border: medium none;
+	font-size: 15px;
+	height: 23px;
+	margin: 5px 0;
+	padding: 0 5px;
+	width: 213px;
+}
+
+#drop-down {
+	height: 22px;
+	margin-bottom: -6px;
+	margin-bottom: -9px\0;
+	margin-left: -5px;
+	padding: 1px;
+}
+
+.try,.ben,.price,.left-side-box a {
+	color: #008AC3;
+}
+
+.try-list,.ben-list,.price-list,.first-name,.last-name,.email-address,.Phone-No,.current-system-drop-box,.left-side-box h5
+	{
+	color: #A0A0A0;
+}
+
+.button-signup-page a {
+	color: red;
+}
+
+.delete_message {
+	color: red;
+}
+
+.terms-error input[type="checkbox"] {
+	margin-right: -8px;
+	margin-right: 0px\0;
+	outline: 0 none;
+}
+
+.left-side-box {
+	background: none repeat scroll 0 0 white;
+	color: #A0A0A0;
+}
+
+#checkbox1 {
+	margin-bottom: 10px;
+}
+
+#forget-link1,#signUp-link1 {
+	color: #008AC3;
+	font-size: 15px;
+}
+
+.mid-login-box1 {
+	margin-left: 0;
+	margin-top: 12px;
+}
+
+.left-side-options {
+	font-size: 20px;
+	margin-top: 40px;
+}
+
+.fieldset {
+	border: none !important;
+}
+
+#red,.red {
+	color: red;
+}
+
+.hiddenDiv {
+	margin: 15px 150px 100px 5px;
+}
+
+.stepcarousel {
+	position: relative; /*leave this value alone*/
+	border: 0px none;
+	overflow: scroll; /*leave this value alone*/
+	width: 502px; /*Width of Carousel Viewer itself*/
+	height: 280px; /*Height should enough to fit largest content's height*/
+	margin-bottom: 10px
+}
+
+.stepcarousel .belt {
+	position: absolute; /*leave this value alone*/
+	left: 0;
+	top: 0;
+}
+
+.stepcarousel .panel {
+	overflow: hidden;
+	/*clip content that go outside dimensions of holding panel DIV*/
+	margin: 0px; /*margin around each panel*/
+	width: 502px;
+	/*Width of each panel holding each content. If removed, widths should be individually defined on each content DIV then. */
+}
+
+#contact_form_cont,#services_form_cont {
+	margin: 15px 25px 0 0;
+}
+
+#contact_content {
+	color: #333333;
+	font-size: 15px;
+	margin-top: 30px;
+}
+
+#contact_cont,#services_cont,#faq_cont,#screen_cont {
+	background-image: url("fx/contactbox.png");
+	height: 385px;
+	margin-left: 35px;
+	margin-top: -1000px;
+	position: absolute;
+	width: 790px;
+	z-index: 9999999;
+}
+
+.footer-options a:hover {
+	text-decoration: underline !important;
+}
+
+.pricing-table img {
+	margin: 25px 0 0 10px;
+}
+
+.adjust-padding {
+	padding-left: 45px;
+	padding-right: 35px;
+}
+/* These styles for opera*/
+noindex:-o-prefocus,.right-side-options {
+	margin-top: -5px !important;
+}
+
+noindex:-o-prefocus,.signup-submit-mid {
+	padding-bottom: 0px;
+}
+
+noindex:-o-prefocus,.terms-error input[type="checkbox"] {
+	margin-top: -14px;
+}
+
+noindex:-o-prefocus,.terms-error span {
+	margin-left: 20px !important;
+}
+
+noindex:-o-prefocus,.sign-up-left,noindex:-o-prefocus,.sign-up-right {
+	margin-bottom: -18px;
+}
+
+.mid-login-box1 td {
+	padding-right: 5px;
+}
+
+.logo-image img {
+	border: 0px none !important;
+}
+/* Only for chrome */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+	.terms-error input[type="checkbox"] {
+		margin-right: 0px !important;
+	}
+	.terms-error span {
+		margin-left: 0px;
+	}
+}
+
+#contact-layout div,#support-width div,#privacy-layout div,#mid-2 div {
+	background: #F4F4F4;
+}
+
+.remaining-header-part-login ul li {
+	background: url("../images/Login_button.png") no-repeat scroll 0 0
+		transparent;
+	width: 76px;
+	height: 36px;
+}
+
+.sign-up-left {
+	background: url("../images/Siginup_left.png") no-repeat scroll 0 0
+		transparent;
+	display: inline-block;
+	height: 52px;
+	width: 8px;
+}
+
+.sign-up-right {
+	background: url("../images/Siginup_right.png") no-repeat scroll 0 0
+		transparent;
+	width: 8px;
+	height: 52px;
+	display: inline-block;
+}
+
+.sign-up-middle {
+	background: url("../images/Siginup_mid.png") repeat-x scroll 0 0
+		transparent;
+	height: 52px;
+}
+
+.signup-for-free-button ul li,.signup-submit-button ul li {
+	display: inline;
+}
+
+.signup-for-free-button {
+	margin: 20px 0 0 65px;
+}
+
+.signup-submit-button {
+	margin-top: 15px;
+}
+
+.support_textarea {
+	width: 223px;
+	height: 125px;
+	font-size: 15px;
+}
+
+.signup-for-free-button a:hover {
+	color: red !important;
+}
+
+:root #mid-box7 {
+	width: 210px \0/IE9;
+}
+
+.support_textarea {
+	overflow: hidden\0;
+}
+
+input[type="submit"]:FOCUS {
+	outline: none;
+}
+
+#accounterForm .error {
+	display: block;
+}
+
+#accounterForm label.error,#activationForm label.error,#emailActivationForm label.error
+	{
+	color: red !important;
+}
+
+.remaining-header-part-login a:FOCUS,.login-hover {
+	opacity: 0.5;
+	outline: 0px none;
+	-moz-opacity: 0.5 !important;
+	-webkit-opacity: 0.5 !important;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0.5)"
+		!important;
+	filter: alpha(opacity =                                                        
+		  0.5) !important;
+}
+
+.signup-submit-mid:FOCUS,input[type="submit"]:FOCUS,.login-focus {
+	color: #008AC3 !important;
+	outline: none;
+}
+
+.menu-bar li .active {
+	color: #008AC3 !important;
+}
+
+.left-arrow {
+	background: url("../images/Pop-up.png") no-repeat scroll 0 0 transparent;
+	height: 15px;
+	margin-left: -13px;
+	margin-top: 14px;
+	width: 13px;
+}
+
+.indication-box {
+	background: none repeat scroll 0 0 #DFF1F5;
+	border: 1px solid #A1BFC8;
+	border-radius: 5px 5px 5px 5px;
+	-moz-border-radius: 5px;
+	-webkit-radius-border: 5px;
+	width: 257px;
+	position: relative;
+	left: 0;
+	font-size: 12px;
+}
+
+.box-data {
+	padding: 2px 5px 0;
+}
+
+.mandatory {
+	background-color: #FFFFE6;
+	border: 1px solid #E6EACD;
+	color: red;
+	font-size: 11px;
+	font-weight: normal
+}
+
+#accounterForm td:FIRST-CHILD {
+	text-align: right;
+	padding-right: 15px;
+}
+/* ////////////new login and forgot password css Date:3/8/2011*/
+* {
+	margin: 0 0;
+	padding: 0;
+}
+
+form {
+	font-weight: normal;
+}
+
+.cancel_accountform #commanContainer {
+	width: 410px;
+}
+
+#companies-page td {
+	vertical-align: top;
+}
+
+#companies-page #migration-details {
+	width: 450px;
+}
+
+#companies-page .company_lists .company_list_child{
+	width: 60%;
+    left: 19%;
+    position: relative;
+}
+#companies_page .form-box{
+	min-height: 400px;
+}
+
+#commanContainer a.proceed.button-links,#commanContainer a.proceed.button-links:hover
+	{
+	text-decoration: none;
+}
+
+#commanNewContainer,#commanContainer {
+	margin: 3em auto;
+}
+
+#commanNewContainer {
+	width: 960px;
+}
+
+#commanContainer label,#commanNewContainer label {
+	color: #777777;
+	font-size: 14px;
+	margin: 0;
+	text-align: left;
+}
+
+#commanContainer .accounterform,.form-box,.new_login_page,.signup-total-form
+	{
+	background: none repeat scroll 0 0 #FFFFFF;
+	border: 1px solid #dcf2fd;
+	border-radius: 3px 3px 3px 3px;
+	box-shadow: 0 4px 10px -1px rgba(200, 200, 200, 0.7);
+	font-weight: normal;
+	margin-left: 8px;
+	padding: 15px 10px;
+	border-radius: 10px 10px 10px 10px;
+	clear: both;
+}
+
+#commanContainer  input[type="text"],#commanContainer  input[type="password"],#commanContainer select,#commanNewContainer input[type="text"],#commanNewContainer input[type="password"],#commanNewContainer select,#enterEmailDiv #emailField
+	{
+	background: none repeat scroll 0 0 #FBFBFB;
+	border: 1px solid #B1B1B1;
+	box-shadow: 1px 1px 2px rgba(200, 200, 200, 0.2) inset;
+	margin: 2px 6px 3px 0px;
+	outline: medium none;
+	padding: 0px 0px 0px 3px;
+	width: 97%;
+	height: 28px;
+}
+
+#subscription_complition_form textarea,#subscription_complition_form select
+	{
+	width: 210px;
+}
+
+#subscription_complition_form table td {
+	display: table-cell;
+	/*white-space: pre-wrap;*/
+	word-wrap: break-word;
+}
+
+#subscription_complition_form textarea {
+	height: 50px;
+}
+
+#subscription_complition_form {
+	overflow: hidden;
+}
+
+#subscription_complition_form #error {
+	word-wrap: break-word;
+}
+
+#subscription_complition_form table {
+	table-layout: fixed;
+	width: 367px;
+}
+
+.loginbutton,#forgot-login,.signup-submit,.reset-button,.OkButton {
+	margin-right: 8px;
+}
+
+.allviews-common-button:FOCUS,.loginbutton input:focus,button {
+	border: 1px solid #10CDD1
+}
+
+input [type="checkbox"] {
+	border: 1px solid #7A7777;
+}
+
+#subscription_complition_form table td {
+	padding: 0 0 10px 0;
+}
+
+.subscribtionManagementButton a {
+	color: white !important;
+	font-weight: bold;
+	margin-left: 8px;
+	text-decoration: none !important;
+}
+
+.allviews-common-button,.subscribtionManagementButton a {
+	background: none repeat scroll 0 0 #008AC3;
+	border: 1px solid #002e36;
+	border-radius: 5px 5px 5px 5px;
+	margin-top: 10px;
+	padding: 3px 10px;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+}
+
+.loginbutton input:active,.loginbutton input:hover {
+	background: #1a5158;
+	border: 1px solid #9ebfc3;
+}
+
+.form-bottom-options,.activate-code {
+	margin: 15px 0 0 16px;
+	text-shadow: 0 1px 0 #FFFFFF;
+	width: 100%;
+}
+
+.form-bottom-options a,#commanContainer a,#commanNewContainer a {
+	color: #008AC3;
+/* 	text-decoration: underline; */
+}
+
+.accounterLogo {
+	padding: 0 0 15px 10px;
+}
+
+.accounterLogoimage {
+	padding: 0 0 15px 10px;
+	background: url("/images/Accounter_logo.png") no-repeat scroll 0 0
+		transparent;
+	display: inline-block;
+	height: 50px;
+	margin-left: 10px;
+	text-indent: -999em;
+	width: 230px;
+}
+
+.common-box {
+	border-radius: 3px 3px 3px 3px;
+	border-style: solid;
+	border-width: 1px;
+	margin: 0 0 16px 8px;
+	padding: 12px;
+	font-size: 12px;
+}
+
+.button-links {
+	border-radius: 5px 5px 5px 5px;
+	display: block;
+	font-weight: bold;
+	height: 25px;
+	padding: 10px;
+	text-align: center;
+	width: 104px;
+	color: black !important;
+}
+
+.form-bottom-options tr a.button-links {
+	text-decoration: none !important;
+    background: #008AC3;
+    color: white !important;
+    text-shadow: none !important;
+}
+
+.go-premium,.manage-subscription {
+	background-image: -moz-linear-gradient(center top, #FFC154, #E47601);
+	background-image: -webkit-linear-gradient(top, #FFC154, #E47601);
+	background-image: -o-linear-gradient(top left, #FFC154 #E47601);
+	background-image: linear-gradient(to bottom right, #FFC154, #E47601);
+}
+
+.logout,.login-thankyou,.delete-account,.proceed {
+	background-image: -moz-linear-gradient(center top, #FEFEFE, #E0DCD5);
+	background-image: -webkit-linear-gradient(top, #FEFEFE, #E0DCD5);
+	background-image: -o-linear-gradient(top left, #FEFEFE #E0DCD5);
+	background-image: linear-gradient(to bottom right, #FEFEFE, #E0DCD5);
+}
+
+#login_error {
+	background-color: #FFEBE8;
+	border-color: #CC0000;
+}
+
+#login_success,#gmailregister {
+	background-color: #FFEBE8;
+	border-color: #99C68E;
+}
+
+#forgot-password_error,.create-company-message {
+	background-color: #FFFFE0;
+	border-color: #E6DB55;
+}
+
+.signup-container {
+	width: 1025px !important;
+	margin: 10px auto !important;
+}
+
+.signup-submit {
+	margin-top: 15px;
+}
+
+.reset-header,.company-heading {
+	color: #008AC3;
+	margin-bottom: 10px;
+}
+
+#select-box {
+	padding: 0px !important;
+}
+
+.form-box li {
+	list-style-type: none;
+	display: block;
+}
+
+.form-box li a {
+	font-size: 1.1rem;
+    padding-left: 10px;
+    font-family: open sans condensed,sans-serif;
+}
+
+.form-box div a:hover {
+	color: #008AC3 !important;
+}
+.form-box div a.create_new_company.button-links:hover {
+	color: white !important;
+}
+
+div#news_body{
+	word-spacing: 7px;
+}
+
+a.button-links:hover, .form-bottom-options a.button-links:hover {
+	  background-color: #2280a9;
+}
+
+.form-box ul {
+	margin-top: 20px;
+}
+
+.form-box {
+	min-height: 200px;
+}
+
+.check_label {
+	margin: 10px 0px 0px !important;
+}
+
+a#fdbk_tab {
+	right: 0px !important;
+	top: 40% !important;
+	left: inherit !important;
+	margin: 0 -7px 0 0 !important;
+}
+
+a#fdbk_tab:hover {
+	margin: 0px -4px 0 0 !important;
+}
+
+.fieldset textarea {
+	resize: none;
+}
+
+.resend-code {
+	padding: 10px 0 0 35px;
+}
+
+.companies-list a:FIRST-CHILD {
+	font-size: 18px;
+	text-decoration: none !important;
+}
+
+.delete_company {
+	text-decoration: none !important;
+	padding-top: 3px;
+}
+
+.companies-list a:hover {
+	text-decoration: underline !important;
+}
+
+.companies-list {
+	margin-bottom: 3px;
+	overflow-y: hidden;
+	
+}
+.companies-list.company-name-id a{
+	text-decoration: none;
+}
+
+.password_strength {
+	padding: 0 5px;
+	display: inline-block;
+}
+
+.password_strength_1 {
+	background-color: #fcb6b1;
+}
+
+.password_strength_2 {
+	background-color: #fccab1;
+}
+
+.password_strength_3 {
+	background-color: #fcfbb1;
+}
+
+.password_strength_4 {
+	background-color: #dafcb1;
+}
+
+.password_strength_5 {
+	background-color: #bcfcb1;
+}
+
+.email_password,.text_box_margin {
+	margin: 10px 0px;
+}
+
+#appVersions,#mainFooter {
+	height: 25px;
+	margin-top: 0;
+	position: relative;
+	width: 100%;
+	z-index: 10;
+	color: #666666;
+	padding-top: 8px;
+}
+
+#appVersions {
+	border-top: 1px solid #CCCCCC;
+}
+
+#appVersions a,#appVersions span,#mainFooter a,#mainFooter span {
+	color: #666666;
+	font-size: 12px;
+	padding: 0 5px;
+}
+
+#appVersions a:hover,#mainFooter a:HOVER {
+	text-decoration: underline;
+}
+
+#maintananceContainer {
+	background: none repeat scroll 0 0 #EAEEF1;
+	width: 960px;
+	height: 330px;
+}
+
+.maintainence_message {
+	color: #395169;
+	line-height: 2;
+}
+
+.maintanance_subcont {
+	padding: 25px;
+}
+
+.unavailable_page {
+	padding: 20px 25px 0;
+}
+
+.terms_unorderlist li {
+	display: list-item !important;
+	list-style-type: square !important;
+	list-style-image: none !important;
+}
+
+.terms_unorderlist {
+	margin: 10px 0 0 30px;
+}
+
+.mid2_height {
+	height: auto !important;
+	padding-bottom: 20px;
+}
+
+.terms_and_contions,.privacy_policy {
+	padding: 0px 40px;
+}
+
+.support_send {
+	margin-right: 8px;
+}
+
+.support_send input {
+	width: 50px !important;
+}
+
+#reset_hint_box {
+	margin: -37px 0 0 265px;
+	position: absolute;
+	z-index: 1;
+}
+
+.new_logo_field {
+	text-align: center;
+}
+/*.new_login_page{
+	height:380px;
+}*/
+.new_login_accounterform #login_error {
+	width: 335px;
+}
+
+#feedDiv {
+	width: 400px;
+	padding: 0 34px 0 16px;
+}
+
+.new_login_accounterform {
+	border-left: 1px solid #008AC3;
+	padding-left: 30px;
+	width: 420px;
+}
+
+#feedDivUl li {
+	border-bottom: 1px solid #B1B1B1;
+	padding: 3px;
+	width: 100%;
+}
+
+#feedDivUl {
+	margin-top: 15px;
+}
+
+#feedDivUl .listItemHover {
+	background: none repeat scroll 0 0 #D4EFFB;
+	border-bottom: 1px solid #5EC2ED;
+}
+
+#feedDiv h2 {
+	color: #0079C6;
+	margin-bottom: 10px;
+}
+
+#unChangedNewsDiv {
+	height: 90px
+}
+
+.display-none,.hiddenDiv {
+	display: none;
+}
+
+.maintainence_message #errorMsg {
+	color: red;
+	font-size: 12px;
+	text-align: center;
+	margin-right: 95px;
+}
+
+.maintainence_message #successmsgDiv {
+	color: green;
+}
+
+.google_icon,.yahoo_icon,.facebook_icon,.aol_icon {
+	display: inline-block;
+	height: 34px;
+	text-indent: -999em;
+	width: 90px;
+	margin-top: 10px;
+	padding: 3px;
+	border: 1px solid white;
+}
+
+.google_icon {
+	background: url("../images/Google.jpg") no-repeat scroll 4px 5px
+		transparent;
+}
+
+.yahoo_icon {
+	background: url("../images/Yahoo.jpg") no-repeat scroll 5px 5px
+		transparent;
+}
+
+.aol_icon {
+	background: url("../images/AOL.jpg") no-repeat scroll 5px 5px
+		transparent;
+}
+
+.facebook_icon {
+	background: url("../images/Facebook.jpg") no-repeat scroll 5px 5px
+		transparent;
+}
+
+.new_login_accounterform #openIdForm a:hover,#openIdForm a:hover {
+	border: 1px solid #CCCCCC;
+	border-radius: 5px 5px 5px 5px;
+}
+
+.new_login_accounterform #openIdForm span {
+	display: block;
+}
+
+.new_login_accounterform #accounterForm {
+	width: 264px;
+}
+
+.footer-options div {
+	float: left;
+}
+
+.footer-options ul {
+	float: right;
+}
+
+.footer-options div a {
+	background: url("../images/fblike.png") no-repeat scroll 0 0 transparent;
+	text-indent: -999em;
+	display: inline-block;
+	width: 48px;
+	height: 48px;
+}
+
+.delete-account-description {
+	height: 100px;
+	width: 280px;
+	border: 1px solid #aaa;
+}
+
+.delete-account-options input[type="checkbox"] {
+	margin: 5px;
+}
+
+.form-box,.companies-list {
+	overflow-x:auto;
+}
+
+.company_lists {
+	overflow: visible;
+	white-space: nowrap;
+	width: 100%;
+}
+
+.accounterform {
+	display: table;
+}
+
+.signup-left,.signup-right {
+	display: table-cell;
+}
+
+.signup-right li {
+	display: block;
+}
+
+.signup-right h3 {
+	border-bottom: 1px solid #F0F0F0;
+	font-weight: bold;
+	padding: 5px;
+	width: 100%;
+	font-size: 15px;
+}
+
+.signup-left {
+	margin-right: 45px;
+	border-right: 1px solid #DDD;
+	padding-right: 45px;
+	padding-left: 25px;
+}
+
+.signup-right ul li {
+	background: url("/images/check-mark-small.gif") no-repeat scroll left
+		center;
+	padding-left: 20px;
+	line-height: 1.8;
+	margin-left: 6px;
+}
+
+#companies-page * {
+	line-height: 24px;
+}
+
+#migration-details {
+	font-size: 16px;
+}
+
+#migration-details p {
+	font-size: 16px;
+}
+
+#migration-details li {
+	font-size: 15px;
+}
+
+#migration-details {
+	padding-right: 100px;
+}
+
+.button-links,.button-links:hover {
+	text-decoration: none;
+}
+
+.companies-list a:FIRST-CHILD {
+	float: left;
+}
+
+#language_picker select {
+	margin-bottom: 5px;
+	width: 90px;
+}
+
+#accounter-header {
+	text-align: center;
+}
+
+#language_picker,#language_picker #locale_option {
+	display: inline-block;
+}
+
+.company_lists {
+	clear: both;
+}
+
+#proceed {
+	text-align: center;
+}
+
+.openid-signup-container {
+	width: 600px !important;
+}
+
+#login_error {
+	clear: both;
+	width: 71%;
+}
+
+.form-bottom-options a:hover,.form-bottom-options a:FOCUS {
+	color: #072027 !important;
+}
+
+.supported_browsers span {
+	color: #1f5065;
+	padding-left: 10px;
+	padding-top: 30px;
+	position: absolute;
+	vertical-align: top;
+}
+
+#subscription_form select {
+	margin: 16px 0 11px 33px;
+	width: 252px;
+}
+
+#subscribe_button {
+	margin: 16px 0 0 73px;
+}
+
+.openidinfo {
+	padding-bottom: 20px;
+}
+
+.encryptContainer {
+	width: 700px !important;
+}
+
+.company_name_action {
+	clear: both;
+	color: #008AC3;
+	padding-bottom: 12px;
+}
+
+.company_lists .form-box {
+	padding: 16px 10px 15px;
+	min-height: 400px;
+}
+/* End of the new Login and forgot password page*/
+.thankyou-form {
+	width: 700px !important;
+}
+
+#delete_user_confirm li {
+	color: #008AC3;
+	font-size: 14px;
+	font-weight: bold;
+	margin-top: 10px;
+	padding-left: 10px;
+}
+
+#delete_user_confirm {
+	min-height: 120px;
+}
+
+#company-locked p {
+	color: #008AC3;
+	font-size: 15px;
+	margin-top: 70px;
+	text-align: center;
+}
+
+.form-bottom-options a {
+	font-size: 13px;
+}
+
+#accounterForm .encryptiondiv {
+	margin: 10px;
+	width: 300px;
+}
+
+#accounterForm #content div {
+	text-align: left;
+	margin-bottom: 15px;
+}
+
+.api_registration {
+	width: 500px !important;
+	margin: 30px auto !important;
+}
+
+#company-locked table {
+	width: 100%;
+}
+
+#company-locked table td {
+	padding: 5px;
+}
+
+#trail-button-row .trailbutton {
+	background: none repeat scroll 0 0 #008AC3;
+	border-radius: 5px 5px 5px 5px;
+	color: #FFFFFF;
+	height: 25px;
+	padding: 8px 30px;
+	text-align: center;
+	text-decoration: none;
+	width: 150px;
+}
+
+#trail-button-row td,#premium-option-row {
+	padding: 30px 0;
+}
+
+#premium-option-row td {
+	padding-top: 30px;
+}
+
+#combo-row td {
+	padding-bottom: 30px;
+}
+
+#trail-button-row,#premium-table {
+	width: 100%;
+}
+
+.or td {
+	border-bottom: 1px dotted gray;
+}
+
+.main-class {
+	width: 900px;
+	margin: 0 auto;
+	border: 1px solid #ccc;
+	padding: 15px;
+	border-collapse: collapse;
+}
+
+.main-class #licenseContainer {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.main-class #licenseContainer .under-line td {
+	padding: 5px;
+}
+
+.main-class #licenseContainer td input[type=submit] {
+	margin-top: 10px;
+}
+
+#licenseContainer .under-line {
+	border-bottom: 1px solid #ccc;
+}
+
+#licenseInfo .main-class {
+	width: 900px;
+	margin: 0 auto;
+	border: 1px solid #ccc;
+	padding: 15px;
+	border-collapse: collapse;
+}
+
+.main-class #licenseContainer {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.main-class #licenseContainer .under-line td {
+	padding: 5px;
+}
+
+.main-class #licenseContainer td input[type=submit] {
+	margin-top: 10px;
+}
+
+#licenseContainer .under-line {
+	border-bottom: 1px solid #ccc;
+}
+
+#licenseInfo h1 {
+	margin: 0 auto;
+	width: 932px;
+}
+
+#licenseInfo {
+	text-align: left;
+}
+
+.reasons {
+	display: table;
+}
+
+.reasons>* {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.reasons {
+	margin: 10px 0;
+	background: none repeat scroll 0 0 #fffbe8;
+	padding: 8px;
+	border: 1px solid #fffbea;
+	border-radius: 5px;
+}
+
+.signup-right .reasons h3 {
+	margin-top: 0px
+}
+
+.benfits {
+	background: none repeat scroll 0% 0% #DCF1FC;
+	padding: 10px;
+	border: 1px solid #E5F0F5;
+	border-radius: 5px;
+}
+
+.signup-submit {
+	text-align: center;
+}
+
+.signup-submit input {
+	background: #0079C6;
+	color: white;
+	border: 1px solid #0079C6;
+	font-weight: 700;
+	padding: 15px 20px;
+	font-size: 19px;
+}
+
+.signup-submit input:hover {
+	background: #1579b9;
+}
+
+.signUpTitle {
+	background-color: #0079C6;
+	padding: 10px;
+	border-radius: 5px;
+	color: #FFF;
+	font-size: 28px;
+	text-align: center;
+}
+
+.comment {
+	font-style: italic;
+	line-height: 20px;
+}
+
+.signup-right #openIdForm {
+	margin: 0 25px;
+}
+
+.commenter {
+	display: block;
+	text-align: right;
+}
+
+.reasons img {
+	margin-top: 20px;
+}
+
+.form-bottom-options {
+	margin: 10px 0 0 0;
+	text-align: right;
+	width: 72% !important;
+    left: 20%;
+    position: relative;
+}
+
+#accounter-header * {
+	vertical-align: middle;
+}
+
+#language_picker {
+	float: right;
+}
+
+.companies-list-page, .companies-list-page table{
+	width: 100%;
+}
+
+#companies-list-page #language_picker {
+	float: none;
+}
+
+.form-item label {
+	min-width: 125px;
+	margin-bottom: 10px;
+	text-align: left;
+	display: inline-block;
+	font-weight: 600;
+}
+
+.form-item input,.form-item select {
+	min-width: 225px;
+	padding: 5px;
+}
+#company-migrator h2{
+	padding: 35px;
+	font-size: 2em;
+	color: #8A3FAF;
+}
+#migration-instructions{
+	padding-left:40px;
+	margin-top:10px;
+}
+#migration-instructions li{
+	display:list-item;
+	list-style-type:decimal;
+}
+#migration-details h3 ,#migration-details h2{
+	 color:#008AC3;
+}
+#migration-details h3 {
+    margin: 10px 0px;
+}
+.proceed.button-links{
+	background:#582869;
+	color:#fff  !important;
+}
+.proceed.button-links:hover{
+	background:#3D174A;
+}
+#migration-content{
+	border: 2px solid #008AC3;
+    border-bottom: 0px;
+    border-top: 0px;
+    border-left: 0px;
+    padding-right: 50px;
+}
+#migration-content .proceed.button-links{
+	float:right;
+}
+#migration-content .clear{
+	clear:both;
+}
+#upgrade{
+	padding: 10px 15px;
+	background: #7F47A2;
+}
+#upgrade:hover{
+	background: #5A3277;
+}
+#company-migrator,#signupsuccess{
+	width:360px;
+	margin:0 auto;
+	border:1px solid #694D88;
+	padding:20px;
+	margin-top:50px;
+	border-radius:10px;
+}
+#company-migrator #buttons-pane{
+	text-align:right;
+	padding-right:20px;
+}
+#signupsuccess{
+    width: 600px;
+    text-align:left;
+}
+#signupsuccess h2{
+	margin:20px 0;
+	color: #8A3FAF;
+}
+#signupsuccess h4{
+	margin:10px 0;
+	color: #8A3FAF;
+}
+#signupsuccess ol{
+	margin:0 40px;
+}
+#migration-details,#signupsuccess{
+	font-family: sans-serif,Arial Unicode MS, Arial;
+}
+#accounterForm #company-migrator .error{
+	display:inline-block;
+	font-weight: 400;
+}
+#signupsuccess ol li{
+	display:list-item;
+	list-style-type:decimal;

@@ -1,0 +1,494 @@
+/*col.gridHeader1,col.gridBody1 {
+	display: none;
+	background: pink;
+}
+*/
+table {
+	font-size: 15px;
+	border-collapse: collapse;
+	table-layout: fixed;
+	font-family: Arial Unicode MS, Arial, sans-serif;
+}
+
+body,table,tr,td,th,p {
+	padding: 0px;
+	margin: 0px;
+}
+/******** Styles for ListGrid *********/
+.gridBody,.gridHeader { /*border-width: 0 1px 1px 0;
+	border-style: ridge;*/
+	
+}
+
+.gridBody .parentNode td,.gridBody .childNode td {
+	border: 0 !important;
+}
+
+.gridHeader  td { /*border-width: 1px 1px 1px 1px !important;*/
+	
+}
+
+.margin-l {
+	margin-left: 15px;
+}
+
+.margin-r {
+	margin-right: 15px;
+}
+
+.gridBody td,.gridHeader td { /*border-width: 2px 0 0 2px;
+	border-style: ridge;*/
+	
+}
+
+.gridBody td div,.gridHeader td div {
+	white-space: nowrap;
+	width: 100%;
+	overflow: hidden;
+}
+
+.thinBorder {
+	border: 1px solid #E1E1E1;
+}
+
+.gridHeaderBackGround {
+	background: #f2f2f2;
+	font-weight: bold;
+}
+
+.ShiftBottom {
+	margin-top: 3em;
+}
+
+.thead {
+	display: table-header-group;
+}
+
+.tfoot {
+	display: table-footer-group;
+}
+
+.ReportGrid .gridBody tr td.underline {
+	border-top: 1px solid black !important;
+	cursor: default;
+}
+
+.ReportGrid .gridBody tr td {
+	border: 0px none !important;
+	overflow: visible !important;;
+	padding-left: 5px !important;
+}
+
+.ReportGrid .gridBody {
+	border: 0px none !important;
+}
+
+.ReportGrid .gridHeader tr td {
+	border: 0px none !important;
+	overflow: visible !important;
+	padding-right: 4px !important;
+	font-weight: bold;
+}
+
+div.gridBodyContainer {
+	overflow: visible !important;
+	height: auto !important;
+	width: auto !important;
+}
+
+.gridHeaderLastTd {
+	display: none;
+}
+
+/********* Styles for View Employee Details in HR **********/
+.header-label {
+	color: blue;
+	font-weight: bold;
+	margin: 10px 0 5px;
+	padding-top: 10px;
+	border-top: 1px solid #000;
+}
+
+.field-name {
+	font-weight: bold;
+	margin-right: 10px;
+}
+
+.ReportGrid .gridBody tr td.depth1 {
+	padding-left: 1% !important;
+}
+
+.ReportGrid .gridBody tr td.depth2 {
+	padding-left: 3% !important;
+}
+
+.ReportGrid .gridBody tr td.depth3 {
+	padding-left: 5% !important;
+}
+
+.ReportGrid .gridBody tr td.depth4 {
+	padding-left: 7% !important;
+}
+
+.ReportGrid .gridBody tr td.depth5 {
+	padding-left: 9% !important;
+}
+
+.ReportGrid .gridBody tr td.depth6 {
+	padding-left: 11% !important;
+}
+
+.ReportGrid .gridBody tr td.depth7 {
+	padding-left: 13% !important;
+}
+
+.ReportGrid .gridBody tr td.depth8 {
+	padding-left: 15% !important;
+}
+
+.ReportGrid .gridBody tr td.depth9 {
+	padding-left: 17% !important;
+}
+
+.ReportGrid .gridBody tr td.depth10 {
+	padding-left: 19% !important;
+}
+
+.ReportGrid {
+	height: 100% !important;
+}
+
+h1 {
+	font-size: 2em;
+	font-weight: bold;
+	color: #777777;
+	margin: 40px 0px 70px;
+	text-align: center;
+}
+
+.boldcell {
+	font-weight: bold;
+	cursor: default;
+}
+
+.financeBackground {
+	background: #FFFFFF none repeat scroll 0 0;
+	border: 2px solid #C6E2FF;
+	padding: 6px;
+}
+
+.listgridViewBottom {
+	border-right: 1px solid #A7ABB4;
+	border-top: 1px solid #A7ABB4;
+	border-bottom: 1px solid #A7ABB4;
+	border-left: 1px solid #A7ABB4;
+}
+
+.ReportGrid .bodyCell {
+	overflow: visible !important;
+}
+
+.gridHeader td.gridHeaderCell,.gridBody tr td,.gridFooterParent,.gridHeaderParent
+	{
+	height: 22px;
+}
+
+.ReportGrid .gridHeader {
+	border: 0px none !important;
+	padding-left: 4px !important;
+}
+
+.ReportGrid .gridBody,.ReportGrid .gridHeader {
+	border-collapse: separate !important;
+	table-layout: fixed;
+	white-space: normal !important;
+}
+
+.ReportGrid .gridBody tr td div,.ReportGrid .gridHeader tr td div {
+	overflow: visible !important;
+	height: 18px !important;
+	white-space: normal !important;
+	width: 100% !important;
+}
+
+.ReportGrid .gridBody tr td {
+	border-right: 0px none !important;
+	padding-left: 5px !important;
+	overflow: visible !important;
+	border-bottom: 0px none !important;
+}
+
+.noScroll {
+	overflow-y: hidden !important;
+	overflow-x: hidden !important;
+}
+
+.handCursor {
+	text-decoration: underline;
+	cursor: pointer;
+	color: #0000AA;
+	white-space: nowrap;
+	width: 1px;
+}
+
+table tr.ReportGridRow:HOVER {
+	background: #9fd8ef url('images/mouse-hover-shade.png') repeat-x;
+}
+
+.reportGridContainer {
+	padding: 3px !important;
+}
+
+.reports-Button {
+	border: 1px solid #006;
+	background: #9cf;
+}
+
+.listgridfooter {
+	table-layout: fixed;
+	background: #EEEEEE none repeat scroll 0 0;
+	table-layout: fixed;
+	width: 100%;
+}
+
+.listgridfooter td {
+	padding-left: 0px;
+	text-align: left;
+	font-weight: bold;
+}
+
+td.gridDecimalCell {
+	text-align: right;
+}
+
+table tr.ReportGridRow td {
+	width: 0px !important;
+}
+
+table tr.gridHeaderRow td {
+	width: 0px !important;
+}
+
+.removeHeadBorder {
+	margin-top: 40px;
+	text-align: center;
+	width: 100%;
+}
+
+.invoice_quick_header p {
+	padding-bottom: 15px;
+}
+
+.invoice_details_table td:first-child,.removeHeadBorder th,.removeHeadBorder th p,.xero_invoice_table th,.xero_credit_memo th
+	{
+	background-color: #F2F2F2 !important;
+	font-weight: bold;
+}
+
+#permethterms td,.due_date td,#vat_sort_bankaccount  td,#shipto td,#billto table td,#header-part-invoice td
+	{
+	padding: 5px;
+}
+
+.invoice_main_div {
+	margin: 10px;
+}
+
+#salesPerson,#shippingMethod,#paymentTerms {
+	font-weight: bold;
+}
+
+#permethterms,#vat_sort_bankaccount,.due_date,#footer {
+	margin-top: 20px;
+}
+
+#billto td,#shippingAddressTable td {
+	padding: 5px;
+}
+
+.invoice_details_quicktable {
+	text-align: center;
+}
+
+.table-head {
+	text-transform: uppercase;
+}
+
+.table-head,.credit-head,.credito_vimukti tr:first-child td,.main_credit_vimukti th
+	{
+	background-color: #F2F2F2;
+	font-weight: bold;
+}
+
+.billto_quick tr:last-child td,.credito_vimukti tr:last-child td {
+	width: 400px;
+	height: 200px;
+}
+
+.due_date {
+	clear: both;
+	width: 100%;
+}
+
+.dueamount_enclosed,.quick_total_table {
+	float: right;
+}
+
+.dueamount_enclosed td,.quick_total_table td {
+	padding: 3px;
+}
+
+.quick_credit_total td {
+	height: 40px;
+	text-align: center;
+	width: 200px;
+}
+
+.dueamount_enclosed  tr:last-child td,.zoho_subtotal_table td,.credit_zoho_total td
+	{
+	height: 35px;
+	width: 150px;
+}
+
+.quick_invoice_header  tbody td,.credit_zoho_main tbody td,.xero_credit_memo tbody td,.main_credit_vimukti tbody .item-row td
+	{
+	vertical-align: top;
+}
+
+.xero_invoice_table tr {
+	border-bottom: 1px solid #000;
+}
+
+.due_xerodate {
+	clear: both;
+	margin-top: 30px;
+}
+
+.due_xerodate td,.zoho_subtotal_table td {
+	padding: 3px;
+}
+
+.xero_invoice_table {
+	margin-top: 20px;
+}
+
+.zoho_subtotal_table,.credit_zoho_total {
+	border: 1px solid #000;
+	float: right;
+	margin-top: 25px;
+}
+
+.memo-text {
+	border-right: 1px solid #000;
+	text-align: center;
+}
+
+.xero_credit_memo {
+	margin: 20px 0 0;
+}
+
+.xero_credit_memo td,.xero_credit_memo th,.xero_invoice_table td,.xero_invoice_table th
+	{
+	padding: 10px;
+}
+
+.xero_credit_memo td,.credit_quick_number .credit_note_vimukti td {
+	text-align: center;
+}
+
+.xero_credit_total,.xero_sub_total {
+	margin-top: 20px;
+	float: right;
+	border: 1px solid #000;
+}
+
+.xero_credit_total td,.xero_sub_total td {
+	padding: 10px 50px;
+}
+
+.credit_zoho_header {
+	margin-bottom: -25px;
+}
+
+.credit_to_zoho {
+	height: 150px;
+	padding: 5px;
+	vertical-align: top;
+	width: 280px;
+}
+
+.credit_zoho_main td,.credit_zoho_main th,.credit_zoho_total td,.main_credit_vimukti td
+	{
+	padding: 3px;
+	text-align: center;
+}
+
+.credit_zoho_main,.credit_zoho_total,.margin {
+	margin: 10px 0;
+}
+
+.credito_vimukti td {
+	padding: 3px;
+	vertical-align: top;
+}
+
+.credit_note_vimukti td,.main_credit_vimukti td,.main_credit_vimukti th,#items th,#items td,.due_xerodate td
+	{
+	padding: 5px;
+}
+
+.credit_note_head {
+	margin: 10px 0;
+	border-bottom: 1px solid;
+}
+
+.credit_note_head td {
+	padding-bottom: 10px;
+}
+
+.credit_quick_head,.dueamount_enclosed {
+	margin: 10px 0px;
+}
+
+.quick_credit_total {
+	float: right;
+	margin: 20px 0;
+}
+
+.plaincredit {
+	width: 200px;
+	height: 200px;
+}
+
+.invoice_xero_header,.title_font_size {
+	font-size: 20px;
+}
+
+.credit_quick_number  .credit_note_vimukti .credit-head,.credit_quick_upp .gridHeaderBackGround,.credit_quick_upp th
+	{
+	text-transform: uppercase;
+}
+
+.hole_margin {
+	margin: 10px 20px 20px;
+}
+
+.invoice_details_table tr,.invoice_details_table td,.invoice_details_table,.removeHeadBorder,.removeHeadBorder tr,.removeHeadBorder td,
+#items,#items th,#items tr,#items td,#billto,#billto tr,#billto td,#shippingAddressTable,#shippingAddressTable tr,#shippingAddressTable td,#permethterms,#permethterms tr,#permethterms td,
+#termsconditions,#termsconditions tr,#termsconditions td,.invoice_details_quicktable ,.invoice_details_quicktable tr,
+.invoice_details_quicktable td,.quick_total_table,.quick_total_table tr,.quick_total_table td,.invoice_zoho_table,
+.invoice_zoho_table tr,.invoice_zoho_table td,.credito_vimukti,.credito_vimukti tr,.credito_vimukti th,
+.credito_vimukti td,.credit_note_vimukti,.credit_note_vimukti td,.credit_note_vimukti tr,.credit_note_vimukti th,
+.main_credit_vimukti,.main_credit_vimukti td,.main_credit_vimukti tr,.main_credit_vimukti th,.credit_zoho_table ,.credit_zoho_table td,.credit_zoho_table  tr,
+.credit_zoho_main,.credit_zoho_main th,.credit_zoho_main td,.credit_zoho_main tr,.xero_credit_memo,.xero_credit_memo tr,.xero_credit_memo td,
+.quick_credit_total,.quick_credit_total tr,.quick_credit_total td,.xero_credit_memo th,
+#vat_sort_bankaccount,#vat_sort_bankaccount tr,#vat_sort_bankaccount td{
+   border:2px solid #000 !important;
+}
+
+.credit_zoho_table,.credit_zoho_table tr,.credit_zoho_table td{
+	border:2px solid #000 !important;
+}
+th.credit-head{
+	border:2px solid #000 !important;
+}

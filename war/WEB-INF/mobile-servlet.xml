@@ -1,0 +1,66 @@
+<property name="mappings">
+	<props>
+		<prop key="/do/addcontact">/addcontact</prop>
+		<prop key="/do/editcontact/{addressID}">/editcontact</prop>
+		<prop key="/do/viewcontactslist">/viewcontactslist</prop>
+		<prop key="/do/viewcontact/{addressID}">/viewcontact</prop>
+		<prop key="/do/delete/contact/{addressID}">/delete/contact</prop>
+		
+		<prop key="/do/home">/home</prop>
+		
+		<prop key="/do/createMessage">/createMessage</prop>
+		<prop key="/do/messages/{viewtype}">/messages</prop>
+		<prop key="/do/message/{messageID}">/message</prop>
+		<prop key="/do/messages/delete">/delete/messages</prop>
+		
+		<prop key="/do/createtask">/createtask</prop>
+		<prop key="/do/edittask/{taskID}">/edittask</prop>
+		<prop key="/do/tasks">/tasks</prop>
+		<prop key="/do/delete/task/{taskID}">/delete/task</prop>
+		
+		<prop key="/do/createevent">/createevent</prop>
+		<prop key="/do/editevent/{calendareventID}">/editevent</prop>
+		<prop key="/do/events">/events</prop>
+		<prop key="/do/delete/event/{calendareventID}">/delete/event</prop>
+	</props>
+</property>
+<bean name="/addcontact" class="com.vimukti.collaber.ui.mobile.controllers.AddContactController">
+</bean>
+<bean name="/editcontact" class="com.vimukti.collaber.ui.mobile.controllers.EditContactController">
+</bean>
+<bean name="/viewcontactslist" class="com.vimukti.collaber.ui.mobile.controllers.ViewListOfContactsController">
+</bean>
+<bean name="/viewcontact" class="com.vimukti.collaber.ui.mobile.controllers.ViewIndividualContact">
+</bean>
+<bean name="/delete/contact" class="com.vimukti.collaber.ui.mobile.controllers.DeleteContactController">
+</bean>
+
+<bean name="/home" class="com.vimukti.collaber.ui.mobile.controllers.loadHomePageController">
+</bean>
+
+<bean name="/createMessage" class="com.vimukti.collaber.ui.mobile.controllers.CreateMessageController">
+</bean>
+<bean name="/messages" class="com.vimukti.collaber.ui.mobile.controllers.ViewListOfMessages">
+</bean>
+<bean name="/message" class="com.vimukti.collaber.ui.mobile.controllers.ViewIndividualMessageController">
+</bean>
+<bean name="/delete/messages" class="com.vimukti.collaber.ui.mobile.controllers.DeleteMessageController">
+</bean>
+
+<bean name="/createtask" class="com.vimukti.collaber.ui.mobile.controllers.CreateTaskController">
+</bean>
+<bean name="/edittask" class="com.vimukti.collaber.ui.mobile.controllers.EditTaskController">
+</bean>
+<bean name="/tasks" class="com.vimukti.collaber.ui.mobile.controllers.ViewListOfTasksController">
+</bean>
+<bean name="/delete/task" class="com.vimukti.collaber.ui.mobile.controllers.DeleteTaskController">
+</bean>
+
+<bean name="/createevent" class="com.vimukti.collaber.ui.mobile.controllers.CreateEventController">
+</bean>
+<bean name="/editevent" class="com.vimukti.collaber.ui.mobile.controllers.EditEventController">
+</bean>
+<bean name="/events" class="com.vimukti.collaber.ui.mobile.controllers.ViewListOfEventsController">
+</bean>
+<bean name="/delete/event" class="com.vimukti.collaber.ui.mobile.controllers.DeleteEventController">
+</bean>

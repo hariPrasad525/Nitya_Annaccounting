@@ -1,0 +1,1216 @@
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" version="2.5">
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+
+	<error-page>
+		<error-code>404</error-code>
+		<location>/pagenotfound.html</location>
+	</error-page>
+
+	<error-page>
+		<error-code>500</error-code>
+		<location>/ex_500.html</location>
+	</error-page>
+
+	<!-- Listener for shutting down the comet processor when the ServletContext 
+		is destroyed -->
+	<listener>
+		<listener-class>net.zschech.gwt.comet.server.CometServletContextListener
+		</listener-class>
+	</listener>
+
+	<!-- Listener for invalidating CometSessions when HTTPSessions are invalidated -->
+	<listener>
+		<listener-class>net.zschech.gwt.comet.server.CometHttpSessionListener
+		</listener-class>
+	</listener>
+
+
+	<!-- <servlet> <servlet-name>FileDownload</servlet-name> <servlet-class> 
+		com.isomorphic.servlet.FileDownload</servlet-class> <init-param> <param-name>expires</param-name> 
+		<param-value> text/javascript:2592000,image/gif:2592000,image/png:2592000,application/x-javascript:2592000 
+		</param-value> </init-param> </servlet> <servlet-mapping> <servlet-name>FileDownload</servlet-name> 
+		<url-pattern> /com.vimukti.collaber.web.CollaberApplication/* </url-pattern> 
+		</servlet-mapping> -->
+	<servlet>
+		<servlet-name>accounter</servlet-name>
+		<servlet-class>com.vimukti.accounter.servlets.OpenCompanyServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>accounter</servlet-name>
+		<url-pattern>/company/accounter</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>accounter</servlet-name>
+		<url-pattern>/accounter</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>webLogin</servlet-name>
+		<servlet-class>com.vimukti.accounter.servlets.NewLoginServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>webLogin</servlet-name>
+		<url-pattern>/main/login</url-pattern>
+		<url-pattern>/login</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>menuxml</servlet-name>
+		<servlet-class>com.vimukti.accounter.servlets.MacMenuServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>menuxml</servlet-name>
+		<url-pattern>desktop/mac/menu</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>newmenuxml</servlet-name>
+		<servlet-class>com.vimukti.accounter.servlets.NewMenuServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>newmenuxml</servlet-name>
+		<url-pattern>desktop/mac/newmenu</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>mailHookeServlet</servlet-name>
+		<servlet-class>com.vimukti.accounter.text.MailHookServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>mailHookeServlet</servlet-name>
+		<url-pattern>/mail/mailhook/postmark</url-pattern>
+	</servlet-mapping>
+
+	<!-- <servlet-mapping> <servlet-name>new signup</servlet-name> <url-pattern>/signup</url-pattern> 
+		</servlet-mapping> <servlet> <servlet-name>new signup</servlet-name> <servlet-class>com.vimukti.accounter.servlets.SignupServlet 
+		</servlet-class> </servlet> -->
+
+	<!-- API SERVLET MAPPING START -->
+
+	<filter>
+		<filter-name>Api Filter</filter-name>
+		<filter-class>com.vimukti.accounter.developer.api.ApiFilter
+		</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>Api Filter</filter-name>
+		<url-pattern>/company/api/*</url-pattern>
+	</filter-mapping>
+
+	<servlet>
+		<servlet-name>Api Login</servlet-name>
+		<servlet-class>com.vimukti.accounter.developer.api.ApiLoginServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Api Login</servlet-name>
+		<url-pattern>/company/api/xml/login</url-pattern>
+		<url-pattern>/company/api/json/login</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Api Operations</servlet-name>
+		<servlet-class>com.vimukti.accounter.developer.api.ApiOperationsServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Api Operations</servlet-name>
+		<url-pattern>/company/api/xml/operations</url-pattern>
+		<url-pattern>/company/api/json/operations</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Reports Api</servlet-name>
+		<servlet-class>com.vimukti.accounter.developer.api.ReportsApiServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Reports Api</servlet-name>
+		<url-pattern>/company/api/xml/reports</url-pattern>
+		<url-pattern>/company/api/json/reports</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Api Registration</servlet-name>
+		<servlet-class>com.vimukti.accounter.developer.api.RegistrationServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Api Registration</servlet-name>
+		<url-pattern>/apiregistration</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Create Objects</servlet-name>
+		<servlet-class>com.vimukti.accounter.developer.api.RestApiServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Create Objects</servlet-name>
+		<url-pattern>/company/api/xml/crud</url-pattern>
+		<url-pattern>/company/api/json/crud</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Api Lists</servlet-name>
+		<servlet-class>com.vimukti.accounter.developer.api.ListsApiServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Api Lists</servlet-name>
+		<url-pattern>/company/api/xml/lists</url-pattern>
+		<url-pattern>/company/api/json/lists</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- for Paypal Transaction Permission servlet -->
+	<servlet>
+		<servlet-name>PaypalTransactionPermissionServlet</servlet-name>
+		<servlet-class>
+			com.vimukti.accounter.servlets.PaypalTransactionPermissionServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PaypalTransactionPermissionServlet </servlet-name>
+		<url-pattern>/main/paypaltransactionpermission</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- for Paypal call back servlet -->
+	<servlet>
+		<servlet-name>PaypalTransactionCallbackServlet</servlet-name>
+		<servlet-class>
+			com.vimukti.accounter.servlets.PaypalTransactionCallbackServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PaypalTransactionCallbackServlet </servlet-name>
+		<url-pattern>/main/paypalcallbackservlet</url-pattern>
+	</servlet-mapping>
+
+	<!-- API SERVLET MAPPING END -->
+
+	<servlet>
+		<servlet-name>Companies</servlet-name>
+		<servlet-class>com.vimukti.accounter.servlets.CompaniesServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Companies</servlet-name>
+		<url-pattern>/main/companies</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Company Password</servlet-name>
+		<servlet-class>com.vimukti.accounter.servlets.CompanyPasswordServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Company Password</servlet-name>
+		<url-pattern>company/companypassword</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Activation</servlet-name>
+		<servlet-class>com.vimukti.accounter.servlets.ActivationServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Activation</servlet-name>
+		<url-pattern>/main/activation</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Company Password Recovery</servlet-name>
+		<servlet-class>com.vimukti.accounter.servlets.CompanyPasswordRecoveryServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Company Password Recovery</servlet-name>
+		<url-pattern>/main/company/password/recovery</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>EmailForActivation</servlet-name>
+		<servlet-class>com.vimukti.accounter.servlets.EmailForActivationServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EmailForActivation</servlet-name>
+		<url-pattern>/main/emailforactivation</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>signup</servlet-name>
+		<servlet-class>com.vimukti.accounter.servlets.SignupServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>signup</servlet-name>
+		<url-pattern>/main/signup</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>selectcompany</servlet-name>
+		<servlet-class>com.vimukti.accounter.servlets.MigrateCompanyServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>selectcompany</servlet-name>
+		<url-pattern>/main/selectcompany</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>migrationstatus</servlet-name>
+		<servlet-class>com.vimukti.accounter.servlets.MigrationStatusServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>migrationstatus</servlet-name>
+		<url-pattern>/main/migrationstatus</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>support</servlet-name>
+		<servlet-class>com.vimukti.accounter.servlets.SupportServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>support</servlet-name>
+		<url-pattern>/main/support</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>generatePDFServlet</servlet-name>
+		<servlet-class>com.vimukti.accounter.servlets.GeneratePDFservlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>generatePDFServlet</servlet-name>
+		<url-pattern>/do/finance/generatePDFServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>form16AServlet</servlet-name>
+		<servlet-class>com.vimukti.accounter.servlets.Form16ApdfGenerationServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>form16AServlet</servlet-name>
+		<url-pattern>/do/finance/Form16ApdfGenerationServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>generateETDSServlet</servlet-name>
+		<servlet-class>com.vimukti.accounter.servlets.GenerateETDSServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>generateETDSServlet</servlet-name>
+		<url-pattern>/do/finance/GenerateETDSServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>miscInfoServlet</servlet-name>
+		<servlet-class>com.vimukti.accounter.servlets.MISCInfoServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>miscInfoServlet</servlet-name>
+		<url-pattern>/do/finance/miscInfoServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ExportReportServlet</servlet-name>
+		<servlet-class>com.vimukti.accounter.servlets.ExportReportServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ExportReportServlet</servlet-name>
+		<url-pattern>/do/finance/ExportReportServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Suffixservlet</servlet-name>
+		<servlet-class>com.vimukti.accounter.servlets.Suffixservlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Suffixservlet</servlet-name>
+		<url-pattern>/site/*</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>forgetpassword</servlet-name>
+		<servlet-class>com.vimukti.accounter.servlets.ForgetPasswordServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>forgetpassword</servlet-name>
+		<url-pattern>/main/forgotpassword</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>resetPassword</servlet-name>
+		<servlet-class>com.vimukti.accounter.servlets.ResetPasswordServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>resetPassword</servlet-name>
+		<url-pattern>/main/resetpassword</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Logout</servlet-name>
+		<servlet-class>com.vimukti.accounter.servlets.LogoutServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Logout</servlet-name>
+		<url-pattern>/main/logout
+		</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>deleteAccount</servlet-name>
+		<servlet-class>com.vimukti.accounter.servlets.DeleteAccountServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>deleteAccount</servlet-name>
+		<url-pattern>/main/deleteAccount
+		</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>cancelform</servlet-name>
+		<servlet-class>com.vimukti.accounter.servlets.CancelAccountServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>cancelform</servlet-name>
+		<url-pattern>/main/cancelform
+		</url-pattern>
+	</servlet-mapping>
+
+	<!-- the comet servlet for streaming messages to the client -->
+	<servlet>
+		<servlet-name>comet</servlet-name>
+		<servlet-class>net.zschech.gwt.comet.server.CometServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>comet</servlet-name>
+		<url-pattern>/do/comet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>iAccounterCIImpl</servlet-name>
+		<servlet-class>
+			com.vimukti.accounter.web.server.AccounterCompanyInitializationServiceImpl
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>iAccounterCIImpl</servlet-name>
+		<url-pattern>/do/accounter/ci/rpc/service </url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>iAccounterImpl</servlet-name>
+		<servlet-class>
+			com.vimukti.accounter.web.server.AccounterCRUDServiceImpl
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>iAccounterImpl</servlet-name>
+		<url-pattern>/do/accounter/crud/rpc/service</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>iAccounterGetImpl</servlet-name>
+		<servlet-class>
+			com.vimukti.accounter.web.server.AccounterGETServiceImpl
+		</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>iAccounterGetImpl</servlet-name>
+		<url-pattern>/do/accounter/get/rpc/service </url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>iAccounterHomeViewImpl
+		</servlet-name>
+		<servlet-class>
+			com.vimukti.accounter.web.server.AccounterHomeViewImpl
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>iAccounterHomeViewImpl </servlet-name>
+		<url-pattern>/do/accounter/home/rpc/service </url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>iAccounterReportImpl</servlet-name>
+		<servlet-class>
+			com.vimukti.accounter.web.server.AccounterReportServiceImpl
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>iAccounterReportImpl</servlet-name>
+		<url-pattern>/do/accounter/report/rpc/service </url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>createcompany</servlet-name>
+		<servlet-class>com.vimukti.accounter.servlets.CreateCompanyServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>createcompany</servlet-name>
+		<url-pattern>/main/createcompany</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Company Status</servlet-name>
+		<servlet-class>com.vimukti.accounter.servlets.CompanyStatusServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Company Status</servlet-name>
+		<url-pattern>/main/companystatus</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>companyAuthentication</servlet-name>
+		<servlet-class>com.vimukti.accounter.servlets.AuthenticationServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>companyAuthentication</servlet-name>
+		<url-pattern>/companyAuthentication</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>deletecompany</servlet-name>
+		<servlet-class>com.vimukti.accounter.servlets.DeleteCompanyServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>deletecompany</servlet-name>
+		<url-pattern>/main/deletecompany</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>uploadImportDataFile</servlet-name>
+		<servlet-class>com.vimukti.accounter.servlets.UploadImportDataFileServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>uploadImportDataFile</servlet-name>
+		<url-pattern>/do/uploadImportDataFile</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>uploadFile</servlet-name>
+		<servlet-class>com.vimukti.accounter.servlets.UploadFileServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>uploadFile</servlet-name>
+		<url-pattern>/do/uploadfile</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Upload Attachment</servlet-name>
+		<servlet-class>com.vimukti.accounter.servlets.UploadAttachmentServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Upload Attachment</servlet-name>
+		<url-pattern>/do/uploadattachment</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Download Attachment</servlet-name>
+		<servlet-class>com.vimukti.accounter.servlets.DownloadAttachmentServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Download Attachment</servlet-name>
+		<url-pattern>/do/downloadattachment</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>Download Temp File</servlet-name>
+		<servlet-class>com.vimukti.accounter.servlets.DownloadTempFileServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Download Temp File</servlet-name>
+		<url-pattern>/do/downloadtempfile</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>uploadtemplatefile</servlet-name>
+		<servlet-class>com.vimukti.accounter.servlets.UploadTemplateFileServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>uploadtemplatefile</servlet-name>
+		<url-pattern>/do/uploadtemplatefile</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>uploadstatementfile</servlet-name>
+		<servlet-class>com.vimukti.accounter.servlets.UploadStatementFileServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>uploadstatementfile</servlet-name>
+		<url-pattern>/do/uploadstatementfile</url-pattern>
+	</servlet-mapping>
+
+
+
+	<servlet>
+		<servlet-name>downloadFileFromFile</servlet-name>
+		<servlet-class>com.vimukti.accounter.servlets.DownloadFileServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>downloadFileFromFile</servlet-name>
+		<url-pattern>/do/downloadFileFromFile</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>default</servlet-name>
+		<servlet-class>
+			org.eclipse.jetty.servlet.DefaultServlet
+		</servlet-class>
+		<init-param>
+			<param-name>
+				gzip
+			</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>
+				useFileMappedBuffer
+			</param-name>
+			<param-value>false</param-value>
+		</init-param>		
+	</servlet>
+
+	<servlet>
+		<servlet-name>downloadfiles</servlet-name>
+		<servlet-class>
+			org.eclipse.jetty.servlet.DefaultServlet
+		</servlet-class>
+		<init-param>
+			<param-name>
+				gzip
+			</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>downloadfiles</servlet-name>
+		<url-pattern>/do/downloadfiles</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>/accounter.client/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>/jscripts/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>/css/*</url-pattern>
+	</servlet-mapping>
+	<filter>
+		<filter-name>GzipFilter</filter-name>
+		<filter-class>com.vimukti.accounter.utils.GzipFilter</filter-class>
+		<init-param>
+			<param-name>mimeTypes</param-name>
+			<param-value>text/plain,text/html,text/xml,application/xhtml+xml,text/css,application/javascript,image/svg+xml
+			</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>GzipFilter</filter-name>
+		<url-pattern>/main/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>GzipFilter</filter-name>
+		<url-pattern>/company/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>GzipFilter</filter-name>
+		<url-pattern>/site/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>gwtCacheControlFilter</filter-name>
+		<filter-class>com.vimukti.accounter.servlets.GWTCacheControlFilter
+		</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>gwtCacheControlFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>AccounterDebugFilter</filter-name>
+		<filter-class>com.vimukti.accounter.servlets.AccounterDebugFilter
+		</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>AccounterDebugFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>ServletLocaleFilter</filter-name>
+		<filter-class>com.vimukti.accounter.servlets.ServletLocaleFilter
+		</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>ServletLocaleFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>MainServerFilter</filter-name>
+		<filter-class>com.vimukti.accounter.servlets.MainServerFilter
+		</filter-class>
+	</filter>
+
+	<filter>
+		<filter-name>ServerMaintananceFilter</filter-name>
+		<filter-class>com.vimukti.accounter.servlets.ServerMaintainanceFilter
+		</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>MainServerFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter-mapping>
+		<filter-name>ServerMaintananceFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+
+	<filter>
+		<filter-name>ThreadLocalFilter</filter-name>
+		<filter-class>com.vimukti.accounter.servlets.ThreadLocalFilter
+		</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>ThreadLocalFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+
+	<filter>
+		<filter-name>StartupFilter</filter-name>
+		<filter-class>com.vimukti.accounter.servlets.StartupFilter
+		</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>StartupFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+
+	<context-param>
+		<param-name>version</param-name>
+		<param-value>1.0.9.11.67</param-value>
+	</context-param>
+
+	<servlet>
+		<servlet-name>maintanance</servlet-name>
+		<servlet-class>com.vimukti.accounter.servlets.MaintananceServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>maintanance</servlet-name>
+		<url-pattern>/main/maintanance</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>adminlogin</servlet-name>
+		<servlet-class>com.vimukti.accounter.admin.server.AdminLoginServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>adminlogin</servlet-name>
+		<url-pattern>/adminlogin</url-pattern>
+	</servlet-mapping>
+
+
+
+	<servlet>
+		<servlet-name>adminhome</servlet-name>
+		<servlet-class>com.vimukti.accounter.admin.server.AdminHomeServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>adminhome</servlet-name>
+		<url-pattern>/adminhome</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>adminserviceimpl</servlet-name>
+		<servlet-class>
+			com.vimukti.accounter.admin.server.AdminCRUDServiceImpl
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>adminserviceimpl</servlet-name>
+		<url-pattern>/do/admin/crud/rpc/service</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>adminlogout</servlet-name>
+		<servlet-class>com.vimukti.accounter.admin.server.AdminLogoutServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>adminlogout</servlet-name>
+		<url-pattern>/adminlogout</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>AdminHomeViewImpl
+		</servlet-name>
+		<servlet-class>
+			com.vimukti.accounter.admin.server.AdminHomeViewImpl
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AdminHomeViewImpl </servlet-name>
+		<url-pattern>/do/admin/home/rpc/service</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>OpenIdServlet
+		</servlet-name>
+		<servlet-class>
+			com.vimukti.accounter.servlets.OpenIdServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>OpenIdServlet </servlet-name>
+		<url-pattern>/main/openid</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>openIdSignupServlet
+		</servlet-name>
+		<servlet-class>
+			com.vimukti.accounter.servlets.SignupOpenIdServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>openIdSignupServlet </servlet-name>
+		<url-pattern>/main/openidsignup</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>FacebookLoginServlet
+		</servlet-name>
+		<servlet-class>
+			com.vimukti.accounter.servlets.FacebookLoginServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FacebookLoginServlet </servlet-name>
+		<url-pattern>/main/fbauth</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>MaintanaceInfoMailServelet
+		</servlet-name>
+		<servlet-class>
+			com.vimukti.accounter.servlets.MaintanaceInfoMailServelet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MaintanaceInfoMailServelet </servlet-name>
+		<url-pattern>/main/maintanaceinform</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>iTranslateImpl</servlet-name>
+		<servlet-class>
+			com.vimukti.accounter.web.server.translate.TranslateServiceImpl
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>iTranslateImpl</servlet-name>
+		<url-pattern>/do/accounter/translate/rpc/service</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>TranslationUploadServlet
+		</servlet-name>
+		<servlet-class>
+			com.vimukti.accounter.servlets.TranslationUploadServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TranslationUploadServlet </servlet-name>
+		<url-pattern>/translate/upload</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>EmailActivationServlet
+		</servlet-name>
+		<servlet-class>
+			com.vimukti.accounter.servlets.EmailActivateServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EmailActivationServlet </servlet-name>
+		<url-pattern>/main/emailActivation</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>GoPremiumServlet
+		</servlet-name>
+		<servlet-class>
+			com.vimukti.accounter.servlets.GoPremiumServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>GoPremiumServlet </servlet-name>
+		<url-pattern>/main/subscription/cancel</url-pattern>
+		<url-pattern>/main/subscription/gopremium</url-pattern>
+	</servlet-mapping>
+	<servlet>
+
+		<servlet-name>SubscribtionComplitionServlet
+		</servlet-name>
+		<servlet-class>
+			com.vimukti.accounter.servlets.SubscribtionComplitionServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SubscribtionComplitionServlet </servlet-name>
+		<url-pattern>/main/subscription/thankyou</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>SubscriptionIPNServlet
+		</servlet-name>
+		<servlet-class>
+			com.vimukti.accounter.servlets.SubscriptionIPNServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SubscriptionIPNServlet</servlet-name>
+		<url-pattern>/main/subscription/ipn</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>InAppReceiptVerificationServlet</servlet-name>
+		<servlet-class>
+			com.vimukti.accounter.servlets.InAppReceiptVerificationServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>InAppReceiptVerificationServlet </servlet-name>
+		<url-pattern>/main/inappreceiptverification</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>SubscriptionManagementServlet
+		</servlet-name>
+		<servlet-class>
+			com.vimukti.accounter.servlets.SubscriptionManagementServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SubscriptionManagementServlet </servlet-name>
+		<url-pattern>/main/subscriptionmanagement</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>SubDeleteUserConformServlet
+		</servlet-name>
+		<servlet-class>
+			com.vimukti.accounter.servlets.SubDeleteUserConformServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SubDeleteUserConformServlet </servlet-name>
+		<url-pattern>/main/subsdeleteuserconform</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>iAccounterExportCSVImpl
+		</servlet-name>
+		<servlet-class>
+			com.vimukti.accounter.web.server.AccounterExportCSVImpl
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>iAccounterExportCSVImpl </servlet-name>
+		<url-pattern>/do/accounter/exportcsv/rpc/service </url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>OpenIDPasswordServlet
+		</servlet-name>
+		<servlet-class>
+			com.vimukti.accounter.servlets.OpenIDPasswordServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>OpenIDPasswordServlet </servlet-name>
+		<url-pattern>/main/openidpassword</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>EncryptCompaniesServlet
+		</servlet-name>
+		<servlet-class>
+			com.vimukti.accounter.servlets.EncryptCompaniesServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EncryptCompaniesServlet </servlet-name>
+		<url-pattern>/main/encryption</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>DecryptCompaniesServlet
+		</servlet-name>
+		<servlet-class>
+			com.vimukti.accounter.servlets.DecryptCompanyServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DecryptCompaniesServlet </servlet-name>
+		<url-pattern>/main/decryption</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>DecryptPasswordServlet
+		</servlet-name>
+		<servlet-class>
+			com.vimukti.accounter.servlets.DecryptPasswordServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DecryptPasswordServlet </servlet-name>
+		<url-pattern>/main/decryptpassword</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Company locked</servlet-name>
+		<servlet-class>
+			com.vimukti.accounter.servlets.CompanyLockedServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Company locked</servlet-name>
+		<url-pattern>/main/companylocked</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>PremiumServlet</servlet-name>
+		<servlet-class>
+			com.vimukti.accounter.servlets.PremiumServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PremiumServlet </servlet-name>
+		<url-pattern>/main/gopremium</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- used for creating websocket connection -->
+
+	<servlet>
+		<servlet-name>ws</servlet-name>
+		<servlet-class>com.vimukti.accounter.ws.WebSocketHandler
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ws</servlet-name>
+		<url-pattern>/main/ws</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>windowsServiceImpl</servlet-name>
+		<servlet-class>
+			com.vimukti.accounter.web.server.AccounterWindowsHomeServiceImpl
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>windowsServiceImpl</servlet-name>
+		<url-pattern>/do/accounter/windows/rpc/service</url-pattern>
+	</servlet-mapping>
+
+	<!-- for creating caching file -->
+	<servlet>
+		<servlet-name>CacheFilenameCreatorServlet</servlet-name>
+		<servlet-class>
+			com.vimukti.accounter.servlets.CacheFilenameCreatorServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CacheFilenameCreatorServlet</servlet-name>
+		<url-pattern>/main/cache/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>iAccounterPayrollImpl
+		</servlet-name>
+		<servlet-class>
+			com.vimukti.accounter.web.server.AccounterPayrollImpl
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>iAccounterPayrollImpl </servlet-name>
+		<url-pattern>/do/accounter/payroll/rpc/service </url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>freeTrailServlet
+		</servlet-name>
+		<servlet-class>
+			com.vimukti.accounter.servlets.FreeTrailServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>freeTrailServlet </servlet-name>
+		<url-pattern>/main/freetrail </url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>licenseInfoServlet
+		</servlet-name>
+		<servlet-class>
+			com.vimukti.accounter.servlets.LicenseInfoServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>licenseInfoServlet </servlet-name>
+		<url-pattern>/main/licenseInfo</url-pattern>
+	</servlet-mapping>
+	<listener>
+		<listener-class>com.vimukti.accounter.listeners.ServicesStartUpListener
+		</listener-class>
+	</listener>
+
+	<listener>
+		<listener-class>com.vimukti.accounter.listeners.StartUpListener
+		</listener-class>
+	</listener>
+
+
+	<servlet>
+		<servlet-name>setupserviceimpl</servlet-name>
+		<servlet-class>
+			com.vimukti.accounter.setup.server.SetupServiceImpl
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>setupserviceimpl</servlet-name>
+		<url-pattern>/do/setup/service</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>setupservlet</servlet-name>
+		<servlet-class>
+			com.vimukti.accounter.setup.server.AccounterSetupServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>setupservlet</servlet-name>
+		<url-pattern>/desk/setup</url-pattern>
+	</servlet-mapping>
+
+
+
+	<servlet>
+		<servlet-name>desktopStartup
+		</servlet-name>
+		<servlet-class>
+			com.vimukti.accounter.servlets.DesktopStartupServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>desktopStartup </servlet-name>
+		<url-pattern>/desk/startup</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>desktopStartupComplete
+		</servlet-name>
+		<servlet-class>
+			com.vimukti.accounter.servlets.StartupCompletedServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>desktopStartupComplete </servlet-name>
+		<url-pattern>/desk/startupcomplete</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>manageLicense
+		</servlet-name>
+		<servlet-class>
+			com.vimukti.accounter.servlets.ManageLicenseServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>manageLicense </servlet-name>
+		<url-pattern>/main/managelicense</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>purchaseLicense
+		</servlet-name>
+		<servlet-class>
+			com.vimukti.accounter.servlets.PurchaseLicenseServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>purchaseLicense </servlet-name>
+		<url-pattern>/main/purchaseLicense</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>PurchaseLicenseIPNServlet
+		</servlet-name>
+		<servlet-class>
+			com.vimukti.accounter.servlets.PurchaseLicenseIPNServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PurchaseLicenseIPNServlet </servlet-name>
+		<url-pattern>/main/license/ipn</url-pattern>
+	</servlet-mapping>
+
+	<!-- <filter> <filter-name>CharsetFilter</filter-name> <filter-class>com.vimukti.accounter.servlets.CharsetFilter</filter-class> 
+		<init-param> <param-name>requestEncoding</param-name> <param-value>UTF-8</param-value> 
+		</init-param> </filter> <filter-mapping> <filter-name>CharsetFilter</filter-name> 
+		<url-pattern>/*</url-pattern> </filter-mapping> -->
+
+</web-app>

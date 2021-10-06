@@ -1,0 +1,452 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field">
+
+	<query name="getClient.by.mailId">
+		<query-param name="emailId" type="String" />
+		from com.vimukti.accounter.core.Client client
+		where client.emailId
+		=:emailId
+	</query>
+	<query name="getAdvertisements">
+		from com.vimukti.accounter.core.Advertisement add
+	</query>
+
+	<query name="get.activation.by.token">
+		<query-param name="token" type="String" />
+		from com.vimukti.accounter.core.Activation activation
+		where
+		activation.token
+		=:token
+	</query>
+
+	<query name="get.activation.by.emailid">
+		<query-param name="emailId" type="String" />
+		from com.vimukti.accounter.core.Activation activation
+		where
+		activation.emailId
+		=:emailId
+	</query>
+
+	
+
+	<query name="get.PayPalAccount.by.AccountID">
+		<query-param name="accountID" type="long" />
+		from com.vimukti.accounter.core.Account account
+		where account.id=:accountID
+	</query>
+	
+	<query name="list.get.PaypalAccounts">
+		<query-param name="companyId" type="long" />
+		<query-param name="type" type="integer" />
+		from com.vimukti.accounter.core.Account account
+		where account.company.id=:company  
+		and account.type=:type
+	</query>
+
+
+	<query name="delete.activation.by.emailId">
+		<query-param name="emailId" type="String" />
+		delete from com.vimukti.accounter.core.Activation activation
+		where
+		activation.emailId=:emailId
+	</query>
+
+	<query name="delete.activation.by.Id">
+		<query-param name="id" type="integer" />
+		delete from com.vimukti.accounter.core.Activation activation
+		where
+		activation.id=:id
+	</query>
+
+	<query name="get.companiesList.by.emailId.and.password">
+		<query-param name="emailId" type="String" />
+		<query-param name="password" type="String" />
+		from com.vimukti.accounter.core.Client client
+		where client.emailId
+		=:emailId and client.password=:password
+	</query>
+
+	<query name="getclient.from.central.db.using.emailid.and.password">
+		<query-param name="emailId" type="String" />
+		<query-param name="password" type="String" />
+		from com.vimukti.accounter.core.Client client
+		where
+		client.emailId=:emailId and client.password =:password
+	</query>
+
+	<query name="getServerCompany.by.name">
+		<query-param name="name" type="string" />
+		from com.vimukti.accounter.core.Company c where
+		c.preferences.tradingName=:name
+	</query>
+
+	<sql-query name="get.client.created.companies">
+		<query-param name="clientId" type="long" />
+	
+		<![CDATA[
+				SELECT *
+				FROM   company
+				WHERE  created_by IN (SELECT id
+                				    	FROM   users
+                      					WHERE  client_id = :clientId)  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="transactions.count.per.month">
+		<query-param name="companyId" type="long" />
+		<query-param name="startDate" type="long" />
+
+		<return-scalar column="TRANSACTION_COUNT" type="int" />
+		
+		<![CDATA[
+				SELECT COUNT(*) AS TRANSACTION_COUNT
+				FROM   TRANSACTION
+				WHERE  company_id = :companyId
+       			AND created_date >= :startDate 
+				]]>
+
+	</sql-query>
+
+	<sql-query name="get.company.contactsupport">
+		<query-param name="companyId" type="long" />
+
+		<return-scalar column="CONTACT_SUPPORT" type="boolean" />
+		
+		<![CDATA[
+				SELECT CONTACT_SUPPORT
+				FROM   COMPANY
+				WHERE  ID = :companyId  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="get.created.users">
+		<query-param name="users" type="String" />	
+		<![CDATA[
+				SELECT C.EMAIL_ID AS EMAIL_ID
+				FROM   USERS U
+				       LEFT JOIN CLIENT C
+				         ON C.ID = U.CLIENT_ID
+				WHERE  C.EMAIL_ID IN ( :users )
+				GROUP  BY C.EMAIL_ID  
+		]]>
+
+	</sql-query>
+
+	<query name="getServerCompany.by.id">
+		<query-param name="id" type="integer" />
+		from com.vimukti.accounter.core.Company c where
+		c.id=:id
+	</query>
+
+	<sql-query name="list.Users.by.emailIds">
+		<query-param name="users" type="String" />
+
+		<return-scalar column="EMAIL_ID" type="string" />
+		<return-scalar column="FIRST_NAME" type="string" />
+		<return-scalar column="LAST_NAME" type="string" />
+		<return-scalar column="COMPANY_ID" type="long" />
+		<return-scalar column="IS_DELETED" type="boolean" />
+		<![CDATA[
+				SELECT C.EMAIL_ID,
+				       C.FIRST_NAME,
+				       C.LAST_NAME,
+				       U.COMPANY_ID,
+				       U.IS_DELETED
+				FROM   USERS U
+				       LEFT JOIN CLIENT C
+				         ON C.ID = U.CLIENT_ID
+				WHERE  C.EMAIL_ID IN ( :users )  
+		]]>
+
+	</sql-query>
+
+	<sql-query name="unlock.company">
+		<query-param name="companyId" type="long" />
+		
+		<![CDATA[
+				UPDATE company 
+				SET    is_locked = false 
+				WHERE  id = :companyId 
+		]]>
+
+	</sql-query>
+
+	<sql-query name="lock.company">
+		<query-param name="companyId" type="long" />
+		
+		<![CDATA[
+				UPDATE company 
+				SET    is_locked = true 
+				WHERE  id = :companyId 
+		]]>
+
+	</sql-query>
+
+	<sql-query name="delete.Client.Companies">
+		<query-param name="serverCompanyID" type="String" />
+		
+		<![CDATA[
+				DELETE FROM CLIENT_COMPANIES
+				WHERE  COMPANY_ID = :serverCompanyID  
+		]]>
+
+	</sql-query>
+
+	<query name="delete.ServerCompany.by.Id">
+		<query-param name="id" type="String" />
+		delete from com.vimukti.accounter.core.Company company
+		where
+		company.id
+		=:id
+	</query>
+
+	<query name="update.client.emailStatus">
+		<query-param name="email" type="string" />
+		update com.vimukti.accounter.core.Client c set c.isEmailBounced = true
+		where c.emailId=:email
+	</query>
+	
+	<sql-query name="get.company.passwordkey">
+		<query-param name="companyName" type="String" />
+		
+		<return-scalar column="PASSWORD_KEY" type="binary" />
+		<return-scalar column="ID" type="long" />
+		<![CDATA[
+				SELECT c.password_recovery_key AS password_key, 
+				       c.id 
+				FROM   company c 
+				WHERE  c.trading_name = :companyName 			
+		]]>
+
+	</sql-query>
+	
+	<sql-query name="get.client.passwordkey">
+		<query-param name="emailId" type="String" />
+		
+		<return-scalar column="PASSWORD_KEY" type="binary" />
+		<return-scalar column="ID" type="long" />
+		<![CDATA[
+				SELECT c.password_reovery_key AS password_key, 
+				       c.id 
+				FROM   client c 
+				WHERE  c.email_id = :emailId 			
+		]]>
+
+	</sql-query>
+	
+	<sql-query name="get.companyId.secret.createdUserId">
+		<query-param name="companyName" type="String" />
+		
+		<return-scalar column="C_ID" type="long" />
+		<return-scalar column="SECRET_KEY" type="binary" />
+		<return-scalar column="U_ID" type="long" />
+		<![CDATA[
+				SELECT c.id AS c_id, 
+				       c.secret_key, 
+				       u.id AS u_id 
+				FROM   company c 
+				       LEFT JOIN users u 
+				         ON u.id = c.created_by 
+				WHERE  c.trading_name = :companyName 			
+		]]>
+
+	</sql-query>
+	
+	<query name="getUser.by.mailId.and.companyId">
+		<query-param name="emailId" type="String" />
+		<query-param name="companyId" type="long" />
+		from com.vimukti.accounter.core.User u
+		where u.client.emailId=:emailId
+		and u.company.id=:companyId
+	</query>
+
+	<sql-query name="getUserIds.invited.by.client">
+		<query-param name="emailId" type="String" />
+		<query-param name="clientId" type="long" />
+		SELECT * FROM USERS U2 WHERE U2.ID IN (SELECT U.ID AS USER_ID
+		FROM
+		USERS U LEFT JOIN CLIENT C2 ON C2.ID=U.CLIENT_ID
+		WHERE
+		U.IS_DELETED=FALSE AND C2.EMAIL_ID=:emailId AND
+		U.COMPANY_ID IN
+		(SELECT
+		C.ID FROM COMPANY C WHERE C.CREATED_BY IN
+		(SELECT U1.ID FROM USERS U1
+		WHERE U1.CLIENT_ID=:clientId)))
+	</sql-query>
+	<query name="delete.remembermeKeys">
+		<query-param name="key" type="String" />
+		delete from com.vimukti.accounter.core.RememberMeKey rk where
+		rk.key=:key
+	</query>
+
+	<query name="get.remembermeKey">
+		<query-param name="key" type="String" />
+		from com.vimukti.accounter.core.RememberMeKey rk where rk.key=:key
+	</query>
+
+	<sql-query name="getExpensesTotalByType">
+		<query-param name="expenseType" type="long" />
+		<query-param name="companyId" type="long" />
+		<query-param name="startDate" type="long" />
+		<query-param name="endDate" type="long" />
+		
+		<![CDATA[
+				SELECT SUM(T.TOTAL * T.CURRENCY_FACTOR) AS TOTAL
+				FROM   TRANSACTION T
+				       LEFT OUTER JOIN CASH_PURCHASE CP
+				         ON CP.ID = T.ID
+				       LEFT OUTER JOIN ACCOUNT A
+				         ON A.ID = CP.PAYFROM_ACCOUNT_ID
+				       LEFT OUTER JOIN CREDIT_CARD_CHARGES CC
+				         ON CC.ID = T.ID
+				       LEFT OUTER JOIN PAYEE P
+				         ON P.ID = CC.VENDOR_ID
+				       LEFT OUTER JOIN USERS U
+				         ON U.ID = CP.EMPLOYEE
+				       LEFT OUTER JOIN CLIENT C
+				         ON C.ID = U.CLIENT_ID
+				WHERE  CASE
+				         WHEN :expenseType IN ( 26, 27, 28 ) THEN T.T_TYPE = :expenseType
+				         ELSE T.T_TYPE IN ( 26, 27, 28 )
+				       END
+				       AND T.T_DATE BETWEEN :startDate AND :endDate
+				       AND T.SAVE_STATUS = 203
+				       AND T.COMPANY_ID = :companyId  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="isCompanyLocked">
+		<query-param name="companyId" type="long" />
+		<return-scalar column="IS_LOCKED" type="boolean" />
+		<![CDATA[
+				SELECT IS_LOCKED
+				FROM   COMPANY
+				WHERE  ID = :companyId  
+				]]>
+
+	</sql-query>
+	
+	<sql-query name="isCompanyDeleted">
+		<query-param name="companyId" type="long" />
+		<return-scalar column="IS_DELETED" type="boolean" />
+		<![CDATA[
+				SELECT IS_DELETED
+				FROM   COMPANY
+				WHERE  ID = :companyId  
+				]]>
+	</sql-query>
+
+	
+	
+
+	<sql-query name="isCompanyExists">
+		<query-param name="companyId" type="long" />
+
+		<return-scalar column="COMPANY_ID" type="long" />
+		
+		<![CDATA[
+				SELECT ID AS COMPANY_ID
+				FROM   COMPANY
+				WHERE  ID = :companyId  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getCompaniesByClientId">
+		<query-param name="clientId" type="long" />
+		
+		<![CDATA[
+				SELECT C.COMPANY_ID
+				FROM   USERS C
+				WHERE  C.CLIENT_ID = :clientId  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getCompanySecret">
+		<query-param name="companyId" type="long" />
+
+		<return-scalar column="SECRET" type="binary" />
+		
+		<![CDATA[
+				SELECT C.SECRET_KEY AS SECRET
+				FROM   COMPANY C
+				WHERE  C.ID = :companyId  
+				]]>
+
+	</sql-query>
+
+	<query name="get.company.by.tradingname">
+		<query-param name="tradingName" type="String" />
+		from com.vimukti.accounter.core.Company c where
+		c.preferences.tradingName=:tradingName
+	</query>
+
+	<query name="get.all.clients">
+		from com.vimukti.accounter.core.Client
+	</query>
+
+	<query name="get.subscription">
+		<query-param name="type" type="int" />
+		from com.vimukti.accounter.core.Subscription where type=:type
+	</query>
+	
+	<sql-query name="getHint.by.company">
+		<query-param name="companyId" type="long" />
+		select password_HInt from company where id=:companyId
+	</sql-query>
+	
+	<sql-query name="insertAllFeatures">
+		insert into features values(3,'create company');
+		insert into features values(3,'brnading theme0');
+		insert into features values(3,'history');
+		insert into features values(3,'user activity');
+		insert into features values(3,'class');
+		insert into features values(3,'location');
+		insert into features values(3,'attachments');
+		insert into features values(3,'billable exenses');
+		insert into features values(3,'credtis and charges');
+		insert into features values(3,'merging');
+		insert into features values(3,'job costing');
+		insert into features values(3,'encryption');
+		insert into features values(3,'invite users');
+		insert into features values(3,'inventory');
+		insert into features values(3,'extra reports');
+		insert into features values(3,'multi currency');
+		insert into features values(3,'salse order');
+		insert into features values(3,'purchase order');
+		insert into features values(3,'recurring transactions');
+		insert into features values(3,'drafts');
+		insert into features values(3,'dash board widgets');
+		insert into features values(3,'BUDGET');
+		insert into features values(3,'transactions');
+		insert into features values(3,'fixed asset');
+		insert into features values(3,'import');
+		insert into features values(3,'transaction navigation');
+		insert into features values(3,'historical unitprices');
+		insert into features values(3,'import bank statements');
+		insert into features values(3,'pay roll');
+	</sql-query>
+	
+	
+	<query name="getLicense">
+		<query-param name="emailId" type="String" />
+		from com.vimukti.accounter.core.License ls  where ls.isActive=true
+	</query>
+	
+	<query name="getLicenseByServerID">
+		<query-param name="serverId" type="String" />
+		from com.vimukti.accounter.core.License ls  where ls.serverId=:serverId
+	</query>
+	
+	<query name="getActiveLicenseOfClient">
+		<query-param name="client" type="Client" />
+		from com.vimukti.accounter.core.License ls  where ls.client=:client and ls.isActive=true
+	</query>
+	
+</hibernate-mapping>

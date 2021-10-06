@@ -1,0 +1,1755 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+                "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.vimukti.accounter.core"
+	default-access="field" auto-import="false">
+	<class name="Transaction" table="TRANSACTION">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<many-to-one name="company" column="COMPANY_ID" class="Company">
+		</many-to-one>
+		<many-to-one name="statementRecord" column="STATEMENT_RECORD_ID"
+			class="StatementRecord">
+		</many-to-one>
+		<property name="version" column="VERSION"></property>
+		<!-- <property name="netAmount" column="NET_AMOUNT"></property> -->
+		<!-- <property name="totalVAT" column="TOTAL_VAT"></property> -->
+		<property name="transactionDate" column="T_DATE"
+			type="com.vimukti.accounter.core.LongUseType"></property>
+		<property name="type" column="T_TYPE"></property>
+		<property name="number" type="encryptedstring" column="NUMBER"></property>
+		<property name="saveStatus" column="SAVE_STATUS"></property>
+		<property name="isAutomaticTransaction" column="IS_AUTOMATIC_TRANSACTION"></property>
+		<property name="isValidated" column="IS_VALIDATED"></property>
+		<property name="paymentMethod" type="encryptedstring" column="PAYMENT_METHOD"></property>
+		<property name="memo" type="encryptedstring" column="MEMO"></property>
+		<property name="reference" type="encryptedstring" column="REFERENCE"></property>
+		<property name="subTotal" column="SUB_TOTAL"></property>
+		<property name="totalTaxableAmount" column="TOTAL_TAXABLE_AMOUNT"></property>
+		<property name="totalNonTaxableAmount" column="TOTAL_NON_TAXABLE_AMOUNT"></property>
+		<!-- <property name="EUVATExemptPayee" column="EU_VAT_EXEMPT_PAYEE"></property> -->
+		<!-- <property name="isVATreturned" column="IS_VAT_RETURNED"></property> -->
+		<list name="transactionItems" cascade="save-update,delete-orphan">
+			<key column="TRANSACTION_ID" />
+			<list-index column="IDX" />
+			<one-to-many class="TransactionItem" />
+		</list>
+		<one-to-one name="recurringTransaction"
+			class="com.vimukti.accounter.core.RecurringTransaction" property-ref="transaction" />
+		<property name="status" column="STATUS"></property>
+		<property name="canVoidOrEdit" column="CAN_VOID_OR_EDIT"></property>
+		<property name="isDeposited" column="IS_DEPOSITED"></property>
+		<property name="total" column="TOTAL"></property>
+		<property name="netAmount" column="NET_AMOUNT"></property>
+		<many-to-one name="createdBy" column="CREATED_BY" class="User"
+			not-null="true"></many-to-one>
+		<many-to-one name="lastModifier" column="LAST_MODIFIER"
+			class="User" not-null="true"></many-to-one>
+		<property name="createdDate" column="CREATED_DATE" not-null="true" />
+		<property name="lastModifiedDate" column="LAST_MODIFIED_DATE"
+			not-null="true" />
+		<set name="attachments" table="ATTACHMENT" cascade="save-update,delete-orphan">
+			<key column="TRANSACTION_ID" not-null="true" />
+			<one-to-many class="Attachment" />
+		</set>
+		<property name="currency" column="CURRENCY"></property>
+		<property name="currencyFactor" column="CURRENCY_FACTOR"></property>
+		<set name="accountTransactionEntriesList" inverse="true"
+			cascade="all-delete-orphan">
+			<key column="TRANSACTION_ID"></key>
+			<one-to-many class="AccountTransaction" />
+		</set>
+		<!-- <set name="payVATEntriesList" inverse="true" cascade="save-update"> 
+			<key column="TRANSACTION_ID"></key> <one-to-many class="PayTAXEntries" /> 
+			</set> -->
+		<many-to-one name="creditsAndPayments" class="CreditsAndPayments"
+			column="CREDITS_AND_PAYMENTS_ID" cascade="delete">
+		</many-to-one>
+		<property name="isDefault" column="IS_DEFAULT"></property>
+		<many-to-one name="accounterClass" class="AccounterClass"
+			column="TRANSACTION_ACCOUNTER_CLASS">
+		</many-to-one>
+		<many-to-one name="transactionMakeDepositEntries" class="TransactionMakeDepositEntries"
+			cascade="save-update" column="TRANSACTION_MAKE_DEPOSIT_ENTRY_ID">
+		</many-to-one>
+		<many-to-one name="location" class="Location" column="LOCATION_ID">
+		</many-to-one>
+		<many-to-one name="job" class="Job" column="JOB_ID">
+		</many-to-one>
+		<set name="reconciliationItems" inverse="true">
+			<key column="TRANSACTION_ID" />
+			<one-to-many class="com.vimukti.accounter.core.ReconciliationItem" />
+		</set>
+
+		<list name="history" cascade="save-update,delete">
+			<key column="TRANSACTION_ID" />
+			<list-index column="IDX" />
+			<one-to-many class="TransactionLog" />
+		</list>
+
+		<set name="taxRateCalculationEntriesList" inverse="true"
+			cascade="all-delete-orphan">
+			<key column="TRANSACTION_ID"></key>
+			<one-to-many class="TAXRateCalculation" />
+		</set>
+		
+		<set name="payeeUpdates" inverse="true"
+			cascade="all-delete-orphan">
+			<key column="TRANSACTION"></key>
+			<one-to-many class="PayeeUpdate" />
+		</set>
+		
+		<set name="itemUpdates" inverse="true"
+			cascade="all-delete-orphan">
+			<key column="TRANSACTION"></key>
+			<one-to-many class="ItemUpdate" />
+		</set>
+		
+		<set name="inventoryHistory" inverse="true"
+			cascade="all-delete-orphan">
+			<key column="TRANSACTION"></key>
+			<one-to-many class="InventoryHistory" />
+		</set>
+		
+		<many-to-one name="lastActivity" class="Activity" column="LAST_ACTIVITY"></many-to-one>
+
+		<!-- <joined-subclass name="PayTAX" table="PAY_TAX"> <key column="ID" /> 
+			<property name="billsDueOnOrBefore" column="BILLS_DUE_ON_OR_BEFORE" type="com.vimukti.accounter.core.LongUseType"></property> 
+			<many-to-one name="payFrom" class="Account" cascade="save-update" column="PAYFROM_ACCOUNT_ID"> 
+			</many-to-one> <many-to-one name="taxAgency" class="TAXAgency" cascade="save-update" 
+			column="TAX_AGENCY_ID"> </many-to-one> <property name="endingBalance" column="ENDING_BALANCE"></property> 
+			<property name="isEdited" column="IS_EDITED"></property> <list name="transactionPaySalesTax" 
+			cascade="save-update" > <key column="TRANSACTION_ID" /> <list-index column="IDX" 
+			/> <one-to-many class="TransactionPaySalesTax" /> </list> </joined-subclass> -->
+		<joined-subclass name="PayTAX" table="PAY_TAX">
+			<key column="ID" />
+			<property name="returnsDueOnOrBefore" column="RETURNS_DUE_ON_OR_BEFORE"
+				type="com.vimukti.accounter.core.LongUseType"></property>
+			<many-to-one name="payFrom" class="Account" cascade="save-update"
+				column="PAYFROM_ACCOUNT_ID">
+			</many-to-one>
+			<many-to-one name="taxAgency" class="TAXAgency" cascade="save-update"
+				column="TAX_AGENCY_ID">
+			</many-to-one>
+			<property name="isEdited" column="IS_EDITED"></property>
+			<property name="checkNumber" column="CHECK_NUMBER" type="encryptedstring"></property>
+			<list name="transactionPayTAX" cascade="save-update,delete-orphan">
+				<key column="PAY_TAX_ID" />
+				<list-index column="IDX" />
+				<one-to-many class="TransactionPayTAX" />
+			</list>
+		</joined-subclass>
+		<joined-subclass name="TDSChalanDetail" table="TDS_CHALAN_DETAIL">
+			<key column="ID" />
+			<many-to-one name="payFrom" class="Account" cascade="save-update"
+				column="PAYFROM_ID">
+			</many-to-one>
+			<property name="incomeTaxAmount"></property>
+			<property name="surchangePaidAmount"></property>
+			<property name="educationCessAmount"></property>
+			<property name="interestPaidAmount"></property>
+			<property name="penaltyPaidAmount"></property>
+			<property name="otherAmount"></property>
+			<property name="paymentSection" type="encryptedstring"></property>
+			<property name="bankChalanNumber"></property>
+			<property name="checkNumber"></property>
+			<property name="bankBsrCode" type="encryptedstring"></property>
+			<property name="bookEntry"></property>
+			<property name="dateTaxPaid"></property>
+			<property name="chalanPeriod"></property>
+			<property name="chalanSerialNumber"></property>
+			<property name="formType"></property>
+			<property name="assesmentYearStart"></property>
+			<property name="assesmentYearEnd"></property>
+			<property name="isFiled"></property>
+			<property name="etdsfillingAcknowledgementNo" type="encryptedstring"></property>
+			<property name="acknowledgementDate" type="com.vimukti.accounter.core.LongUseType"></property>
+			<property name="fromDate" type="com.vimukti.accounter.core.LongUseType"></property>
+			<property name="toDate" type="com.vimukti.accounter.core.LongUseType"></property>
+			<list name="tdsTransactionItems" cascade="save-update,delete-orphan">
+				<key column="TDS_CHALLANDETAIL_ID"></key>
+				<list-index column="IDX" />
+				<one-to-many class="TDSTransactionItem" />
+			</list>
+		</joined-subclass>
+		<joined-subclass name="BuildAssembly" table="BUILD_ASSEMBLY">
+			<key column="ID" />
+			<many-to-one name="inventoryAssembly" class="InventoryAssembly"
+				column="INVENTORY_ASSEMBLY">
+			</many-to-one>
+			<property name="quantityToBuild" column="QUANTITY_TO_BUILD"></property>
+		</joined-subclass>
+		<joined-subclass name="ReceiveVAT" table="RECEIVE_VAT">
+			<key column="ID" />
+			<property name="returnsDueOnOrBefore" column="RETURNS_DUE_ON_OR_BEFORE"
+				type="com.vimukti.accounter.core.LongUseType"></property>
+			<many-to-one name="depositIn" class="Account" cascade="save-update"
+				column="DEPOSIT_IN_ACCOUNT_ID">
+			</many-to-one>
+			<many-to-one name="taxAgency" class="TAXAgency" cascade="save-update"
+				column="TAX_AGENCY_ID">
+			</many-to-one>
+			<property name="endingBalance" column="ENDING_BALANCE"></property>
+			<property name="isEdited" column="IS_EDITED"></property>
+			<property name="checkNumber" column="CHECK_NUMBER" type="encryptedstring"></property>
+			<list name="transactionReceiveVAT" cascade="save-update,delete">
+				<key column="RECEIVE_VAT_ID" />
+				<list-index column="IDX" />
+				<one-to-many class="TransactionReceiveVAT" />
+			</list>
+		</joined-subclass>
+		<joined-subclass name="CashPurchase" table="CASH_PURCHASE">
+			<key column="ID" />
+			<many-to-one name="vendor" class="Vendor" cascade="save-update"
+				column="VENDOR_ID">
+			</many-to-one>
+			<component name="contact" class="Contact">
+				<property name="isPrimary" column="CP_IS_PRIMARY"></property>
+				<property name="name" type="encryptedstring" column="CP_NAME"></property>
+				<property name="title" type="encryptedstring" column="CP_TITLE"></property>
+				<property name="businessPhone" type="encryptedstring"
+					column="CP_BUSINESS_PHONE"></property>
+				<property name="email" type="encryptedstring" column="CP_EMAIL"></property>
+			</component>
+			<component name="vendorAddress" class="Address">
+				<property name="type" column="VENDOR_ADDRESS_TYPE"></property>
+				<property name="address1" type="encryptedstring" column="VENDOR_ADDRESS_ADDRESS1"
+					length="100"></property>
+				<property name="street" type="encryptedstring" column="VENDOR_ADDRESS_STREET"></property>
+				<property name="city" type="encryptedstring" column="VENDOR_ADDRESS_CITY"></property>
+				<property name="stateOrProvinence" type="encryptedstring"
+					column="VENDOR_ADDRESS_STATE"></property>
+				<property name="zipOrPostalCode" type="encryptedstring"
+					column="VENDOR_ADDRESS_ZIP"></property>
+				<property name="countryOrRegion" type="encryptedstring"
+					column="VENDOR_ADDRESS_COUNTRY"></property>
+				<property name="isSelected" column="VENDOR_ADDRESS_IS_SELECTED"></property>
+			</component>
+			<property name="phone" column="PHONE" type="encryptedstring"></property>
+			<many-to-one name="payFrom" class="Account" cascade="save-update"
+				column="PAYFROM_ACCOUNT_ID">
+			</many-to-one>
+			<many-to-one name="cashExpenseAccount" class="Account"
+				cascade="save-update" column="CASH_EXPENSE_ACCOUNT_ID">
+			</many-to-one>
+			<many-to-one name="employee" class="User" cascade="save-update"
+				column="EMPLOYEE">
+			</many-to-one>
+			<set name="estimates" table="CASH_PURCHASE_ESTIMATES">
+				<key column="CASH_PURCHASE_ID"></key>
+				<many-to-many class="Estimate" />
+			</set>
+			<list name="purchaseOrders" table="CASH_PURCHASE_ORDERS">
+				<key column="CASH_PURCHASE_ID"></key>
+				<list-index column="VTX" />
+				<many-to-many column="PURCHASE_ORDER_ID" class="PurchaseOrder" />
+			</list>
+			<!-- <property name="employeeName" column="EMPLOYEE_NAME" type="string"></property> -->
+			<property name="checkNumber" column="CHECK_NUMBER" type="encryptedstring"></property>
+			<property name="deliveryDate" column="DELIVERY_DATE"
+				type="com.vimukti.accounter.core.LongUseType"></property>
+			<property name="expenseStatus" column="EXPENSE_STATUS"></property>
+		</joined-subclass>
+		<joined-subclass name="CashSales" table="CASH_SALES">
+			<key column="ID" />
+			<many-to-one name="customer" class="Customer" cascade="save-update"
+				column="CUSTOMER_ID">
+			</many-to-one>
+			<component name="contact" class="Contact">
+				<property name="isPrimary" column="CS_IS_PRIMARY"></property>
+				<property name="name" type="encryptedstring" column="CS_NAME"></property>
+				<property name="title" type="encryptedstring" column="CS_TITLE"></property>
+				<property name="businessPhone" type="encryptedstring"
+					column="CS_BUSINESS_PHONE"></property>
+				<property name="email" type="encryptedstring" column="CS_EMAIL"></property>
+			</component>
+			<component name="billingAddress" class="Address">
+				<property name="type" column="BILLING_ADDRESS_TYPE"></property>
+				<property name="address1" type="encryptedstring" column="BILLING_ADDRESS1"
+					length="100"></property>
+				<property name="street" type="encryptedstring" column="BILLING_ADDRESS_STREET"></property>
+				<property name="city" type="encryptedstring" column="BILLING_ADDRESS_CITY"></property>
+				<property name="stateOrProvinence" type="encryptedstring"
+					column="BILLING_ADDRESS_STATE"></property>
+				<property name="zipOrPostalCode" type="encryptedstring"
+					column="BILLING_ADDRESS_ZIP"></property>
+				<property name="countryOrRegion" type="encryptedstring"
+					column="BILLING_ADDRESS_COUNTRY"></property>
+				<property name="isSelected" column="BILLING_ADDRESS_IS_SELECTED"></property>
+			</component>
+			<component name="shippingAdress" class="Address">
+				<property name="type" column="SHIPPING_ADDRESS_TYPE"></property>
+				<property name="address1" type="encryptedstring" column="SHIPPING_ADDRESS1"
+					length="100"></property>
+				<property name="street" type="encryptedstring" column="SHIPPING_ADDRESS_STREET"></property>
+				<property name="city" type="encryptedstring" column="SHIPPING_ADDRESS_CITY"></property>
+				<property name="stateOrProvinence" type="encryptedstring"
+					column="SHIPPING_ADDRESS_STATE"></property>
+				<property name="zipOrPostalCode" type="encryptedstring"
+					column="SHIPPING_ADDRESS_ZIP"></property>
+				<property name="countryOrRegion" type="encryptedstring"
+					column="SHIPPING_ADDRESS_COUNTRY"></property>
+				<property name="isSelected" column="SHIPPING_ADDRESS_IS_SELECTED"></property>
+			</component>
+			<property name="phone" type="encryptedstring" column="PHONE"></property>
+			<property name="checkNumber" column="CHECK_NUMBER" type="encryptedstring"></property>
+			<many-to-one name="salesPerson" class="SalesPerson"
+				column="SALES_PERSON_ID">
+			</many-to-one>
+			<many-to-one name="depositIn" class="Account" cascade="save-update"
+				column="DEPOSIT_IN_ACCOUNT_ID">
+			</many-to-one>
+			<many-to-one name="shippingTerm" class="ShippingTerms"
+				column="SHIPPING_TERMS_ID">
+			</many-to-one>
+			<many-to-one name="shippingMethod" class="ShippingMethod"
+				column="SHIPPING_METHOD_ID">
+			</many-to-one>
+			<list name="salesOrders" table="CASH_SALE_ORDERS">
+				<key column="CASHSALE_ID"></key>
+				<list-index column="VTX" />
+				<many-to-many column="ESTIMATE_ID" class="Estimate" />
+			</list>
+			<property name="deliverydate" column="DELIVERY_DATE"
+				type="com.vimukti.accounter.core.LongUseType"></property>
+			<many-to-one name="priceLevel" class="PriceLevel" column="PRICE_LEVEL_ID">
+			</many-to-one>
+			<property name="taxTotal" column="SALES_TAX"></property>
+			<property name="discountTotal" column="DISCOUNT_TOTAL"></property>
+			<property name="roundingTotal" column="ROUNDING_TOTAL"></property>
+		</joined-subclass>
+		<joined-subclass name="CreditCardCharge" table="CREDIT_CARD_CHARGES">
+			<key column="ID" />
+			<many-to-one name="vendor" class="Vendor" cascade="save-update"
+				column="VENDOR_ID">
+			</many-to-one>
+			<component name="contact" class="Contact">
+				<property name="isPrimary" column="CCC_IS_PRIMARY"></property>
+				<property name="name" type="encryptedstring" column="CCC_NAME"></property>
+				<property name="title" type="encryptedstring" column="CCC_TITLE"></property>
+				<property name="businessPhone" type="encryptedstring"
+					column="CCC_BUSINESS_PHONE"></property>
+				<property name="email" type="encryptedstring" column="CCC_EMAIL"></property>
+			</component>
+			<component name="vendorAddress" class="Address">
+				<property name="type" column="VENDOR_ADDRESS_TYPE"></property>
+				<property name="street" type="encryptedstring" column="VENDOR_ADDRESS_STREET"></property>
+				<property name="city" type="encryptedstring" column="VENDOR_ADDRESS_CITY"></property>
+				<property name="stateOrProvinence" type="encryptedstring"
+					column="VENDOR_ADDRESS_STATE"></property>
+				<property name="zipOrPostalCode" type="encryptedstring"
+					column="VENDOR_ADDRESS_ZIP"></property>
+				<property name="countryOrRegion" type="encryptedstring"
+					column="VENDOR_ADDRESS_COUNTRY"></property>
+				<property name="isSelected" column="VENDOR_ADDRESS_IS_SELECTED"></property>
+			</component>
+			<property type="encryptedstring" name="phone" column="PHONE"></property>
+			<many-to-one name="payFrom" class="Account" cascade="save-update"
+				column="PAYFROM_ACCOUNT_ID">
+			</many-to-one>
+			<property name="checkNumber" type="encryptedstring" column="CHECK_NUMBER"></property>
+			<property name="deliveryDate" column="DELIVERY_DATE"
+				type="com.vimukti.accounter.core.LongUseType"></property>
+		</joined-subclass>
+		<joined-subclass name="CustomerCreditMemo" table="CUSTOMER_CREDIT_MEMO">
+			<key column="ID" />
+			<many-to-one name="customer" class="Customer" cascade="save-update"
+				column="CUSTOMER_ID">
+			</many-to-one>
+			<component name="contact" class="Contact">
+				<property name="isPrimary" column="CCM_IS_PRIMARY"></property>
+				<property name="name" type="encryptedstring" column="CCM_NAME"></property>
+				<property name="title" type="encryptedstring" column="CCM_TITLE"></property>
+				<property name="businessPhone" type="encryptedstring"
+					column="CCM_BUSINESS_PHONE"></property>
+				<property name="email" type="encryptedstring" column="CCM_EMAIL"></property>
+			</component>
+			<component name="billingAddress" class="Address">
+				<property name="type" column="BILLING_ADDRESS_TYPE"></property>
+				<property name="address1" type="encryptedstring" column="BILLING_ADDRESS1"
+					length="100"></property>
+				<property name="street" type="encryptedstring" column="BILLING_ADDRESS_STREET"></property>
+				<property name="city" type="encryptedstring" column="BILLING_ADDRESS_CITY"></property>
+				<property name="stateOrProvinence" type="encryptedstring"
+					column="BILLING_ADDRESS_STATE"></property>
+				<property name="zipOrPostalCode" type="encryptedstring"
+					column="BILLING_ADDRESS_ZIP"></property>
+				<property name="countryOrRegion" type="encryptedstring"
+					column="BILLING_ADDRESS_COUNTRY"></property>
+				<property name="isSelected" column="BILLING_ADDRESS_IS_SELECTED"></property>
+			</component>
+			<property type="encryptedstring" name="phone" column="PHONE"></property>
+			<many-to-one name="salesPerson" class="SalesPerson"
+				column="SALES_PERSON_ID">
+			</many-to-one>
+			<many-to-one name="account" class="Account" cascade="save-update"
+				column="ACCOUNT_ID">
+			</many-to-one>
+			<many-to-one name="priceLevel" class="PriceLevel" column="PRICE_LEVEL_ID">
+			</many-to-one>
+			<property name="taxTotal" column="SALES_TAX"></property>
+			<property name="discountTotal" column="DISCOUNT_TOTAL"></property>
+			<property name="balanceDue" column="BALANCE_DUE"></property>
+		</joined-subclass>
+
+		<joined-subclass name="CustomerPrePayment" table="CUSTOMER_PREPAYMENT">
+			<key column="ID"></key>
+			<many-to-one name="depositIn" class="Account" cascade="save-update"
+				column="DEPOSITIN_ID"></many-to-one>
+			<many-to-one name="customer" class="Customer" cascade="save-update"
+				column="CUSTOMER_ID"></many-to-one>
+			<property name="balanceDue" column="BALANCE_DUE"></property>
+			<property name="checkNumber" column="CHECK_NUMBER" type="encryptedstring"></property>
+			<component name="address" class="Address">
+				<property name="type" column="CPP_ADDRESS_TYPE"></property>
+				<property name="address1" column="CPP_ADDRESS_ADDRESS1"
+					type="encryptedstring" length="100"></property>
+				<property name="street" type="encryptedstring" column="CPP_ADDRESS_STREET"></property>
+				<property name="city" type="encryptedstring" column="CPP_ADDRESS_CITY"></property>
+				<property name="stateOrProvinence" type="encryptedstring"
+					column="CPP_ADDRESS_STATE"></property>
+				<property name="zipOrPostalCode" type="encryptedstring"
+					column="CPP_ADDRESS_ZIP"></property>
+				<property name="countryOrRegion" type="encryptedstring"
+					column="CPP_ADDRESS_COUNTRY"></property>
+				<property name="isSelected" column="CPP_ADDRESS_IS_SELECTED"></property>
+			</component>
+		</joined-subclass>
+
+		<joined-subclass name="CustomerRefund" table="CUSTOMER_REFUND">
+			<key column="ID" />
+			<many-to-one name="payTo" class="Customer" cascade="save-update"
+				column="CUSTOMER_ID">
+			</many-to-one>
+			<component name="address" class="Address">
+				<property name="type" column="CR__ADDRESS_TYPE"></property>
+				<property name="address1" type="encryptedstring" column="CR_ADDRESS_ADDRESS1"
+					length="100"></property>
+				<property name="street" type="encryptedstring" column="CR__ADDRESS_STREET"></property>
+				<property name="city" type="encryptedstring" column="CR__ADDRESS_CITY"></property>
+				<property name="stateOrProvinence" type="encryptedstring"
+					column="CR__ADDRESS_STATE"></property>
+				<property name="zipOrPostalCode" type="encryptedstring"
+					column="CR__ADDRESS_ZIP"></property>
+				<property name="countryOrRegion" type="encryptedstring"
+					column="CR__ADDRESS_COUNTRY"></property>
+				<property name="isSelected" column="CR__ADDRESS_IS_SELECTED"></property>
+			</component>
+			<many-to-one name="payFrom" class="Account" cascade="save-update"
+				column="PAYFROM_ACCOUNT_ID">
+			</many-to-one>
+			<property name="isToBePrinted" column="IS_TO_BE_PRINTED"></property>
+			<property name="isPaid" column="IS_PAID"></property>
+			<property name="payments" column="PAYMENTS"></property>
+			<property name="balanceDue" column="BALANCE_DUE"></property>
+			<property name="checkNumber" column="CHECK_NUMBER" type="encryptedstring"></property>
+		</joined-subclass>
+		<joined-subclass name="EnterBill" table="ENTER_BILL">
+			<key column="ID" />
+			<many-to-one name="vendor" class="Vendor" cascade="save-update"
+				column="VENDOR_ID">
+			</many-to-one>
+			<component name="contact" class="Contact">
+				<property name="isPrimary" column="EB_IS_PRIMARY"></property>
+				<property name="name" type="encryptedstring" column="EB_NAME"></property>
+				<property name="title" type="encryptedstring" column="EB_TITLE"></property>
+				<property name="businessPhone" type="encryptedstring"
+					column="EB_BUSINESS_PHONE"></property>
+				<property name="email" type="encryptedstring" column="EB_EMAIL"></property>
+			</component>
+			<component name="vendorAddress" class="Address">
+				<property name="type" column="VENDOR_ADDRESS_TYPE"></property>
+				<property name="address1" column="VENDOR_ADDRESS_ADDRESS1"
+					type="encryptedstring" length="100"></property>
+				<property name="street" type="encryptedstring" column="VENDOR_ADDRESS_STREET"></property>
+				<property name="city" type="encryptedstring" column="VENDOR_ADDRESS_CITY"></property>
+				<property name="stateOrProvinence" type="encryptedstring"
+					column="VENDOR_ADDRESS_STATE"></property>
+				<property name="zipOrPostalCode" type="encryptedstring"
+					column="VENDOR_ADDRESS_ZIP"></property>
+				<property name="countryOrRegion" type="encryptedstring"
+					column="VENDOR_ADDRESS_COUNTRY"></property>
+				<property name="isSelected" column="VENDOR_ADDRESS_IS_SELECTED"></property>
+			</component>
+			<property type="encryptedstring" name="phone" column="PHONE"></property>
+			<many-to-one name="paymentTerm" class="PaymentTerms"
+				column="PAYMENT_TERM_ID">
+			</many-to-one>
+			<property name="dueDate" column="DUE_DATE"
+				type="com.vimukti.accounter.core.LongUseType"></property>
+			<property name="deliveryDate" column="DELIVERY_DATE"
+				type="com.vimukti.accounter.core.LongUseType"></property>
+			<property name="isPaid" column="IS_PAID"></property>
+			<property name="payments" column="PAYMENTS"></property>
+			<property name="balanceDue" column="BALANCE_DUE"></property>
+			<property name="discountDate" column="DISCOUNT_DATE"
+				type="com.vimukti.accounter.core.LongUseType"></property>
+			<set name="transactionPayBills" inverse="true">
+				<key column="ENTER_BILL_ID"></key>
+				<one-to-many class="TransactionPayBill" />
+			</set>
+			<set name="estimates" table="ENTERBILL_ESTIMATES">
+				<key column="ENTER_BILL_ID"></key>
+				<many-to-many class="Estimate" />
+			</set>
+			<list name="purchaseOrders" table="ENTER_BILL_ORDERS">
+				<key column="ENTER_BILL_ID"></key>
+				<list-index column="VTX" />
+				<many-to-many column="PURCHASE_ORDER_ID" class="PurchaseOrder" />
+			</list>
+			<many-to-one name="itemReceipt" class="ItemReceipt"
+				cascade="save-update" column="ITEM_RECEIPT_ID">
+			</many-to-one>
+		</joined-subclass>
+		<joined-subclass name="Estimate" table="ESTIMATE">
+			<key column="ID" />
+			<many-to-one name="customer" class="Customer" cascade="save-update"
+				column="CUSTOMER_ID">
+			</many-to-one>
+			<component name="contact" class="Contact">
+				<property name="isPrimary" column="EST_IS_PRIMARY"></property>
+				<property name="name" type="encryptedstring" column="EST_NAME"></property>
+				<property name="title" type="encryptedstring" column="EST_TITLE"></property>
+				<property name="businessPhone" type="encryptedstring"
+					column="EST_BUSINESS_PHONE"></property>
+				<property name="email" type="encryptedstring" column="EST_EMAIL"></property>
+			</component>
+			<component name="address" class="Address">
+				<property name="type" column="ESTIMATE_ADDRESS_TYPE"></property>
+				<property name="address1" type="encryptedstring" column="ESTIMATE_ADDRESS_ADDRESS1"
+					length="100"></property>
+				<property name="street" type="encryptedstring" column="ESTIMATE_ADDRESS_STREET"></property>
+				<property name="city" type="encryptedstring" column="ESTIMATE_ADDRESS_CITY"></property>
+				<property name="stateOrProvinence" type="encryptedstring"
+					column="ESTIMATE_ADDRESS_STATE"></property>
+				<property name="zipOrPostalCode" type="encryptedstring"
+					column="ESTIMATE_ADDRESS_ZIP"></property>
+				<property name="countryOrRegion" type="encryptedstring"
+					column="ESTIMATE_ADDRESS_COUNTRY"></property>
+				<property name="isSelected" column="ESTIMATE_ADDRESS_IS_SELECTED"></property>
+			</component>
+			<component name="shippingAdress" class="Address">
+				<property name="type" column="SHIPPING_ADDRESS_TYPE"></property>
+				<property name="address1" type="encryptedstring" column="SHIPPING_ADDRESS1"
+					length="100"></property>
+				<property name="street" type="encryptedstring" column="SHIPPING_ADDRESS_STREET"></property>
+				<property name="city" type="encryptedstring" column="SHIPPING_ADDRESS_CITY"></property>
+				<property name="stateOrProvinence" type="encryptedstring"
+					column="SHIPPING_ADDRESS_STATE"></property>
+				<property name="zipOrPostalCode" type="encryptedstring"
+					column="SHIPPING_ADDRESS_ZIP"></property>
+				<property name="countryOrRegion" type="encryptedstring"
+					column="SHIPPING_ADDRESS_COUNTRY"></property>
+				<property name="isSelected" column="SHIPPING_ADDRESS_IS_SELECTED"></property>
+			</component>
+			<property type="encryptedstring" name="phone" column="PHONE"></property>
+			<property name="estimateType" column="ESTIMATETYPE"></property>
+			<property name="refferingTransactionType" column="REFFERING_TRANSACTION_TYPE"></property>
+			<many-to-one name="salesPerson" class="SalesPerson"
+				column="SALES_PERSON_ID">
+			</many-to-one>
+			<many-to-one name="paymentTerm" class="PaymentTerms"
+				column="PAYMENT_TERMS_ID">
+			</many-to-one>
+			<many-to-one name="shippingTerm" class="ShippingTerms"
+				column="SHIPPING_TERMS_ID">
+			</many-to-one>
+			<many-to-one name="shippingMethod" class="ShippingMethod"
+				column="SHIPPING_METHOD_ID">
+			</many-to-one>
+			<property name="expirationDate" column="EXPIRATION_DATE"
+				type="com.vimukti.accounter.core.LongUseType"></property>
+			<property name="customerOrderNumber" column="CUSTOMER_ORDER_NUMBER"
+				type="encryptedstring"></property>
+			<property name="deliveryDate" column="DELIVERY_DATE"
+				type="com.vimukti.accounter.core.LongUseType"></property>
+			<many-to-one name="priceLevel" class="PriceLevel" column="PRICE_LEVEL_ID">
+			</many-to-one>
+			<property name="taxTotal" column="SALES_TAX"></property>
+			<!-- <property name="isTurnedToInvoiceOrSalesOrder" column="IS_TURNED_TO_INVOICE"></property> -->
+			<many-to-one name="usedInvoice" class="Invoice" column="USED_INVOICE">
+			</many-to-one>
+			<many-to-one name="usedCashSale" class="CashSales"
+				column="USED_CASHSALES">
+			</many-to-one>
+		</joined-subclass>
+		<joined-subclass name="Invoice" table="INVOICE">
+			<key column="ID" />
+			<many-to-one name="customer" class="Customer" cascade="save-update"
+				column="CUSTOMER_ID">
+			</many-to-one>
+			<component name="contact" class="Contact">
+				<property name="isPrimary" column="INVOICE_IS_PRIMARY"></property>
+				<property name="name" type="encryptedstring" column="INVOICE_NAME"></property>
+				<property name="title" type="encryptedstring" column="INVOICE_TITLE"></property>
+				<property name="businessPhone" type="encryptedstring"
+					column="INVOICE_BUSINESS_PHONE"></property>
+				<property name="email" type="encryptedstring" column="INVOICE_EMAIL"></property>
+			</component>
+			<component name="billingAddress" class="Address">
+				<property name="type" column="BILLING_ADDRESS_TYPE"></property>
+				<property name="address1" type="encryptedstring" column="BILLING_ADDRESS1"
+					length="100"></property>
+				<property name="street" type="encryptedstring" column="BILLING_ADDRESS_STREET"></property>
+				<property name="city" type="encryptedstring" column="BILLING_ADDRESS_CITY"></property>
+				<property name="stateOrProvinence" type="encryptedstring"
+					column="BILLING_ADDRESS_STATE"></property>
+				<property name="zipOrPostalCode" type="encryptedstring"
+					column="BILLING_ADDRESS_ZIP"></property>
+				<property name="countryOrRegion" type="encryptedstring"
+					column="BILLING_ADDRESS_COUNTRY"></property>
+				<property name="isSelected" column="BILLING_ADDRESS_IS_SELECTED"></property>
+			</component>
+			<component name="shippingAdress" class="Address">
+				<property name="type" column="SHIPPING_ADDRESS_TYPE"></property>
+				<property name="address1" column="SHIPPING_ADDRESS1" type="encryptedstring"
+					length="100"></property>
+				<property name="street" type="encryptedstring" column="SHIPPING_ADDRESS_STREET"></property>
+				<property name="city" type="encryptedstring" column="SHIPPING_ADDRESS_CITY"></property>
+				<property name="stateOrProvinence" type="encryptedstring"
+					column="SHIPPING_ADDRESS_STATE"></property>
+				<property name="zipOrPostalCode" type="encryptedstring"
+					column="SHIPPING_ADDRESS_ZIP"></property>
+				<property name="countryOrRegion" type="encryptedstring"
+					column="SHIPPING_ADDRESS_COUNTRY"></property>
+				<property name="isSelected" column="SHIPPING_ADDRESS_IS_SELECTED"></property>
+			</component>
+			<property type="encryptedstring" name="phone" column="PHONE"></property>
+			<many-to-one name="salesPerson" class="SalesPerson"
+				column="SALES_PERSON_ID">
+			</many-to-one>
+			<many-to-one name="paymentTerm" class="PaymentTerms"
+				column="PAYMENT_TERMS_ID">
+			</many-to-one>
+			<many-to-one name="shippingTerm" class="ShippingTerms"
+				column="SHIPPING_TERMS_ID">
+			</many-to-one>
+			<many-to-one name="shippingMethod" class="ShippingMethod"
+				column="SHIPPING_METHOD_ID">
+			</many-to-one>
+			<property name="dueDate" column="DUE_DATE"
+				type="com.vimukti.accounter.core.LongUseType"></property>
+			<property name="deliverydate" column="DELIVERY_DATE"
+				type="com.vimukti.accounter.core.LongUseType"></property>
+			<property name="orderNum" column="SALES_ORDER_NO" type="encryptedstring"></property>
+			<property name="discountTotal" column="DISCOUNT_TOTAL"></property>
+			<many-to-one name="priceLevel" class="PriceLevel" column="PRICE_LEVEL_ID">
+			</many-to-one>
+			<property name="taxTotal" column="SALES_TAX_AMOUNT"></property>
+			<property name="payments" column="PAYMENTS"></property>
+			<property name="balanceDue" column="BALANCE_DUE"></property>
+			<property name="isPaid" column="IS_PAID"></property>
+			<property name="isEdited" column="IS_EDITED"></property>
+			<list name="estimates" table="INVOICE_ESTIMATES">
+				<key column="INVOICE_ID"></key>
+				<list-index column="VTX" />
+				<many-to-many column="ESTIMATE_ID" class="Estimate" />
+			</list>
+			<property name="discountDate" column="DISCOUNT_DATE"
+				type="com.vimukti.accounter.core.LongUseType"></property>
+			<set name="transactionReceivePayments" inverse="true">
+				<key column="INVOICE_ID"></key>
+				<one-to-many class="TransactionReceivePayment" />
+			</set>
+			<property name="roundingTotal" column="ROUNDING_TOTAL"></property>
+		</joined-subclass>
+		<joined-subclass name="TransferFund" table="TRANSFER_FUND">
+			<key column="ID" />
+			<many-to-one name="depositIn" class="Account" cascade="save-update"
+				column="DEPOSIT_IN_ID">
+			</many-to-one>
+			<many-to-one name="depositFrom" class="Account" cascade="save-update"
+				column="DEPOSIT_FROM_ID">
+			</many-to-one>
+			<many-to-one name="cashBackAccount" class="Account"
+				cascade="save-update" column="CASH_BACK_ACCOUNT_ID">
+			</many-to-one>
+			<property name="cashBackMemo" type="encryptedstring" column="CASH_BACK_MEMO"></property>
+			<property name="cashBackAmount" column="CASH_BACK_AMOUNT"></property>
+		</joined-subclass>
+		<joined-subclass name="PayBill" table="PAY_BILL">
+			<key column="ID" />
+			<many-to-one name="payFrom" class="Account" cascade="save-update"
+				column="PAYFROM_ID">
+			</many-to-one>
+			<property name="billDueOnOrBefore" column="BILL_DUE_ONORBEFORE"
+				type="com.vimukti.accounter.core.LongUseType"></property>
+			<many-to-one name="vendor" class="Vendor" cascade="save-update"
+				column="VENDOR_ID">
+			</many-to-one>
+			<many-to-one name="tdsTaxItem" class="TAXItem" cascade="save-update"
+				column="TDS_TAXITEM">
+			</many-to-one>
+			<property name="tdsTotal" column="TDS_TOTAL"></property>
+			<property name="isToBePrinted" column="IS_TO_BE_PRINTED"></property>
+			<property name="endingBalance" column="ENDING_BALANCE"></property>
+			<property name="unusedAmount" column="UNUSED_AMOUNT"></property>
+			<property name="vendorBalance" column="VENDOR_BALANCE"></property>
+			<component name="address" class="Address">
+				<property name="type" column="PAYBILL_ADDRESS_TYPE"></property>
+				<property name="address1" type="encryptedstring" column="PAYBILL_ADDRESS_ADDRESS1"
+					length="100"></property>
+				<property name="street" type="encryptedstring" column="PAYBILL_ADDRESS_STREET"></property>
+				<property name="city" type="encryptedstring" column="PAYBILL_ADDRESS_CITY"></property>
+				<property name="stateOrProvinence" type="encryptedstring"
+					column="PAYBILL_ADDRESS_STATE"></property>
+				<property name="zipOrPostalCode" type="encryptedstring"
+					column="PAYBILL_ADDRESS_ZIP"></property>
+				<property name="countryOrRegion" type="encryptedstring"
+					column="PAYBILL_ADDRESS_COUNTRY"></property>
+				<property name="isSelected" column="PAYBILL_ADDRESS_IS_SELECTED"></property>
+			</component>
+			<!-- <many-to-one name="VATCode" column="VAT_CODE_ID" class="TaxCode" -->
+			<!-- > -->
+			<!-- </many-to-one> -->
+			<!-- <property name="VATFraction" column="VAT_FRACTION"></property> -->
+			<list name="transactionPayBill" cascade="save-update,delete,delete-orphan">
+				<key column="TRANSACTION_ID" />
+				<list-index column="IDX" />
+				<one-to-many class="TransactionPayBill" />
+			</list>
+			<property name="checkNumber" column="CHECK_NUMBER" type="encryptedstring"></property>
+			<property name="isAmountIncludeTDS" column="IS_AMOUNT_INCLUDE_TDS"></property>
+		</joined-subclass>
+		<joined-subclass name="VendorPrePayment" table="VENDOR_PAYMENT">
+			<key column="ID" />
+			<many-to-one name="payFrom" class="Account" cascade="save-update"
+				column="PAYFROM_ID">
+			</many-to-one>
+			<many-to-one name="vendor" class="Vendor" cascade="save-update"
+				column="VENDOR_ID">
+			</many-to-one>
+			<many-to-one name="tdsTaxItem" class="TAXItem" cascade="save-update"
+				column="TDS_TAXITEM">
+			</many-to-one>
+			<property name="tdsTotal" column="TDS_TOTAL"></property>
+			<property name="isToBePrinted" column="IS_TO_BE_PRINTED"></property>
+			<property name="endingBalance" column="ENDING_BALANCE"></property>
+			<property name="unusedAmount" column="UNUSED_AMOUNT"></property>
+			<property name="vendorBalance" column="VENDOR_BALANCE"></property>
+			<component name="address" class="Address">
+				<property name="type" column="PAYBILL_ADDRESS_TYPE"></property>
+				<property name="address1" type="encryptedstring" column="PAYBILL_ADDRESS_ADDRESS1"
+					length="100"></property>
+				<property name="street" type="encryptedstring" column="PAYBILL_ADDRESS_STREET"></property>
+				<property name="city" type="encryptedstring" column="PAYBILL_ADDRESS_CITY"></property>
+				<property name="stateOrProvinence" type="encryptedstring"
+					column="PAYBILL_ADDRESS_STATE"></property>
+				<property name="zipOrPostalCode" type="encryptedstring"
+					column="PAYBILL_ADDRESS_ZIP"></property>
+				<property name="countryOrRegion" type="encryptedstring"
+					column="PAYBILL_ADDRESS_COUNTRY"></property>
+				<property name="isSelected" column="PAYBILL_ADDRESS_IS_SELECTED"></property>
+			</component>
+			<property name="checkNumber" column="CHECK_NUMBER" type="encryptedstring"></property>
+			<property name="isAmountIncludeTDS" column="IS_AMOUNT_INCLUDE_TDS"></property>
+		</joined-subclass>
+		<joined-subclass name="PurchaseOrder" table="PURCHASE_ORDER">
+			<key column="ID" />
+			<many-to-one name="vendor" class="Vendor" cascade="save-update"
+				column="VENDOR_ID">
+			</many-to-one>
+			<many-to-one name="shipTo" class="Account" column="SHIP_TO_ID">
+			</many-to-one>
+			<property name="purchaseOrderDate" column="PURCHASE_ORDER_DATE"
+				type="com.vimukti.accounter.core.LongUseType"></property>
+			<property name="toBePrinted" column="TO_BE_PRINTED"></property>
+			<property name="toBeEmailed" column="TO_BE_EMAILED"></property>
+			<component name="contact" class="Contact">
+				<property name="isPrimary" column="EB_IS_PRIMARY"></property>
+				<property name="name" type="encryptedstring" column="EB_NAME"></property>
+				<property name="title" type="encryptedstring" column="EB_TITLE"></property>
+				<property name="businessPhone" type="encryptedstring"
+					column="EB_BUSINESS_PHONE"></property>
+				<property name="email" type="encryptedstring" column="EB_EMAIL"></property>
+			</component>
+			<component name="vendorAddress" class="Address">
+				<property name="type" column="VENDOR_ADDRESS_TYPE"></property>
+				<property name="address1" type="encryptedstring" column="VENDOR_ADDRESS_ADDRESS1"
+					length="100"></property>
+				<property name="street" type="encryptedstring" column="VENDOR_ADDRESS_STREET"></property>
+				<property name="city" type="encryptedstring" column="VENDOR_ADDRESS_CITY"></property>
+				<property name="stateOrProvinence" type="encryptedstring"
+					column="VENDOR_ADDRESS_STATE"></property>
+				<property name="zipOrPostalCode" type="encryptedstring"
+					column="VENDOR_ADDRESS_ZIP"></property>
+				<property name="countryOrRegion" type="encryptedstring"
+					column="VENDOR_ADDRESS_COUNTRY"></property>
+				<property name="isSelected" column="VENDOR_ADDRESS_IS_SELECTED"></property>
+			</component>
+			<property name="phone" type="encryptedstring" column="PHONE"></property>
+			<many-to-one name="paymentTerm" class="PaymentTerms"
+				column="PAYMENT_TERM_ID">
+			</many-to-one>
+			<property name="deliveryDate" column="DELIVERY_DATE"
+				type="com.vimukti.accounter.core.LongUseType"></property>
+			<property name="dispatchDate" column="DISPATCH_DATE"
+				type="com.vimukti.accounter.core.LongUseType"></property>
+			<component name="shippingAddress" class="Address">
+				<property name="type" column="SHIPPING_ADDRESS_TYPE"></property>
+				<property name="address1" type="encryptedstring" column="SHIPPING_ADDRESS_ADDRESS1"
+					length="100"></property>
+				<property name="street" type="encryptedstring" column="SHIPPING_ADDRESS_STREET"></property>
+				<property name="city" type="encryptedstring" column="SHIPPING_ADDRESS_CITY"></property>
+				<property name="stateOrProvinence" type="encryptedstring"
+					column="SHIPPING_ADDRESS_STATE"></property>
+				<property name="zipOrPostalCode" type="encryptedstring"
+					column="SHIPPING_ADDRESS_ZIP"></property>
+				<property name="countryOrRegion" type="encryptedstring"
+					column="SHIPPING_ADDRESS_COUNTRY"></property>
+				<property name="isSelected" column="SHIPPING_ADDRESS_IS_SELECTED"></property>
+			</component>
+			<many-to-one name="shippingTerms" class="ShippingTerms"
+				cascade="save-update" column="SHIPPING_TERMS_ID">
+			</many-to-one>
+			<many-to-one name="shippingMethod" class="ShippingMethod"
+				cascade="save-update" column="SHIPPING_METHOD_ID">
+			</many-to-one>
+			<property name="purchaseOrderNumber" type="encryptedstring"
+				column="PURCHASE_ORDER_NUMBER"></property>
+			<many-to-one name="usedBill" class="EnterBill" column="USED_BILL">
+			</many-to-one>
+			<many-to-one name="usedCashPurchase" class="CashPurchase"
+				column="USED_CASHPURCHASE">
+			</many-to-one>
+			<!-- <list name="enterBills" cascade="save-update,delete" > <key column="TRANSACTION_ID" 
+				/> <list-index column="EBX" /> <one-to-many class="EnterBill" /> </list> 
+				<list name="itemReceipts" cascade="save-update,delete" > <key column="TRANSACTION_ID" 
+				/> <list-index column="IRX" /> <one-to-many class="ItemReceipt" /> </list> -->
+		</joined-subclass>
+		<joined-subclass name="ItemReceipt" table="ITEM_RECEIPT">
+			<key column="ID" />
+			<many-to-one name="vendor" class="Vendor" cascade="save-update"
+				column="VENDOR_ID">
+			</many-to-one>
+			<many-to-one name="shipTo" class="Account" column="SHIP_TO_ID">
+			</many-to-one>
+			<property name="purchaseOrderDate" column="PURCHASE_ORDER_DATE"
+				type="com.vimukti.accounter.core.LongUseType"></property>
+			<property name="toBePrinted" column="TO_BE_PRINTED"></property>
+			<property name="toBeEmailed" column="TO_BE_EMAILED"></property>
+			<component name="contact" class="Contact">
+				<property name="isPrimary" column="EB_IS_PRIMARY"></property>
+				<property name="name" type="encryptedstring" column="EB_NAME"></property>
+				<property name="title" type="encryptedstring" column="EB_TITLE"></property>
+				<property name="businessPhone" type="encryptedstring"
+					column="EB_BUSINESS_PHONE"></property>
+				<property name="email" type="encryptedstring" column="EB_EMAIL"></property>
+			</component>
+			<component name="vendorAddress" class="Address">
+				<property name="type" column="VENDOR_ADDRESS_TYPE"></property>
+				<property name="address1" type="encryptedstring" column="VENDOR_ADDRESS_ADDRESS1"
+					length="100"></property>
+				<property name="street" type="encryptedstring" column="VENDOR_ADDRESS_STREET"></property>
+				<property name="city" type="encryptedstring" column="VENDOR_ADDRESS_CITY"></property>
+				<property name="stateOrProvinence" type="encryptedstring"
+					column="VENDOR_ADDRESS_STATE"></property>
+				<property name="zipOrPostalCode" type="encryptedstring"
+					column="VENDOR_ADDRESS_ZIP"></property>
+				<property name="countryOrRegion" type="encryptedstring"
+					column="VENDOR_ADDRESS_COUNTRY"></property>
+				<property name="isSelected" column="VENDOR_ADDRESS_IS_SELECTED"></property>
+			</component>
+			<property name="phone" type="encryptedstring" column="PHONE"></property>
+			<many-to-one name="paymentTerm" class="PaymentTerms"
+				column="PAYMENT_TERM_ID">
+			</many-to-one>
+			<property name="dueDate" column="DUE_DATE"
+				type="com.vimukti.accounter.core.LongUseType"></property>
+			<property name="deliveryDate" column="DELIVERY_DATE"
+				type="com.vimukti.accounter.core.LongUseType"></property>
+			<component name="shippingAddress" class="Address">
+				<property name="type" column="SHIPPING_ADDRESS_TYPE"></property>
+				<property name="address1" type="encryptedstring" column="SHIPPING_ADDRESS_ADDRESS1"
+					length="100"></property>
+				<property name="street" type="encryptedstring" column="SHIPPING_ADDRESS_STREET"></property>
+				<property name="city" type="encryptedstring" column="SHIPPING_ADDRESS_CITY"></property>
+				<property name="stateOrProvinence" type="encryptedstring"
+					column="SHIPPING_ADDRESS_STATE"></property>
+				<property name="zipOrPostalCode" type="encryptedstring"
+					column="SHIPPING_ADDRESS_ZIP"></property>
+				<property name="countryOrRegion" type="encryptedstring"
+					column="SHIPPING_ADDRESS_COUNTRY"></property>
+				<property name="isSelected" column="SHIPPING_ADDRESS_IS_SELECTED"></property>
+			</component>
+			<many-to-one name="shippingTerms" class="ShippingTerms"
+				cascade="save-update" column="SHIPPING_TERMS_ID">
+			</many-to-one>
+			<many-to-one name="shippingMethod" class="ShippingMethod"
+				cascade="save-update" column="SHIPPING_METHOD_ID">
+			</many-to-one>
+			<!-- <list name="enterBills" cascade="save-update,delete" > <key column="TRANSACTION_ID" 
+				/> <list-index column="EBX" /> <one-to-many class="EnterBill" /> </list> -->
+			<many-to-one name="purchaseOrder" class="PurchaseOrder"
+				cascade="save-update" column="PURCHASE_ORDER_ID">
+			</many-to-one>
+			<property name="isBilled" column="IS_BILLED"></property>
+			<property name="balanceDue" column="BALANCE_DUE"></property>
+		</joined-subclass>
+		<joined-subclass name="ReceivePayment" table="RECEIVE_PAYMENT">
+			<key column="ID" />
+			<many-to-one name="customer" class="Customer" cascade="save-update"
+				column="CUSTOMER_ID">
+			</many-to-one>
+			<property name="amount" column="AMOUNT"></property>
+			<property name="customerBalance" column="CUSTOMER_BALANCE"></property>
+			<many-to-one name="depositIn" class="Account" cascade="save-update"
+				column="ACCOUNT_ID">
+			</many-to-one>
+			<property name="checkNumber" column="CHECK_NUMBER" type="encryptedstring"></property>
+			<property name="unUsedCredits" column="UNUSED_CREDITS"></property>
+			<property name="unUsedPayments" column="UNUSED_PAYMENTS"
+				lazy="true"></property>
+			<property name="totalCashDiscount" column="TOTAL_CASH_DISCOUNT"></property>
+			<property name="totalWriteOff" column="TOTAL_WRITE_OFF"></property>
+			<property name="totalAppliedCredits" column="TOTAL_APPLIED_CREDITS"></property>
+			<property name="tdsTotal" column="TDS_TOTAL" />
+			<!-- <many-to-one name="VATCode" column="VAT_CODE_ID" class="TaxCode" -->
+			<!-- > -->
+			<!-- </many-to-one> -->
+			<!-- <property name="VATFraction" column="VAT_FRACTION"></property> -->
+			<many-to-one name="creditsAndPayments" class="CreditsAndPayments"
+				column="CREDITS_AND_PAYMENTS_ID">
+			</many-to-one>
+			<list name="transactionReceivePayment" cascade="save-update,delete,delete-orphan">
+				<key column="TRANSACTION_ID" />
+				<list-index column="IDX" />
+				<one-to-many class="TransactionReceivePayment" />
+			</list>
+		</joined-subclass>
+
+		<!-- <joined-subclass name="SalesOrder" table="SALES_ORDER"> <key column="ID" 
+			/> <many-to-one name="customer" class="Customer" cascade="save-update" column="CUSTOMER_ID"> 
+			</many-to-one> <component name="contact" class="Contact"> <property name="isPrimary" 
+			column="INVOICE_IS_PRIMARY"></property> <property name="name" column="INVOICE_NAME"></property> 
+			<property name="title" column="INVOICE_TITLE"></property> <property name="businessPhone" 
+			column="INVOICE_BUSINESS_PHONE"></property> <property name="email" column="INVOICE_EMAIL"></property> 
+			</component> <component name="billingAddress" class="Address"> <property 
+			name="type" column="BILLING_ADDRESS_TYPE"></property> <property name="address1" 
+			column="BILLING_ADDRESS1" length="100"></property> <property name="street" 
+			column="BILLING_ADDRESS_STREET"></property> <property name="city" column="BILLING_ADDRESS_CITY"></property> 
+			<property name="stateOrProvinence" column="BILLING_ADDRESS_STATE"></property> 
+			<property name="zipOrPostalCode" column="BILLING_ADDRESS_ZIP"></property> 
+			<property name="countryOrRegion" column="BILLING_ADDRESS_COUNTRY"></property> 
+			<property name="isSelected" column="BILLING_ADDRESS_IS_SELECTED"></property> 
+			</component> <component name="shippingAdress" class="Address"> <property 
+			name="type" column="SHIPPING_ADDRESS_TYPE"></property> <property name="address1" 
+			column="SHIPPING_ADDRESS1" length="100"></property> <property name="street" 
+			column="SHIPPING_ADDRESS_STREET"></property> <property name="city" column="SHIPPING_ADDRESS_CITY"></property> 
+			<property name="stateOrProvinence" column="SHIPPING_ADDRESS_STATE"></property> 
+			<property name="zipOrPostalCode" column="SHIPPING_ADDRESS_ZIP"></property> 
+			<property name="countryOrRegion" column="SHIPPING_ADDRESS_COUNTRY"></property> 
+			<property name="isSelected" column="SHIPPING_ADDRESS_IS_SELECTED"></property> 
+			</component> <property name="phone" column="PHONE"></property> <many-to-one 
+			name="salesPerson" class="SalesPerson" column="SALES_PERSON_ID"> </many-to-one> 
+			<many-to-one name="paymentTerm" class="PaymentTerms" column="PAYMENT_TERMS_ID"> 
+			</many-to-one> <many-to-one name="shippingTerm" class="ShippingTerms" column="SHIPPING_TERMS_ID"> 
+			</many-to-one> <many-to-one name="shippingMethod" class="ShippingMethod" 
+			column="SHIPPING_METHOD_ID"> </many-to-one> <property name="dueDate" column="DUE_DATE" 
+			type="com.vimukti.accounter.core.LongUseType"></property> <property name="discountTotal" 
+			column="DISCOUNT_TOTAL"></property> <many-to-one name="priceLevel" class="PriceLevel" 
+			column="PRICE_LEVEL_ID"> </many-to-one> <property name="taxTotal" column="SALES_TAX_AMOUNT"></property> 
+			<many-to-one name="salesTaxItem" class="Item" column="ITEM_ID"> </many-to-one> 
+			<many-to-one name="estimate" class="Estimate" column="ESTIMATE_ID"> </many-to-one> 
+			<property name="customerOrderNumber" column="CUSTOMER_ORDER_NUMBER"></property> 
+			<list name="invoices" cascade="save-update,delete" > <key column="TRANSACTION_ID" 
+			/> <list-index column="IDX" /> <one-to-many class="Invoice" /> </list> </joined-subclass> -->
+		<joined-subclass name="Expense" table="EXPENSE">
+			<key column="ID" />
+			<property name="billFrom" column="BILL_FROM" type="encryptedstring"></property>
+			<property name="billDate" column="BILL_DATE"
+				type="com.vimukti.accounter.core.LongUseType"></property>
+			<property name="status" column="STATUS"></property>
+			<property name="submittedDate" column="SUBMITTED_DATE"
+				type="com.vimukti.accounter.core.LongUseType"></property>
+			<property name="paymentDueDate" column="PAYMENT_DUE_DATE"
+				type="com.vimukti.accounter.core.LongUseType"></property>
+			<property name="reportingDate" column="REPORTING_DATE"
+				type="com.vimukti.accounter.core.LongUseType"></property>
+			<property name="amountDue" column="AMOUNT_DUE"></property>
+			<property name="paidAmount" column="PAID_AMOUNT"></property>
+			<property name="category" column="CATEGORY"></property>
+			<property name="isAuthorised" column="IS_AUTHORISED"></property>
+			<list name="transactionExpenses" cascade="save-update,delete">
+				<key column="EXPENSE_ID" />
+				<list-index column="IDX" />
+				<one-to-many class="TransactionExpense" />
+			</list>
+		</joined-subclass>
+		<joined-subclass name="VendorCreditMemo" table="VENDOR_CREDIT_MEMO">
+			<key column="ID" />
+			<many-to-one name="vendor" class="Vendor" cascade="save-update"
+				column="VENDOR_ID">
+			</many-to-one>
+			<component name="contact" class="Contact">
+				<property name="isPrimary" column="VCM_IS_PRIMARY"></property>
+				<property name="name" type="encryptedstring" column="VCM_NAME"></property>
+				<property name="title" type="encryptedstring" column="VCM_TITLE"></property>
+				<property name="businessPhone" type="encryptedstring"
+					column="VCM_BUSINESS_PHONE"></property>
+				<property name="email" type="encryptedstring" column="VCM_EMAIL"></property>
+			</component>
+			<property name="phone" type="encryptedstring" column="PHONE"></property>
+			<property name="balanceDue" column="BALANCE_DUE"></property>
+		</joined-subclass>
+		<joined-subclass name="PayExpense" table="PAY_EXPENSE">
+			<key column="ID" />
+			<many-to-one name="paidFrom" class="Account" column="ACCOUNT_ID">
+			</many-to-one>
+			<property name="refernceOrChequeNumber" column="REFERENCE_OR_CHEQUE_NUMBER"
+				type="encryptedstring"></property>
+			<list name="transactionPayExpenses" cascade="save-update,delete">
+				<key column="PAY_EXPENSE_ID" />
+				<list-index column="IDX" />
+				<one-to-many class="TransactionPayExpense" />
+			</list>
+		</joined-subclass>
+		<joined-subclass name="WriteCheck" table="WRITE_CHECKS">
+			<key column="ID" />
+			<property name="payToType" column="PAY_TO_TYPE"></property>
+			<property name="inFavourOf" column="IN_FAVOUR_OF" type="encryptedstring"></property>
+			<many-to-one name="bankAccount" class="Account" cascade="save-update"
+				column="ACCOUNT_ID">
+			</many-to-one>
+			<many-to-one name="customer" class="Customer" cascade="save-update"
+				column="CUSTOMER_ID">
+			</many-to-one>
+			<many-to-one name="vendor" class="Vendor" cascade="save-update"
+				column="VENDOR_ID">
+			</many-to-one>
+			<many-to-one name="taxAgency" class="TAXAgency" cascade="save-update"
+				column="TAX_AGENCY_ID">
+			</many-to-one>
+			<component name="address" class="Address">
+				<property name="type" column="WRITECHECK_ADDRESS_TYPE"></property>
+				<property name="address1" type="encryptedstring"
+					column="WRITECHECK_ADDRESS_ADDRESS1" length="100"></property>
+				<property name="street" type="encryptedstring" column="WRITECHECK_ADDRESS_STREET"></property>
+				<property name="city" type="encryptedstring" column="WCHECK_ADDRESS_CITY"></property>
+				<property name="stateOrProvinence" type="encryptedstring"
+					column="WCHECK_ADDRESS_STATE"></property>
+				<property name="zipOrPostalCode" type="encryptedstring"
+					column="WCHECK_ADDRESS_ZIP"></property>
+				<property name="countryOrRegion" type="encryptedstring"
+					column="WCHECK_ADDRESS_COUNTRY"></property>
+				<property name="isSelected" column="WCHECK_ADDRESS_IS_SELECTED"></property>
+			</component>
+			<property name="amount" column="AMOUNT"></property>
+			<property name="toBePrinted" column="TO_BE_PRINTED"></property>
+			<many-to-one name="salesPerson" class="SalesPerson"
+				column="SALES_PERSON_ID">
+			</many-to-one>
+			<set name="estimates" table="WRITE_CHECKS_ESTIMATES">
+				<key column="WRITE_CHECKS_ID"></key>
+				<many-to-many class="Estimate" />
+			</set>
+			<property name="inWords" type="encryptedstring" column="IN_WORDS"></property>
+			<property name="checkNumber" type="encryptedstring" column="CHECK_NUMBER"></property>
+		</joined-subclass>
+		<!-- <joined-subclass name="TransferFund" table="TRANSFER_FUND"> <key column="ID" 
+			/> <many-to-one name="transferFrom" class="Account" cascade="save-update" 
+			column="TRANSFER_FROM"> </many-to-one> <many-to-one name="transferTo" class="Account" 
+			cascade="save-update" column="TRANSFER_TO"> </many-to-one> </joined-subclass> -->
+		<!--<joined-subclass name="IssuePayment" table="ISSUEPAYMENT"> <key column="ID" 
+			/> <many-to-one name="account" class="Account" cascade="save-update" column="ACCOUNT_ID"> 
+			</many-to-one> <property name="checkNumber" column="CHECK_NUMBER"></property> 
+			<list name="transactionIssuePayment" cascade="save-update,delete"> <key column="TRANSACTION_ID" 
+			/> <list-index column="IDX" /> <one-to-many class="TransactionIssuePayment" 
+			/> </list> </joined-subclass> -->
+		<joined-subclass name="JournalEntry" table="JOURNAL_ENTRY">
+			<key column="ID" />
+			<property name="debitTotal" column="DEBIT_TOTAL"></property>
+			<property name="creditTotal" column="CREDIT_TOTAL"></property>
+			<property name="journalEntryType" column="JOURNAL_ENTRY_TYPE"></property>
+			<property name="balanceDue" column="BALANCE_DUE"></property>
+			<many-to-one name="involvedPayee" class="Payee" cascade="save-update"
+				column="PAYEE_ID">
+			</many-to-one>
+			<many-to-one name="involvedAccount" class="Account"
+				cascade="save-update" column="ACCOUNT_ID">
+			</many-to-one>
+			<set name="transactionPayBills" inverse="true" cascade="save-update,delete">
+				<key column="JOURNAL_ENTRY_ID"></key>
+				<one-to-many class="TransactionPayBill" />
+			</set>
+		</joined-subclass>
+		<joined-subclass name="TAXReturn" table="TAX_RETURN">
+			<key column="ID" />
+			<property name="periodStartDate" column="START_DATE"
+				type="com.vimukti.accounter.core.LongUseType"></property>
+			<property name="periodEndDate" column="END_DATE"
+				type="com.vimukti.accounter.core.LongUseType"></property>
+
+			<many-to-one name="taxAgency" class="TAXAgency" cascade="save-update"
+				column="TAX_AGENCY">
+			</many-to-one>
+
+			<property name="balance" column="BALANCE"></property>
+			<property name="totalTAXAmount" column="TAX_TOTAL"></property>
+
+			<list name="taxReturnEntries" cascade="save-update,delete-orphan">
+				<key column="TAX_RETURN_ID" />
+				<list-index column="TEI" />
+				<one-to-many class="TAXReturnEntry" />
+			</list>
+
+		</joined-subclass>
+		<joined-subclass name="TAXAdjustment" table="TAX_ADJUSTMENT">
+			<key column="ID" />
+			<property name="increaseVATLine" column="INCREASE_VAT_LINE"></property>
+			<property name="isFiled" column="IS_FILED"></property>
+			<property name="isSales" column="IS_SALES"></property>
+			<property name="balanceDue" column="BALANCE_DUE"></property>
+			<many-to-one name="adjustmentAccount" class="Account"
+				cascade="save-update" column="ADJUSTMENT_ACCOUNT">
+			</many-to-one>
+			<many-to-one name="taxItem" class="TAXItem" cascade="save-update"
+				column="TAX_ITEM">
+			</many-to-one>
+			<many-to-one name="taxAgency" class="TAXAgency" cascade="save-update"
+				column="TAX_AGENCY_ID">
+			</many-to-one>
+		</joined-subclass>
+
+		<!-- <joined-subclass name="TAXAdjustment" table="TAX_ADJUSTMENT"> <key 
+			column="id" /> <property name="increaseTAXLine" column="INCREASE_TAX_LINE"></property> 
+			<many-to-one name="adjustmentAccount" class="Account" cascade="save-update" 
+			column="ADJUSTMENT_ACCOUNT_ID"> </many-to-one> <many-to-one name="taxAgency" 
+			class="TAXAgency" cascade="save-update" column="TAX_AGENCY_ID"> </many-to-one> 
+			<many-to-one name="journalEntry" class="JournalEntry" cascade="save-update,delete" 
+			column="JOURNAL_ENTRY_ID"> </many-to-one> </joined-subclass> -->
+
+		<joined-subclass name="MakeDeposit" table="MAKE_DEPOSIT">
+			<key column="ID" />
+			<property name="depositTo" column="DEPOSIT_TO"></property>
+			<list name="transactionDepositItems" cascade="save-update,delete-orphan">
+				<key column="MAKE_DEPOSIT_ID" />
+				<list-index column="IDX" />
+				<one-to-many class="TransactionDepositItem" />
+			</list>
+			<set name="estimates" table="DEPOSIT_ESTIMATES">
+				<key column="DEPOSIT_ID"></key>
+				<many-to-many class="Estimate" />
+			</set>
+		</joined-subclass>
+
+		<joined-subclass name="StockAdjustment" table="STOCK_ADJUSTMENT">
+			<key column="ID" />
+			<many-to-one name="company" column="COMPANY_ID" class="Company"
+				not-null="true">
+			</many-to-one>
+
+			<many-to-one name="wareHouse" column="WAREHOUSE" class="Warehouse"
+				not-null="true">
+			</many-to-one>
+
+			<many-to-one name="adjustmentAccount" column="ADJUSTMENT_ACCOUNT"
+				class="Account" not-null="true">
+			</many-to-one>
+
+			<many-to-one name="createdBy" class="User" column="CREATED_BY"
+				not-null="true" />
+			<many-to-one name="lastModifier" class="User" column="LAST_MODIFIER"
+				not-null="true" />
+			<property name="createdDate" column="CREATED_ON" not-null="true" />
+			<property name="lastModifiedDate" column="LAST_MODIFIED_ON"
+				not-null="true" />
+
+		</joined-subclass>
+		<joined-subclass name="PayRun" table="PAY_RUN">
+			<key column="ID" />
+			<many-to-one name="company" column="COMPANY_ID" class="Company"
+				not-null="true">
+			</many-to-one>
+			<many-to-one name="employee" column="EMPLOYEE" class="Employee">
+			</many-to-one>
+			<many-to-one name="employeeGroup" column="EMPLOYEE_GROUP" class="EmployeeGroup">
+			</many-to-one>
+			<property name="payPeriodStartDate" column="PAY_PERIOD_STARTDATE"
+				type="com.vimukti.accounter.core.LongUseType" />
+			<property name="payPeriodEndDate" column="PAY_PERIOD_ENDDATE"
+				type="com.vimukti.accounter.core.LongUseType" />
+			<set name="payEmployee" inverse="true" cascade="save-update,delete-orphan">
+				<key column="PAY_RUN_ID" />
+				<one-to-many class="EmployeePaymentDetails" />
+			</set>
+			<list name="attendanceItems" cascade="save-update,delete-orphan">
+				<key column="ATTENDANCE_MANAGEMENT" />
+				<list-index column="IDX" />
+				<one-to-many class="AttendanceManagementItem" />
+			</list>
+			<property name="noOfWorkingDays" column="NOOF_WORKING_DAYS" not-null="true" />
+			<property name="payments" column="PAYMENTS"></property>
+			<property name="balanceDue" column="BALANCE_DUE"></property>
+		</joined-subclass>
+		<joined-subclass name="PayEmployee" table="PAY_EMPLOYEE">
+			<key column="ID" />
+			<many-to-one name="payAccount" class="Account" cascade="save-update"
+				column="PAY_FROM_ID">
+			</many-to-one>
+			<many-to-one name="employee" class="Employee"
+				column="EMPLOYEE_ID">
+			</many-to-one>
+			<many-to-one name="employeeGroup" class="EmployeeGroup" cascade="save-update"
+				column="EMPLOYEE_GROUP_ID">
+			</many-to-one>
+			<list name="transactionPayEmployee" cascade="save-update,delete,delete-orphan">
+				<key column="TRANSACTION_ID" />
+				<list-index column="IDX" />
+				<one-to-many class="TransactionPayEmployee" />
+			</list>
+		</joined-subclass>
+		
+		<joined-subclass name="StockTransfer" table="WAREHOUSE_TRANSFER">
+			<key column="ID" />	
+			<many-to-one name="fromWarehouse" column="FROM_WAREHOUSE"
+				class="Warehouse">
+			</many-to-one>
+			<many-to-one name="toWarehouse" column="TO_WAREHOUSE"
+				class="Warehouse">
+			</many-to-one>
+	
+			<set name="stockTransferItems" cascade="save-update,delete-orphan">
+				<key column="WAREHOUSE_TRANSFER"></key>
+				<one-to-many class="StockTransferItem" />
+			</set>
+		</joined-subclass>
+	</class>
+
+	<class name="Attachment" table="ATTACHMENTS">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<property name="attachmentId" column="ATTACHMENT_ID"
+			not-null="true"></property>
+		<property name="name" type="encryptedstring" column="NAME"
+			not-null="true"></property>
+		<property name="size" column="SIZE" not-null="true"></property>
+		<many-to-one name="company" column="COMPANY_ID" class="Company" />
+		<property name="version" column="VERSION"></property>
+		<many-to-one name="createdBy" column="CREATED_BY" class="User"
+			not-null="true" />
+		<many-to-one name="lastModifier" column="LAST_MODIFIER"
+			class="User" not-null="true" />
+		<property name="createdDate" column="CREATED_DATE" not-null="true" />
+		<property name="lastModifiedDate" column="LAST_MODIFIED_DATE"
+			not-null="true" />
+	</class>
+
+	<!-- TDSTransactionItem class -->
+	<class name="TDSTransactionItem" table="TDSTRANSACTIONITEM">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<many-to-one name="vendor" column="VENDOR_ID" class="Vendor">
+		</many-to-one>
+		<property name="totalAmount" column="TOTAL_AMOUNT"></property>
+		<property name="tdsAmount" column="TDS_AMOUNT"></property>
+		<property name="surchargeAmount" column="SURCHARGE_AMOUNT"></property>
+		<property name="eduCess" column="EDU_CESS"></property>
+		<property name="totalTax" column="TOTAL_TAX"></property>
+		<property name="taxRate" column="TAX_RATE"></property>
+		<property name="transactionDate" column="TRANSACTION_DATE"
+			type="com.vimukti.accounter.core.LongUseType"></property>
+		<many-to-one name="transaction" column="TRANSACTION_ID"
+			class="Transaction" lazy="false">
+		</many-to-one>
+		<property name="deducteeCode" column="DEDUCTEE_CODE"></property>
+		<property name="remark" type="encryptedstring" column="REMARK"></property>
+	</class>
+
+	<class name="TransactionItem" table="TRANSACTION_ITEM">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<property name="version" column="VERSION"></property>
+		<property name="type" column="TYPE"></property>
+		<many-to-one name="item" class="Item" column="ITEM_ID">
+		</many-to-one>
+		<many-to-one name="customer" class="Customer" column="CUSTOMER_ID">
+		</many-to-one>
+		<many-to-one name="job" class="Job" column="JOB_Id">
+		</many-to-one>
+		<many-to-one name="account" class="Account" column="ACCOUNT_ID">
+		</many-to-one>
+		<many-to-one name="taxCode" class="TAXCode" column="TAX_CODE">
+		</many-to-one>
+		<!-- <many-to-one name="vatItem" class="VATItem" column="VAT_ITEM"> </many-to-one> -->
+		<property name="description" type="encryptedstring" column="DESCRIPTION"></property>
+		<!--<property name="quantity" column="QUANTITY"></property> -->
+		<many-to-one name="wareHouse" class="Warehouse" column="WARE_HOUSE">
+		</many-to-one>
+		<component name="quantity" class="Quantity">
+			<property name="value" column="QTY_VALUE"></property>
+			<many-to-one name="unit" class="Unit" column="QTY_UNIT"></many-to-one>
+		</component>
+		<property name="unitPrice" column="UNIT_PRICE"></property>
+		<property name="discount" column="DISCOUNT"></property>
+		<property name="lineTotal" column="LINE_TOTAL"></property>
+		<property name="updateAmount" column="UPDATE_AMOUNT"></property>
+		<property name="isTaxable" column="IS_TAXABLE"></property>
+		<property name="isBillable" column="IS_BILLABLE"></property>
+		<many-to-one name="transaction" class="Transaction"
+			column="TRANSACTION_ID">
+		</many-to-one>
+		<!-- <many-to-one name="itemBackUp" class="ItemBackUp" cascade="save-update,delete" 
+			column="ITEM_BACK_UP"> </many-to-one> -->
+		<!-- <set name="taxRateCalculationEntriesList" inverse="true" cascade="all-delete-orphan" 
+			> <key column="TRANSACTION_ITEM_ID"></key> <one-to-many class="TaxRateCalculation" 
+			/> </set> -->
+
+		<property name="VATfraction" column="VAT_FRACTION"></property>
+		<property name="usedamt" column="INVOICED"></property>
+		<property name="backOrder" column="BACK_ORDER"></property>
+		<many-to-one name="referringTransactionItem" class="TransactionItem"
+			column="REFERRING_TRANSACTION_ITEM_ID">
+		</many-to-one>
+		<many-to-one name="accounterClass" class="AccounterClass"
+			column="TRANS_ITEM_ACCOUNTER_CLASS">
+		</many-to-one>
+		<property name="isAmountIncludeTAX" column="AMOUNTS_INCLUDE_TAX"></property>
+		<set name="purchases" cascade="save-update,delete,delete-orphan">
+			<key column="TRANSACTION_ITEM_ID"></key>
+			<one-to-many class="InventoryPurchase" />
+		</set>
+		<many-to-one name="effectingAccount" class="Account"
+			column="EFFECTING_ACCOUNT" />
+	</class>
+
+	<class name="TransactionDepositItem" table="TRANSACTION_DEPOSIT_ITEM">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<property name="version" column="VERSION"></property>
+		<many-to-one name="receivedFrom" class="Payee" column="RECEIVED_FROM_ID">
+		</many-to-one>
+		<many-to-one name="account" class="Account" column="ACCOUNT_ID">
+		</many-to-one>
+		<property name="total" column="TOTAL"></property>
+		<property name="refNo" type="encryptedstring" column="REFERNCE_NO"></property>
+		<many-to-one name="customer" class="Customer" column="CUSTOMER_ID">
+		</many-to-one>
+		<many-to-one name="job" class="Job" column="JOB_ID">
+		</many-to-one>
+		<property name="isBillable" column="IS_BILLABLE"></property>
+		<many-to-one name="transaction" class="Transaction"
+			column="TRANSACTION_ID">
+		</many-to-one>
+		<property name="description" type="encryptedstring" column="DESCRIPTION"></property>
+		<many-to-one name="accounterClass" class="AccounterClass"
+			column="TRANS_ITEM_ACCOUNTER_CLASS">
+		</many-to-one>
+		<property name="paymentMethod" type="encryptedstring" column="PAYMENT_METHOD">
+		</property>
+	</class>
+
+	<class name="CreditsAndPayments" table="CREDITS_AND_PAYMENTS">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<property name="memo" type="encryptedstring" column="MEMO"></property>
+		<property name="creditAmount" column="CREDIT_AMOUNT"></property>
+		<property name="balance" column="BALANCE"></property>
+		<many-to-one name="transaction" class="Transaction"
+			column="TRANSACTION_ID">
+		</many-to-one>
+		<many-to-one name="payee" class="Payee" column="PAYEE_ID">
+		</many-to-one>
+		<set name="transactionCreditsAndPayments" cascade="delete">
+			<key column="CREDITS_AND_PAYMENTS_ID"></key>
+			<one-to-many class="TransactionCreditsAndPayments" />
+		</set>
+		<property name="version" type="int">
+			<column name="VERSION" default="0"></column>
+		</property>
+	</class>
+	<class name="TransactionCreditsAndPayments" table="TRANSACTION_CREDITS_AND_PAYMENTS">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<property name="date" column="DATE"
+			type="com.vimukti.accounter.core.LongUseType"></property>
+		<property name="memo" type="encryptedstring" column="MEMO"></property>
+		<property name="amountToUse" column="AMOUNT_TO_USE"></property>
+		<many-to-one name="transactionReceivePayment" class="TransactionReceivePayment"
+			column="TRANSACTION_RECEIVE_PAYMENT_ID">
+		</many-to-one>
+		<many-to-one name="transactionPayBill" class="TransactionPayBill"
+			column="TRANSACTION_PAYBILL_ID">
+		</many-to-one>
+		<many-to-one name="creditsAndPayments" class="CreditsAndPayments"
+			cascade="save-update" column="CREDITS_AND_PAYMENTS_ID">
+		</many-to-one>
+		<property name="isVoid" column="IS_VOID"></property>
+		<property name="version" type="int">
+			<column name="VERSION" default="0"></column>
+		</property>
+	</class>
+	<class name="TransactionPayBill" table="TRANSACTION_PAYBILL">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<many-to-one name="company" column="COMPANY_ID" class="Company">
+		</many-to-one>
+		<property name="version" column="VERSION"></property>
+		<property name="dueDate" column="DUE_DATE"
+			type="com.vimukti.accounter.core.LongUseType"></property>
+		<many-to-one name="enterBill" class="EnterBill" column="ENTER_BILL_ID">
+		</many-to-one>
+		<property name="originalAmount" column="ORIGINAL_AMOUNT"></property>
+		<property name="amountDue" column="AMOUNT_DUE"></property>
+		<property name="discountDate" column="DISCOUNT_DATE"
+			type="com.vimukti.accounter.core.LongUseType"></property>
+		<many-to-one name="discountAccount" class="Account"
+			column="DISCOUNT_ID">
+		</many-to-one>
+		<property name="cashDiscount" column="CASH_DISCOUNT"></property>
+		<property name="appliedCredits" column="APPLIED_CREDITS"></property>
+		<property name="payment" column="PAYMENT"></property>
+		<property name="tdsAmount" column="TDS_AMOUNT"></property>
+		<many-to-one name="payBill" class="PayBill" column="PAYBILL_ID">
+		</many-to-one>
+		<list name="transactionCreditsAndPayments" cascade="save-update,delete">
+			<key column="TRANSACTION_PAYBILL_ID" />
+			<list-index column="IDX" />
+			<one-to-many class="TransactionCreditsAndPayments" />
+		</list>
+		<property name="isVoid" column="IS_VOID"></property>
+		<property name="billNumber" type="encryptedstring" column="BILL_NUMBER"></property>
+		<many-to-one name="journalEntry" class="JournalEntry"
+			cascade="save-update" column="JOURNAL_ENTRY_ID">
+		</many-to-one>
+	</class>
+	
+	<class name="TransactionPayEmployee" table="TRANSACTION_PAY_EMPLOYEE">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<many-to-one name="company" column="COMPANY_ID" class="Company">
+		</many-to-one>
+		<property name="version" column="VERSION"></property>
+		<many-to-one name="payRun" class="PayRun" column="PAY_RUN_ID">
+		</many-to-one>
+		<property name="originalAmount" column="ORIGINAL_AMOUNT"></property>
+		<property name="amountDue" column="AMOUNT_DUE"></property>
+		<property name="payment" column="PAYMENT"></property>
+		<many-to-one name="payEmployee" class="PayEmployee" column="PAY_EMPLOYEE_ID">
+		</many-to-one>
+		<property name="isVoid" column="IS_VOID"></property>
+	</class>
+	
+	<class name="TransactionReceivePayment" table="TRANSACTION_RECEIVE_PAYMENT">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<property name="version" column="VERSION"></property>
+		<property name="dueDate" column="DUE_DATE"
+			type="com.vimukti.accounter.core.LongUseType"></property>
+		<many-to-one name="invoice" class="Invoice" cascade="save-update"
+			column="INVOICE_ID">
+		</many-to-one>
+		<property name="invoiceAmount" column="INVOICE_AMOUNT"></property>
+		<property name="discountDate" column="DISCOUNT_DATE"
+			type="com.vimukti.accounter.core.LongUseType"></property>
+		<many-to-one name="discountAccount" class="Account"
+			cascade="save-update" column="DISCOUNT_ID">
+		</many-to-one>
+		<property name="cashDiscount" column="CASH_DISCOUNT"></property>
+		<many-to-one name="writeOffAccount" class="Account"
+			cascade="save-update" column="WRITE_OFF_ID">
+		</many-to-one>
+		<property name="writeOff" column="WRITE_OFF"></property>
+		<property name="appliedCredits" column="APPLIED_CREDITS"></property>
+		<property name="payment" column="PAYMENT"></property>
+		<many-to-one name="receivePayment" class="ReceivePayment"
+			column="TRANSACTION_ID">
+		</many-to-one>
+		<list name="transactionCreditsAndPayments" cascade="save-update,delete">
+			<key column="TRANSACTION_RECEIVE_PAYMENT_ID" />
+			<list-index column="IDX" />
+			<one-to-many class="TransactionCreditsAndPayments" />
+		</list>
+		<property name="isVoid" column="IS_VOID"></property>
+		<many-to-one name="customerRefund" class="CustomerRefund"
+			cascade="save-update" column="CUSTOMER_REFUND_ID">
+		</many-to-one>
+		<many-to-one name="journalEntry" class="JournalEntry"
+			cascade="save-update" column="JOURNAL_ENTRY_ID">
+		</many-to-one>
+		<property name="number" type="encryptedstring" column="NUMBER"></property>
+	</class>
+	<!--<class name="TransactionIssuePayment" table="TRANSACTION_ISSUE_PAYMENT"> 
+		<id name="id" column="ID"> <generator class="identity" /> </id> <property 
+		name="date" column="DATE" type="com.vimukti.accounter.core.LongUseType"></property> 
+		<many-to-one name="writeCheck" class="WriteCheck" column="WRITE_CHECK_ID"> 
+		</many-to-one> <many-to-one name="customerRefund" class="CustomerRefund" 
+		column="CUSTOMER_REFUND_ID"> </many-to-one> <many-to-one name="payBill" class="PayBill" 
+		column="PAYBILL_ID"> </many-to-one> <many-to-one name="creditCardCharge" 
+		class="CreditCardCharge" column="CREDIT_CARD_CHARGE_ID"> </many-to-one> <many-to-one 
+		name="cashPurchase" class="CashPurchase" column="CASH_PURCHASE_ID"> </many-to-one> 
+		<many-to-one name="paySalesTax" class="PayTAX" column="PAY_SALES_TAX_ID"> 
+		</many-to-one> <property name="number" column="NUMBER"></property> <property 
+		name="name" column="NAME"></property> <property name="memo" type="text" column="MEMO"></property> 
+		<property name="amount" column="AMOUNT"></property> <many-to-one name="transaction" 
+		class="Transaction" column="TRANSACTION_ID"> </many-to-one> <property name="version" 
+		column="VERSION"></property> </class> -->
+	<class name="TransactionPayTAX" table="TRANSACTION_PAY_TAX">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<many-to-one name="taxAgency" class="TAXAgency" cascade="save-update"
+			column="TAX_AGENCY_ID">
+		</many-to-one>
+		<property name="amountToPay" column="AMOUNT_TO_PAY"></property>
+		<property name="taxDue" column="TAX_DUE"></property>
+		<many-to-one name="taxReturn" class="TAXReturn" column="VAT_RETURN_ID">
+		</many-to-one>
+		<property name="filedDate" column="FILED_DATE"
+			type="com.vimukti.accounter.core.LongUseType"></property>
+		<many-to-one name="payTAX" class="PayTAX" column="PAY_TAX_ID">
+		</many-to-one>
+		<property name="version" column="VERSION"></property>
+	</class>
+	<class name="TransactionReceiveVAT" table="TRANSACTION_RECEIVE_VAT">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<many-to-one name="taxAgency" class="TAXAgency" cascade="save-update"
+			column="TAX_AGENCY_ID">
+		</many-to-one>
+		<property name="amountToReceive" column="AMOUNT_TO_RECEIVE"></property>
+		<property name="taxDue" column="TAX_DUE"></property>
+		<many-to-one name="taxReturn" class="TAXReturn" column="TAX_RETURN_ID">
+		</many-to-one>
+		<many-to-one name="receiveVAT" class="ReceiveVAT" column="RECEIVE_VAT_ID">
+		</many-to-one>
+		<property name="version" column="VERSION"></property>
+	</class>
+	<class name="TAXReturnEntry" table="TAX_RETURN_ENTRY">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<many-to-one name="transaction" class="Transaction"
+			column="TRANSACTION_ID">
+		</many-to-one>
+		<many-to-one name="taxItem" class="TAXItem" column="TAXITEM_ID">
+		</many-to-one>
+		<many-to-one name="taxAgency" class="TAXAgency" column="TAXAGENCY_ID">
+		</many-to-one>
+		<many-to-one name="taxReturn" class="TAXReturn" column="TAX_RETURN_ID">
+		</many-to-one>
+		<property name="grassAmount" column="GRASS_AMOUNT"></property>
+		<property name="netAmount" column="NET_AMOUNT"></property>
+		<property name="taxAmount" column="TAX_AMOUNT"></property>
+		<property name="version" column="VERSION"></property>
+		<property name="isTAXGroupEntry" column="IS_TAX_GROUP_ENTRY"></property>
+		<property name="transactionDate" column="TRANSACTION_DATE"
+			type="com.vimukti.accounter.core.LongUseType"></property>
+		<property name="transactionType" column="TRANSACTION_TYPE"></property>
+		<property name="transactionCategory" column="TRANSACTION_CATEGORY"></property>
+	</class>
+	<!-- <class name="PayTAXEntries" table="PAY_TAX_ENTRIES"> <id name="id" 
+		column="ID"> <generator class="identity" /> </id> <many-to-one name="transaction" 
+		class="Transaction" column="TRANSACTION_ID"> </many-to-one> <many-to-one 
+		name="taxCode" class="TAXCode" column="TAXCODE_ID"> </many-to-one> <many-to-one 
+		name="taxAgency" class="TAXAgency" column="TAXAGENCY_ID"> </many-to-one> 
+		<property name="amount" column="AMOUNT"></property> <property name="balance" 
+		column="BALANCE"></property> <property name="version" column="VERSION"></property> 
+		</class> -->
+	<class name="TransactionMakeDepositEntries" table="TRANSACTION_MAKE_DEPOSIT_ENTRIES">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<property name="type" column="TYPE"></property>
+		<many-to-one name="transaction" class="Transaction"
+			column="TRANSACTION_ID">
+		</many-to-one>
+		<many-to-one name="account" class="Account" column="ACCOUNT_ID">
+		</many-to-one>
+		<property name="amount" column="AMOUNT"></property>
+		<property name="balance" column="BALANCE"></property>
+	</class>
+	<class name="TransactionExpense" table="TRANSACTION_EXPENSE">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<property name="type" column="TYPE"></property>
+		<many-to-one name="item" class="Item" column="ITEM_ID">
+		</many-to-one>
+		<many-to-one name="account" class="Account" column="ACCOUNT_ID">
+		</many-to-one>
+		<property name="description" type="encryptedstring" column="DESCRIPTION"></property>
+		<property name="quantity" column="QUANTITY"></property>
+		<property name="unitPrice" column="UNIT_PRICE"></property>
+		<property name="amount" column="AMOUNT"></property>
+		<many-to-one name="expense" class="Expense" column="EXPENSE_ID">
+		</many-to-one>
+	</class>
+	<class name="TransactionPayExpense" table="TRANSACTION_PAY_EXPENSE">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<many-to-one name="expense" class="Expense" cascade="save-update"
+			column="EXPENSE_ID">
+		</many-to-one>
+		<property name="payment" column="PAYMENT"></property>
+		<many-to-one name="payExpense" class="PayExpense" column="PAY_EXPENSE_ID">
+		</many-to-one>
+	</class>
+	<class name="RecurringTransaction" table="RECURRING_TRANSACTION">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<many-to-one name="company" column="COMPANY_ID" class="Company">
+		</many-to-one>
+
+		<property name="occurencesCount" column="OCCURRENCES_COUNT"></property>
+		<property name="occurencesCompleted" column="OCCURRENCES_COMPLETED"></property>
+
+		<property name="intervalType" column="INTERVAL_TYPE"></property>
+		<property name="intervalPeriod" column="INTERVAL_PERIOD"></property>
+		<property name="dueDateType" column="DUE_DATE_TYPE"></property>
+		<property name="dueDateValue" column="DUE_DATE_VALUE"></property>
+		<property name="actionType" column="ACTION_TYPE"></property>
+		<property name="name" type="encryptedstring" column="NAME"></property>
+		<property name="endDateType" column="END_DATE_TYPE"></property>
+		<property name="stopped" column="STOPPED"></property>
+
+		<property name="startDate" column="START_DATE"
+			type="com.vimukti.accounter.core.LongUseType"></property>
+		<property name="endDate" column="END_DATE"
+			type="com.vimukti.accounter.core.LongUseType"></property>
+		<property name="nextScheduleOn" column="NEXT_SCHEDULE_ON"
+			type="com.vimukti.accounter.core.LongUseType"></property>
+
+		<property name="prevScheduleOn" column="PREV_SCHEDULE_ON"
+			type="com.vimukti.accounter.core.LongUseType"></property>
+
+		<many-to-one name="transaction" column="TRANSACTION_ID"
+			unique="true" not-null="true" cascade="save-update,delete-orphan" />
+
+		<many-to-one name="createdBy" column="CREATED_BY" class="User"
+			not-null="true"></many-to-one>
+		<many-to-one name="lastModifier" column="LAST_MODIFIER"
+			class="User" not-null="true"></many-to-one>
+		<property name="createdDate" column="CREATED_DATE" not-null="true" />
+		<property name="lastModifiedDate" column="LAST_MODIFIED_DATE"
+			not-null="true" />
+		<property name="weekDay" column="WEEK_DAY"></property>
+		<property name="dayOfMonth" column="DAY_OF_MONTH"></property>
+		<property name="weekOfMonth" column="WEEK_OF_MONTH"></property>
+		<property name="month" column="MONTH_OF_YR"></property>
+		<property name="unbilledChargesEnabled" column="UNBILLED_CHARGES"></property>
+		<property name="alertWhenEnded" column="ALERT_WHEN_ENDED"></property>
+		<property name="notifyCreatedTransaction" column="NOTIFY_CREATED_TRANSACTION"></property>
+		<property name="daysInAdvanceToCreate" column="DAYS_IN_ADVANCE"></property>
+		<property name="daysBeforeToRemind" column="DAYS_BEFORE_REMIND"></property>
+		<property name="type" column="RECURRING_TYPE"></property>
+		<property name="status" column="STATUS"></property>
+		<set name="reminders" inverse="true" cascade="all-delete-orphan"
+			lazy="false">
+			<key column="RECURRING_TRANSACTION"></key>
+			<one-to-many class="Reminder" />
+		</set>
+	</class>
+
+
+	<class name="TransactionLog" table="TRANSACTION_HISTORY">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<many-to-one name="company" column="COMPANY_ID" class="Company">
+		</many-to-one>
+		<property name="type" column="TYPE"></property>
+		<property name="userName" type="encryptedstring" column="USER_NAME"></property>
+		<property name="time" column="TIME"></property>
+		<property name="description" type="encryptedstring" column="DESCRIPTION"></property>
+		<many-to-one name="transaction" class="Transaction"
+			column="TRANSACTION_ID">
+		</many-to-one>
+	</class>
+	
+	<class name="PayeeUpdate" table="PAYEE_UPDATE">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<many-to-one name="company" column="COMPANY_ID" class="Company"
+			not-null="true">
+		</many-to-one>
+		<many-to-one name="payee" class="Payee"
+			column="PAYEE"/>
+		<many-to-one name="transaction" class="Transaction"
+			column="TRANSACTION"/>
+		<property name="amount" column="AMOUNT"/>
+		<many-to-one name="createdBy" column="CREATED_BY" class="User"
+			not-null="true"></many-to-one>
+		<many-to-one name="lastModifier" column="LAST_MODIFIER"
+			class="User" not-null="true"></many-to-one>
+		<property name="createdDate" column="CREATED_DATE" not-null="true" />
+		<property name="lastModifiedDate" column="LAST_MODIFIED_DATE"
+			not-null="true" />
+	</class>
+	
+	<class name="ItemUpdate" table="ITEM_UPDATE">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<many-to-one name="company" column="COMPANY_ID" class="Company"
+			not-null="true">
+		</many-to-one>
+		
+		<many-to-one name="item" class="Item"
+			column="ITEM"/>
+		<many-to-one name="transaction" class="Transaction"
+			column="TRANSACTION"/>
+		<many-to-one name="warehouse" class="Warehouse"
+			column="WARE_HOUSE"/>
+		<component name="quantity" class="Quantity">
+			<property name="value" column="QTY_VALUE"></property>
+			<many-to-one name="unit" class="Unit" column="QTY_UNIT"></many-to-one>
+		</component>
+		<property name="unitPrice" column="UNIT_PRICE"/>
+		
+		<many-to-one name="createdBy" column="CREATED_BY" class="User"
+			not-null="true"></many-to-one>
+		<many-to-one name="lastModifier" column="LAST_MODIFIER"
+			class="User" not-null="true"></many-to-one>
+		<property name="createdDate" column="CREATED_DATE" not-null="true" />
+		<property name="lastModifiedDate" column="LAST_MODIFIED_DATE"
+			not-null="true" />
+	</class>
+	
+	<class name="InventoryHistory" table="INVENTORY_HISTORY">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<many-to-one name="company" column="COMPANY_ID" class="Company"
+			not-null="true">
+		</many-to-one>
+		
+		<many-to-one name="item" class="Item" column="ITEM" not-null="true"/>
+		<many-to-one name="transaction" class="Transaction"	column="TRANSACTION" 
+		    not-null="true"/>
+		<many-to-one name="payee" class="Payee"	column="PAYEE"/>
+		
+		<component name="quantity" class="Quantity">
+			<property name="value" column="QTY_VALUE"></property>
+			<many-to-one name="unit" class="Unit" column="QTY_UNIT"></many-to-one>
+		</component>
+		<property name="unitPrice" column="UNIT_PRICE"/>
+		<property name="assetValue" column="ASSET_VALUE"/>
+		
+		<many-to-one name="createdBy" column="CREATED_BY" class="User"
+			not-null="true"></many-to-one>
+		<many-to-one name="lastModifier" column="LAST_MODIFIER"
+			class="User" not-null="true"></many-to-one>
+		<property name="createdDate" column="CREATED_DATE" not-null="true" />
+		<property name="lastModifiedDate" column="LAST_MODIFIED_DATE"
+			not-null="true" />
+		<many-to-one name="warehouse" class="Warehouse" column="WAREHOUSE"/>
+	</class>
+	
+	
+</hibernate-mapping>

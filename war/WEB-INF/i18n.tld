@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib>
+<tlibversion>1.0</tlibversion>
+<jspversion>1.1</jspversion>
+<shortname>i18n</shortname>
+<info>i18n for Accounter</info>
+<uri>http://accounterlive.com/jsp/taglib/substr</uri>
+<tag>
+    <name>i18n</name>
+    <tagclass>com.vimukti.accounter.web.server.i18n.I18nTagHandler</tagclass>
+    <info>Substring function.</info>
+    <attribute>
+      <name>msg</name>
+      <required>true</required>
+      </attribute>
+</tag>
+</taglib>

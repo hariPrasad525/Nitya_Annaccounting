@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<patterns>
+	<pattern login="true">
+		<input>reports</input>
+		<outputs>
+			<command title="companyFinancialReports" />
+			<command title="customersandReceivablesReports" />
+			<command title="salesReports" />
+			<command title="vendorsandPayableReports" />
+			<command title="purchasesReports" />
+			<command title="payrollReports" />
+			<command if="trackTax" title="vATReports" />
+		</outputs>
+	</pattern>
+
+	<pattern login="true" if="payrollEnabled">
+		<input>payrollReports</input>
+		<outputs>
+			<command title="paySlipSummary" />
+			<command title="payslipDetail" />
+			<command title="payHeadSummaryReport" />
+			<command title="payHeadDetailReport" />
+		</outputs>
+	</pattern>
+	<pattern login="true">
+		<input>companyFinancialReports</input>
+		<outputs>
+			<text name="companyFinancialReports" />
+			<command title="profitandLoss" />
+			<command title="balanceSheet" />
+			<command title="cashFlowReport" />
+			<command title="trialBalance" />
+			<command title="transactionDetailByAccount" />
+			<command title="expenseReport" />
+			<command if="trackTax" title="transactionDetailedbyTaxItem" />
+		</outputs>
+	</pattern>
+
+	<pattern login="true">
+		<input>customersandReceivablesReports</input>
+		<input>customerreports</input>
+		<outputs>
+			<text name="customersandReceivablesReports" />
+			<command title="arAgeingSummary" />
+			<command title="arAgeingDetail" />
+			<command title="customerStatement" />
+			<command title="customerTransactionHistory" />
+		</outputs>
+	</pattern>
+
+	<pattern login="true">
+		<input>salesReports</input>
+		<outputs>
+			<text name="salesReports" />
+			<command title="salesByCustomerSummary" />
+			<command title="salesByCustomerDetail" />
+			<command title="salesByItemSummary" />
+			<command title="salesByItemDetail" />
+			<command if="salesOrderEnable" title="salesOrderReport" />
+		</outputs>
+	</pattern>
+
+	<pattern login="true">
+		<input>vendorsandPayableReports</input>
+		<input>vendorReports</input>
+		<outputs>
+			<command title="apAgeingSummary" />
+			<command title="apAgeingDetail" />
+			<command title="vendorTransactionHistory" />
+		</outputs>
+	</pattern>
+
+	<pattern login="true">
+		<input>purchasesReports</input>
+		<outputs>
+			<text name="purchasesReports" />
+			<command title="purchaseByVendorSummary" />
+			<command title="purchaseByVendorDetail" />
+			<command title="purchaseByItemSummary" />
+			<command title="purchaseByItemDetail" />
+			<command if="purchaseorderEnabled" title="purchaseOrderReport" />
+		</outputs>
+	</pattern>
+
+	<pattern login="true" if="trackTax">
+		<input>vATReports</input>
+		<input>tAXReports</input>
+		<outputs>
+			<command if="isUK" title="priorVATReturns" />
+			<command if="isUK" title="vatDetail" />
+			<command if="isNotUK" title="taxItemDetailReport" />
+			<command if="isUK" title="vat100" />
+			<command if="isUK" title="vatExceptionDetail" />
+			<command if="isNotUK" title="taxItemExceptionDetailReport" />
+			<command if="isUK" title="uncategorisedVATAmounts" />
+			<command if="isUK" title="ecSalesList" />
+			<command if="isUK" title="vatItemSummary" />
+			<command if="isNotUK" title="vatItemSummary" />
+		</outputs>
+	</pattern>
+</patterns>

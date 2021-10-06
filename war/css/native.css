@@ -1,0 +1,38 @@
+/** Add css rules here for your application. */
+	/** This css file only for MAC application of accounter  */
+	/*
+ *	@author A.Praveena
+ *
+ */
+
+body{
+   width: 100% !important;
+   margin:0px!important;
+}
+.page_header,.help-panel,.bottom-corners, .XTRA_HELP_PANEL,.MENU_BAR_BG,.dialog_help_icon{
+   display: none !important;
+}
+.noScroll,.main-finance-window{
+   background:none !important;
+   padding:0px !important;
+   width:100%;
+}
+.scroll-panel,.abstract_base_view,.financeWindow,.setting-class-panel{
+   width:100% !important;	
+}
+body,div, table td, select,.gwt-Button,textarea,input,label,.ReportGrid tr td,.gwt-Label,form#contactForm .submit,
+form#contactForm input, textarea,.main-finance-window,.gwt-MenuBar-vertical .gwt-MenuItem,.gwt-DialogBox,#mainFooter,.popup,.setup_panel,.gwt-PopupPanel{
+	font-size:13px;
+}
+.editheader td div,.gridHeader td{
+	font-size:14px !important;
+}
+.general-setting-invoice{
+	padding:0px !important;
+}
+.contact-deatails-panel{
+	width:100px !important;
+}
+.setting-class-panel{
+	padding:10px 0px !important;
+}

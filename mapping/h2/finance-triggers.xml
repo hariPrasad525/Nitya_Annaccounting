@@ -1,0 +1,242 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+                "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.vimukti.accounter.core"
+	default-access="field">
+	<sql-query name="transactionsCreatedCountTrigger">
+	<![CDATA[ 
+	DROP TRIGGER  IF EXISTS  transactionsCreatedCount ON TRANSACTION ;
+	 
+	CREATE OR REPLACE FUNCTION transactionsCreatedCount() RETURNS trigger AS $transactionsCreatedCount$
+	DECLARE
+		       userId         bigint;
+		       clientId       bigint;
+	BEGIN
+	    userId=NEW.CREATED_BY;
+		clientId=(select client_id from users u where u.id=userId);
+        IF (TG_OP ='INSERT') THEN
+           UPDATE CLIENT SET TRANSACTIONS_CREATED=TRANSACTIONS_CREATED +1  WHERE id = clientId;
+		   RETURN NEW;
+        END IF;
+           RETURN NULL;
+	END;
+		$transactionsCreatedCount$ LANGUAGE plpgsql;
+   
+	CREATE TRIGGER transactionsCreatedCount AFTER INSERT  ON TRANSACTION FOR each	ROW EXECUTE PROCEDURE transactionsCreatedCount();
+   ]]>
+	</sql-query>
+
+	<sql-query name="transactionsUpdateCountTrigger">
+	<![CDATA[ 
+	DROP TRIGGER  IF EXISTS  transactionsUpdateCount ON TRANSACTION ;
+	 
+	CREATE OR REPLACE FUNCTION transactionsUpdateCount() RETURNS trigger AS $transactionsUpdateCount$
+	DECLARE
+		       userId         bigint;
+		       clientId       bigint;
+	BEGIN
+	     userId=NEW.CREATED_BY;
+		 clientId=(select client_id from users u where u.id=userId);
+        IF (TG_OP ='UPDATE') THEN
+         UPDATE CLIENT SET TRANSACTIONS_UPDATE=TRANSACTIONS_UPDATE +1  WHERE id = clientId;
+		 RETURN NEW;
+        END IF;
+         RETURN NULL;
+	END;
+		$transactionsUpdateCount$ LANGUAGE plpgsql;
+   
+	CREATE TRIGGER transactionsUpdateCount BEFORE  UPDATE  ON TRANSACTION FOR each	ROW EXECUTE PROCEDURE transactionsUpdateCount();
+   ]]>
+	</sql-query>
+	<sql-query name="companiesCountTrigger">
+	<![CDATA[ 
+	            DROP TRIGGER  IF EXISTS  companiesCount ON COMPANY;
+				CREATE OR REPLACE FUNCTION companiesCount() RETURNS trigger AS $companiesCount$
+				 DECLARE
+				       userID          bigint;
+				       clientID        bigint;
+				BEGIN 
+				IF (TG_OP ='INSERT') THEN
+					  userID=NEW.CREATED_BY;
+					  clientID=(select client_id from users  u where u.id=userID);
+					  UPDATE CLIENT SET COMPANIES=COMPANIES +1  WHERE id = clientID;
+					  RETURN NEW;
+			    END IF;
+                RETURN NULL;
+				END;
+				$companiesCount$ LANGUAGE plpgsql;
+				CREATE TRIGGER companiesCount AFTER INSERT  ON COMPANY FOR each ROW EXECUTE PROCEDURE companiesCount();
+			]]>
+	</sql-query>
+
+	<sql-query name="lastClientUpDateTrigger">
+	<![CDATA[
+				DROP TRIGGER  IF EXISTS  lastClientUpDate ON CLIENT; 
+				CREATE OR REPLACE FUNCTION lastClientUpDate() RETURNS trigger AS $lastClientUpDate$
+				BEGIN
+				IF(TG_OP = 'UPDATE') THEN
+						NEW.UPDATE_DATE = (SELECT ( CAST(TO_CHAR((SELECT CURRENT_TIMESTAMP), 'YYYYMMDD')AS  BIGINT)));
+						RETURN NEW;
+				END IF;
+				  RETURN NULL;
+				END;
+				$lastClientUpDate$ LANGUAGE plpgsql;
+				CREATE TRIGGER lastClientUpDate BEFORE UPDATE ON CLIENT FOR each ROW EXECUTE PROCEDURE lastClientUpDate();
+			]]>
+	</sql-query>
+
+	<sql-query name="changedPasswordCountTrigger">
+	<![CDATA[
+				DROP TRIGGER  IF EXISTS  changedPasswordCount ON CLIENT; 
+				CREATE OR REPLACE FUNCTION changedPasswordCount() RETURNS trigger AS $changedPasswordCount$
+				 DECLARE
+				 total integer;
+				BEGIN
+				IF(TG_OP = 'UPDATE') THEN
+					IF ( OLD.PASSWORD != NEW.PASSWORD) THEN
+						total=NEW.CHANGED_PASSWORD;
+		                NEW.CHANGED_PASSWORD =total+1;
+		                RETURN NEW;
+	                END IF;
+                END IF;
+                 RETURN NULL;
+				END;
+				$changedPasswordCount$ LANGUAGE plpgsql;
+				CREATE TRIGGER changedPasswordCount AFTER UPDATE ON CLIENT FOR each ROW EXECUTE PROCEDURE changedPasswordCount();
+			]]>
+	</sql-query>
+	<sql-query name="noOfUsersPerCompanyCountTrigger">
+	<![CDATA[
+				DROP TRIGGER  IF EXISTS  noOfUsersPerCompanyCount ON USERS; 
+				CREATE OR REPLACE FUNCTION noOfUsersPerCompanyCount() RETURNS trigger AS $noOfUsersPerCompanyCount$
+				 DECLARE
+				  totalCompanies bigint;
+				   companyId  bigint;
+				BEGIN
+				 IF(TG_OP = 'INSERT') THEN
+				     companyId=NEW.COMPANY_ID;
+					 totalCompanies = (SELECT COUNT(*) FROM USERS WHERE COMPANY_ID=companyId);
+					 UPDATE COMPANY SET NUMBER_OF_USERS= totalCompanies WHERE ID=companyId;
+					 RETURN NEW;
+			     END IF;
+                 RETURN NULL;
+				END;
+				$noOfUsersPerCompanyCount$ LANGUAGE plpgsql;
+				CREATE TRIGGER noOfUsersPerCompanyCount AFTER INSERT ON USERS FOR each ROW EXECUTE PROCEDURE noOfUsersPerCompanyCount();
+			]]>
+	</sql-query>
+
+	<sql-query name="noOfTRansactionPerCompanyCountTrigger">
+	<![CDATA[
+	 			 DROP TRIGGER  IF EXISTS  noOfTransactionPerCompanyCount ON TRANSACTION; 
+				 CREATE OR REPLACE FUNCTION noOfTransactionPerCompanyCount() RETURNS trigger AS $noOfTransactionPerCompanyCount$
+				 DECLARE
+					  totalTransactions bigint;
+					  companyId  bigint;
+				 BEGIN
+				 IF(TG_OP = 'INSERT') THEN
+					 companyId=NEW.COMPANY_ID;
+					 totalTransactions = (SELECT COUNT(*) FROM TRANSACTION WHERE COMPANY_ID=companyId);
+					 UPDATE COMPANY SET TRANSACTIONS_COUNT= totalTransactions WHERE ID=companyId;
+                     RETURN NEW;
+                  END IF;
+                 RETURN NULL;
+				END;
+				$noOfTransactionPerCompanyCount$ LANGUAGE plpgsql;
+				CREATE TRIGGER noOfTransactionPerCompanyCount AFTER INSERT ON TRANSACTION FOR each ROW EXECUTE PROCEDURE noOfTransactionPerCompanyCount();
+			]]>
+	</sql-query>
+
+	<sql-query name="userInsertTrigger">
+	<![CDATA[
+				DROP TRIGGER  IF EXISTS  userInsert ON USERS; 
+				CREATE OR REPLACE FUNCTION userInsert() RETURNS trigger AS $userInsert$
+				DECLARE
+					  clientid      bigint;
+				BEGIN
+				clientid=NEW.CLIENT_ID;
+				UPDATE CLIENT CL SET PREMIUM_COMPANIES= (SELECT COUNT(*) FROM COMPANY C LEFT JOIN USERS U ON U.ID=C.CREATED_BY LEFT JOIN CLIENT CL2 ON CL2.ID=U.CLIENT_ID LEFT JOIN CLIENT_SUBSCRIPTION CS ON CL2.CLIENT_SUBSCRIPTION=CS.ID LEFT JOIN SUBSCRIPTION S ON S.ID=CS.SUBSCRIPTION_ID WHERE S.TYPE=3 AND C.ID IN (SELECT COMPANY_ID FROM USERS U2 WHERE U2.CLIENT_ID=CL.ID AND U2.IS_DELETED=FALSE))WHERE CL.ID=clientid;
+				 RETURN NEW;
+				END;
+				$userInsert$ LANGUAGE plpgsql;
+				CREATE TRIGGER userInsert AFTER INSERT  ON USERS FOR each ROW EXECUTE PROCEDURE userInsert();
+			]]>
+	</sql-query>
+
+	<sql-query name="clientUpdateTrigger">
+	<![CDATA[
+				DROP TRIGGER  IF EXISTS  clientUpdate ON CLIENT; 
+				CREATE OR REPLACE FUNCTION clientUpdate() RETURNS trigger AS $clientUpdate$
+				DECLARE
+					  clientid      bigint;
+				BEGIN
+				clientid=NEW.ID;
+				NEW.PREMIUM_COMPANIES= (SELECT COUNT(*) FROM COMPANY C LEFT JOIN USERS U ON U.ID=C.CREATED_BY LEFT JOIN CLIENT CL2 ON CL2.ID=U.CLIENT_ID LEFT JOIN CLIENT_SUBSCRIPTION CS ON CL2.CLIENT_SUBSCRIPTION=CS.ID LEFT JOIN SUBSCRIPTION S ON S.ID=CS.SUBSCRIPTION_ID WHERE S.TYPE=3 AND C.ID IN (SELECT COMPANY_ID FROM USERS U2 WHERE U2.CLIENT_ID=clientid AND U2.IS_DELETED=FALSE));
+				 RETURN NEW;
+				END;
+				$clientUpdate$ LANGUAGE plpgsql;
+				CREATE TRIGGER clientUpdate AFTER UPDATE ON CLIENT FOR each ROW EXECUTE PROCEDURE clientUpdate();
+			]]>
+	</sql-query>
+	<sql-query name="updateAccounterClassPathTrigger">
+	<![CDATA[
+				DROP TRIGGER  IF EXISTS  updatePathCount ON ACCOUNTER_CLASS; 
+				CREATE OR REPLACE FUNCTION updatePathCount() RETURNS trigger AS $updatePathCount$
+				DECLARE
+						companyId bigint;
+						path integer;
+						parentcount integer;
+						count integer;
+						pathName text;  
+				BEGIN
+				 		companyId=NEW.COMPANY_ID;
+				IF( NEW.PARENT_ID  IS NULL) THEN
+						 path = (SELECT CLASS_COUNT FROM COMPANY WHERE ID=companyId);
+						 New.PATH=path+1;
+						 UPDATE COMPANY SET CLASS_COUNT =path+1 ;
+                      RETURN NEW;
+                ELSE 
+	                 pathName=(SELECT AC.PATH FROM ACCOUNTER_CLASS AC WHERE AC.ID=NEW.PARENT_ID); 
+                     count=(SELECT count(*) FROM ACCOUNTER_CLASS AC WHERE AC.PARENT_ID=NEW.PARENT_ID);
+                     count=count+1;
+	                 NEW.PATH=(pathName || '.' || (SELECT CAST(count as text)));
+	                 RETURN NEW;
+                END IF;
+                   RETURN NULL;
+				END;
+				$updatePathCount$ LANGUAGE plpgsql;
+				CREATE TRIGGER updatePathCount BEFORE INSERT ON ACCOUNTER_CLASS FOR each ROW EXECUTE PROCEDURE updatePathCount();
+			]]>
+	</sql-query>
+	<sql-query name="updateItemPathTrigger">
+	<![CDATA[
+				DROP TRIGGER  IF EXISTS  updateItemPath ON ITEM; 
+				CREATE OR REPLACE FUNCTION updateItemPath() RETURNS trigger AS $updateItemPath$
+				DECLARE
+					  path integer;
+					  count integer;
+					  pathName text;  
+							  
+				BEGIN
+				IF( NEW.PARENT_ID  IS NULL) THEN
+						 path = (SELECT ITEM_COUNT FROM COMPANY WHERE ID =NEW.COMPANY_ID);
+						 New.PATH=path+1;
+						 UPDATE COMPANY SET ITEM_COUNT =path+1 ;
+                      RETURN NEW;
+                ELSE 
+				 pathName=(SELECT I.PATH FROM ITEM I WHERE I.ID=NEW.PARENT_ID); 
+                     count= (SELECT count(*) FROM ITEM I WHERE I.PARENT_ID=NEW.PARENT_ID);
+                     count=count+1;
+	                 NEW.PATH=(pathName || '.' || (SELECT CAST(count as text)));
+	                 RETURN NEW;
+                END IF;
+                   RETURN NULL;
+				END;
+				$updateItemPath$ LANGUAGE plpgsql;
+				CREATE TRIGGER updateItemPath BEFORE INSERT ON ITEM FOR each ROW EXECUTE PROCEDURE updateItemPath();
+			]]>
+	</sql-query>
+
+</hibernate-mapping>
+	

@@ -1,0 +1,172 @@
+body{
+margin:0;
+padding:0;
+font-family:'Bookman Old Style', serif;
+font-size:15px;
+background: #c0d0e0;
+}
+h1, h2, h3, h4, h5, h6, form, td{
+padding: 0;
+margin:0;
+}
+h2{
+font-size:15px;
+}
+th{
+font-weight:bold;
+}
+input, select, textarea{
+/*border: 1px solid #AAA;
+height:25px;*/
+}
+input{
+width: 100%;
+margin: 0 3px 3px 0;
+}
+input[type="text"],input[type="password"]{
+	border: 1px solid #AAA !important;
+}
+input,select{
+	height: 25px;
+}
+textarea{
+height:60px;
+width:100%;
+}
+table{
+table-layout: fixed;
+}
+.msg, .task, .event,.workspacechanges{
+	width: 100%;
+	}
+.msg td{
+	overflow: hidden;
+	}
+.header{
+background: #6d88a3 url(images/bar-image.png) repeat-x scroll 0 0 ;
+padding:0 5px;
+vertical-align: middle;
+}
+.header a{
+color: #FFF;
+}
+.header img{
+	margin-top:3px;
+}
+.header a:hover{
+color: #FFF;
+}
+.right{
+float: right;
+}
+.logo{
+background:url(images/logo-mobile.png) no-repeat scroll 0 50% ;
+padding-left: 47px;
+}
+a{
+text-decoration: none;
+}
+a, a:hover{
+color: blue;
+}
+a:hover{
+text-decoration: underline;
+}
+div.content{
+padding:0 5px;
+}
+table.content, .content1, .content2{
+width:100%;
+table-layout: fixed;
+padding:0 5px;
+background: #d3e4f4;
+/*white-space: nowrap;*/
+vertical-align : middle;
+}
+table.content td, .content1 td, .content2 td{
+	width:100%;
+}
+.content2{
+margin-bottom: 20px;
+}
+table.content{
+
+}
+.home{
+	background: #333;
+	border-spacing: 2px; 
+	margin: 0;
+	padding: 0;
+	border-collapse: collapse; 
+	}
+table.content td, .content1 td{
+border-bottom:1px solid #c0d0e0;
+margin:0;
+padding:0;
+}
+.traficLight-yellow,.traficLight-red,.traficLight-green {
+	text-align: center;
+	width:30px;
+	height: 35px;
+	overflow:hidden;
+	font-size: 12px;
+	border:0 none;
+}
+.traficLight-yellow a,.traficLight-red a,.traficLight-green a{
+color:#FFF;
+}
+.traficLight-yellow,.traficLight-red,.traficLight-green
+	{
+	/*background-image: url('images/lights.png');
+	background-repeat: no-repeat;*/
+}
+.traficLight-yellow {
+	background: url('images/yellow-light1.png') no-repeat scroll 50% 0%;
+}
+.traficLight-red {
+	background: url('images/red-light1.png') no-repeat scroll 50% 0%;
+}
+.traficLight-green {
+	background: url('images/green-light1.png') no-repeat scroll 50% 0%;
+}
+.tab{
+background: url('images/mobile-tab.png') no-repeat scroll 50% 50%;
+padding:0 18px;
+color: #000;
+}
+.button, .submit{
+width: auto !important;
+color: #000;
+}
+.button{
+margin-left: 10px;
+}
+.radio, .checkbox{
+width: auto;
+border: 0 none;
+}
+.msg-td{
+width: 70px;
+}
+.create-msg-td{
+width: 88px;
+}
+.para{
+text-indent: 5px;
+}
+.login{
+vertical-align: middle;
+text-align: center;
+}
+.bold{
+font-weight: bold;
+}
+.center{
+	margin: 0 auto;
+}
+.login-box{
+	-webkit-border-radius: 5px;
+	-moz-border-radius:5px;
+	border:1px solid #AAA;
+	padding: 10px;
+}

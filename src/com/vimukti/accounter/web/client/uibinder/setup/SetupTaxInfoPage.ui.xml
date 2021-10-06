@@ -1,0 +1,43 @@
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+<g:FlowPanel ui:field="mainViewPanel" styleName="setup_common_head">
+		<g:Label ui:field="headerLabel" styleName="setup_header_label" />
+		<g:FlowPanel ui:field="viewPanel">
+			<g:Label ui:field="federalTaxDetailsLabel" styleName="customize_account">
+			</g:Label>
+			<g:Label ui:field="federalEmployeeein" styleName="settings_later">
+			</g:Label>
+			
+			<g:FlowPanel styleName="estimate_stmt_acc">
+			  <g:RadioButton name="bills" ui:field="isKnownEIN"
+					styleName="employee_yesno" />
+			  <g:TextBox styleName="setup_textbox" ui:field="empIdentityNo" />
+			
+			  <g:RadioButton name="bills" ui:field="isUnknownEIN"
+					styleName="employee_yesno" />		
+		    </g:FlowPanel>		
+		    
+		    <g:FlowPanel styleName="state-panel">
+					<g:Label styleName="setup_label" ui:field="stateLabel" />
+					<g:ListBox styleName="setup_listbox" ui:field="stateListBox" />
+			</g:FlowPanel>
+			
+			<g:Label ui:field="stateEmployeeein" styleName="settings_later">
+			</g:Label>
+			
+			<g:FlowPanel styleName="estimate_stmt_acc">
+			  <g:RadioButton name="bills2" ui:field="isKnownStateEAN"
+					styleName="employee_yesno2" />
+			  <g:TextBox styleName="setup_textbox" ui:field="stateEmpAcno" />
+			
+			  <g:RadioButton name="bills2" ui:field="isUnknownStateEAN"
+					styleName="employee_yesno2" />		
+		    </g:FlowPanel>
+		
+		</g:FlowPanel>
+	</g:FlowPanel>
+
+</ui:UiBinder> 
+
+<!--  federalTaxDetailsLabel -->
+<!-- federalEmployeeein  -->

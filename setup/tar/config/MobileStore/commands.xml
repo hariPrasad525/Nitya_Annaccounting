@@ -1,0 +1,1366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<commands>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.MyCommand"
+		name="my com">
+	</command>
+	<command clazz="com.vimukti.accounter.mobile.commands.LogoutCommand"
+		name="logout">
+		<alias>signout</alias>
+	</command>
+	<command clazz="com.vimukti.accounter.mobile.commands.AuthenticationCommand"
+		name="authenticate">
+		<alias>login</alias>
+		<alias>signin</alias>
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.CancelCommand"
+		name="cancel">
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.CreateFullCompanyCommand"
+		name="fullCompanySetup">
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.CreatePartialCompanyCommand"
+		name="partialCompanySetup">
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.CompanyTypeCommand"
+		name="companyTypeSelection">
+		<alias>createCompany</alias>
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.SelectCompanyCommand"
+		name="selectCompany">
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.PendingItemsListCommand"
+		name="fixedAssetsPendingItemsList">
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.RegisteredItemsListCommand"
+		name="registeredItemsList">
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.SoldAndDisposedItemsListCommand"
+		name="soldAndDisposedItems">
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.CreateInvoiceCommand"
+		name="newInvoice">
+		<alias>createInvoice</alias>
+		<alias>addInvoice</alias>
+		<alias>updateInvoice</alias>
+		<alias>editInvoice</alias>
+		<alias>modifyInvoice</alias>
+		<alias>createNewInvoice</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.CreateVendorGroupCommand"
+		name="newVendorGroup">
+		<alias>createVendorGroup</alias>
+		<alias>updateVendorGroup</alias>
+		<alias>modifyVendorGroup</alias>
+		<alias>editVendorGroup</alias>
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.AddNewCurrencyCommand"
+		name="addCurrency">
+		<alias>updateCurrency</alias>
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.CurrencyListCommand"
+		name="currencyList"></command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.MergeCustomersCommand"
+		name="mergeCustomers"></command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.MergeVendorsCommand"
+		name="mergeVendors"></command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.MergeAccountsCommand"
+		name="mergeAccounts"></command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.CreateFixedAssetCommand"
+		name="newFixedAsset">
+		<alias>updateFixedAsset</alias>
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.MergeItemsCommand"
+		name="mergeItems"></command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.CreateAccountCommand"
+		name="newAccount">
+		<alias>createAccount</alias>
+		<alias>addAccount</alias>
+		<alias>updateAccount</alias>
+		<alias>modifyAccount</alias>
+		<alias>editAccount</alias>
+		<alias>newBankAccount</alias>
+		<alias>addBankAccount</alias>
+		<alias>newBankAccount</alias>
+		<alias>createBankAccount</alias>
+		<alias>editBankAccount</alias>
+		<alias>updateBankAccount</alias>
+		<alias>modifyBankAccount</alias>
+		<alias>createNewBankAccount</alias>
+		<alias>createBankAccount</alias>
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.AccountsListCommand"
+		name="accounterCategoryList">
+		<alias>Accounts</alias>
+		<alias>accounterCategoryList</alias>
+		<alias>chartOfAccounts</alias>
+		<alias>listOfAccounts</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.reports.APAgingDetailReportCommand"
+		name="apAgeingDetail">
+		<alias>APAgingDetailReport</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.reports.APAgingSummaryReportCommand"
+		name="apAgeingSummary">
+		<alias>aPAgingSummaryReport</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.reports.ARAgingDetailReportCommand"
+		name="arAgeingDetail">
+		<alias>aRAgingDetailReport</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.reports.ARAgingSummaryReportCommand"
+		name="arAgeingSummary">
+		<alias>aRAgingSummaryReport</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.reports.BalanceSheetReportCommand"
+		name="balanceSheet">
+		<alias>balanceSheetReport</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.reports.CashFlowReportCommand"
+		name="cashFlowReport">
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.reports.CustomerStatementReportCommand"
+		name="customerstatement">
+		<alias>customerStatement</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.reports.CustomerTransactionHistoryReportCommand"
+		name="customerTransactionHistory">
+		<alias>customerTransactionHistoryReport</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.reports.ECSalesListReportCommand"
+		name="ecSalesList">
+		<alias>eCSalesListReport</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.delete.CustomerDeleteCommand"
+		name="deleteCustomer"></command>
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.delete.CustomerGroupDeleteCommand"
+		name="deletecustomergroup"></command>
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.delete.VendorDeleteCommand"
+		name="deleteVendor"></command>
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.delete.AccountDeleteCommand"
+		name="deleteAccount">
+		<alias>deleteBankAccout</alias>
+	</command>
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.delete.VendorGroupDeleteCommand"
+		name="deleteVendorGroup"></command>
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.delete.ShippingMethodDeleteCommand"
+		name="deleteShippingMethod"></command>
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.delete.CreditRatingDeleteCommand"
+		name="deleteCreditRating"></command>
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.delete.PaymentTermDeleteCommand"
+		name="deletePaymentTerm"></command>
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.delete.ShippingTermDeleteCommand"
+		name="deleteShippingTerm"></command>
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.delete.ItemGroupDeleteCommand"
+		name="deleteItemGroup"></command>
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.delete.ItemDeleteCommand"
+		name="deleteItem">
+		<alias>deleteInventoryItem</alias>
+		<alias>deleteNonInventoryItem</alias>
+		<alias>deleteServiceItem</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.delete.TransactionDeleteCommand"
+		name="deleteTransaction">
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.delete.SalesPersonDeleteCommand"
+		name="deleteSalesPerson"></command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.delete.VatCodeDeleteCommand"
+		name="deleteVatCode"></command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.delete.VatItemDeleteCommand"
+		name="deleteVatItem"></command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.delete.TaxAgencyDeleteCommand"
+		name="deleteTaxagency"></command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.reports.ExpenseReportCommand"
+		name="expenseReport">
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.reports.PriorVATReturnReportCommand"
+		name="priorVATReturn">
+		<alias>priorVATReturnReport</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.reports.ProfitLossReportCommand"
+		name="profitAndLoss">
+		<alias>profitLossReport</alias>
+		<alias>profitandlossReport</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.reports.PurchaseByItemDetailReportCommand"
+		name="purchaseByItemDetail">
+		<alias>purchaseByItemDetailReport</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.reports.PurchaseByItemSummaryReportCommand"
+		name="purchaseByItemSummary">
+		<alias>purchasebyItemSummaryReport</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.reports.PurchaseBySupplierDetailReportCommand"
+		name="purchaseBySupplierDetail">
+		<alias>purchaseByVednorDetailReport</alias>
+		<alias>purchaseByVendorDetail</alias>
+	</command>
+	
+	
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.reports.PurchaseBySupplierSummaryReportCommand"
+		name="purchaseByVendorSummary">
+		<alias>purchaseByVendorSummaryReport</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.reports.PurchaseOpenOrderReportCommand"
+		name="purchaseOrderReport">
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.reports.SalesByCustomerDetailReportCommand"
+		name="salesByCustomerDetail">
+		<alias>salesByCustomerDetailReport</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.reports.SalesByCustomerSummaryReportCommand"
+		name="salesByCustomerSummary">
+		<alias>salesByCustomerSummaryReport</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.reports.SalesByItemDetailReportCommand"
+		name="salesByItemDetail">
+		<alias>salesbyItemDetailReport</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.reports.SalesByItemSummaryReportCommand"
+		name="salesByItemSummary">
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.reports.SalesOpenOrderReportCommand"
+		name="salesOrderReport">
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.reports.SupplierTransactionHistoryReportCommand"
+		name="vendorTransactionHistory">
+		<alias>vendorTransactionHistoryReport</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.reports.TransactionDetailByAccountReportCommand"
+		name="transactionDetailByAccount">
+		<alias>transactionDetailByAccountReport</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.reports.TrialBalanceReportCommand"
+		name="trialBalance">
+		<alias>trialBalanceReport</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.reports.UncategorisedVATAmountsReportCommand"
+		name="uncategorisedVATAmounts">
+		<alias>uncategorizedVATAmountsReport</alias>
+		<alias>uncategorisedVATAmounts</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.reports.VAT100ReportCommand"
+		name="vat100">
+		<alias>vAT100Report</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.reports.VATDetailReportCommand"
+		name="vatDetail">
+		<alias>vATDetailReport</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.reports.VATItemSummaryReportCommand"
+		name="vatItemSummary">
+		<alias>vATItemSummaryReport</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.reports.ECSalesListDetailReportCommand"
+		name="ecSalesListDetails">
+		<alias>ecSalesListDetailReport</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.reports.TransactionDetailbyTaxItemReportCommand"
+		name="transactionDetailByTaxItem">
+		<alias>transactionDetailbyTaxItemReport</alias>
+		<alias>transactionDetailByTaxItem</alias>
+		<alias>transactionDetailedbyTaxItem</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.reports.VATItemDetailReportCommand"
+		name="vatItemDetail">
+		<alias>vATItemDetailReport</alias>
+		<alias>taxItemDetailReport</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.reports.TaxItemExceptionReportCommand"
+		name="taxItemExceptionDetailReport">
+		<alias>taxItemExceptionDetailReport</alias>
+		<alias>vatExceptionDetail</alias>
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.CreateVATItemCommand"
+		name="newVATItem">
+		<alias>createVatitem</alias>
+		<alias>addVatitem</alias>
+		<alias>addTaxItem</alias>
+		<alias>createTaxItem</alias>
+		<alias>newTaxItem</alias>
+		<alias>modifyTaxItem</alias>
+		<alias>updateTaxItem</alias>
+		<alias>editTaxItem</alias>
+		<alias>updateTaxItem</alias>
+
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.CreateServiceItemCommand"
+		name="newServiceItem">
+		<alias>addServiceItem</alias>
+		<alias>createServiceItem</alias>
+		<alias>updateServiceItem</alias>
+		<alias>modifyServiceItem</alias>
+		<alias>createNewServiceItem</alias>
+		<alias>editServiceItem</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.CreateNonInventoryItemCommand"
+		name="newNonInventoryItem">
+		<alias>nonInventoryItem</alias>
+		<alias>newProductItem</alias>
+		<alias>createNonInventoryItem</alias>
+		<alias>editNonInventoryItem</alias>
+		<alias>modifyNonInventoryItem</alias>
+		<alias>updateNonInventoryItem</alias>
+		<alias>createNewNonInventoryItem</alias>
+		<alias>updateProductItem</alias>
+	</command>
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.CreateInventoryAssemblyItemCommand"
+		name="createNewInventoryAssemblyItem">
+		<alias>inventoryAssemblyItem</alias>
+		<alias>createInventoryAssemblyItem</alias>
+		<alias>editInventoryAssemblyItem</alias>
+		<alias>modifyInventoryAssemblyItem</alias>
+		<alias>updateInventoryAssemblyItem</alias>
+		<alias>createNewInventoryAssemblyItem</alias>
+	</command>
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.CreateInventoryItemCommand"
+		name="newInventoryItem">
+		<alias>inventoryItem</alias>
+		<alias>createInventoryItem</alias>
+		<alias>editInventoryItem</alias>
+		<alias>modifyInventoryItem</alias>
+		<alias>updateInventoryItem</alias>
+		<alias>createNewInventoryItem</alias>
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.ItemsCommand"
+		name="itemList">
+		<alias>allItems</alias>
+		<alias>items</alias>
+		<alias>listOfItems</alias>
+		<alias>listofAllItem</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.CreateFiscalYearCommand"
+		name="newFiscalYear">
+		<alias>createFascalYear</alias>
+		<alias>editFiscalYear</alias>
+		<alias>updateFiscalYear</alias>
+		<alias>modifyFiscalYear</alias>
+		<alias>addFiscalYear</alias>
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.UserActivityLogCommand"
+		name="userActivityLog">
+		<alias>activity</alias>
+		<alias>log</alias>
+		<alias>usersActivityLogTitle</alias>
+		<alias>userLog</alias>
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.ExpensesListCommand"
+		name="expensesList">
+		<alias>expensesClaims</alias>
+		<alias>expenses</alias>
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.CreateEnterBillCommand"
+		name="enterBill">
+		<alias>billEnter</alias>
+		<alias>bill</alias>
+		<alias>newEnterBill</alias>
+		<alias>newEnterBill</alias>
+		<alias>updateVendorBill</alias>
+	</command>
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.UpdateTransactionCommand"
+		name="editTransaction">
+		<alias>updatePayment</alias>
+		<alias>updateTransaction</alias>
+	</command>
+	<command clazz="com.vimukti.accounter.mobile.commands.CreatePayBillCommand"
+		name="payBill">
+		<alias>billPay</alias>
+		<alias>createPayBill</alias>
+		<alias>updateVendorPayment</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.BillsAndExpensesListCommand"
+		name="billsAndExpenses">
+		<alias>bills</alias>
+		<alias>billsList</alias>
+		<alias>creditCardExpenseList</alias>
+		<alias>cashExpenseList</alias>
+		<alias>vendorList</alias>
+		<alias>vendorBillList</alias>
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.CreateVATCodeCommand"
+		name="newVATCode">
+		<alias>createVATCode</alias>
+		<alias>addVATCode</alias>
+		<alias>addTAXCode</alias>
+		<alias>createTAXCode</alias>
+		<alias>newTAXCode</alias>
+		<alias>updateTAXCode</alias>
+		<alias>editTAXCode</alias>
+		<alias>modifyTAXCode</alias>
+		<alias>updateVatCode</alias>
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.CreateVATAgencyCommand"
+		name="newVATAgency">
+		<alias>createVATAgency</alias>
+		<alias>addVATAgency</alias>
+		<alias>addTAXAgency</alias>
+		<alias>createTAXAgency</alias>
+		<alias>editTAXAgency</alias>
+		<alias>updateTAXAgency</alias>
+		<alias>modifyTAXAgency</alias>
+		<alias>newTAXAgency</alias>
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.VATAdjustmentCommand"
+		name="newVATAdjustment">
+		<alias>createTaxAdjustment</alias>
+		<alias>updateTaxAdjustment</alias>
+		<alias>updateVATAdjustment</alias>
+		<alias>newTaxAdjustment</alias>
+		<alias>vatAdjustment</alias>
+		<alias>taxAdjustment</alias>
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.PayVATCommand"
+		name="payVAT">
+		<alias>payTax</alias>
+		<alias>updatePayTax</alias>
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.ReceiveVATCommand"
+		name="receiveVAT">
+		<alias>newReceiveVat</alias>
+		<alias>taxRefund</alias>
+		<alias>updateTaxRefund</alias>
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.CreateTaxGroupCommand"
+		name="newTaxGroup">
+		<alias>createTaxGroup</alias>
+		<alias>addTaxGroup</alias>
+		<alias>updateTaxGroup</alias>
+	</command>
+
+	<!-- <command clazz="com.vimukti.accounter.mobile.commands.PaySalesTaxCommand" -->
+	<!-- name="Pay VAT"> -->
+	<!-- <alias>Pay SalesTax</alias> -->
+	<!-- <alias>Pay Sales Tax</alias> -->
+	<!-- </command> -->
+
+	<command clazz="com.vimukti.accounter.mobile.commands.FileVATCommand"
+		name="fileVAT">
+		<alias>fileTax</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.CreateCashPurchaseCommand"
+		name="newCashPurchase">
+		<alias>vendorcashPurchase</alias>
+		<alias>createCashPurchase</alias>
+		<alias>newCashPurchase</alias>
+		<alias>editCashPurchase</alias>
+		<alias>editvendorcashPurchase</alias>
+		<alias>updateCashPurchase</alias>
+		<alias>updatevendorcashPurchase</alias>
+		<alias>modifyCashPurchase</alias>
+		<alias>modifyvendorcashPurchase</alias>
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.CreateCashSaleCommand"
+		name="newCashSale">
+		<alias>addCashSale</alias>
+		<alias>newCashSale</alias>
+		<alias>modifyCashSale</alias>
+		<alias>updateCashSale</alias>
+		<alias>editCashSale</alias>
+		<alias>createCashSale</alias>
+	</command>
+
+	<!-- <command clazz="com.vimukti.accounter.mobile.commands.NewCreditCardChargeCommand" 
+		name="newCreditcardCharge"> <alias>creditCardCharge</alias> <alias>createCreditCardCharge</alias> 
+		<alias>addCreditCardCharge</alias> <alias>createCreditCardCharge</alias> 
+		<alias>editCreditCardCharge</alias> <alias>updateCreditCardCharge</alias> 
+		</command> -->
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.CreateCreditCardExpenseCommand"
+		name="newCreditCardExpense">
+		<alias>creditCardExpense</alias>
+		<alias>addCreditCardExpense</alias>
+		<alias>editCreditCardExpense</alias>
+		<alias>modifyCreditCardExpense</alias>
+		<alias>updateCreditCardExpense</alias>
+		<alias>createCreditCardExpense</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.CreateCustomerCreditMemoCommand"
+		name="newCustomerCreditMemo">
+		<alias>createCustomerCreditMemo</alias>
+		<alias>addCustomerCreditMemo</alias>
+		<alias>editCustomerCreditMemo</alias>
+		<alias>updateCustomerCreditMemo</alias>
+		<alias>modifyCustomerCreditMemo</alias>
+		<alias>customercredit</alias>
+		<alias>createCustomerCredit</alias>
+		<alias>updateCustomerCredit</alias>
+	</command>
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.CreateCashExpenseCommand"
+		name="newCashExpense">
+		<alias>addCashExpense</alias>
+		<alias>newCashExpense</alias>
+		<alias>cashExpense</alias>
+		<alias>editCashExpens</alias>
+		<alias>updateCashExpense</alias>
+		<alias>modifyCashExpense</alias>
+		<alias>createCashExpense</alias>
+		<alias>cashExpense</alias>
+		<alias>newCashExpense</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.CreateMakeDepositCommand"
+		name="newMakeDeposit">
+		<alias>makeADeposit</alias>
+		<alias>updateMakeDeposit</alias>
+		<alias>addMakeDeposit</alias>
+		<alias>newTransferFunds</alias>
+		<alias>addTransferFunds</alias>
+		<alias>newDepositsAndTransferFunds</alias>
+		<alias>depositandTransferFunds</alias>
+		<alias>depositsandTransferFunds</alias>
+		<alias>updateTransferFund</alias>
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.CreateLocationCommand"
+		name="newLocation">
+		<alias>location</alias>
+		<alias>createLocation</alias>
+		<alias>updateLocation</alias>
+		<alias>editLocation</alias>
+		<alias>modifyLocation</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.CreateIssuePaymentCommand"
+		name="newIssuePayment">
+		<alias>issuePayment</alias>
+		<alias>createIssuePayment</alias>
+		<alias>updateIssuePayment</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.CreateVendorCreditMemoCommand"
+		name="newVendorCreditMemo">
+		<alias>addVendorCreditMemo</alias>
+		<alias>createVendorCreditMemo</alias>
+		<alias>createVendorCredit</alias>
+		<alias>vendorCredit</alias>
+		<alias>updateVendorCredit</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.CreateShippingMethodCommand"
+		name="newShippingMethod">
+		<alias>shippingMethod</alias>
+		<alias>createShippingMethod</alias>
+		<alias>updateShippingMethod</alias>
+		<alias>modifyShippingMethod</alias>
+		<alias>editShippingMethod</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.CreateShippingTermCommand"
+		name="newShippingTerm">
+		<alias>updateShippingTerm</alias>
+		<alias>modifyShippingTerm</alias>
+		<alias>editShippingTerm</alias>
+		<alias>updateshippingterm</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.CreateSalesPersonCommand"
+		name="newSalesPerson">
+		<alias>createSalesPerson</alias>
+		<alias>addSalesPerson</alias>
+		<alias>updateSalesPerson</alias>
+		<alias>modifySalesPerson</alias>
+		<alias>editSalesPerson</alias>
+		<alias>salesPerson</alias>
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.CreateContactCommand"
+		name="newContact">
+		<alias>createContact</alias>
+		<alias>addContact</alias>
+		<alias>updateContact</alias>
+		<alias>modifyContact</alias>
+		<alias>editContact</alias>
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.CreateCustomerCommand"
+		name="newCustomer">
+		<alias>createCustomer</alias>
+		<alias>addCustomer</alias>
+		<alias>updateCustomer</alias>
+		<alias>modifyCustomer</alias>
+		<alias>editCustomer</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.CreateCreditRatingCommand"
+		name="newCreditRating">
+		<alias>createCreditRating</alias>
+		<alias>addCreditRating</alias>
+		<alias>creditRating</alias>
+		<alias>updateCreditRating</alias>
+		<alias>modifyCreditRating</alias>
+		<alias>editCreditRating</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.CreateCustomerPrepaymentCommand"
+		name="newCustomerPrepayment">
+		<alias>createCustomerPrepayment</alias>
+		<alias>createCustomerPayment</alias>
+		<alias>addCustomerPrepayment</alias>
+		<alias>editCustomerPrepayment</alias>
+		<alias>updateCustomerprepayment</alias>
+		<alias>updateCustomerPrepayment</alias>
+		<alias>modifyCustomerPrepayment</alias>
+		<alias>customerPrepayment</alias>
+	</command>
+	<command clazz="com.vimukti.accounter.mobile.commands.UpdateItemCommand"
+		name="updateItem">
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.CreateReceivePaymentCommand"
+		name="newReceivePayment">
+		<alias>paymentReceive</alias>
+		<alias>createReceivePayment</alias>
+		<alias>customerPayment</alias>
+		<alias>createReceivePayment</alias>
+		<alias>addReceivePayment</alias>
+		<alias>updateReceivePayment</alias>
+		<alias>editReceivePayment</alias>
+		<alias>modifyReceivePayment</alias>
+		<alias>addreceivepayment</alias>
+		<alias>updateCustomerPayment</alias>
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.CreateQuoteCommand"
+		name="newQuote">
+		<alias>estimate</alias>
+		<alias>createQuote</alias>
+		<alias>addQuote</alias>
+		<alias>addEstimate</alias>
+		<alias>EditEstimate</alias>
+		<alias>modifyEstimate</alias>
+		<alias>updateEstimate</alias>
+		<alias>createEstimate</alias>
+		<alias>modifyQuote</alias>
+		<alias>updateQuote</alias>
+		<alias>editQuote</alias>
+		<alias>newEstimate</alias>
+		<alias>newCharge</alias>
+		<alias>addCharge</alias>
+		<alias>editCharge</alias>
+		<alias>modifyCharge</alias>
+		<alias>updateCharge</alias>
+		<alias>newCredit</alias>
+		<alias>addCredit</alias>
+		<alias>editCredit</alias>
+		<alias>modifyCredit</alias>
+		<alias>updateCredit</alias>
+		<alias>newSalesOrder</alias>
+		<alias>modifySalesOrder</alias>
+		<alias>updateSalesOrder</alias>
+		<alias>editSalesOrder</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.CreateCustomerRefundCommand"
+		name="newCustomerRefund">
+		<alias>createCustomerRefund</alias>
+		<alias>addCustomerrefund</alias>
+		<alias>editCustomerRefund</alias>
+		<alias>updateCustomerRefund</alias>
+		<alias>modifyCustomerRefund</alias>
+		<alias>customerRefund</alias>
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.AccountRegisterCommand"
+		name="accountRegister">
+		<alias>bankRegisters</alias>
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.CustomerListCommand"
+		name="Customers">
+		<alias>customerLists</alias>
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.CreateClassCommand"
+		name="newClass">
+		<alias>createClass</alias>
+		<alias>editClass</alias>
+		<alias>updateClass</alias>
+		<alias>modifyClass</alias>
+		<alias>addClass</alias>
+	</command>
+
+	<!-- <command clazz="com.vimukti.accounter.mobile.commands.BankAccountReconcilationHistoryCommand" 
+		name="ReconcilationHistory"> <alias>Reconcilation History</alias> </command> -->
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.CreateVendorPrepaymentCommand"
+		name="newVendorPrepayment">
+		<alias>vendorPrepayment</alias>
+		<alias>addANewVendorPayment</alias>
+		<alias>addVendorPrepayment</alias>
+		<alias>addVendorPayment</alias>
+		<alias>createVendorPrepayment</alias>
+		<alias>createVendorPayment</alias>
+		<alias>updateVendorPrepayment</alias>
+		<alias>modifyVendorPrepayment</alias>
+		<alias>editVendorPrepayment</alias>
+		<alias>newVendorPayment</alias>
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.VendorsListCommand"
+		name="vendorsList">
+		<alias>Vendors</alias>
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.InvoiceListCommand"
+		name="invoicesList">
+		<alias>invoices</alias>
+		<alias>invoiceLists</alias>
+		<alias>invoicesList</alias>
+		<alias>listofAllInvoices</alias>
+		<alias>invoiceList</alias>
+
+	</command>
+
+	<!-- <command clazz="com.vimukti.accounter.mobile.commands.SalesOrderListCommand" 
+		name="Sales Order List"> <alias>Sales Orders</alias> </command> -->
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.ReceivedPaymentsListCommand"
+		name="receivedPaymentsList">
+		<alias>receivedPayments</alias>
+		<alias>paymentsReceived</alias>
+		<alias>customerPayments</alias>
+		<alias>customerPrePaymentList</alias>
+	</command>
+
+	<!-- <command clazz="com.vimukti.accounter.mobile.commands.PurchaseOrderListCommand" 
+		name="Purchase Order List"> <alias>Purchase Orders</alias> <alias>Purchase 
+		Order List</alias> </command> -->
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.CreateInviteAUserCommand"
+		name="Inviteuser">
+		<alias>newUser</alias>
+		<alias>updateUser</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.CreateBrandingThemeCommand"
+		name="newBrandTheme">
+		<alias>createBrandingTheme</alias>
+		<alias>addBrandingTheme</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.CreditRatingListCommand"
+		name="creditRatingList">
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.CreatePaymentTermCommand"
+		name="addPaymentTerm">
+		<alias>newPaymentTerm</alias>
+		<alias>createPaymentTerm</alias>
+		<alias>updatePaymentTerm</alias>
+		<alias>modifyPaymentTerm</alias>
+		<alias>EditPaymentTerm</alias>
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.UsersCommand"
+		name="users">
+		<alias>usersList</alias>
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.CreateVendorCommand"
+		name="createVendor">
+		<alias>newVendor</alias>
+		<alias>addVendor</alias>
+		<alias>updateVendor</alias>
+		<alias>modifyVendor</alias>
+		<alias>editVendor</alias>
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.VendorPaymentsCommand"
+		name="vendorPayments">
+		<alias>vendorPaymentsList</alias>
+		<alias>payments</alias>
+		<alias>vendorPrepaymentList</alias>
+		<alias>writeCheckList</alias>
+		<alias>creditCardChargeList</alias>
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.LocationListCommand"
+		name="locationlist">
+		<alias>locationsList</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.JournalEntryListCommand"
+		name="journalEntries">
+		<alias>journalEntriesList</alias>
+	</command>
+
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.CreateJournalEntryCommand"
+		name="newJournalEntry">
+		<alias>createJournalEntry</alias>
+		<alias>addJournalEntry</alias>
+		<alias>updateJournalEntry</alias>
+	</command>
+
+
+	<!-- <command clazz="com.vimukti.accounter.mobile.commands.NewSalesOrderCommand" 
+		name="New Sales Order"> <alias>New SalesOrder</alias> <alias>Add Sales Order</alias> 
+		<alias>Sales Order</alias> <alias>Create SalesOrder</alias> <alias>Create 
+		Sales Order</alias> </command> -->
+
+	<!-- <command clazz="com.vimukti.accounter.mobile.commands.NewPurchaseOrderCommand" 
+		name="New Purchase Order"> <alias>New PurchaseOrder</alias> <alias>Purchase 
+		Order</alias> <alias>Create PurchaseOrder</alias> <alias>Add PurchaseOrder</alias> 
+		<alias>Create Purchase Order</alias> <alias>Edit Purchase Order</alias> <alias>Update 
+		Purchase Order</alias> <alias>Modify Purchase Order</alias> <alias>Create 
+		New PurchaseOrder</alias> </command> -->
+
+	<command clazz="com.vimukti.accounter.mobile.commands.VoidTransactionCommand"
+		name="voidTransaction">
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.SalesPersonsListCommand"
+		name="salesPersonList">
+		<alias>salesPersons</alias>
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.WriteCheckCommand"
+		name="newWriteCheck">
+		<alias>createWriteCheck</alias>
+		<alias>newCheck</alias>
+		<alias>writeCheck</alias>
+		<alias>addWriteCheck</alias>
+		<alias>updateWriteCheck</alias>
+		<alias>modifyWriteCheck</alias>
+		<alias>editWriteCheck</alias>
+		<alias>updateCheck</alias>
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.CreateItemGroupCommand"
+		name="itemGroup">
+		<alias>newItemGroup</alias>
+		<alias>addItemGroup</alias>
+		<alias>createItemGroup</alias>
+		<alias>updateItemGroup</alias>
+		<alias>editItemGroup</alias>
+		<alias>modifyItemGroup</alias>
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.QuotesListCommand"
+		name="quotesList">
+		<alias>quotes</alias>
+		<alias>estimates</alias>
+		<alias>estimatesList</alias>
+		<alias>credits</alias>
+		<alias>creditsList</alias>
+		<alias>Charges</alias>
+		<alias>chargesList</alias>
+		<alias>quoteList</alias>
+		<alias>salesOrderList</alias>
+		<alias>salesOrders</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.CustomerRefundsListCommand"
+		name="customerRefundsList">
+		<alias>customerRefunds</alias>
+		<alias>customerRefundList</alias>
+	</command>
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.CreateMeasurementCommand"
+		name="measurement">
+		<alias>newMeasurment</alias>
+		<alias>createMeasurement</alias>
+		<alias>editMeasurement</alias>
+		<alias>updateMeasurement</alias>
+		<alias>modifyMeasurement</alias>
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.VATCodesListCommand"
+		name="taxCodesList">
+		<alias>tAXCodes</alias>
+		<alias>vatCodes</alias>
+		<alias>vATCodesList</alias>
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.VATItemsListCommand"
+		name="taxItemsList">
+		<alias>vATItems</alias>
+		<alias>vatItemsList</alias>
+		<alias>manageSalesItems</alias>
+		<alias>taxitems</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.CreateJournalEntryCommand"
+		name="newJournalEntry">
+		<alias>addJournalEntry</alias>
+
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.ShippingTermsListCommand"
+		name="shippingTermsList">
+		<alias>shippingTerms</alias>
+		<alias>shippingTermList</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.ShippingMethodListCommand"
+		name="shippingMethodList">
+		<alias>shippingMethods</alias>
+	</command>
+
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.BankAccountsListCommand"
+		name="BankAccounts">
+		<alias>bankAccountsList</alias>
+		<alias>banksList</alias>
+		<alias>bankAccounts</alias>
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.SignupCommand"
+		name="signup">
+		<alias>newToAccounter</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.CreateFullCompanyCommand"
+		name="createfullCompany">
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.CreatePartialCompanyCommand"
+		name="createPartialCompany">
+	</command>
+
+	<!-- <command -->
+	<!-- clazz="com.vimukti.accounter.mobile.commands.ReconcillationHistoryCommand" -->
+	<!-- name="History"> -->
+	<!-- <alias>Reconcillation History</alias> -->
+	<!-- </command> -->
+
+	<!-- <command clazz="com.vimukti.accounter.mobile.commands.NewProductItemCommand" 
+		name="Product Item"> <alias>Create New Product Item</alias> <alias>Create 
+		Product Item</alias> <alias>Update Product Item</alias> <alias>Modify Product 
+		Item</alias> <alias>Edit Product Item</alias> </command> -->
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.CreateCustomerGroupCommand"
+		name="customerGroup">
+		<alias>createcustomergroup</alias>
+		<alias>updatecustomergroup</alias>
+		<alias>modifycustomergroup</alias>
+		<alias>editcustomergroup</alias>
+	</command>
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.CreateCreditNoteCommand"
+		name="newCreditNote">
+		<alias>createCreditNote</alias>
+		<alias>newCreditMemo</alias>
+		<alias>newCustomerCreditNote</alias>
+		<alias>newCustomerCreditMemo</alias>
+		<alias>createCreditMemo</alias>
+		<alias>updateCreditMemo</alias>
+		<alias>editCreditMemo</alias>
+		<alias>modifyCreditMemo</alias>
+		<alias>newCreditNotes</alias>
+	</command>
+	<command clazz="com.vimukti.accounter.mobile.commands.ClassListCommand"
+		name="accounterClassList">
+		<alias>classeslist</alias>
+		<alias>classes</alias>
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.TaxAgenciesListCommand"
+		name="taxAgenciesList">
+		<alias>taxAgencielist</alias>
+		<alias>TaxAgencies</alias>
+
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.MeasurementListCommand"
+		name="measurementsList">
+		<alias>measurmentlist</alias>
+		<alias>Measurments</alias>
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.ItemGroupsListCommand"
+		name="itemGroupList">
+		<alias>itemGroupsList</alias>
+		<alias>itemGroupList</alias>
+		<alias>itemGroups</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.CustomerGroupListCommand"
+		name="customergroupList">
+		<alias>customergroups</alias>
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.VendorGroupListCommand"
+		name="vendorGroupList">
+		<alias>vendorGroups</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.PaymentTermsListCommand"
+		name="paymentTermsList">
+		<alias>paymentTermslist</alias>
+		<alias>paymentTerms</alias>
+		<alias>paymentTermList</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.preferences.CompanyInfoPreferenceCommand"
+		name="comapnyInfo">
+		<alias>comapnyInfoPreferences</alias>
+		<alias>setCompanyInfo</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.preferences.VendorAndPurchasePreferencesCommand"
+		name="vendorAndPurchasePreferences">
+		<alias>vendorAndPurchases</alias>
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.preferences.CustomerAndSalesPreferencesCommand"
+		name="customersAndSales">
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.preferences.NumberFormatPreferencesCommand"
+		name="DateFormats">
+	</command>
+
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.preferences.CategoriesPreferencesCommand"
+		name="categories">
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.ForgotPasswordCommand"
+		name="forgotPassword">
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.ChangePasswordCommand"
+		name="changePassword">
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.TaxHistoryCommand"
+		name="taxHistory">
+
+	</command>
+
+	<command clazz="com.vimukti.accounter.mobile.commands.CreateWareHouseCommand"
+		name="newWareHouse">
+		<alias>createWarehouse</alias>
+		<alias>stockwarehouseCombo</alias>
+		<alias>updateWarehouse</alias>
+	</command>
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.CreateWareHouseTransferCommand"
+		name="newWarehouseTransfer">
+		<alias>createWarehouseTransfer</alias>
+		<alias>wareHouseTransfer</alias>
+		<alias>updateWarehouseTransfer</alias>
+	</command>
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.CreateStockAdjustmentCommand"
+		name="newStockadjustment">
+		<alias>newStockAdjustment</alias>
+		<alias>createStockAdjustment</alias>
+		<alias>stockAdjustment</alias>
+		<alias>updateStockAdjustment</alias>
+	</command>
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.InventoryItemsListCommand"
+		name="InventoryItems">
+		<alias>inventoryItemsList</alias>
+	</command>
+	<command clazz="com.vimukti.accounter.mobile.commands.WareHouseListCommand"
+		name="warehouseList">
+		<alias>wareHouses</alias>
+	</command>
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.WareHouseTransferListCommand"
+		name="warehouseTransferList">
+		<alias>wareHouseTransfers</alias>
+	</command>
+	<command clazz="com.vimukti.accounter.mobile.commands.MeasurementListCommand"
+		name="measurementList">
+		<alias>measurements</alias>
+	</command>
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.StockAdjustmentListCommand"
+		name="stockAdjustmentList">
+		<alias>stockAdjustments</alias>
+	</command>
+	<command clazz="com.vimukti.accounter.mobile.commands.TaxGroupListCommand"
+		name="manageSalesTaxGroups">
+	</command>
+	<command clazz="com.vimukti.accounter.mobile.commands.PrintInvoiceCommand"
+		name="printAndSendEmail">
+	</command>
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.delete.DeleteCompanyCommand"
+		name="deletecompany">
+	</command>
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.delete.DeleteUserCommand"
+		name="deleteUser">
+	</command>
+	<command clazz="com.vimukti.accounter.mobile.commands.ChangeCompanyCommand"
+		name="changeCompany">
+	</command>
+	<command clazz="com.vimukti.accounter.mobile.commands.ShowWareHouseCommand"
+		name="showWareHouse">
+	</command>
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.delete.DeleteWareHouseCommand"
+		name="deleteWareHouse">
+	</command>
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.CreatePriceLivelCommand"
+		name="addNewPriceLevel">
+	</command>
+	<command clazz="com.vimukti.accounter.mobile.commands.CreateBankCommand"
+		name="newBank">
+	</command>
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.preferences.CurrencyFormatCommand"
+		name="currencyFormat">
+	</command>
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.CreatePurchaseOrderCommand"
+		name="createPurchaseOrder">
+		<alias>updatePurchaseOrder</alias>
+		<alias>addNewPurchaseOrder</alias>
+	</command>
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.PurchaseOrderListCommand"
+		name="purchaseOrderList">
+	</command>
+	<command clazz="com.vimukti.accounter.mobile.commands.NewEmailAccountCommand"
+		name="createEmailAccount">
+	</command>
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.TestEmailAccountCommand"
+		name="testEmailAccount">
+	</command>
+	<command
+		clazz="com.vimukti.accounter.mobile.commands.SendInvoiceEmailCommand"
+		name="sendInvoiceToMail">
+	</command>
+	<command clazz="com.vimukti.accounter.mobile.commands.DepriciationCommand"
+		name="depreciation">
+	</command>
+	<command clazz="com.vimukti.accounter.mobile.commands.CreatePayHeadCommand"
+		name="newPayHead">
+		<alias>updatePayHead</alias>
+	</command>
+	<command clazz="com.vimukti.accounter.mobile.commands.EmployeeListCommand"
+		name="employeeList">
+	</command>
+	<command clazz="com.vimukti.accounter.mobile.commands.PayheadListCommand"
+		name="payheadList">
+	</command>
+	<command clazz="com.vimukti.accounter.mobile.commands.PayrollUnitListCommand"
+		name="payrollUnitList">
+	</command>
+	<command clazz="com.vimukti.accounter.mobile.commands.PayStructureListCommand"
+		name="payStructureList">
+	</command>
+	<command clazz="com.vimukti.accounter.mobile.commands.AttendanceOrProductionListCommand"
+		name="attendanceOrProductionTypeList">
+	</command>
+	
+	<command clazz="com.vimukti.accounter.mobile.commands.reports.PayheadSummaryCommand"
+		name="payHeadSummaryReport">
+	</command>
+	<command clazz="com.vimukti.accounter.mobile.commands.reports.PayHeadDetailCommand"
+		name="payHeadDetailReport">
+	</command>
+	<command clazz="com.vimukti.accounter.mobile.commands.reports.PaySlipSummaryReportCommand"
+		name="paySlipSummary">
+	</command>
+	<command clazz="com.vimukti.accounter.mobile.commands.reports.PaySlipDetailReportCommand"
+		name="payslipDetail">
+	</command>>
+	<command clazz="com.vimukti.accounter.mobile.commands.CreateEmployeeCommand"
+		name="newEmployee">
+		<alias>updateEmployee</alias>
+	</command>
+	<command clazz="com.vimukti.accounter.mobile.commands.CreateEmployeeGroupCommand"
+		name="newEmployeeGroup">
+		<alias>updateEmployeeGroup</alias>
+	</command>
+	<command clazz="com.vimukti.accounter.mobile.commands.CreatePayEmployeeCommand"
+		name="newPayEmployee">
+		<alias>updatePayEmployee</alias>
+	</command>
+	<command clazz="com.vimukti.accounter.mobile.commands.CreatePayStructureCommand"
+		name="newPayStructure">
+		<alias>updatePayStructure</alias>
+	</command>
+	<command clazz="com.vimukti.accounter.mobile.commands.CreatePayRollUnitCommand"
+		name="newPayrollUnit">
+		<alias>updatePayrollUnit</alias>
+	</command>
+	<command clazz="com.vimukti.accounter.mobile.commands.CreateAttendanceOrProductionTypeCommand"
+		name="newAttOrProductionType">
+		<alias>updateAttOrProductionType</alias>
+	</command>
+</commands>

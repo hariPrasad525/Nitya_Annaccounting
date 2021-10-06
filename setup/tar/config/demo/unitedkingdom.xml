@@ -1,0 +1,501 @@
+<?xml version="1.0"?>
+<ClientCompany>
+
+	<registrationNumber>10541244</registrationNumber>
+	<companyEmail>defaultcompany@mail.com</companyEmail>
+	<companyEmailForCustomers></companyEmailForCustomers>
+	<isConfigured>1</isConfigured>
+	<createdDate>2011-10-21 13:24:13 GMT</createdDate>
+	<ein></ein>
+	<firstMonthOfFiscalYear>0</firstMonthOfFiscalYear>
+	<firstMonthOfIncomeTaxYear>0</firstMonthOfIncomeTaxYear>
+	<taxForm>0</taxForm>
+	<booksClosingDate>0</booksClosingDate>
+	<closingDateWarningType>0</closingDateWarningType>
+	<enableAccountNumbers>FALSE</enableAccountNumbers>
+	<customerType>0</customerType>
+	<enableAutoRecall>FALSE</enableAutoRecall>
+	<restartSetupInterviews>FALSE</restartSetupInterviews>
+	<fiscalYearStarting>0</fiscalYearStarting>
+	<industry>0</industry>
+	<bankAccountNo>1025635</bankAccountNo>
+	<sortCode>DF</sortCode>
+
+	<!-- company preferences object -->
+	<preferences>
+		<dateFormat></dateFormat>
+		<locationTrackingId>0</locationTrackingId>
+		<logSpaceUsed>0</logSpaceUsed>
+		<id>100</id>
+		<startOfFiscalYear>1</startOfFiscalYear>
+		<endOfFiscalYear>1</endOfFiscalYear>
+		<preventPostingBeforeDate>11022011</preventPostingBeforeDate>
+		<depreciationStartDate>11022011</depreciationStartDate>
+		<lastDepreciationDate>11022011</lastDepreciationDate>
+		<industryType>1</industryType>
+		<defaultShippingTerm>1</defaultShippingTerm>
+		<defaultAnnualInterestRate>0</defaultAnnualInterestRate>
+		<defaultMinimumFinanceCharge>0D</defaultMinimumFinanceCharge>
+		<graceDays>0</graceDays>
+		<VATregistrationNumber>VAT1101</VATregistrationNumber>
+		<VATreportingPeriod>1</VATreportingPeriod>
+		<endingPeriodForVATreporting>1</endingPeriodForVATreporting>
+		<decimalCharacte>.</decimalCharacte>
+		<primaryCurrency>1</primaryCurrency>
+		<supportingCurrenciesList></supportingCurrenciesList>
+		<organizationType>1</organizationType>
+		<fiscalYearFirstMonth>1</fiscalYearFirstMonth>
+		<haveEpmloyees></haveEpmloyees>
+		<haveW_2Employees></haveW_2Employees>
+		<have1099contractors></have1099contractors>
+		<trackEmployeeExpenses></trackEmployeeExpenses>
+		<isBeginingorTodaysdate></isBeginingorTodaysdate>
+		<trackFinanceDate>1</trackFinanceDate>
+		<referCustomers>1</referCustomers>
+		<referVendors>1</referVendors>
+		<referAccounts>1</referAccounts>
+		<preferencesFlag>1</preferencesFlag>
+		<version>0</version>
+		<tradingName>Demo Company</tradingName>
+		<legalName>Demo Company</legalName>
+		<companyEmail>demo-company@mail.com</companyEmail>
+		<phone>10101010101</phone>
+		<fax>000001111</fax>
+		<webSite>www.demo-company.com.co.in</webSite>
+		<taxId>DEMO11012</taxId>
+		<tradingAddress></tradingAddress>
+		<timezone></timezone>
+		<defaultTaxCode>0</defaultTaxCode>
+		<isShowLegalName>TRUE</isShowLegalName>
+		<isShowRegisteredAddress>TRUE</isShowRegisteredAddress>
+	</preferences>
+
+	<!--customers object -->
+	<customers>
+		<Customer id="1">
+			<number>Blue Ribbons Pvt Ltd</number>
+			<type>1</type>
+			<fileAs>Blue Ribbons Pvt Ltd</fileAs>
+			<address>
+				<ClientAddress>
+					<type>3</type>
+					<street>UK Street</street>
+					<city>Bridgton</city>
+					<stateOrProvinence>Staes</stateOrProvinence>
+					<zipOrPostalCode>UK102544</zipOrPostalCode>
+					<countryOrRegion>United Kingdom</countryOrRegion>
+					<isSelected>FALSE</isSelected>
+					<address1>address1</address1>
+				</ClientAddress>
+			</address>
+			<phoneNo>784458555</phoneNo>
+			<faxNo>45558445</faxNo>
+			<email>kdsk@mail.com</email>
+			<webPageAddress>wwww.ds.com</webPageAddress>
+			<isActive>TRUE</isActive>
+			<bankAccountNo>1254221</bankAccountNo>
+			<bankName>HDFC</bankName>
+			<bankBranch>UK</bankBranch>
+			<payeeSince>1722011</payeeSince>
+			<openingBalance>15000</openingBalance>
+			<balanceAsOf>15000</balanceAsOf>
+			<contacts>
+				<ClientContact>
+					<isPrimary>TRUE</isPrimary>
+					<name>John</name>
+					<title></title>
+					<businessPhone>78422596</businessPhone>
+					<email>john@mail.com</email>
+				</ClientContact>
+			</contacts>
+			<memo>customer one</memo>
+		</Customer>
+	</customers>
+
+	<!-- vendors object -->
+	<vendors>
+		<Vendor id="1">
+			<name>Parachute Ltd</name>
+			<vendorNumber></vendorNumber>
+			<type>2</type>
+			<fileAs>Parachute Ltd</fileAs>
+			<address>
+				<ClientAddress>
+					<type>3</type>
+					<street>UK Street</street>
+					<city>Bridgton</city>
+					<stateOrProvinence>Staes</stateOrProvinence>
+					<zipOrPostalCode>UK102544</zipOrPostalCode>
+					<countryOrRegion>United Kingdom</countryOrRegion>
+					<isSelected>FALSE</isSelected>
+					<address1>address1</address1>
+				</ClientAddress>
+			</address>
+			<tdsApplicable>TRUE</tdsApplicable>
+			<phoneNo>784458555</phoneNo>
+			<faxNo>45558445</faxNo>
+			<email>kdsk@mail.com</email>
+			<webPageAddress>wwww.ds.com</webPageAddress>
+			<payeeSince>1722011</payeeSince>
+			<taxId>TAXID74585241</taxId>
+			<isTrackPaymentsFor1099>TRUE</isTrackPaymentsFor1099>
+			<contacts>
+				<ClientContact>
+					<isPrimary>TRUE</isPrimary>
+					<name>John</name>
+					<title></title>
+					<businessPhone>78422596</businessPhone>
+					<email>john@mail.com</email>
+				</ClientContact>
+			</contacts>
+		</Vendor>
+	</vendors>
+
+	<!-- banks list object -->
+	<banks>
+		<ClientBank>
+			<id>1</id>
+			<name>ICICI</name>
+			<version>0</version>
+		</ClientBank>
+	</banks>
+
+	<!-- ClientShippingTerms object -->
+	<shippingTerms>
+		<ClientShippingTerms>
+			<version>0</version>
+			<id>1</id>
+			<name>name</name>
+			<description>description</description>
+			<isDefault>TRUE</isDefault>
+		</ClientShippingTerms>
+	</shippingTerms>
+
+
+	<!-- ClientShippingMethod object -->
+	<shippingMethods>
+		<ClientShippingMethod>
+			<version>0</version>
+			<id>1</id>
+			<name>name</name>
+			<description>description</description>
+			<isDefault>TRUE</isDefault>
+		</ClientShippingMethod>
+	</shippingMethods>
+
+
+	<!-- ClientPriceLevel object -->
+	<priceLevels>
+		<ClientPriceLevel>
+			<version>0</version>
+			<id>1</id>
+			<name>name</name>
+			<isDefault>TRUE</isDefault>
+			<percentage>0.0</percentage>
+			<isPriceLevelDecreaseByThisPercentage></isPriceLevelDecreaseByThisPercentage>
+		</ClientPriceLevel>
+	</priceLevels>
+
+
+	<!-- ClientItemGroup object -->
+	<itemGroups>
+		<ClientItemGroup>
+			<version>0</version>
+			<name>item</name>
+			<id>1</id>
+			<isDefault>TRUE</isDefault>
+			<items></items>
+		</ClientItemGroup>
+	</itemGroups>
+
+
+	<!-- ClientTAXGroup object -->
+	<taxGroups>
+		<ClientTAXGroup>
+			<taxItems></taxItems>
+			<groupRate>0.00</groupRate>
+		</ClientTAXGroup>
+	</taxGroups>
+
+
+	<!-- ClientPaySalesTax object -->
+	<paySalesTaxs>
+		<ClientPaySalesTax>
+			<payFrom>1</payFrom>
+			<billsDueOnOrBefore>1</billsDueOnOrBefore>
+			<taxAgency>1</taxAgency>
+			<endingBalance>1000</endingBalance>
+			<isEdited>FALSE</isEdited>
+		</ClientPaySalesTax>
+	</paySalesTaxs>
+
+
+	<!-- ClientCreditRating object -->
+	<creditRatings>
+		<ClientCreditRating>
+			<id>1</id>
+			<name></name>
+			<isDefault></isDefault>
+			<version>0</version>
+		</ClientCreditRating>
+	</creditRatings>
+
+
+	<!-- ClientSalesPerson object -->
+	<salesPersons>
+		<ClientSalesPerson>
+		</ClientSalesPerson>
+	</salesPersons>
+
+
+	<!-- ClientTAXItemGroup object -->
+	<taxItemGroups>
+		<ClientTAXItemGroup>
+			<id>1</id>
+			<name></name>
+			<description></description>
+			<isActive></isActive>
+			<isSalesType></isSalesType>
+			<isPercentage></isPercentage>
+			<isDefault></isDefault>
+			<version>0</version>
+		</ClientTAXItemGroup>
+	</taxItemGroups>
+
+
+	<!-- ClientFiscalYear object -->
+	<fiscalYears>
+		<ClientFiscalYear>
+		</ClientFiscalYear>
+	</fiscalYears>
+
+
+	<!-- ClientFixedAsset object -->
+	<fixedAssets>
+		<ClientFixedAsset>
+			<id>1</id>
+			<name></name>
+			<assetNumber></assetNumber>
+			<assetAccount>1001</assetAccount>
+			<linkedAccumulatedDepreciationAccount>10001</linkedAccumulatedDepreciationAccount>
+			<purchaseDate>20011226</purchaseDate>
+			<purchasePrice>10001</purchasePrice>
+			<description></description>
+			<assetType></assetType>
+			<depreciationRate>0.0</depreciationRate>
+			<depreciationMethod>1</depreciationMethod>
+			<depreciationExpenseAccount>10000</depreciationExpenseAccount>
+			<accumulatedDepreciationAmount>1000</accumulatedDepreciationAmount>
+			<status>1</status>
+			<bookValue>10000</bookValue>
+			<isSoldOrDisposed>10000</isSoldOrDisposed>
+			<fixedAssetNotes></fixedAssetNotes>
+			<fixedAssetsHistory></fixedAssetsHistory>
+			<soldOrDisposedDate>20110620</soldOrDisposedDate>
+			<accountForSale></accountForSale>
+			<salePrice>0.00</salePrice>
+			<noDepreciation></noDepreciation>
+			<depreciationTillDate>20110606</depreciationTillDate>
+			<notes></notes>
+			<lossOrGainOnDisposalAccount>10000</lossOrGainOnDisposalAccount>
+			<totalCapitalGain>1</totalCapitalGain>
+			<totalCapitalGainAmount>0.0</totalCapitalGainAmount>
+			<lossOrGain>0.0</lossOrGain>
+			<version>0</version>
+		</ClientFixedAsset>
+	</fixedAssets>
+
+
+	<!-- ClientVATReturn object -->
+	<vatReturns>
+		<ClientVATReturn>
+			<VATperiodStartDate>20110606</VATperiodStartDate>
+			<VATperiodEndDate>20110606</VATperiodEndDate>
+			<taxAgency>1</taxAgency>
+			<boxes></boxes>
+			<journalEntry>1</journalEntry>
+			<balance>0.0</balance>
+		</ClientVATReturn>
+	</vatReturns>
+
+	<!-- ClientTAXAgency object -->
+	<taxAgencies>
+		<ClientTAXAgency>
+			<paymentTerm>1</paymentTerm>
+			<purchaseLiabilityAccount>1001</purchaseLiabilityAccount>
+			<salesLiabilityAccount>1001</salesLiabilityAccount>
+			<VATReturn>1</VATReturn>
+			<taxType>1</taxType>
+		</ClientTAXAgency>
+	</taxAgencies>
+
+	<!-- ClientTAXCode object -->
+	<taxCodes>
+		<ClientTAXCode>
+			<id>0</id>
+			<name></name>
+			<description></description>
+			<isTaxable></isTaxable>
+			<isActive></isActive>
+			<TAXItemGrpForPurchases>1</TAXItemGrpForPurchases>
+			<TAXItemGrpForSales>1</TAXItemGrpForSales>
+			<isECSalesEntry></isECSalesEntry>
+			<isDefault></isDefault>
+			<taxAgency>1</taxAgency>
+			<version>0</version>
+			<salesTaxRate>0.0</salesTaxRate>
+			<purchaseTaxRate>0.0</purchaseTaxRate>
+		</ClientTAXCode>
+	</taxCodes>
+
+
+	<!-- bank account object -->
+	<accounts>
+		<BankAccount id="1">
+			<bank>16</bank>
+			<bankAccountNumber>ICICI-1004</bankAccountNumber>
+			<bankAccountType>2</bankAccountType>
+			<id>0</id>
+			<type>2</type>
+			<number>1001</number>
+			<name>ICICI</name>
+			<isActive>TRUE</isActive>
+			<parent>0</parent>
+			<cashFlowCategory>1</cashFlowCategory>
+			<openingBalance>3000</openingBalance>
+			<asOf>20110323</asOf>
+			<isConsiderAsCashAccount>FALSE</isConsiderAsCashAccount>
+			<comment>icici account</comment>
+			<creditLimit>0.0</creditLimit>
+			<cardOrLoanNumber></cardOrLoanNumber>
+			<isIncrease>FALSE</isIncrease>
+			<currentBalance>0.0</currentBalance>
+			<totalBalance>0.0</totalBalance>
+			<baseType>0</baseType>
+			<subBaseType>0</subBaseType>
+			<groupType>0</groupType>
+			<isDefault>FALSE</isDefault>
+			<isOpeningBalanceEditable>TRUE</isOpeningBalanceEditable>
+			<hierarchy></hierarchy>
+			<flow></flow>
+			<boxNumber>0</boxNumber>
+			<version>0</version>
+		</BankAccount>
+	</accounts>
+
+	<!-- items object -->
+	<items>
+		<ClientItem id="1">
+			<isActive>TRUE</isActive>
+			<type>1</type>
+			<name>Computers</name>
+			<standardCost>158200</standardCost>
+			<isISellThisItem>TRUE</isISellThisItem>
+			<incomeAccount>1001</incomeAccount>
+			<salesPrice>15000</salesPrice>
+			<isTaxable>TRUE</isTaxable>
+		</ClientItem>
+	</items>
+
+	<!-- quotes objects -->
+	<quote>
+		<Quote id="1">
+			<expirationDate>12062011</expirationDate>
+			<deliveryDate>12062011</deliveryDate>
+			<customer>1</customer>
+			<contact>
+				<name>John</name>
+			</contact>
+			<phone>7842555</phone>
+			<transactionItems>
+				<ClientTransactionItem>
+					<name>CPU</name>
+					<description>computer parts</description>
+					<quantity>2</quantity>
+					<unitPrice>2000</unitPrice>
+					<discount>0.00</discount>
+					<lineTotal>4000</lineTotal>
+					<isTaxable>TRUE</isTaxable>
+				</ClientTransactionItem>
+			</transactionItems>
+		</Quote>
+	</quote>
+
+
+	<!-- invoices object -->
+	<invoices>
+		<Invoice id="1">
+			<customer>1</customer>
+			<contact>
+				<name>John</name>
+			</contact>
+			<phone>7842555</phone>
+			<paymentTerm>1</paymentTerm>
+			<discountDate>12262011</discountDate>
+			<dueDate>12262011</dueDate>
+			<orderNum>INV1250</orderNum>
+			<transactionItems>
+				<ClientTransactionItem>
+					<name>CPU</name>
+					<description>computer parts</description>
+					<quantity>2</quantity>
+					<unitPrice>2000</unitPrice>
+					<discount>0.00</discount>
+					<lineTotal>4000</lineTotal>
+					<isTaxable>TRUE</isTaxable>
+				</ClientTransactionItem>
+			</transactionItems>
+		</Invoice>
+	</invoices>
+
+
+
+	<salesOrders>
+		<ClientSalesOrder id="1">
+			<customer>1</customer>
+			<contact>
+				<name>John</name>
+			</contact>
+			<phone>7842555</phone>
+			<customerOrderNumber>10</customerOrderNumber>
+			<dueDate>12062011</dueDate>
+			<transactionItems>
+				<ClientTransactionItem>
+					<name>CPU</name>
+					<description>computer parts</description>
+					<quantity>2</quantity>
+					<unitPrice>2000</unitPrice>
+					<discount>0.00</discount>
+					<lineTotal>4000</lineTotal>
+					<isTaxable>TRUE</isTaxable>
+				</ClientTransactionItem>
+			</transactionItems>
+		</ClientSalesOrder>
+	</salesOrders>
+
+
+
+	<purchaseOrders>
+		<ClientPurchaseOrder id="1">
+			<vendor>1</vendor>
+			<contact>
+				<name>John</name>
+			</contact>
+			<phone>7842555</phone>
+			<purchaseOrderNumber>10</purchaseOrderNumber>
+			<dueDate>12062011</dueDate>
+			<transactionItems>
+				<ClientTransactionItem>
+					<name>CPU</name>
+					<description>computer parts</description>
+					<quantity>2</quantity>
+					<unitPrice>2000</unitPrice>
+					<discount>0.00</discount>
+					<lineTotal>4000</lineTotal>
+					<isTaxable>TRUE</isTaxable>
+				</ClientTransactionItem>
+			</transactionItems>
+		</ClientPurchaseOrder>
+	</purchaseOrders>
+
+</ClientCompany>

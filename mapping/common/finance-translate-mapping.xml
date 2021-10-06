@@ -1,0 +1,412 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+                "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.vimukti.accounter.web.server.translate"
+	default-access="field" auto-import="false">
+	<class name="LocalMessage" table="LOCAL_MESSAGE">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<many-to-one name="message" column="MESSAGE_ID" class="Message"
+			not-null="true"></many-to-one>
+		<many-to-one name="lang" column="LANGUAGE" lazy="false"
+			class="Language" not-null="true"></many-to-one>
+		<property name="value" type="text" column="VALUE"></property>
+		<property name="votes" column="VOTES" type="int"></property>
+		<property name="isApproved" column="IS_APPROVED"></property>
+		<many-to-one name="createdBy" class="com.vimukti.accounter.core.Client"
+			column="CLIENT">
+		</many-to-one>
+		<property name="createdDate" column="CREATED_DATE" not-null="true" />
+	</class>
+
+	<class name="Key" table="KEY">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<property name="key" column="KEY"></property>
+		<property name="usageOrder" column="USAGE_ORDER"></property>
+		<property name="usageCount" column="USAGE_COUNT"></property>
+	</class>
+
+	<class name="Message" table="MESSAGE">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<property name="value" type="text" unique="true" column="VALUE"></property>
+		<property name="comment" type="text" column="COMMENT"></property>
+		<property name="isNotUsed" column="IS_NOT_USED"></property>
+		<set name="localMessages" lazy="false" inverse="true">
+			<key column="MESSAGE_ID" />
+			<one-to-many class="LocalMessage" />
+		</set>
+		<set name="keys" table="KEY_MESSAGES" cascade="save-update">
+			<key column="MESSAGE_ID"></key>
+			<many-to-many column="KEY_ID" class="Key" />
+		</set>
+	</class>
+
+	<class name="Vote" table="VOTE">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<many-to-one name="localMessage" column="LOCAL_MESSAGE_ID"
+			class="LocalMessage"></many-to-one>
+		<many-to-one name="client" column="CLIENT_ID"
+			class="com.vimukti.accounter.core.Client"></many-to-one>
+	</class>
+
+	<class name="Language" table="LANGUAGE">
+		<id name="code" column="CODE"></id>
+		<property name="name" column="NAME"></property>
+		<property name="tooltip" column="TOOLTIP"></property>
+	</class>
+
+	<query name="getMessageById">
+		<query-param name="id" type="long" />
+		from com.vimukti.accounter.web.server.translate.Message m where
+		m.id=:id
+	</query>
+
+	<query name="getMessageByValue">
+		<query-param name="value" type="string" />
+		from com.vimukti.accounter.web.server.translate.Message m where
+		m.value=:value
+	</query>
+
+	<query name="getKeyByValue">
+		<query-param name="value" type="string" />
+		from com.vimukti.accounter.web.server.translate.Key k where
+		k.key=:value
+	</query>
+
+	<query name="getLocalMessageById">
+		<query-param name="id" type="long" />
+		from com.vimukti.accounter.web.server.translate.LocalMessage lm where
+		lm.id=:id
+	</query>
+
+	<query name="getLocalMessageByClient">
+		<query-param name="clientId" type="long" />
+		<query-param name="messageId" type="int" />
+		<query-param name="lang" type="string" />
+		from com.vimukti.accounter.web.server.translate.LocalMessage
+		lm where
+		lm.createdBy.id=:clientId and lm.message.id=:messageId and
+		lm.lang.code=:lang
+	</query>
+
+	<query name="getVoteByClientId">
+		<query-param name="clientId" type="long" />
+		<query-param name="localMessageId" type="long" />
+		from com.vimukti.accounter.web.server.translate.Vote v where
+		v.client.id=:clientId and v.localMessage.id=:localMessageId
+	</query>
+
+	<!-- <query name="getLocalMessages"> <query-param name="messageId" type="int" 
+		/> <query-param name="lang" type="string" /> from com.vimukti.accounter.web.server.translate.LocalMessage 
+		lm where lm.message.id=:messageId and lm.lang=:lang </query> -->
+
+	<!-- <sql-query name="getNextMessageId"> <query-param name="lastMessageId" 
+		type="int" /> <return-scalar column="ID" type="int" /> <return-scalar column="TOT" 
+		type="int" /> SELECT M.ID, COUNT(LM.ID) AS TOT FROM MESSAGE M LEFT JOIN LOCAL_MESSAGE 
+		LM ON M.ID=LM.MESSAGE_ID WHERE M.ID!=:lastMessageId GROUP BY M.ID ORDER BY 
+		TOT LIMIT 1; </sql-query> -->
+
+	<!-- <sql-query name="getNoOfMessagesTranslatedByLang"> <query-param name="lang" 
+		type="string" /> SELECT COUNT(*) AS ROWCOUNT FROM (SELECT LM.MESSAGE_ID FROM 
+		LOCAL_MESSAGE LM WHERE LM.LANGUAGE=:lang GROUP BY LM.MESSAGE_ID ) AS T ; 
+		</sql-query> <sql-query name="getNoOfMessagesApprovedByLang"> <query-param 
+		name="lang" type="string" /> SELECT COUNT(*) AS ROWCOUNT FROM (SELECT LM.MESSAGE_ID 
+		FROM LOCAL_MESSAGE LM WHERE LM.LANGUAGE=:lang AND LM.IS_APPROVED = TRUE GROUP 
+		BY LM.MESSAGE_ID ) AS T ; </sql-query> -->
+
+	<sql-query name="getNoOfMessages">
+	
+		<![CDATA[
+				SELECT COUNT(*)
+				FROM   MESSAGE;  
+				]]>
+		
+	</sql-query>
+
+	<query name="getMessages">
+		from
+		com.vimukti.accounter.web.server.translate.Message m where m.id != 0
+	</query>
+
+	<query name="getKeys">
+		from
+		com.vimukti.accounter.web.server.translate.Key k
+		where k.id != 0
+	</query>
+
+	<sql-query name="getMessagesByLimit">
+		<query-param name="fm" type="int" />
+		<query-param name="limt" type="int" />
+		<query-param name="lang" type="string" />
+		<query-param name="searchTerm" type="string" />
+		
+		<![CDATA[
+				SELECT *
+				FROM   MESSAGE M
+				WHERE  M.VALUE LIKE :searchTerm
+				ORDER  BY (SELECT COUNT(*)
+				           FROM   LOCAL_MESSAGE LM
+				           WHERE  LM.MESSAGE_ID = M.ID
+				                  AND LM.LANGUAGE = :lang) ASC,
+				          (SELECT Max(VOTES)
+				           FROM   LOCAL_MESSAGE LM
+				           WHERE  LM.MESSAGE_ID = M.ID
+				                  AND LM.LANGUAGE = :lang) ASC,
+				          (SELECT COUNT(*)
+				           FROM   LOCAL_MESSAGE LM
+				           WHERE  LM.MESSAGE_ID = M.ID
+				                  AND LM.LANGUAGE = :lang
+				                  AND LM.IS_APPROVED = TRUE) = 1 ASC,
+				          M.VALUE
+				LIMIT  :limt OFFSET :fm  
+				]]>
+		
+	</sql-query>
+
+	<sql-query name="getCountOfMessages">
+		<query-param name="searchTerm" type="string" />
+		
+		<![CDATA[
+				SELECT COUNT(*)
+				FROM   MESSAGE M
+				WHERE  M.VALUE LIKE :searchTerm  
+				]]>
+		
+	</sql-query>
+
+	<sql-query name="getUntranslatedMessages">
+		<query-param name="lang" type="string" />
+		<query-param name="fm" type="int" />
+		<query-param name="limt" type="int" />
+		<query-param name="searchTerm" type="string" />
+		
+		<![CDATA[
+				SELECT *
+				FROM   MESSAGE M
+				WHERE (SELECT COUNT(*)
+				       FROM   LOCAL_MESSAGE LM
+				       WHERE  LM.MESSAGE_ID = M.ID
+				              AND LM.LANGUAGE = :lang) = 0
+				      AND M.VALUE LIKE :searchTerm
+				ORDER  BY M.VALUE
+				LIMIT  :limt OFFSET :fm  
+				]]>
+
+	</sql-query>
+
+	<sql-query name="getCountOfUntranslatedMessages">
+		<query-param name="lang" type="string" />
+		<query-param name="searchTerm" type="string" />
+		
+		<![CDATA[
+				SELECT COUNT(*)
+				FROM   MESSAGE M
+				WHERE (SELECT COUNT(*)
+				       FROM   LOCAL_MESSAGE LM
+				       WHERE  LM.MESSAGE_ID = M.ID
+				              AND LM.LANGUAGE = :lang) = 0
+				      AND M.VALUE LIKE :searchTerm  
+				]]>
+		
+	</sql-query>
+
+	<sql-query name="getMyTranslations">
+		<query-param name="lang" type="string" />
+		<query-param name="fm" type="int" />
+		<query-param name="limt" type="int" />
+		<query-param name="clientId" type="long" />
+		<query-param name="searchTerm" type="string" />
+		
+		<![CDATA[
+				SELECT *
+				FROM   MESSAGE M
+				WHERE  (SELECT COUNT(*)
+				        FROM   LOCAL_MESSAGE LM
+				        WHERE  LM.MESSAGE_ID = M.ID
+				               AND LM.LANGUAGE = :lang
+				               AND LM.CLIENT = :clientId) = 1
+				       AND M.VALUE LIKE :searchTerm
+				ORDER  BY (SELECT COUNT(*)
+				           FROM   LOCAL_MESSAGE LM
+				           WHERE  LM.MESSAGE_ID = M.ID
+				                  AND LM.LANGUAGE = :lang) ASC,
+				          (SELECT Max(VOTES)
+				           FROM   LOCAL_MESSAGE LM
+				           WHERE  LM.MESSAGE_ID = M.ID
+				                  AND LM.LANGUAGE = :lang) ASC,
+				          (SELECT COUNT(*)
+				           FROM   LOCAL_MESSAGE LM
+				           WHERE  LM.MESSAGE_ID = M.ID
+				                  AND LM.LANGUAGE = :lang
+				                  AND LM.IS_APPROVED = TRUE) = 1 ASC,
+				          M.VALUE
+				LIMIT  :limt OFFSET :fm  
+				]]>
+		
+	</sql-query>
+
+	<sql-query name="getCountOfMyTranslations">
+		<query-param name="lang" type="string" />
+		<query-param name="clientId" type="long" />
+		<query-param name="searchTerm" type="string" />
+		
+		<![CDATA[
+				SELECT COUNT(*)
+				FROM   MESSAGE M
+				WHERE  (SELECT COUNT(*)
+				        FROM   LOCAL_MESSAGE LM
+				        WHERE  LM.MESSAGE_ID = M.ID
+				               AND LM.LANGUAGE = :lang
+				               AND LM.CLIENT = :clientId) = 1
+				       AND M.VALUE LIKE :searchTerm  
+				]]>
+		
+	</sql-query>
+
+	<sql-query name="getUnApprovedMessages">
+		<query-param name="fm" type="int" />
+		<query-param name="limt" type="int" />
+		<query-param name="lang" type="string" />
+		<query-param name="searchTerm" type="string" />
+		
+		<![CDATA[
+				SELECT *
+				FROM   MESSAGE M
+				WHERE  (SELECT COUNT(*)
+				        FROM   LOCAL_MESSAGE LM
+				        WHERE  LM.MESSAGE_ID = M.ID
+				               AND LM.LANGUAGE = :lang
+				               AND LM.IS_APPROVED = TRUE) = 0
+				       AND M.VALUE LIKE :searchTerm
+				ORDER  BY (SELECT COUNT(*)
+				           FROM   LOCAL_MESSAGE LM
+				           WHERE  LM.MESSAGE_ID = M.ID
+				                  AND LM.LANGUAGE = :lang) ASC,
+				          (SELECT Max(VOTES)
+				           FROM   LOCAL_MESSAGE LM
+				           WHERE  LM.MESSAGE_ID = M.ID
+				                  AND LM.LANGUAGE = :lang) ASC,
+				          M.VALUE
+				LIMIT  :limt OFFSET :fm  
+				]]>
+		
+	</sql-query>
+
+	<sql-query name="getCountOfUnApprovedMessages">
+		<query-param name="lang" type="string" />
+		<query-param name="searchTerm" type="string" />
+		
+		<![CDATA[
+				SELECT COUNT(*)
+				FROM   MESSAGE M
+				WHERE  (SELECT COUNT(*)
+				        FROM   LOCAL_MESSAGE LM
+				        WHERE  LM.MESSAGE_ID = M.ID
+				               AND LM.LANGUAGE = :lang
+				               AND LM.IS_APPROVED = TRUE) = 0
+				       AND M.VALUE LIKE :searchTerm  
+				]]>
+		
+	</sql-query>
+
+	<query name="getLanguageById">
+		<query-param name="code" type="string" />
+		from com.vimukti.accounter.web.server.translate.Language l where
+		l.code=:code
+	</query>
+
+	<query name="getLanguages">
+		from
+		com.vimukti.accounter.web.server.translate.Language l where
+		l.code!=''
+	</query>
+
+	<query name="getLocalMessagesByMessageId">
+		<query-param name="messageId" type="long" />
+		<query-param name="lang" type="string" />
+		from com.vimukti.accounter.web.server.translate.LocalMessage lm where
+		lm.message.id=:messageId and lm.lang.code=:lang
+	</query>
+
+	<sql-query name="getKeyAndValues">
+		<query-param name="clientId" type="long" />
+		<query-param name="lang" type="string" />
+		
+		<![CDATA[
+				SELECT K.KEY,
+				       ( CASE
+				           WHEN ( LM.VALUE IS NOT NULL ) THEN LM.VALUE
+				           ELSE M.VALUE
+				         END ) AS VALUE
+				FROM   KEY K
+				       LEFT JOIN KEY_MESSAGES KM
+				         ON KM.KEY_ID = K.ID
+				       LEFT JOIN MESSAGE M
+				         ON M.ID = KM.MESSAGE_ID
+				       LEFT JOIN LOCAL_MESSAGE LM
+				         ON LM.MESSAGE_ID = M.ID
+				            AND LM.LANGUAGE = :lang
+				            AND ( LM.IS_APPROVED
+				                   OR LM.CLIENT = :clientId )
+				ORDER  BY K.KEY,
+				          LM.IS_APPROVED DESC;  
+				]]>
+		
+	</sql-query>
+
+	<sql-query name="deleteLocalMessage">
+		<query-param name="id" type="long" />
+		
+		<![CDATA[
+				DELETE FROM LOCAL_MESSAGE LM
+				WHERE  LM.ID = :id;  
+				]]>
+		
+	</sql-query>
+
+	<sql-query name="deleteVotesByLocalMessage">
+		<query-param name="id" type="long" />
+		
+		<![CDATA[
+				DELETE FROM VOTE V
+				WHERE  V.LOCAL_MESSAGE_ID = :id;  
+				]]>
+				
+	</sql-query>
+
+	<sql-query name="getLocalMessageForKey">
+		<query-param name="client" type="long" />
+		<query-param name="language" type="string" />
+		<query-param name="key" type="string" />
+		
+		<![CDATA[
+				SELECT ( CASE
+				           WHEN ( LM.VALUE IS NOT NULL ) THEN LM.VALUE
+				           ELSE M.VALUE
+				         END ) AS VALUE
+				FROM   KEY K
+				       LEFT JOIN KEY_MESSAGES KM
+				         ON KM.KEY_ID = K.ID
+				       LEFT JOIN MESSAGE M
+				         ON M.ID = KM.MESSAGE_ID
+				       LEFT JOIN LOCAL_MESSAGE LM
+				         ON LM.MESSAGE_ID = M.ID
+				            AND LM.LANGUAGE = :language
+				            AND ( LM.IS_APPROVED
+				                   OR LM.CLIENT = :client )
+				WHERE  K.KEY = :key
+				ORDER  BY K.KEY,
+				          LM.IS_APPROVED DESC;  
+				]]>
+				
+	</sql-query>
+
+</hibernate-mapping>

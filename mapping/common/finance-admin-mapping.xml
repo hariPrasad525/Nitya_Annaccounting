@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+                "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.vimukti.accounter.admin.core"
+	default-access="field" auto-import="false">
+	<!-- Admin users class -->
+	<class name="com.vimukti.accounter.admin.core.AdminUser" table="ADMIN_USER">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<property name="name" column="NAME"></property>
+		<property name="emailId" column="EMAIL_ID"></property>
+		<property name="password" column="PASSWORD"></property>
+		<property name="typeOfUser" column="TYPE_OF_USER"></property>
+		<property name="status" column="STATUS"></property>
+		<property name="isPermissionsGiven" column="IS_PERMISSIONS_GIVEN"></property>
+	</class>
+	
+	<class name="com.vimukti.accounter.admin.core.AdminTemplate" table="ADMIN_TEMPLATES">
+		<id name="id" column="ID">
+			<generator class="identity" />
+		</id>
+		<property name="name" column="NAME"></property>
+		<property name="subject" type="text"  column="SUBJECT"></property>
+		<property name="body" type="text"  column="BODY"></property>
+	</class>
+
+	<!--
+		<class name="Admin" table="ADMIN"> <id name="id" column="ID">
+		<generator class="identity" /> </id> <property name="name"
+		column="NAME"></property> <property name="emailID"
+		column="EMAIL_ID"></property> <list name="adminUsers" lazy="false"
+		cascade="save-update,delete"> <key column="ADMIN_ID"></key>
+		<list-index column="IDX" /> <one-to-many class="AdminUser" /> </list>
+		</class>
+	-->
+
+	<query name="get.adminuser.by.emailid.and.password">
+		<query-param name="emailId" type="String" />
+		<query-param name="password" type="String" />
+		
+		from com.vimukti.accounter.admin.core.AdminUser user where user.emailId =:emailId and user.password=:password
+	</query>
+	
+	<query name="getAdminUsers">
+		from com.vimukti.accounter.admin.core.AdminUser adminuser 
+
+	</query>
+
+</hibernate-mapping>
+

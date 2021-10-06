@@ -1,0 +1,26 @@
+/* img{
+	display: none;
+}
+html body * {
+	background-image: none;
+}
+html body .gridHeader td.gridHeaderCell {
+font-weight:bold;
+padding-left:5px;
+}
+.gridHeaderRow{
+	border-bottom: 2px solid #777;
+	}
+* .parentNode{
+	font-weight:bold;
+}*/
+
+/*.gridLabelCell,.gridHeaderCell,.gridTextBoxCell{display:none}*/
+
+col.gridHeader1, col.gridBody1{display:none;background: pink;}
+table{font-size:11px;border-collapse:collapse;table-layout: fixed;}
+.gridBody, .gridHeader{border-width:0 1px 1px 0;border-style:solid;border-color:#000;}
+.gridBody .gridBody{border: 0 !important;}
+.gridHeader{border-width:0 1px 0px 0 !important;background: #AAAAAA;color:blue;}
+.gridBody td, .gridHeader td{border-width:1px 0 0 1px;border-style:solid;border-color:#000;}
+.gridBody td div, .gridHeader td div{white-space: nowrap;width: 100%;overflow: hidden;}

@@ -1,0 +1,272 @@
+/*col.gridHeader1,col.gridBody1 {
+	display: none;
+	background: pink;
+}
+*/
+table {
+	font-size: 13px;
+	border-collapse: collapse;
+	table-layout: fixed;
+	font-family: Arial Unicode MS,Arial,sans-serif;
+}
+
+/******** Styles for ListGrid *********/
+.gridBody,.gridHeader {
+	border-width: 0 1px 1px 0;
+	border-style: ridge;
+}
+
+.gridBody .parentNode td,.gridBody .childNode td {
+	border: 0 !important;
+}
+
+.gridHeader {
+	border-width: 1px 1px 1px 1px !important;
+}
+
+.margin-l {
+	margin-left: 15px;
+}
+
+.margin-r {
+	margin-right: 15px;
+}
+
+.gridBody td,.gridHeader td {
+	border-width: 2px 0 0 2px;
+	border-style: ridge;
+}
+
+.gridBody td div,.gridHeader td div {
+	white-space: nowrap;
+	width: 100%;
+	overflow: hidden;
+}
+
+.thinBorder {
+	border : 1px solid #E1E1E1;
+}
+
+.gridHeaderBackGround {
+	background: #f2f2f2;
+}
+
+.ShiftBottom {
+	margin-top: 3em;
+}
+
+.thead {
+	display: table-header-group;
+}
+
+.tfoot {
+	display: table-footer-group;
+}
+
+.ReportGrid .gridBody tr td.underline {
+	border-top: 1px solid black !important;
+	cursor: default;
+}
+
+.ReportGrid .gridBody tr td {
+	border: 0px none !important;
+	overflow: visible !important;;
+	padding-left: 5px !important;
+}
+
+.ReportGrid .gridBody {
+	border: 0px none !important;
+}
+
+.ReportGrid .gridHeader tr td {
+	border: 0px none !important;
+	overflow: visible !important;
+	padding-right: 4px !important;
+	font-weight: bold;
+}
+
+div.gridBodyContainer {
+	overflow: visible !important;
+	height: auto !important;
+	width: auto !important;
+}
+
+.gridHeaderLastTd {
+	display: none;
+}
+
+/********* Styles for View Employee Details in HR **********/
+.header-label {
+	color: blue;
+	font-weight: bold;
+	margin: 10px 0 5px;
+	padding-top: 10px;
+	border-top: 1px solid #000;
+}
+
+.field-name {
+	font-weight: bold;
+	margin-right: 10px;
+}
+
+/*.ReportGrid .gridBody tr td.depth1 {
+	padding-left: 1% !important;
+}
+
+.ReportGrid .gridBody tr td.depth2 {
+	padding-left: 3% !important;
+}
+
+.ReportGrid .gridBody tr td.depth3 {
+	padding-left: 5% !important;
+}
+
+.ReportGrid .gridBody tr td.depth4 {
+	padding-left: 7% !important;
+}
+
+.ReportGrid .gridBody tr td.depth5 {
+	padding-left: 9% !important;
+}
+
+.ReportGrid .gridBody tr td.depth6 {
+	padding-left: 11% !important;
+}
+
+.ReportGrid .gridBody tr td.depth7 {
+	padding-left: 13% !important;
+}
+
+.ReportGrid .gridBody tr td.depth8 {
+	padding-left: 15% !important;
+}
+
+.ReportGrid .gridBody tr td.depth9 {
+	padding-left: 17% !important;
+}
+
+.ReportGrid .gridBody tr td.depth10 {
+	padding-left: 19% !important;
+}
+
+.ReportGrid {
+	height: 100% !important;
+}*/
+
+h1 {
+	font-size: 2em;
+	font-weight: bold;
+	color: #777777;
+	margin: 40px 0px 70px;
+	text-align: center;
+}
+
+.boldcell {
+	font-weight: bold;
+	cursor: default;
+}
+
+.financeBackground {
+	background: #FFFFFF none repeat scroll 0 0;
+	border: 2px solid #C6E2FF;
+	padding: 6px;
+}
+
+.listgridViewBottom {
+	border-right: 1px solid #A7ABB4;
+	border-top: 1px solid #A7ABB4;
+	border-bottom: 1px solid #A7ABB4;
+	border-left: 1px solid #A7ABB4;
+}
+
+.ReportGrid .bodyCell {
+	overflow: visible !important;
+}
+
+.gridHeader td.gridHeaderCell,.gridBody tr td,.gridFooterParent,.gridHeaderParent
+	{
+	height: 22px;
+}
+
+.ReportGrid .gridHeader {
+	border: 0px none !important;
+	padding-left: 4px !important;
+}
+
+.ReportGrid .gridBody,.ReportGrid .gridHeader {
+	border-collapse: separate !important;
+	table-layout: fixed;
+	white-space: normal !important;
+}
+
+.ReportGrid .gridBody tr td div,.ReportGrid .gridHeader tr td div {
+	overflow: visible !important;
+	height: 18px !important;
+	white-space: normal !important;
+	width: 100% !important;
+}
+
+.ReportGrid .gridBody tr td {
+	border-right: 0px none !important;
+	padding-left: 5px !important;
+	overflow: visible !important;
+	border-bottom: 0px none !important;
+}
+
+.noScroll {
+	overflow-y: hidden !important;
+	overflow-x: hidden !important;
+}
+
+.handCursor {
+	text-decoration: underline;
+	cursor: pointer;
+	color: #0000AA;
+	white-space: nowrap;
+	width: 1px;
+}
+
+table tr.ReportGridRow:HOVER {
+	background: #9fd8ef url('images/mouse-hover-shade.png') repeat-x;
+}
+
+.reportGridContainer {
+	padding: 3px !important;
+}
+
+.reports-Button {
+	border: 1px solid #006;
+	background: #9cf;
+}
+
+.listgridfooter {
+	table-layout: fixed;
+	background: #EEEEEE none repeat scroll 0 0;
+	table-layout: fixed;
+	width: 100%;
+}
+
+.listgridfooter td {
+	padding-left: 0px;
+	text-align: left;
+	font-weight: bold;
+}
+
+td.gridDecimalCell {
+	/*text-align: right;*/
+	text-align:left;
+}
+
+table tr.ReportGridRow td {
+	width: 0px !important;
+}
+
+table tr.gridHeaderRow td {
+	width: 0px !important;
+}
+.gridHeaderRow th{
+	padding-bottom :25px;
+}
+.bold,.boldcell,.bold-cell{
+	font-weight:bold;
+}

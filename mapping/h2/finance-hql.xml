@@ -1,0 +1,411 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.vimukti.accounter.core"
+	default-access="field" auto-import="false">
+
+	<!-- Named HQL for Finance Tool -->
+
+	<query name="list.TAXItem">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.TAXItem t where t.company=:company
+	</query>
+
+	<query name="list.Account">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.Account a where a.company=:company
+		order by a.number
+	</query>
+
+	<query name="list.AccountTransaction">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.AccountTransaction a where
+		a.company=:company
+	</query>
+
+	<query name="list.FiscalYear">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.FiscalYear fy where
+		fy.company=:company order by fy.startDate
+	</query>
+
+	<query name="list.Bank">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.Bank b where b.company=:company order
+		by b.name
+	</query>
+
+	<!-- <query name="list.Company">from com.vimukti.accounter.core.Company 
+		c order by -->
+	<!-- c.preferences.fullName</query> -->
+
+	<query name="list.CreditRating">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.CreditRating cr where
+		cr.company=:company order by cr.name
+	</query>
+
+	<query name="list.Currency">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.Currency c where c.company=:company
+		order by c.name
+	</query>
+
+	<query name="list.CustomerGroup">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.CustomerGroup cg
+		where
+		cg.company=:company
+		order by cg.name
+	</query>
+
+	<query name="list.Item">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.Item i where i.company=:company order
+		by i.name
+	</query>
+
+	<query name="list.ItemGroup">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.ItemGroup ig where ig.company=:company
+		order by ig.name
+	</query>
+
+	<query name="list.Payee">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.Payee p where p.company=:company order
+		by p.name
+	</query>
+
+	<query name="list.PaymentTerms">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.PaymentTerms pt where
+		pt.company=:company order by pt.name
+	</query>
+
+	<query name="list.PriceLevel">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.PriceLevel pl where
+		pl.company=:company order by pl.name
+	</query>
+
+	<query name="list.ShippingMethod">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.ShippingMethod sm where
+		sm.company=:company order by sm.name
+	</query>
+
+	<query name="list.TrackClass">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.AccounterClass
+		accounterClass where
+		accounterClass.company=:company order by
+		accounterClass.className
+	</query>
+
+	<query name="list.ShippingTerms">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.ShippingTerms st where
+		st.company=:company
+		order by st.name
+	</query>
+	<query name="list.TAXCode">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.TAXCode tc where tc.company=:company
+		order by
+		tc.name
+	</query>
+
+	<query name="list.TAXGroup">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.TAXGroup tg where tg.company=:company
+	</query>
+
+	<query name="list.TAXItemGroups">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.TAXItemGroup tig where
+		tig.company=:company
+	</query>
+	<!-- <query name="list.TaxRateCalculation">from com.vimukti.accounter.core.TaxRateCalculation 
+		</query> -->
+	<query name="list.UnitOfMeasure">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.UnitOfMeasure u where
+		u.company=:company order
+		by u.name
+	</query>
+	<query name="list.User">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.User u where u.company=:company order
+		by
+		u.client.firstName,u.client.lastName
+	</query>
+	<query name="list.RecurringTransaction">
+		<query-param name="company" type="Company" />
+		<query-param name="fromDate" type="com.vimukti.accounter.core.LongUseType" />
+		<query-param name="toDate" type="com.vimukti.accounter.core.LongUseType" />
+		from com.vimukti.accounter.core.RecurringTransaction
+		rt where
+		rt.company=:company and rt.startDate between :fromDate and :toDate
+		order by rt.name
+	</query>
+	<query name="list.currentRecTransactions">
+		<query-param name="company" type="Company" />
+		<query-param name="name" type="long" />
+		from com.vimukti.accounter.core.RecurringTransaction rt where
+		rt.nextScheduleOn =:name and rt.company=:company order by rt.name
+	</query>
+	<query name="list.VendorGroup">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.VendorGroup vg where
+		vg.company=:company order by vg.name
+	</query>
+	<query name="list.Transaction">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.Transaction t where t.company=:company
+	</query>
+
+	<!-- <query name="list.CreditsAndPayments">from -->
+	<!-- com.vimukti.accounter.core.CreditsAndPayments -->
+	<!-- </query> -->
+
+	<!-- <query name="list.TransactionCreditsAndPayments">from -->
+	<!-- com.vimukti.accounter.core.TransactionCreditsAndPayments</query> -->
+
+	<query name="list.TransactionPayBill">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.TransactionPayBill tb where
+		tb.company=:company
+	</query>
+
+	<!-- <query name="list.TransactionReceivePayment">from -->
+	<!-- com.vimukti.accounter.core.TransactionReceivePayment</query> -->
+
+	<!-- <query name="list.TransactionIssuePayment">from -->
+	<!-- com.vimukti.accounter.core.TransactionIssuePayment</query> -->
+
+	<!-- <query name="list.TransactionPaySalesTax">from -->
+	<!-- com.vimukti.accounter.core.TransactionPaySalesTax</query> -->
+
+	<!-- <query name="list.PaySalesTaxEntries">from -->
+	<!-- com.vimukti.accounter.core.PaySalesTaxEntries -->
+	<!-- </query> -->
+
+	<!-- <query name="list.TransactionMakeDepositEntries">from -->
+	<!-- com.vimukti.accounter.core.TransactionMakeDepositEntries</query> -->
+
+	<!-- <query name="list.TransactionExpense">from -->
+	<!-- com.vimukti.accounter.core.TransactionExpense -->
+	<!-- </query> -->
+
+	<!-- <query name="list.TransactionPayExpense">from -->
+	<!-- com.vimukti.accounter.core.TransactionPayExpense -->
+	<!-- </query> -->
+
+	<query name="list.Vendor">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.Vendor v where v.company=:company
+	</query>
+	<query name="list.Customer">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.Customer c where c.company=:company
+	</query>
+	<query name="list.SalesPerson">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.SalesPerson sp where
+		sp.company=:company order by sp.firstName
+	</query>
+	<query name="list.TAXAgency">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.TAXAgency ta where ta.company=:company
+	</query>
+	<query name="list.FixedAsset">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.FixedAsset fa where
+		fa.company=:company
+	</query>
+	<!-- <query name="list.SellingOrDisposingFixedAsset">from com.vimukti.accounter.core.SellingOrDisposingFixedAsset</query> -->
+	<query name="list.VATReturn">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.TAXReturn vr where vr.company=:company
+		order by vr.taxAgency.name, vr.periodStartDate
+	</query>
+	<query name="list.currency">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.Currency c where c.company=:company
+		order by c.name
+	</query>
+	<query name="list.TAXAdjustment">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.TAXAdjustment ta where
+		ta.company=:company
+	</query>
+
+	<query name="list.TAXItemGroup">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.TAXItemGroup vig where
+		vig.company=:company order by vig.name
+	</query>
+
+	<!-- <query name="list.Box"> <query-param name="company" type="Company" 
+		/> from com.vimukti.accounter.core.Box b where b.company=:company </query> -->
+
+	<query name="list.VATReturnBox">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.VATReturnBox vrb where
+		vrb.company=:company order by vrb.name
+	</query>
+
+	<query name="list.BrandingTheme">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.BrandingTheme bt where
+		bt.company=:company order by bt.id
+	</query>
+
+	<query name="list.Warehouse">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.Warehouse w where
+		w.company=:company
+		order by w.lastModifiedDate desc
+	</query>
+	<query name="list.All.Units">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.Measurement m where
+		m.company=:company
+		order by m.id
+	</query>
+
+	<query name="list.Activity">
+		<query-param name="company" type="Company" />
+		<query-param name="fromDate" type="long" />
+		<query-param name="endDate" type="long" />
+		from com.vimukti.accounter.core.Activity at where at.company=:company
+		and at.time between :fromDate and :endDate
+		order by at.id desc
+	</query>
+
+	<query name="list.locations">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.Location bt where bt.company=:company
+		order by bt.id
+	</query>
+	<query name="list.TdsChalanDetails">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.TDSChalanDetail bt where
+		bt.company=:company order by bt.transactionDate desc, bt.number desc
+	</query>
+
+	<query name="list.TDSDeductorMasters">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.TDSDeductorMasters bt where
+		bt.company=:company
+	</query>
+	<query name="list.TDSResponsiblePerson">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.TDSResponsiblePerson bt where
+		bt.company=:company
+	</query>
+	<query name="list.Budget">
+		<query-param name="company" type="Company" />
+		from com.vimukti.accounter.core.Budget bt where bt.company=:company
+	</query>
+
+	<query name="unique.name.Account">
+		<query-param name="company" type="Company" />
+		<query-param name="name" type="String" />
+		from com.vimukti.accounter.core.Account a where
+		a.name=:name and
+		a.company=:company
+	</query>
+	<query name="unique.name.Item">
+		<query-param name="company" type="Company" />
+		<query-param name="name" type="String" />
+		from com.vimukti.accounter.core.Item a where
+		a.name=:name and
+		a.company=:company
+	</query>
+	<query name="unique.name.TAXCode">
+		<query-param name="company" type="Company" />
+		<query-param name="name" type="String" />
+		from com.vimukti.accounter.core.TAXCode a where
+		a.name=:name and
+		a.company=:company
+	</query>
+	<query name="unique.name.TAXItem">
+		<query-param name="company" type="Company" />
+		<query-param name="name" type="String" />
+		from com.vimukti.accounter.core.TAXItem a where
+		a.name=:name and
+		a.company=:company
+	</query>
+	<query name="unique.name.Vendor">
+		<query-param name="company" type="Company" />
+		<query-param name="name" type="String" />
+		from com.vimukti.accounter.core.Vendor a where
+		a.name=:name and
+		a.company=:company
+	</query>
+	<query name="unique.name.TAXAgency">
+		<query-param name="company" type="Company" />
+		<query-param name="name" type="String" />
+		from com.vimukti.accounter.core.TAXAgency a where
+		a.name=:name and
+		a.company=:company
+	</query>
+	<query name="unique.name.PaymentTerms">
+		<query-param name="company" type="Company" />
+		<query-param name="name" type="String" />
+		from com.vimukti.accounter.core.PaymentTerms a
+		where
+		a.name=:name and
+		a.company=:company
+	</query>
+
+	<query name="unique.name.VATReturnBox">
+		<query-param name="company" type="Company" />
+		<query-param name="name" type="String" />
+		from com.vimukti.accounter.core.VATReturnBox v
+		where v.name=:name and
+		v.company=:company
+	</query>
+
+	<!-- <query name="unique.emailId.User"> -->
+	<!-- <query-param name="company" type="Company" /> -->
+	<!-- <query-param name="email" type="String" /> -->
+	<!-- from com.vimukti.accounter.core.User u where -->
+	<!-- u.email=:email and -->
+	<!-- u.company=:company -->
+	<!-- </query> -->
+	<query name="gettoken.by.id">
+		from com.vimukti.accounter.core.ResetPasswordToken r
+		where r.token=?
+	</query>
+	<query name="getallMaintanaceInfoUsers">
+		from com.vimukti.accounter.core.MaintananceInfoUser m
+	</query>
+	<query name="getPriceLevel.by.Name">
+		<query-param name="company" type="Company" />
+		<query-param name="name" type="string" />
+		from com.vimukti.accounter.core.PriceLevel pl where pl.name =:name and
+		pl.company=:company
+	</query>
+
+
+	<query name="list.PaypalTransactions">
+		<query-param name="company" type="Company" />
+		<query-param name="accountId" type="long" />
+		from com.vimukti.accounter.core.PaypalTransation transactions where
+		transactions.company=:company
+		and transactions.accountID=:accountId
+	</query>
+	
+	<query name="list.CheckPaypalTransactions">
+		<query-param name="company" type="Company" />
+		<query-param name="transactionID" type="String" />
+		from com.vimukti.accounter.core.PaypalTransation transactions where
+		transactions.company=:company and
+		transactions.transactionID=:transactionID
+	</query>
+
+</hibernate-mapping>

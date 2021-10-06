@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-configuration SYSTEM "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+
+		<!-- configuration pool via c3p0 -->
+		<property name="hibernate.c3p0.acquire_increment">1</property>
+		<property name="hibernate.c3p0.idle_test_period">100</property> <!-- seconds -->
+		<property name="hibernate.c3p0.max_size">100</property>
+		<property name="hibernate.c3p0.max_statements">100</property>
+		<property name="hibernate.c3p0.min_size">10</property>
+		<property name="hibernate.c3p0.timeout">100</property> <!-- seconds -->
+		<!-- DEPRECATED very expensive property name="c3p0.validate> -->
+
+		<property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
+
+		<property name="connection.driver_class">
+			${db.driver}
+		</property>
+		<property name="connection.url">
+			${db.url}
+		</property>
+		<property name="connection.username">
+			${db.user}
+		</property>
+		<property name="connection.password">
+			${db.pass}
+		</property>
+		<property name="connection.charSet">
+			utf8
+		</property>
+		<!-- <property name="hibernate.c3p0.min_size"> 0 </property> -->
+		<!-- DB JDBC connection properties -->
+		<!-- Transaction isolation 2 = READ_COMMITTED -->
+		<property name="hibernate.connection.isolation">
+			2
+		</property>
+		<!-- <property name="hibernate.c3p0.max_size"> 10 </property> <property 
+			name="hibernate.c3p0.timeout"> 300 </property> <property name="hibernate.c3p0.max_statements"> 
+			50 </property> <property name="hibernate.c3p0.idle_test_period"> 3000 </property> -->
+
+
+		<property name="dialect"> ${dialect}
+
+		</property>
+		<property name="javax.persistence.validation.mode">
+			none
+		</property>
+
+		<!-- Use the C3P0 connection pool provider -->
+		<property name="hibernate.hbm2ddl.auto">
+			update
+		</property>
+		<property name="hibernate.current_session_context_class">
+			thread
+		</property>
+		<!-- Show and print nice SQL on stdout -->
+		<property name="show_sql">
+			${db.showsql}
+		</property>
+		<property name="format_sql">
+			true
+		</property>
+		<!-- <mapping resource="hibernate.xml" /> -->
+		<!-- mapping resource=""/ -->
+		<!-- <mapping resource="mapping/queries.xml" />
+		<mapping resource="mapping/usermanagment.xml" />
+
+		<mapping resource="mapping/finance-admin-mapping.xml" />
+
+		Mappings for Finance Module
+
+		<mapping resource="mapping/finance-mapping.xml" />
+		<mapping resource="mapping/finance-transactions.xml" />
+		<mapping resource="mapping/finance-query.xml" />
+		<mapping resource="mapping/finance-hql.xml" />
+		<mapping resource="mapping/finance-reports.xml" />
+		<mapping resource="mapping/finance-views.xml" />
+		<mapping resource="mapping/finance-new-mapping.xml" />
+		<mapping resource="mapping/finance-new-queries.xml" />
+		<mapping resource="mapping/finance-translate-mapping.xml" />
+		<mapping resource="mapping/finance-search.xml" />
+		<mapping resource="mapping/finance-migration.xml" />
+		<mapping resource="mapping/finance-triggers.xml" />
+		<mapping resource="mapping/finance-payroll.xml" /> -->
+
+
+	</session-factory>
+
+</hibernate-configuration>

@@ -1,0 +1,173 @@
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='war/files/FinancePrint.css' media='all'></link>
+</head>
+<!-- $BeginBlock theme -->
+<div style="font-family:segoe script;font-size:${font};margin-bottom:${bottomMargin};margin-top:${topMargin};">
+<div class="invoice_main_div">
+ 
+ <table style="font-family:${fontStyle};font-size:${font};" width="100%">
+	   <tr>
+	       <td align="left;">
+			   <div class="invoice_xero_header">
+			     <p align="left">
+				    <font color="black"><strong>${title}</strong></font>
+				 </p>
+			   </div>
+			</td>
+			<td style="vertical-align: top;" align="right">
+		     <table id="header-part-invoice" style="font-family:${fontStyle};font-size:${font};" width="100%">
+			    <tr>
+				  <td>
+				     <table width="100%" class="invoice_xerodetails_table"  style="font-family:${fontStyle};font-size:${font};">
+					    <colgroup><col></colgroup>
+						<!-- $BeginBlock invNumberHead -->
+						<tr>
+						   <td id ="invoiceNumber" align="left"> Invoice Number</td>
+						</tr>
+						<tr>
+						   <td align="left">
+							 ${invoiceNumber}
+						   </td>
+						</tr>
+						<!-- $EndBlock invNumberHead -->
+                        <!-- $BeginBlock invDateHead -->
+						<tr>
+						  <td id = "invoiceDate" align="left">Invoice Date</td>
+						</tr>
+						<tr>
+						  <td align="left">
+							 ${invoiceDate}
+						  </td>
+						</tr>
+						 <!-- $EndBlock invDateHead -->
+					 </table> 
+				  </td>
+				  <td>
+				    <div class="gwt-HTML">
+						<p>
+						   <strong>${comapany}</strong>
+						   <table><tr><td>${companyDetails}</td></tr></table> 
+						</p>
+			        </div>
+				  </td>
+				</tr>
+			 </table>
+		   </td>
+		</tr>
+		
+   </table>
+<table class="xero_invoice_table"  id="items" width="100%" style="font-family:${fontStyle};font-size:${font};">
+<!-- $BeginBlock  itemDetails -->
+  <tr><!-- $BeginBlock showLabels -->
+    <th><p class="fontSetting">Description</p></th>
+	<th><p class="fontSetting">Qty</p></th>
+	<th><p class="fontSetting">Unit Price</p></th>
+	<th><p class="fontSetting">Total Price</p></th>
+	<!-- $BeginBlock vatBlock -->
+	<th><p class="fontSetting">${VATRate}</p></th>
+	<th><p class="fontSetting">${VATAmount}</p></th>
+	<!-- $EndBlock vatBlock -->
+	<!-- $EndBlock showLabels -->
+  </tr>
+ <!-- $BeginBlock invoiceRecord --> <tr class="item-row">
+	<td class="description" align="center">
+	   <div><p class="fontSetting">${description}</p></div>
+	</td>
+	<td align="center" class="qty">
+	   <div><p class="fontSetting">${quantity}</p></div>
+	</td>
+	<td align="center">
+	   <div class="cost">
+	     <p class="fontSetting">${itemUnitPrice}</p>
+	   </div>
+	</td>
+    <td align="center">
+	   <div class="price">
+	     <p class="fontSetting">${itemTotalPrice}</p>
+	   </div>
+	</td>
+	<!-- $BeginBlock vatValueBlock -->
+	<td align="center" class="vatRate">
+	   <p class="fontSetting"><span >${itemVatRate}</span></p>
+	</td>
+	<td align="center" class="vatAmount">
+	   <div><p class="fontSetting">${itemVatAmount}</p></div>
+	</td>
+	<!-- $EndBlock vatValueBlock -->
+  </tr><!-- $EndBlock invoiceRecord -->
+  </table>
+  <table class="xero_sub_total" >
+  <tr>
+	<td class="blank" colspan="4" rowspan="3" >
+	  <p class="fontSetting">${blankText}</p>
+	</td>
+	<td class="total-line, item-column" ><p class="fontSetting">&nbsp;&nbsp;Sub Total</p></td>
+	<td class="total-value, item-column">
+	  <div id="subtotal">
+	    <p class="fontSetting">
+		 ${subTotal}
+		</p>
+	  </div>
+	</td>
+  </tr>
+  <!-- $BeginBlock VatTotal -->
+  <tr>
+	<td class="total-line, item-column" id="vat-total" ><p class="fontSetting">&nbsp;&nbsp;${vatlabel}</p></td>
+	<td class="total-value, item-column" >
+	   <div id="total"><p class="fontSetting">${vatTotal}</p></div>
+	</td>
+  </tr>
+   <!-- $EndBlock VatTotal -->
+  <tr class="xero-total">
+	<td class="total-line balance, item-column"><p class="fontSetting">&nbsp;&nbsp;TOTAL</p></td>
+	<td class="total-value, item-column" >
+	  <div class="total"><p class="fontSetting">${total}</p></div>
+	</td>
+  </tr><!-- $EndBlock itemDetails -->
+</table>
+<table class="due_xerodate" style="font-family:${fontStyle};font-size:${font};">
+    <tr><!-- $BeginBlock dueDateDetails -->
+       <td id="duedate"><strong>Due Date:</strong></td><td>${dueDate}</td>
+    </tr><!-- $EndBlock dueDateDetails -->
+	<!-- $BeginBlock termsAndAdvice -->
+	 <tr>
+     <td ><strong>${termsAndPaymentAdvice}</strong></td>
+    </tr>
+    <!-- $EndBlock termsAndAdvice -->
+    <!-- $BeginBlock paypalemail -->
+	 <tr>
+     <td ><strong>${email}</strong></td>
+    </tr>
+    <!-- $EndBlock paypalemail -->
+</table>
+<table id="footer" width="100%" style="font-family:${fontStyle};font-size:${font};">
+   <tr>
+	  <td style="vertical-align:top;text-align:left" >
+		 <table  style=" padding:3.5px" >
+			<tr>
+			  <td align="right" style="vertical-align:top;">
+				<table style="font-size:14pt"><colgroup><col></colgroup>
+				<!-- $BeginBlock regestrationAddress -->
+				  <tr>
+					<td><center>${regestrationAddress}</center></td>
+				  </tr>
+				<!-- $EndBlock regestrationAddress -->
+				</table>
+			  </td>
+			</tr>
+		 </table>
+	   </td>
+	   <!-- $BeginBlock logo -->
+	   <td  id = "logoimg" style="vertical-align: bottom;">
+	     <div align="right" style="margin-bottom:14px;">
+		    <img src="war\files\footer-print-img.jpg" width="67.5px" height="25px">
+		 </div>
+       </td>
+       <!-- $EndBlock logo -->
+	</tr>
+</table>
+</div>
+</div>
+<!-- $EndBlock theme -->
+</html>

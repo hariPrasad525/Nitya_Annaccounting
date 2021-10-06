@@ -1,0 +1,206 @@
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='war/files/FinancePrint.css' media='all'></link>
+</head>
+<!-- $BeginBlock theme -->
+<div style="font-family:segoe script;font-size:${font};margin-bottom:${bottomMargin};margin-top:${topMargin};">
+<div class="invoice_main_div">
+ <table style="font-family:${fontStyle};font-size:${font};" width="100%">
+	   <tr>
+	       <td align="center;">
+			   <div class="invoice_quick_header">
+			     <p align="center">
+				    <font color="black"><strong>${title}</strong></font>
+				 </p>
+			   </div>
+			</td>
+		</tr>
+		<tr>
+		  <td style="vertical-align: top;" align="left">
+		     <table id="header-part-invoice" style="font-family:${fontStyle};font-size:${font};" width="100%">
+			    <tr>
+				  <td width="60%">
+				    <div class="gwt-HTML">
+						<p>
+						   <strong>${comapany}</strong>
+						   <table><tr><td>${companyDetails}</td></tr></table> 
+						</p>
+			        </div>
+				  </td>
+				  <td width="40%">
+				     <table width="100%" class="invoice_details_quicktable" border="1"  style="font-family:${fontStyle};font-size:${font};">
+					    <colgroup><col></colgroup>
+						<!-- $BeginBlock invNumberHead -->
+						<tr class="table-head">
+						   <td id ="invoiceNumber"> Invoice Number</td>
+						  <td  width="50%">
+							 Invoice Date
+						   </td>
+						</tr>
+						<!-- $EndBlock invNumberHead -->
+                        <!-- $BeginBlock invDateHead -->
+						<tr>
+						  <td id = "invoiceDate">${invoiceNumber}</td>
+						  <td>
+							 ${invoiceDate}
+						  </td>
+						</tr>
+						<!-- $EndBlock invDateHead -->
+						<!-- $BeginBlock invOrderNumHead -->
+						<tr class="table-head">
+						  <td id = "orderNumber"> Order Number</td>
+						  <td>
+							Customer Number
+						  </td>
+						</tr>
+						<!-- $EndBlock invOrderNumHead -->
+                        <!-- $BeginBlock invCustNumHead -->
+						<tr>
+						  <td id = "customerNumber">${invoiceOrderNumber}</td>
+						  <td>
+							 ${invoiceCustomerNumber}
+						  </td>
+						 </tr>
+						 <!-- $EndBlock invCustNumHead -->
+					 </table> 
+				  </td>
+				</tr>
+			 </table>
+		   </td>
+		</tr> 
+   </table>
+   <table border="0" id="billingAddressTable" width="100%" style="font-family:${fontStyle};font-size:${font};">
+     <tr>
+	   <td style="vertical-align: top;" align="left">
+	     <table border="1"  id="billto" class="billto_quick" style="font-family:${fontStyle};font-size:${font};"><colgroup><col></colgroup>
+		 <!-- $BeginBlock billhead -->
+          <tr>
+			<td class="table-head"><p class="fontSetting"><center>Bill To</center></p></td>
+		  </tr>
+		  <!-- $EndBlock billhead -->
+          <!-- $BeginBlock billingAddressDetails -->
+		  <tr>
+			<td align="left" style="vertical-align:top">
+			   <p class="fontSetting">
+			     <div align="left">&nbsp;${billingAddress}</div>
+			   </p>
+			</td>
+		  </tr>
+		  <!-- $EndBlock billingAddressDetails -->
+		 </table>
+		</td>
+	 </tr>
+ </table>
+ <table class="dueamount_enclosed" border="1">
+    <tr>
+	   <td class="table-head"><p class="fontSetting"><center>Amount Due</center></p></td>
+	   <td class="table-head"><p class="fontSetting"><center>Enclosed</center></p></td>
+    </tr>
+    <tr>
+	   <td><p class="fontSetting"><center>${amountDue}</center></p></td>
+	   <td><p class="fontSetting"><center>${enclosed}</center></p></td>
+	</tr>
+ </table>
+<table border="1" width="100%"  class="removeHeadBorder quick_invoice_header" id="items" style="font-family:${fontStyle};font-size:${font};clear:both">
+<!-- $BeginBlock  itemDetails -->
+<thead>
+  <tr class="table-head"><!-- $BeginBlock showLabels -->
+    <td><p class="fontSetting">Description</p></td>
+	<td><p class="fontSetting">Qty</p></td>
+	<td><p class="fontSetting">Unit Price</p></td>
+	<td><p class="fontSetting">Total Price</p></td>
+	<!-- $BeginBlock vatBlock -->
+	<td><p class="fontSetting">${VATRate}</p></td>
+	<td><p class="fontSetting">${VATAmount}</p></td>
+	<!-- $EndBlock vatBlock -->
+	<!-- $EndBlock showLabels -->
+  </tr>
+</thead>
+<tbody height="400">
+ <!-- $BeginBlock invoiceRecord --> <tr class="item-row">
+	<td class="description">
+	   <div><p class="fontSetting">${description}</p></div>
+	</td>
+	<td class="qty">
+	   <div><p class="fontSetting">${quantity}</p></div>
+	</td>
+	<td>
+	   <div class="cost">
+	     <p class="fontSetting">${itemUnitPrice}</p>
+	   </div>
+	</td>
+    <td>
+	   <div class="price">
+	     <p class="fontSetting">${itemTotalPrice}</p>
+	   </div>
+	</td>
+	<!-- $BeginBlock vatValueBlock -->
+	<td class="vatRate">
+	   <p class="fontSetting"><span >${itemVatRate}</span></p>
+	</td>
+	<td class="vatAmount">
+	   <div><p class="fontSetting">${itemVatAmount}</p></div>
+	</td>
+	<!-- $EndBlock vatValueBlock -->
+  </tr><!-- $EndBlock invoiceRecord -->
+  </tbody>
+  </table>
+  <table border="1" class="quick_total_table">
+  <tr>
+	<td class="blank" colspan="4" rowspan="3" >
+	  <p class="fontSetting">${blankText}</p>
+	</td>
+	<td class="total-line, item-column" ><p class="fontSetting">&nbsp;&nbsp;Sub Total</p></td>
+	<td class="total-value, item-column">
+	  <div id="subtotal">
+	    <p class="fontSetting" align="right">
+		 ${subTotal}
+		</p>
+	  </div>
+	</td>
+  </tr>
+  <!-- $BeginBlock VatTotal -->
+  <tr>
+	<td class="total-line, item-column" id="vat-total" ><p class="fontSetting">&nbsp;&nbsp;${vatlabel}</p></td>
+	<td class="total-value, item-column" align="right">
+	   <div id="total"><p class="fontSetting">${vatTotal}</p></div>
+	</td>
+  </tr>
+   <!-- $EndBlock VatTotal -->
+  <tr>
+	<td class="total-line table-head balance, item-column"><p class="fontSetting">&nbsp;&nbsp;TOTAL</p></td>
+	<td class="table-head total-value, item-column" align="right">
+	  <div class="total"><p class="fontSetting">${total}</p></div>
+	</td>
+  </tr><!-- $EndBlock itemDetails -->
+</table>
+<table id="footer" width="100%" style="font-family:${fontStyle};font-size:${font};clear:both">
+   <tr>
+	  <td style="vertical-align:top;text-align:left" >
+		 <table  style=" padding:3.5px" >
+			<tr>
+			  <td align="right" style="vertical-align:top;">
+				<table style="font-size:14pt"><colgroup><col></colgroup>
+				<!-- $BeginBlock regestrationAddress -->
+				  <tr>
+					<td><center>${regestrationAddress}</center></td>
+				  </tr>
+				<!-- $EndBlock regestrationAddress -->
+				</table>
+			  </td>
+			</tr>
+		 </table>
+	   </td>
+	   <!-- $BeginBlock logo -->
+	   <td  id = "logoimg" style="vertical-align: bottom;">
+	     <div align="right" style="margin-bottom:14px;">
+		    <img src="war\files\footer-print-img.jpg" width="67.5px" height="25px">
+		 </div>
+       </td>
+       <!-- $EndBlock logo -->
+	</tr>
+</table>
+</div>
+</div>
+<!-- $EndBlock theme -->
+</html>

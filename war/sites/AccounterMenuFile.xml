@@ -1,0 +1,160 @@
+<xml>
+   <menus>
+      <MainMenu text="Dashboard">
+       <Menu text="Open">https://app.annaccounting.com/accounter#dashBoard</Menu>
+      </MainMenu>
+      <MainMenu text="Company">
+         <Menu text="New Journal Entry">https://app.annaccounting.com/accounter#newJournalEntry</Menu>
+         <Menu text="New Account">https://app.annaccounting.com/accounter#newAccount</Menu>
+         <Menu text="Company Preferences">https://app.annaccounting.com/accounter#companyPreferences</Menu>
+         <Menu text="Manage Support Lists">
+           <SubMenu text="Customer Group List">https://app.annaccounting.com/accounter#customerGroupList</SubMenu>
+           <SubMenu text="Supplier Group List">https://app.annaccounting.com/accounter#supplierGroupList</SubMenu>
+           <SubMenu text="Payment Term List">https://app.annaccounting.com/accounter#paymentTerms</SubMenu>
+           <SubMenu text="Shipping Method List">https://app.annaccounting.com/accounter#shippingMethodsList</SubMenu>
+           <SubMenu text="Shipping Term List">https://app.annaccounting.com/accounter#shippingTermsList</SubMenu>
+           <SubMenu text="Price Level List">https://app.annaccounting.com/accounter#priceLevels</SubMenu>
+           <SubMenu text="Item Group List">https://app.annaccounting.com/accounter#itemGroupList</SubMenu>
+           <SubMenu text="Credit Rating List">https://app.annaccounting.com/accounter#creditRatingList</SubMenu>
+         </Menu>
+         <Menu text="Manage Fiscal Year">https://app.annaccounting.com/accounter#manageFiscalYear</Menu>
+         <Menu text="Company Lists">
+            <SubMenu text="Accounts List">https://app.annaccounting.com/accounter#accountsList</SubMenu>
+            <SubMenu text="Journal Entries">https://app.annaccounting.com/accounter#journalEntries</SubMenu>
+            <SubMenu text="Items">https://app.annaccounting.com/accounter#items</SubMenu>
+            <SubMenu text="Customers">https://app.annaccounting.com/accounter#customers</SubMenu>
+            <SubMenu text="Suppliers">https://app.annaccounting.com/accounter#supplierList</SubMenu>
+            <SubMenu text="Payments">https://app.annaccounting.com/accounter#payments</SubMenu>
+            <SubMenu text="Sales Persons">https://app.annaccounting.com/accounter#salesPersons</SubMenu>
+        </Menu>
+      </MainMenu>
+      <MainMenu text="VAT">
+         <Menu text="New">
+             <SubMenu text="New VAT Item">https://app.annaccounting.com/accounter#newVatItem</SubMenu>
+             <SubMenu text="New VAT Code">https://app.annaccounting.com/accounter#newVatCode</SubMenu>
+             <SubMenu text="New VAT Agency">https://app.annaccounting.com/accounter#newVatAgency</SubMenu>
+         </Menu>
+         <Menu text="VAT Adjustment">https://app.annaccounting.com/accounter#vatAdjustment</Menu>
+         <Menu text="File VAT">https://app.annaccounting.com/accounter#fileVAT</Menu>
+         <Menu text="Pay VAT">https://app.annaccounting.com/accounter#payVat</Menu>
+         <Menu text="Receive VAT">https://app.annaccounting.com/accounter#receiveVat</Menu>
+         <Menu text="VAT List">
+              <SubMenu text="VAT Items">https://app.annaccounting.com/accounter#vatItems</SubMenu>
+              <SubMenu text="VAT Codes">https://app.annaccounting.com/accounter#vatCodes</SubMenu>
+         </Menu>
+      </MainMenu>
+      <MainMenu text="Customer">
+           <Menu text="Customers Home">https://app.annaccounting.com/accounter#customerHome</Menu>
+           <Menu text="New">
+               <SubMenu text="New Customer">https://app.annaccounting.com/accounter#newCustomer</SubMenu>
+               <SubMenu text="New Item">https://app.annaccounting.com/accounter#newCustomerItem</SubMenu>
+               <SubMenu text="New Quote">https://app.annaccounting.com/accounter#newQuote</SubMenu>
+               <SubMenu text="New Invoice">https://app.annaccounting.com/accounter#newInvoice</SubMenu>
+               <SubMenu text="New Cash Sale">https://app.annaccounting.com/accounter#newCashSale</SubMenu>
+               <SubMenu text="New Credit">https://app.annaccounting.com/accounter#newCredit</SubMenu>
+           </Menu>
+           <Menu text="Customer PrePayment">https://app.annaccounting.com/accounter#customerPrepayment</Menu>
+           <Menu text="Receive Payment">https://app.annaccounting.com/accounter#receivePayment</Menu>
+           <Menu text="Customer Refund">https://app.annaccounting.com/accounter#customerRefund</Menu>
+           <Menu text="Customer List">
+               <SubMenu text="Customers">https://app.annaccounting.com/accounter#customers</SubMenu>
+               <SubMenu text="Items">https://app.annaccounting.com/accounter#items</SubMenu>
+               <SubMenu text="Quotes">https://app.annaccounting.com/accounter#quotes</SubMenu>
+               <SubMenu text="Invoices">https://app.annaccounting.com/accounter#invoices</SubMenu>
+               <SubMenu text="Receive Payments">https://app.annaccounting.com/accounter#receivePayments</SubMenu>
+               <SubMenu text="Customer Refunds">https://app.annaccounting.com/accounter#customerRefunds</SubMenu>
+           </Menu>
+      </MainMenu>
+      <MainMenu text="Supplier">
+           <Menu text="Suppliers Home">https://app.annaccounting.com/accounter#supplierHome
+           </Menu>
+           <Menu text="New">
+              <SubMenu text="New Supplier">https://app.annaccounting.com/accounter#newSupplier</SubMenu>
+              <SubMenu text="New Item">https://app.annaccounting.com/accounter#newSupplierItem</SubMenu>
+              <SubMenu text="Cash Purchase">https://app.annaccounting.com/accounter#newCashPurchase</SubMenu>
+              <SubMenu text="Supplier Credit">https://app.annaccounting.com/accounter#supplierCredit</SubMenu>
+           </Menu>
+           <Menu text="Enter Bill">https://app.annaccounting.com/accounter#enterBill</Menu>
+           <Menu text="Pay Bills">https://app.annaccounting.com/accounter#payBill</Menu>
+           <Menu text="Issue Payments">https://app.annaccounting.com/accounter#issuePayments</Menu>
+           <Menu text="Supplier PrePayment">https://app.annaccounting.com/accounter#supplierPrePayment</Menu>
+           <Menu text="Record Expenses">https://app.annaccounting.com/accounter#recordExpenses</Menu>
+           <Menu text="Expense Claims">https://app.annaccounting.com/accounter#expenseClaims</Menu>
+           <Menu text="Supplier Lists">
+                <SubMenu text="Supplier">https://app.annaccounting.com/accounter#supplierList</SubMenu>
+                <SubMenu text="Items">https://app.annaccounting.com/accounter#purchaseItems</SubMenu>
+                <SubMenu text="Bills And Expenses">https://app.annaccounting.com/accounter#billsAndExpenses</SubMenu>
+                <SubMenu text="Supplier Payments">https://app.annaccounting.com/accounter#supplierPayments</SubMenu>
+           </Menu>
+      </MainMenu>
+      <MainMenu text="Banking">
+           <Menu text="New Bank Account">https://app.annaccounting.com/accounter#newBankAccount</Menu>
+           <Menu text="Deposit / Transfer Funds">https://app.annaccounting.com/accounter#depositTransferFunds</Menu>
+           <Menu text="Pay Bills">https://app.annaccounting.com/accounter#payBill</Menu>
+           <Menu text="New Credit Card Charge">https://app.annaccounting.com/accounter#creditCardCharge</Menu>
+           <Menu text="Banking List">
+                <SubMenu text="Payments">https://app.annaccounting.com/accounter#payments</SubMenu>
+           </Menu>
+      </MainMenu>
+      <MainMenu text="Sales">
+           <Menu text="Sales Order">https://app.annaccounting.com/accounter#salesOrder</Menu>
+           <Menu text="SalesOrder List">https://app.annaccounting.com/accounter#salesOrderList</Menu>
+           <Menu text="SalesOrder Report">https://app.annaccounting.com/accounter#salesOrderReport</Menu>
+      </MainMenu>
+      <MainMenu text="Purchases">
+           <Menu text="Purchase Order">https://app.annaccounting.com/accounter#purchaseOrder</Menu>
+           <Menu text="PurchaseOrder List">https://app.annaccounting.com/accounter#purchaseOrderList</Menu>
+           <Menu text="PurchaseOrder Report">https://app.annaccounting.com/accounter#purchaseOrderReport</Menu>
+      </MainMenu>
+      <MainMenu text="Reports">
+           <Menu text="Company And Financial">
+                <SubMenu text="Profit And Loss">https://app.annaccounting.com/accounter#profitAndLoss</SubMenu>
+                <SubMenu text="Balance Sheet">https://app.annaccounting.com/accounter#balanceSheet</SubMenu>
+                <SubMenu text="Cash Flow Report">https://app.annaccounting.com/accounter#cashFlowReport</SubMenu>
+                <SubMenu text="Trial Balance">https://app.annaccounting.com/accounter#trialBalance</SubMenu>
+                <SubMenu text="Transaction Detail By Account">https://app.annaccounting.com/accounter#transactionDetailByAccount</SubMenu>
+                <SubMenu text="Expense Report">https://app.annaccounting.com/accounter#expenseReport</SubMenu>
+           </Menu>
+           <Menu text="Customers And Receivables">
+                <SubMenu text="A/R Ageing Summary">https://app.annaccounting.com/accounter#arAgingSummary</SubMenu>
+                <SubMenu text="A/R Ageing Detail">https://app.annaccounting.com/accounter#arAgingDetail</SubMenu>
+                <SubMenu text="Customer Statement">https://app.annaccounting.com/accounter#customerStatement</SubMenu>
+                <SubMenu text="Customer Transaction History">
+https://app.annaccounting.com/accounter#customerTransactionHistory</SubMenu>
+            </Menu>
+            <Menu text="Sales">
+                <SubMenu text="Sales By Customer Summary">https://app.annaccounting.com/accounter#salesByCustomerSummary</SubMenu>
+                <SubMenu text="Sales By Customer Detail">https://app.annaccounting.com/accounter#salesByCustomerDe</SubMenu>
+                <SubMenu text="Sales By Item Summary">https://app.annaccounting.com/accounter#salesByItemSummar</SubMenu>
+                <SubMenu text="Sales By Item Detail">https://app.annaccounting.com/accounter#salesByItemDetail</SubMenu>
+                <SubMenu text="Sales Order Report">https://app.annaccounting.com/accounter#salesOrderReport</SubMenu>
+             </Menu>
+             <Menu text="Suppliers And Payables">
+                <SubMenu text="A/P Ageing Summary">https://app.annaccounting.com/accounter#apAgingSummary</SubMenu>
+                <SubMenu text="A/P Ageing Detail">https://app.annaccounting.com/accounter#apAgingDetail</SubMenu>
+                <SubMenu text="Supplier Transaction History">
+https://app.annaccounting.com/accounter#supplierTransactionHistory</SubMenu>
+              </Menu>
+              <Menu text="Purchases">
+                <SubMenu text="Purchase By Supplier Summary">
+https://app.annaccounting.com/accounter#purchaseBySupplierSummary</SubMenu>
+                <SubMenu text="Purchase By Supplier Detail">
+https://app.annaccounting.com/accounter#purchaseBySupplierDetail</SubMenu>
+                <SubMenu text="Purchase By Item Summary">https://app.annaccounting.com/accounter#purchaseByItemSummary</SubMenu>
+                <SubMenu text="Purchase By Item Detail">https://app.annaccounting.com/accounter#purchaseByItemDetail</SubMenu>
+                <SubMenu text="Purchase Order Report">https://app.annaccounting.com/accounter#purchaseOrderReport</SubMenu>
+              </Menu>
+              <Menu text="VAT">
+                <SubMenu text="Prior VAT Returns">https://app.annaccounting.com/accounter#priorVatReturns</SubMenu>
+                <SubMenu text="VAT Detail">https://app.annaccounting.com/accounter#vatDetail</SubMenu>
+                <SubMenu text="VAT 100">https://app.annaccounting.com/accounter#vat100</SubMenu>
+                <SubMenu text="Uncategorised VAT Amounts">https://app.annaccounting.com/accounter#uncategorisedVatAmounts</SubMenu>
+                <SubMenu text="VAT Item Summary">https://app.annaccounting.com/accounter#vatItemSummary</SubMenu>
+                <SubMenu text="EC Sales List">https://app.annaccounting.com/accounter#ecSalesList</SubMenu>
+              </Menu>
+      </MainMenu>
+      <MainMenu text="Settings">
+           <Menu text="General Settings">https://app.annaccounting.com/accounter#generalSettings</Menu>
+      </MainMenu>
+   </menus>
+  </xml>

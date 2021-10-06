@@ -1,0 +1,147 @@
+.mainPanel{
+   width:600px;
+   margin: 20px auto;
+}
+#mainBody{
+    box-shadow: 0 0 10px 5px #CCCCCC;
+    min-height: 500px;
+    padding: 20px;
+}
+#mainBody .mainBody{
+    border: 1px solid #CCCCCC;
+    border-radius: 5px 5px 5px 5px;
+    height: 500px;
+    padding: 10px 20px;
+    width: 100%;
+}
+#mainBody .mainBody .errors{
+	background: none repeat scroll 0 0 #FFE7E7;
+    border: 1px solid #DF9898;
+}
+#mainBody .mainBody .infos,#mainBody .mainBody .errors{
+	border-radius: 5px 5px 5px 5px;
+    padding: 10px;
+    width: 100%;
+}
+#mainBody .mainBody .infos{
+	background: none repeat scroll 0 0 lightYellow;
+    border: 1px solid #E6DB55;
+    margin-top: 10px;
+}
+#mainBody .mainBody .mainPage td {
+    padding: 5px;
+	text-align: left;
+	font-size: 15px;
+}
+#mainBody .mainBody .mainPage .pageTitle {
+    border-bottom: 1px solid #CCCCCC;
+    font-size: 18px;
+    font-weight: bold;
+	padding-bottom: 5px;
+}
+
+#mainBody .mainBody .mainPage td table td table td{
+    padding:0px;
+}
+#mainBody .mainBody .mainPage .title{
+    text-align: right;
+}
+#mainBody .mainBody .mainPage .required{
+    color:red;
+}
+#mainBody .mainBody .mainPage .gwt-TextBox,#mainBody .mainBody .mainPage select,#mainBody .mainBody .mainPage .gwt-PasswordTextBox{
+	height: 22px;
+    width: 180px;
+}
+.footer{
+	border-top: 1px solid #CCCCCC;
+    padding-top: 10px;
+    width: 100%;
+}
+.footer td:last-child{
+   width:60px;
+}
+.footer,.title,#mainBody .mainBody .mainPage .page{
+    width:100%;
+}
+
+.title td:last-child{
+    text-align:right;
+}
+.tag {
+    font-size: 12px;
+    color: graytext;
+}
+
+ #licensesList div h2{
+   display:inline;
+}
+#licensesList .licenses tr,.licenses tr td {
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+#licensesList table.licenses{
+    border: 1px solid #ccc;
+	margin-top:10px;
+	width: 100%;
+}
+#licensesList .licenses tr:first-child{
+    background: none repeat scroll 0 0 #DDDDDD;
+    color: #4B4B4B;
+    font-weight: bold;
+}
+#licensesList div a {
+    color: #6699CC;
+    margin-left: 10px;
+}
+.licenseBody #generate div h4{
+    display: inline;
+}
+.licenseBody #generate div{
+    margin:10px 0px;
+}
+.licenseBody #generate div:first-child h4{
+   padding-right: 64px;
+}
+.licenseText{
+	font-size: 10px;
+	height: 7.1em;
+	width: 300px;
+}
+
+.licenseBody{
+    box-shadow: 0 0 10px 5px #CCCCCC;
+    margin: 20px auto;
+    min-height: 500px;
+    padding: 20px;
+    width: 800px;
+}
+#licensesList div{
+	text-align: left;
+}
+
+#licensesList table td:first-child{
+   width:150px;
+}
+
+.heading{
+	text-align: left;
+}
+
+.license-purchase{
+	 margin: 7em auto;
+	 width: 450px;
+}
+
+.tag a{
+	color: #1166CC !important;
+    text-decoration: none;
+}
+
+.licenseLogout{
+	text-align: right;
+}
+
+.licenseLogout a{
+	color: #2299CC;
+}

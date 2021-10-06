@@ -1,0 +1,191 @@
+<html>
+<head>
+<link rel='stylesheet' type='text/css' href='templetes/FinancePrint.css' media='all'></link>
+</head>
+<div>
+ <table width="100%" style="font-family:${fontStyle};font-size:${font};margin-bottom:${bottomMargin};margin-top:${topMargin};">
+  		<!-- $BeginBlock showlogo -->
+  		<tr><td align=${getLogoAlignment}> ${logoImage}</td></tr>
+  		<!-- $EndBlock showlogo -->
+ </table>
+<table style="width: 100%; height: 80%;" cellspacing="10" >
+<!-- $BeginBlock creditHead -->
+	<tr>
+		<td style="vertical-align: top;" align="left">
+			<div class="gwt-HTML" style=" margin-left: 43px;">
+			<p>
+				<font style="font-family:sans-serif;" size="6px">
+				<strong> ${companyName}</strong></font><br>
+				<font style="font-family:sans-serif; color:#504040;">
+				&nbsp;${companyDetails}</font></br>
+			</p>
+			</div>
+		</td>
+		<td style="vertical-align: top;" align="right">
+			<div class="gwt-HTML" style=" margin-right: 43px;">
+			<p >
+				<font color="black" style="font-family:sans-serif;" size="6px">
+				<strong>Credit Note</strong></font>
+			</p>
+				<div>
+					<table >
+					<colgroup><col></colgroup>
+					
+					<tr>
+						<td style="border: 1px ridge grey; padding: 6px; background: #f2f2f2; font-weight: bold; ">${i18_Credit_Note_Number}</td>
+						<td align="right" width="55%" style="border: 1px ridge grey; padding: 6px;">${creditNoteNumber}</td>
+					</tr>
+					<tr>
+						<td style="border: 1px ridge grey; padding: 6px; background: #f2f2f2; font-weight: bold; ">${i18_Credit_Note_Date}</td>
+						<td align="right" width="55%" style="border: 1px ridge grey; padding: 6px;">${creditNoteDate}</td>
+					</tr>
+					<tr>
+						<td style="border: 1px ridge grey; padding: 6px; background: #f2f2f2; font-weight: bold; ">${i18_Customer_Number}</td>
+						<td align="right" width="55%" style="border: 1px ridge grey; padding: 6px;">${customerNumber}</td>
+					</tr>
+					
+					</table>
+				</div>
+			</div>
+		</td>
+	</tr>
+<!-- $EndBlock creditHead -->
+</table>
+
+<table >
+<tr>
+	<td  align="left">
+		<table  class="gridHeader">
+			<colgroup><col></colgroup>
+			<tr>
+				<td class="gridHeaderBackGround"><center>${i18_Credit_To}</center></td>
+			</tr>
+			<!-- $BeginBlock billAddress -->
+			<tr>
+				<td align="left" >
+				<div align="left">&nbsp;${customerNameNBillAddress}</div>
+				</td>
+			</tr>
+			<!-- $EndBlock billAddress -->
+		</table>
+<table border="1">
+<!-- $BeginBlock  itemDetails -->
+  <tr><!-- $BeginBlock showLabels -->
+    <th><p class="fontSetting">${i18_Description}</p></th>
+	<th><p class="fontSetting">${i18_Qty}</p></th>
+	<th><p class="fontSetting">${i18_Unit_Price}</p></th>
+	<th><p class="fontSetting">${i18_Total_Price}</p></th>
+	<!-- $BeginBlock vatBlock -->
+	<th><p class="fontSetting">${i18_VATRate}</p></th>
+	<th><p class="fontSetting">${i18_VATAmount}</p></th>
+	<!-- $EndBlock vatBlock -->
+	<!-- $EndBlock showLabels -->
+  </tr>
+ <!-- $BeginBlock itemRecord --> <tr class="item-row">
+	<td class="description">
+	   <div><p class="fontSetting">${description}</p></div>
+	</td>
+	<td align="right" class="qty">
+	   <div><p class="fontSetting">${quantity}</p></div>
+	</td>
+	<td align="right">
+	   <div class="cost">
+	     <p class="fontSetting">${unitPrice}</p>
+	   </div>
+	</td>
+    <td align="right">
+	   <div class="price">
+	     <p class="fontSetting">${itemTotalPrice}</p>
+	   </div>
+	</td>
+	<!-- $BeginBlock vatValueBlock -->
+	<td align="right" class="vatRate">
+	   <p class="fontSetting"><span >${itemVatRate}</span></p>
+	</td>
+	<td align="right" class="vatAmount">
+	   <div><p class="fontSetting">${itemVatAmount}</p></div>
+	</td>
+	<!-- $EndBlock vatValueBlock -->
+  </tr><!-- $EndBlock itemRecord -->
+  <tr>
+	<td class="blank" colspan="4" rowspan="3" >
+	  <p class="fontSetting">${memoText}</p>
+	</td>
+	<td class="total-line, item-column" ><p class="fontSetting">&nbsp;&nbsp;${i18_Sub_Total}</p></td>
+	<td class="total-value, item-column">
+	  <div id="subtotal">
+	    <p class="fontSetting" align="right">
+		 ${subTotal}
+		</p>
+	  </div>
+	</td>
+  </tr>
+  <!-- $BeginBlock VatTotal -->
+  <tr>
+	<td class="total-line, item-column" id="vat-total" ><p class="fontSetting">&nbsp;&nbsp;${i18_VATAmount}</p></td>
+	<td class="total-value, item-column" align="right">
+	   <div id="total"><p class="fontSetting">${vatTotalValue}</p></div>
+	</td>
+  </tr>
+   <!-- $EndBlock VatTotal -->
+  <tr>
+	<td class="total-line balance, item-column"><p class="fontSetting">&nbsp;&nbsp;${i18_TOTAL}</p></td>
+	<td class="total-value, item-column" align="right">
+	  <div class="total"><p class="fontSetting">${total}</p></div>
+	</td>
+  </tr><!-- $EndBlock itemDetails -->
+</table>
+<table  border="0" >
+<tr>
+	<td>
+		<table  >
+		<tr>
+			<td style="vertical-align: top;" align="left" colspan="2">
+				<table style="font-size:13px; width: 105%; height: 100%; margin-left:56px;  border-color: #E1E1E1; border-collapse:collapse;" border="1">
+				<colgroup><col></colgroup>
+			
+				<tr>
+					<!-- $BeginBlock vatCodeDetails -->
+					<td><center> ${vatCode}</center></td>
+					<!-- $EndBlock vatCodeDetails -->
+					<!-- $BeginBlock sortCodeDetails -->
+					<td><center> ${sortCode}</center></td>
+					<!-- $EndBlock sortCodeDetails -->
+					<!-- $BeginBlock bankAccountDetails -->
+					<td><center> ${bankAccount}</center></td>
+					<!-- $EndBlock bankAccountDetails -->
+				</tr>
+				
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td style="vertical-align: top;" align="center">
+			<table >
+				<tr>
+					<td align="right" style="vertical-align: top;">
+						<table >
+						<colgroup><col></colgroup>
+						<!-- $BeginBlock regAddress -->
+						<tr>
+							<td><center>${compRegNamenNumber}</center></td>
+						</tr>
+						<!-- $EndBlock regAddress -->
+						</table>
+					</td>
+				</tr>
+			</table>
+			</td>
+	   </tr>
+	   </table>
+	   </td>
+	   <td width="10%" style="vertical-align: bottom;">
+			<div align="right" style="margin-bottom:14px;">
+				<img src="templetes/footer-print-img-new.png" width="67.5px" height="25px">
+			</div>
+		</td>
+</tr>
+</table>
+</div>
+</html>
+
