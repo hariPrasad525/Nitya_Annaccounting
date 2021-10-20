@@ -31,7 +31,9 @@ import com.nitya.accounter.web.client.core.reports.TransactionHistory;
 import com.nitya.accounter.web.client.exception.AccounterException;
 import com.nitya.accounter.web.client.ui.Accounter;
 import com.nitya.accounter.web.client.ui.GwtTabPanel;
+import com.nitya.accounter.web.client.ui.MainFinanceWindow;
 import com.nitya.accounter.web.client.ui.StyledPanel;
+import com.nitya.accounter.web.client.ui.UIUtils;
 import com.nitya.accounter.web.client.ui.combo.IAccounterComboSelectionChangeHandler;
 import com.nitya.accounter.web.client.ui.combo.SelectCombo;
 import com.nitya.accounter.web.client.ui.core.DateField;
@@ -107,7 +109,7 @@ public class NewConsultantDetailsView extends AbstractPayeeCenterView<Consultant
 		DOM.setStyleAttribute(detailPanel.getElement(), "border","1px solid #ccc");
 		
 		detailPanel.add(getConsultantInfo());
-		
+		 MainFinanceWindow.getViewManager().updateButtons();
 		return detailPanel;
 	}
 	
@@ -622,8 +624,38 @@ public class NewConsultantDetailsView extends AbstractPayeeCenterView<Consultant
 	@Override
 	public boolean canExportToCsv() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
+	
+	  @Override
+	    public void exportToCsv() {
+	        if (selectedConsultant != null) {
+	           Accounter.createExportCSVService()
+	                    .getConsultantTransactionsListExportCsv(selectedConsultant,
+	                            getTransactionType(), getTransactionStatusType(),
+	                            getStartDate(), getEndDate(),
+	                            new AsyncCallback<String>() {
+
+	                                @Override
+	                                public void onSuccess(String id) {
+	                                    UIUtils.downloadFileFromTemp(
+	                                            trasactionViewSelect
+	                                                    .getSelectedValue()
+	                                                    + " of "
+	                                                    + selectedConsultant
+	                                                    .getName() + ".csv",
+	                                            id);
+	                                }
+
+	                                @Override
+	                                public void onFailure(Throwable caught) {
+	                                    caught.printStackTrace();
+	                                }
+	                            });
+	        } else {
+	            Accounter.showError(messages.pleaseSelect(Global.get().Customer()));
+	        }
+	    }
 
 	@Override
 	public boolean canEdit() {
