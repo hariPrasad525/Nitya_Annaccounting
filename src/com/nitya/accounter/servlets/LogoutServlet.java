@@ -27,7 +27,20 @@ public class LogoutServlet extends BaseServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		String userid = (String) req.getSession().getAttribute(EMAIL_ID);
-		Long cid = (Long) req.getSession().getAttribute(COMPANY_ID);
+		if(userid == null)
+		{
+			userid = req.getHeader("emailId");
+			
+		}
+		if(req.getHeader("Sec-Fetch-Site").equals("cross-site"))
+		{
+			resp.setHeader("Access-Control-Allow-Origin", "*");
+			resp.setHeader("Access-Control-Allow-Methods", "GET");
+			resp.setHeader("Access-Control-Allow-Headers", "Content-Type");
+			resp.setHeader("Access-Control-Allow-Credentials","true");
+			resp.setHeader("Access-Control-Max-Age", "86400");	
+		}
+		Long cid = (Long) req.getSession().getAttribute(COMPANY_ID);	
 		if (userid != null) {
 			if (cid != null) {
 				try {
@@ -48,7 +61,11 @@ public class LogoutServlet extends BaseServlet {
 		// Support user and OpendCompany
 		req.getSession().invalidate();
 		deleteCookie(req, resp);
-		redirectExternal(req, resp, LOGIN_URL);
+		if(!req.getHeader("Sec-Fetch-Site").equals("cross-site"))
+		{
+			redirectExternal(req, resp, LOGIN_URL);
+		}
+		
 	}
 
 	/**

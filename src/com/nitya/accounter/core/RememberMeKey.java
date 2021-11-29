@@ -15,7 +15,7 @@ public class RememberMeKey extends CreatableObject {
 
 	private String clientKey;// d2
 	private byte[] serverKey;// s2
-
+	private String jnpLoginToken;
 	/**
 	 * Creates new Instance
 	 */
@@ -74,6 +74,14 @@ public class RememberMeKey extends CreatableObject {
 
 	public void setClientKey(String clientKey) {
 		this.clientKey = clientKey;
+	}
+
+	public String getJnpLoginToken() {
+		return jnpLoginToken;
+	}
+
+	public void setJnpLoginToken(String jnpLoginToken) {
+		this.jnpLoginToken = jnpLoginToken;
 	}
 
 }

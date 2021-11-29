@@ -3,6 +3,7 @@ package com.nitya.accounter.servlets;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 import com.nitya.accounter.core.Client;
@@ -26,6 +28,7 @@ import com.nitya.accounter.main.ServerConfiguration;
 import com.nitya.accounter.services.SubscriptionTool;
 import com.nitya.accounter.utils.HibernateUtil;
 import com.nitya.accounter.web.client.Global;
+import com.nitya.accounter.web.client.core.ClientAttachment;
 import com.nitya.accounter.web.client.core.Features;
 
 public class CompaniesServlet extends BaseServlet {
@@ -42,6 +45,7 @@ public class CompaniesServlet extends BaseServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		HttpSession httpSession = req.getSession();
+		Session session1 = HibernateUtil.getCurrentSession();
 		String header2 = req.getHeader("User-Agent");
 		boolean contains = header2.contains("iPad");
 		if (contains) {
@@ -58,6 +62,28 @@ public class CompaniesServlet extends BaseServlet {
 		checkForStatus(req);
 
 		String companyID = req.getParameter(COMPANY_ID);
+		String emailId = req.getParameter("userMail");
+		if(emailId != null)
+		{
+			emailId = emailId.toLowerCase();
+			Company company = new Company();
+			List result = session1.getNamedQuery("getCompanyByMailId")
+							.setParameter("emailId",  emailId)
+							.list();
+			Iterator iterator = result.iterator();
+			Object[] object = null;
+			while(iterator.hasNext())
+			{
+				object = (Object[]) iterator.next();
+				company.setId((long) object[0]);
+//				company.setConfigured((boolean) object[0]);
+				break;
+			}
+			
+			
+			companyID = company.getId()+"";
+		}
+	
 		// for delete account from user profile
 		if (companyID == null
 				&& httpSession.getAttribute("cancelDeleteAccountcompany") != null) {

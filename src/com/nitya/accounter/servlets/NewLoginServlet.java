@@ -1,6 +1,7 @@
 package com.nitya.accounter.servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.security.MessageDigest;
 import java.util.List;
 
@@ -15,11 +16,11 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import com.google.gdata.util.common.util.Base64;
+import com.google.gson.Gson;
 import com.nitya.accounter.core.Client;
 import com.nitya.accounter.core.EU;
 import com.nitya.accounter.core.News;
 import com.nitya.accounter.core.RememberMeKey;
-import com.nitya.accounter.main.ServerConfiguration;
 import com.nitya.accounter.utils.HexUtil;
 import com.nitya.accounter.utils.HibernateUtil;
 import com.nitya.accounter.utils.Security;
@@ -35,7 +36,10 @@ public class NewLoginServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String LOGIN_VIEW = "/WEB-INF/login.jsp";
 	private static final String ACTIVATION_VIEW = "/WEB-INF/activation.jsp";
-
+	private Gson gson = new Gson();
+	private LoginCookies loginCookies = null;
+	private String jnpURL = "http:192.168.0.4:7766/*";
+	
 	@Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -45,8 +49,8 @@ public class NewLoginServlet extends BaseServlet {
 		if (contains) {
 			request.setAttribute("ipad", contains);
 		}
-		
-		boolean itIsnotBot = isBotTryingToLogin("https://www.google.com/recaptcha/api/siteverify", "app.annaccounting.com", "secret=6LdZG5IUAAAAAFeKvI-MQ3BIfxJOOVsLr2B3_5X9&response="+request.getParameter("google-key").trim());
+		boolean itIsnotBot = true;
+//		boolean itIsnotBot = isBotTryingToLogin("https://www.google.com/recaptcha/api/siteverify", "app.annaccounting.com", "secret=6LdZG5IUAAAAAFeKvI-MQ3BIfxJOOVsLr2B3_5X9&response="+request.getParameter("google-key").trim());
         
 		if(!itIsnotBot) {
 			request.setAttribute("message",Global.get().messages().errorMsg("Something wrong with your login, please reload the page and try again."));
@@ -84,7 +88,31 @@ public class NewLoginServlet extends BaseServlet {
 						client.setLoginCount(client.getLoginCount() + 1);
 						client.setLastLoginTime(System.currentTimeMillis());
 						session.saveOrUpdate(client);
-						redirectExternal(request, response, COMPANIES_URL);
+//						dispatch(request, response, COMPANIES_URL);
+						String loginType = request.getParameter("jnpLoginToken");
+						if(loginType != null)
+						{
+							response.setHeader("Access-Control-Allow-Origin", "*");
+					        response.setHeader("Access-Control-Allow-Methods", "POST");
+					        response.setHeader("Access-Control-Allow-Headers", "Content-Type");
+					        response.setHeader("Access-Control-Allow-Credentials","true");
+					        response.setHeader("Access-Control-Max-Age", "86400");
+							response.setContentType("application/json");
+					        response.setCharacterEncoding("UTF-8");
+							 PrintWriter out = response.getWriter();
+							String jsonCookies = this.gson.toJson(loginCookies);
+//							out.append(jsonCookies);
+							// printing the session id in jobs n profiles for logging out the user in Anna accounting
+							out.print(loginCookies.getLoginCookie().getValue());
+							out.close();
+							out.flush();
+							
+							
+						}
+						else {
+							redirectExternal(request, response, COMPANIES_URL);
+						}
+						
 					} else {
 						redirectExternal(request, response, destUrl);
 					}
@@ -108,6 +136,7 @@ public class NewLoginServlet extends BaseServlet {
 
 	private Client doLogin(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+
 		String emailId = request.getParameter(EMAIL_ID);
 		String password = request.getParameter(PASSWORD);
 		Client client = getClient(emailId, password);
@@ -120,7 +149,6 @@ public class NewLoginServlet extends BaseServlet {
 				&& request.getParameter("staySignIn").equals("on")) {
 			// Inserting RememberMeKey
 			Session session = HibernateUtil.getCurrentSession();
-
 			byte[] makeHash = Security.makeHash(client.getEmailId()
 					+ Security.makeHash(client.getPassword()));
 			MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -130,6 +158,7 @@ public class NewLoginServlet extends BaseServlet {
 					rememberMeKey);
 			rememberMe.setClientKey(encode);
 			rememberMe.setServerKey(EU.getKey(request.getSession().getId()));
+			rememberMe.setJnpLoginToken(request.getParameter("jnpLoginToken"));
 			session.save(rememberMe);
 			addUserCookies(response, rememberMeKey);
 		}
@@ -151,7 +180,10 @@ public class NewLoginServlet extends BaseServlet {
 		userCookie.setMaxAge(2 * 7 * 24 * 60 * 60);// Two week
 		// userCookie.setPath("/");
 		// userCookie.setDomain(ServerConfiguration.getServerCookieDomain());
-		resp.addCookie(userCookie);
+//		resp.addCookie(userCookie);
+		resp.setHeader("Set-Cookie", name+"="+key+"; SameSite=none;Secure");
+		 loginCookies = new LoginCookies(name,key);
+		 loginCookies.setLoginCookie(userCookie);
 	}
 
 	protected void addUserCookies(HttpServletResponse resp, String key) {
@@ -393,6 +425,23 @@ public class NewLoginServlet extends BaseServlet {
 
 			return xstream.toXML(list);
 		} finally {
+		}
+	}
+	public static class LoginCookies{
+		private  Cookie loginCookieToken = null;
+		
+		LoginCookies(String name, String key)
+		{
+			loginCookieToken= new Cookie(name, key);
+		}
+		public void setLoginCookie(Cookie loginCookie2)
+		{
+			loginCookieToken = loginCookie2;
+		}
+		
+		public Cookie getLoginCookie()
+		{
+			return loginCookieToken;
 		}
 	}
 

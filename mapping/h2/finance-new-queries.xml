@@ -8,6 +8,24 @@
 		where client.emailId
 		=:emailId
 	</query>
+
+	<sql-query name="getCompanyByMailId">
+		<query-param name="emailId" type="String" />
+		
+		<return-scalar column="ID" type="long" />
+		<return-scalar column="IS_CONFIGURED" type="boolean" />
+	
+		
+		<![CDATA[
+				SELECT C.ID, C.IS_CONFIGURED
+				FROM   company C
+				left join Users U on C.created_by = U.id
+				left join Client Cl on U.client_id = Cl.id
+				WHERE  Cl.email_id = :emailId
+				]]>
+
+	</sql-query>	
+
 	<query name="getAdvertisements">
 		from com.nitya.accounter.core.Advertisement add
 	</query>
@@ -281,6 +299,11 @@
 		<query-param name="key" type="String" />
 		delete from com.nitya.accounter.core.RememberMeKey rk where
 		rk.key=:key
+	</query>
+	<query name="delete.remembermeKey">
+		<query-param name="token" type="String" />
+		delete from com.nitya.accounter.core.RememberMeKey rk where
+		rk.jnpLoginToken=:token
 	</query>
 
 	<query name="get.remembermeKey">

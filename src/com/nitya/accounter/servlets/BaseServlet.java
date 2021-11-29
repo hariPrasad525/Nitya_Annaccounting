@@ -545,6 +545,10 @@ public class BaseServlet extends HttpServlet {
 	public void deleteCookie(HttpServletRequest request,
 			HttpServletResponse response) {
 		String userKey = getCookie(request, OUR_COOKIE);
+//		if(request.getHeader("jnpLoginToken") != null)
+//		{
+//			userKey = request.getHeader("jnpLoginToken");
+//		}
 		removeCookie(request, response, OUR_COOKIE);
 
 		if (userKey == null || userKey.isEmpty()) {
@@ -555,8 +559,15 @@ public class BaseServlet extends HttpServlet {
 		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
+//			if(request.getHeader("jnpLoginToken") != null)
+//			{
+//				session.getNamedQuery("delete.remembermeKey")
+//				.setParameter("token", userKey).executeUpdate();
+//			}
+//			else {
 			session.getNamedQuery("delete.remembermeKeys")
 					.setParameter("key", userKey).executeUpdate();
+//			}
 			transaction.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -574,7 +585,17 @@ public class BaseServlet extends HttpServlet {
 				cookie.setValue("");
 				cookie.setPath("/");
 				cookie.setDomain(ServerConfiguration.getServerCookieDomain());
-				response.addCookie(cookie);
+				if(request.getHeader("Sec-Fetch-Site").equals("cross-site"))
+				{
+//					response.setHeader("Set-Cookie",cookie+ OUR_COOKIE+"="+cookie.getValue()+"Path=/;Domain=.annaccounting.com;Expires=Thu, 01-Jan-1970 00:00:00 GMT; SameSite=none;Secure");
+					response.setHeader("Set-Cookie",cookie.getValue()+ "; SameSite=none;Secure");
+				
+				}
+				else {
+					response.addCookie(cookie);
+				}
+				
+				
 			}
 		}
 	}

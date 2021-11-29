@@ -59,6 +59,11 @@ public class SetupWizard extends FlowPanel {
 			ClientCompanyPreferences preferences) {
 		initSetup(callback, preferences);
 	}
+	
+	public SetupWizard(ClientCompanyPreferences Clientpreferences)
+	{
+		preferences = Clientpreferences;
+	}
 
 	private void initSetup(AsyncCallback<Boolean> callback,
 			ClientCompanyPreferences cPeferences) {

@@ -1752,16 +1752,16 @@ public class CustomerManager extends PayeeManager {
 		String dateInString = "";
 		String toDateInString = "";
 		try {
-			prop.loadFile("config/mysqlconfig.ini");
+			prop.loadFile("config/config.ini");
 		} catch (FileNotFoundException e1) {		
 			e1.printStackTrace();
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		String databaseUrl = prop.getProperty("sqlDatabaseUrl", null);
-		String databaseName = prop.getProperty("sqlDatabaseName", null);
-		String username = prop.getProperty("username", null);
-		String password = prop.getProperty("password", null);
+		String databaseUrl = prop.getProperty("rewaDatabaseUrl", null);
+		String databaseName = prop.getProperty("rewaDatabaseName", null);
+		String username = prop.getProperty("rewaDbUsername", null);
+		String password = prop.getProperty("rewaDbPassword", null);
 		String portNumber= prop.getProperty("port", null);
 		String pattern = "yyyy-MM-dd";
 		if (fromDate == null)

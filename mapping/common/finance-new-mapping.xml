@@ -194,6 +194,7 @@
 		<property name="emailID" column="EMAIL_ID"></property>
 		<property name="clientKey" column="CLIENT_KEY"></property>
 		<property name="serverKey" column="SERVER_KEY" type="binary"></property>
+		<property name="jnpLoginToken" column="JNP_LOGIN_TOKEN"></property>
 	</class>
 
 	<class name="IMUser" table="I_M_USER">

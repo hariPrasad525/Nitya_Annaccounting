@@ -246,11 +246,11 @@ public class ClientCompanyPreferences implements IAccounterCore {
 
 	private long defaultTaxCode;
 
-	private boolean isShowLegalName;
+	private boolean isShowLegalName = true;
 
-	private boolean isShowRegisteredAddress;
+	private boolean isShowRegisteredAddress = false;
 	
-	private boolean isPayrollOnly;
+	private boolean isPayrollOnly = false;
 	
 	//private boolean isAttendanceOnly;
 	
