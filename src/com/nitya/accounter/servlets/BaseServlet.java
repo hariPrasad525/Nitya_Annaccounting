@@ -589,6 +589,7 @@ public class BaseServlet extends HttpServlet {
 				{
 //					response.setHeader("Set-Cookie",cookie+ OUR_COOKIE+"="+cookie.getValue()+"Path=/;Domain=.annaccounting.com;Expires=Thu, 01-Jan-1970 00:00:00 GMT; SameSite=none;Secure");
 					response.setHeader("Set-Cookie",cookie.getValue()+ "; SameSite=none;Secure");
+					response.addCookie(cookie);
 				
 				}
 				else {

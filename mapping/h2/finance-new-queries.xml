@@ -14,10 +14,11 @@
 		
 		<return-scalar column="ID" type="long" />
 		<return-scalar column="IS_CONFIGURED" type="boolean" />
+		<return-scalar column="userId" type="long" />
 	
 		
 		<![CDATA[
-				SELECT C.ID, C.IS_CONFIGURED
+				SELECT C.ID, C.IS_CONFIGURED,U.id as userId
 				FROM   company C
 				left join Users U on C.created_by = U.id
 				left join Client Cl on U.client_id = Cl.id

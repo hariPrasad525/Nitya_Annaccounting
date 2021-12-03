@@ -61,12 +61,16 @@ public abstract class CreatableObject implements Lifecycle {
 
 	@Override
 	public boolean onSave(Session session) throws CallbackException {
-		if (id == 0) {
+		if (id == 0 && this.createdBy == null) {
 			this.createdBy = AccounterThreadLocal.get();
 			this.createdDate = AccounterThreadLocal.currentTime();
 		}
 		this.lastModifier = AccounterThreadLocal.get();
 		this.lastModifiedDate = AccounterThreadLocal.currentTime();
+		if(this.lastModifier == null)
+		{
+			this.lastModifier = this.createdBy;
+		}
 		return false;
 	}
 

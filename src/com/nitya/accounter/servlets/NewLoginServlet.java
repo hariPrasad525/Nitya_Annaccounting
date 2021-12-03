@@ -44,6 +44,7 @@ public class NewLoginServlet extends BaseServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
+		
 		String header2 = request.getHeader("User-Agent");
 		boolean contains = header2.contains("iPad");
 		if (contains) {
@@ -133,7 +134,7 @@ public class NewLoginServlet extends BaseServlet {
 		} finally {
 		}
 	}
-
+	
 	private Client doLogin(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 

@@ -73,7 +73,12 @@ public class SignupServlet extends BaseServlet {
 		
 		boolean response  = true;
 //		boolean response = isBotTryingToLogin("https://www.google.com/recaptcha/api/siteverify", "app.annaccounting.com", "secret=6LdZG5IUAAAAAFeKvI-MQ3BIfxJOOVsLr2B3_5X9&response="+req.getParameter("google-key").trim());
-		
+		resp.setHeader("Access-Control-Allow-Origin", "*");
+        resp.setHeader("Access-Control-Allow-Methods", "POST");
+        resp.setHeader("Access-Control-Allow-Headers", "Content-Type");
+        resp.setHeader("Access-Control-Allow-Credentials","true");
+        resp.setHeader("Access-Control-Max-Age", "86400");
+		resp.setContentType("application/json");
 		// Take userName from request
 		String emailId = req.getParameter("emailId").trim();
 		// String confirmEmailId = req.getParameter("confirmemailId").trim();
@@ -278,8 +283,9 @@ public class SignupServlet extends BaseServlet {
 				saveEntry(client);
 				
 				// JnP companies creation
-				if(req.getParameter("companyUid") != null)
+				if(req.getParameter("companyId") != null)
 				{
+					
 					ClientCompanyPreferences preferences = getPreferences(req,resp);
 					ArrayList<TemplateAccount> accounts = new ArrayList<TemplateAccount>();
 					AccountsTemplateManager manager = new AccountsTemplateManager();

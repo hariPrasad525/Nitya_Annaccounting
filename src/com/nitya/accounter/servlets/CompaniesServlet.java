@@ -1,6 +1,7 @@
 package com.nitya.accounter.servlets;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -14,22 +15,24 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.hibernate.Query;
-import org.hibernate.SQLQuery;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import com.nitya.accounter.core.Client;
 import com.nitya.accounter.core.ClientSubscription;
 import com.nitya.accounter.core.Company;
 import com.nitya.accounter.core.EU;
+import com.nitya.accounter.core.Item;
 import com.nitya.accounter.core.License;
 import com.nitya.accounter.core.SupportedUser;
 import com.nitya.accounter.core.User;
+import com.nitya.accounter.core.UserPermissions;
 import com.nitya.accounter.main.ServerConfiguration;
 import com.nitya.accounter.services.SubscriptionTool;
 import com.nitya.accounter.utils.HibernateUtil;
 import com.nitya.accounter.web.client.Global;
-import com.nitya.accounter.web.client.core.ClientAttachment;
 import com.nitya.accounter.web.client.core.Features;
+import com.nitya.accounter.web.client.ui.settings.RolePermissions;
 
 public class CompaniesServlet extends BaseServlet {
 
@@ -45,7 +48,7 @@ public class CompaniesServlet extends BaseServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		HttpSession httpSession = req.getSession();
-		Session session1 = HibernateUtil.getCurrentSession();
+		
 		String header2 = req.getHeader("User-Agent");
 		boolean contains = header2.contains("iPad");
 		if (contains) {
@@ -67,18 +70,7 @@ public class CompaniesServlet extends BaseServlet {
 		{
 			emailId = emailId.toLowerCase();
 			Company company = new Company();
-			List result = session1.getNamedQuery("getCompanyByMailId")
-							.setParameter("emailId",  emailId)
-							.list();
-			Iterator iterator = result.iterator();
-			Object[] object = null;
-			while(iterator.hasNext())
-			{
-				object = (Object[]) iterator.next();
-				company.setId((long) object[0]);
-//				company.setConfigured((boolean) object[0]);
-				break;
-			}
+			company = getCompanyId(req,resp,emailId);
 			
 			
 			companyID = company.getId()+"";
@@ -188,6 +180,28 @@ public class CompaniesServlet extends BaseServlet {
 		} else {
 			dispatch(req, resp, companiedListView);
 		}
+	}
+
+	private Company getCompanyId(HttpServletRequest req, HttpServletResponse resp, String emailId) {
+		Session session1 = HibernateUtil.getCurrentSession();
+		Company company = new Company();
+		List result = session1.getNamedQuery("getCompanyByMailId")
+						.setParameter("emailId",  emailId)
+						.list();
+		Iterator iterator = result.iterator();
+		Object[] object = null;
+		while(iterator.hasNext())
+		{
+			object = (Object[]) iterator.next();
+			company.setId((long) object[0]);
+			User user = new User();
+			user.setUniqueId(object[0]+"");
+			
+			company.setCreatedBy(user);
+//			company.setConfigured((boolean) object[0]);
+			break;
+		}
+		return company;
 	}
 
 	private void checkLicense(HttpServletRequest req, HttpServletResponse resp) {
@@ -401,7 +415,81 @@ public class CompaniesServlet extends BaseServlet {
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		if(req.getParameter("userEmail") != null && req.getParameter("closeCandidate") == null)
 		doGet(req, resp);
+		else
+		{
+			resp.setHeader("Access-Control-Allow-Origin", "*");
+			resp.setHeader("Access-Control-Allow-Methods", "POST");
+			resp.setHeader("Access-Control-Allow-Headers", "Content-Type");
+			resp.setHeader("Access-Control-Allow-Credentials","true");
+			resp.setHeader("Access-Control-Max-Age", "86400");
+			resp.setContentType("application/json");
+			resp.setCharacterEncoding("UTF-8");
+			if(req.getParameter("closeCandidate") != null)
+			{
+				//save Consulatant Details with or without customer
+				Item consultant = new Item();
+				consultant.setActive(true);
+				consultant.setName(req.getParameter("candidateName"));
+				consultant.setType(1);
+				consultant.setWeight(0);
+//				consultant.setInvoiceFrequencyGroup(1);
+				consultant.setISellThisItem(true);
+				consultant.setSalesDescription(req.getParameter("candidateDescription"));
+				consultant.setSalesPrice(Long.parseLong(req.getParameter("payRate")));
+				consultant.setAverageCost(0);
+//				consultant.setIncomeAccount(1);
+				consultant.setOpeningBalance(0);
+				consultant.setTaxable(false);
+				consultant.setCommissionItem(false);
+				consultant.setIBuyThisItem(false);
+				consultant.setSubItemOf(false);
+//				consultant.setPurchaseDescription(req.getParameter("candidateDescription"));
+//				consultant.setPurchasePrice(Long.parseLong(req.getParameter("payRate")));
+				consultant.setStandardCost(0);
+				consultant.setVersion(0);
+				consultant.setItemTotalValue(0);
+				consultant.setDepth(0);
+				consultant.setDefault(false);
+				consultant.setItemTotalValue(0);
+				consultant.setEmail(req.getParameter("candidateEmail"));
+				consultant.setPhone(req.getParameter("candidatePhone"));
+				consultant.setConsultantAddress(req.getParameter("candidateAddress"));
+				Company company = new Company();
+				company = getCompanyId(req,resp,req.getParameter("userEmail"));
+				User user = new User();
+				user.setUserRole(RolePermissions.ADMIN);
+				user.setAdmin(true);
+				user.setCanDoUserManagement(true);
+				UserPermissions permissions = new UserPermissions();
+				permissions.setTypeOfBankReconcilation(RolePermissions.TYPE_YES);
+				permissions.setTypeOfPayBillsPayments(RolePermissions.TYPE_YES);
+				permissions.setTypeOfInvoicesBills(RolePermissions.TYPE_YES);
+				permissions.setTypeOfManageAccounts(RolePermissions.TYPE_YES);
+				permissions.setTypeOfCompanySettingsLockDates(RolePermissions.TYPE_YES);
+				permissions.setTypeOfViewReports(RolePermissions.TYPE_YES);
+				permissions.setTypeOfInventoryWarehouse(RolePermissions.TYPE_YES);
+				permissions.setTypeOfSaveasDrafts(RolePermissions.TYPE_YES);
+				user.setPermissions(permissions);
+				user.setId(Long.parseLong(company.getCreatedBy().getUniqueId()));
+//				user.setUniqueId(company.getCreatedBy().getUniqueId());
+				consultant.setCompany(company);
+//				consultant.setId(Long.parseLong(company.getCreatedBy().getUniqueId()));
+				consultant.setCreatedBy(user);
+				consultant.setLastModifier(user);
+				consultant.setCreatedDate(new Timestamp(System.currentTimeMillis()));
+				consultant.setId(Long.parseLong(company.getCreatedBy().getUniqueId()));
+				
+//				req.getSession().setAttribute(COMPANY_ID, company.getId());
+				Session session = HibernateUtil.getCurrentSession();
+				Transaction tx = session.beginTransaction();
+				session.save(consultant);
+//				saveEntry(consultant);
+				tx.commit();
+//				session.close();
+			}
+		}
 	}
 
 	// private void addCompanyCookies(HttpServletResponse resp, long companyID)
